@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+
+	<!-- sql문에서 DTO 쓸 때 경로가 기니까 별칭을 세팅 -->
+	<typeAliases>
+		<typeAlias type="travelMaker.tmUser.dto.TmUserDTO" alias="TmUserDTO"/>
+		<typeAlias type="travelMaker.userRk.dto.UserRkDTO" alias="UserRkDTO"/>
+		<typeAlias type="travelMaker.largePos.dto.LargePosDTO" alias="LargePosDTO"/>
+		<typeAlias type="travelMaker.smallPos.dto.SmallPosDTO" alias="SmallPosDTO"/>
+		<typeAlias type="travelMaker.groupSpace.dto.GroupSpaceDTO" alias="GroupSpaceDTO"/>
+		<typeAlias type="travelMaker.groupMember.dto.GroupMemberDTO" alias="GroupMemberDTO"/>
+		<typeAlias type="travelMaker.groupRequest.dto.GroupRequestDTO" alias="GroupRequestDTO"/>
+		<typeAlias type="travelMaker.schedule.dto.ScheduleDTO" alias="ScheduleDTO"/>
+		<typeAlias type="travelMaker.gallery.dto.GalleryDTO" alias="GalleryDTO"/>
+		<typeAlias type="travelMaker.galleryLiked.dto.GalleryLikedDTO" alias="GalleryLikedDTO"/>
+		<typeAlias type="travelMaker.chatting.dto.ChattingDTO" alias="ChattingDTO"/>
+		<typeAlias type="travelMaker.landmarkBoard.dto.LandmarkBoardDTO" alias="LandmarkBoardDTO"/>
+		<typeAlias type="travelMaker.landmarkLiked.dto.LandmarkLikedDTO" alias="LandmarkLikedDTO"/>
+		<typeAlias type="travelMaker.reportReason.dto.ReportReasonDTO" alias="ReportReasonDTO"/>
+		<typeAlias type="travelMaker.reportDetail.dto.ReportDetailDTO" alias="ReportDetailDTO"/>
+		<typeAlias type="travelMaker.message.dto.MessageDTO" alias="MessageDTO"/>
+		<typeAlias type="travelMaker.userCmt.dto.UserCmtDTO" alias="UserCmtDTO"/>
+		<typeAlias type="travelMaker.qnaBoard.dto.QnaBoardDTO" alias="QnaBoardDTO"/>
+		<typeAlias type="travelMaker.notice.dto.NoticeDTO" alias="NoticeDTO"/>
+	</typeAliases>
+	
+	<!-- mapper파일의 위치 세팅. mapper가 추가되면 mappers 안에 mapper 태그를 추가하면 된다 -->
+	<mappers>
+		<mapper resource="/sql/chattingSQL.xml"/>
+		<mapper resource="/sql/galleryLikedSQL.xml"/>
+		<mapper resource="/sql/gallerySQL.xml"/>
+		<mapper resource="/sql/groupMemberSQL.xml"/>
+		<mapper resource="/sql/groupRequestSQL.xml"/>
+		<mapper resource="/sql/groupSpaceSQL.xml"/>
+		<mapper resource="/sql/landmarkBoardSQL.xml"/>
+		<mapper resource="/sql/landmarkLikedSQL.xml"/>
+		<mapper resource="/sql/largePosSQL.xml"/>
+		<mapper resource="/sql/messageSQL.xml"/>
+		<mapper resource="/sql/noticeSQL.xml"/>
+		<mapper resource="/sql/qnaBoardSQL.xml"/>
+		<mapper resource="/sql/reportDetailSQL.xml"/>
+		<mapper resource="/sql/reportReasonSQL.xml"/>
+		<mapper resource="/sql/scheduleSQL.xml"/>
+		<mapper resource="/sql/smallPosSQL.xml"/>
+		<mapper resource="/sql/tmUserSQL.xml"/>
+		<mapper resource="/sql/userCmtSQL.xml"/>
+		<mapper resource="/sql/userRkSQL.xml"/>
+	</mappers>
+
+</configuration>
