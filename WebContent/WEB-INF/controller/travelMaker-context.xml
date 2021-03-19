@@ -12,8 +12,9 @@
 	http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd"
 	>
 	
-	<!-- 다운로드비즈니스로직 처리해주는 클래스 Bean객체 만들기. 이렇게 만들어주면 fileDown이라는 이름으로 이 클래스가 객체생성 된 것 -->
+	<!-- 다운로드비즈니스로직 처리해주는 클래스 Bean객체 만들기. 이렇게 만들어주면 fileDown이라는 이름으로 이 클래스가 객체생성 된 것 
 	<bean id="fileDown" class="test.spring.model.DownloadView"/>
+	-->
 	
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
 		<property name="order" value="0"/>

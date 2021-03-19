@@ -1,5 +1,13 @@
 package travelMaker.service.bean;
 
-public class MemberServiceImpl {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import travelMaker.model.dao.TmUserDAO;
+
+@Service
+public class MemberServiceImpl implements MemberService {
+
+	@Autowired
+	private TmUserDAO tmuserDAO = null;
 }
