@@ -9,15 +9,15 @@ import travelMaker.service.bean.QnaReportService;
 @Controller
 @RequestMapping("/qr/")
 public class QnaReportController {
-
-	/*
-	@Autowired
-	private QnaReportService qnaReportService = null;
-	*/
 	
-	@RequestMapping("reportWrite.tm")
-	public String reportWrite() {
+	@RequestMapping("reportWriteForm.tm")
+	public String reportWriteForm() {
 		return "client/report/reportWriteForm";
+	}
+	
+	@RequestMapping("reportWritePro.tm")
+	public String reportWritePro() {
+		return "client/report/reportWritePro";
 	}
 	
 

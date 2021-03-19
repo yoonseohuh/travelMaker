@@ -1,5 +1,8 @@
 package travelMaker.service.bean;
 
-public class QnaReportServiceImpl {
+import org.springframework.stereotype.Service;
 
+@Service
+public class QnaReportServiceImpl implements QnaReportService {
+	
 }
