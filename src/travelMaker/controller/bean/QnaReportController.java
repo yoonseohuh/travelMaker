@@ -9,13 +9,16 @@ import travelMaker.service.bean.QnaReportService;
 @Controller
 @RequestMapping("/qr/")
 public class QnaReportController {
-	
+
+	/*
 	@Autowired
 	private QnaReportService qnaReportService = null;
+	*/
 	
 	@RequestMapping("reportWrite.tm")
 	public String reportWrite() {
 		return "client/report/reportWriteForm";
 	}
+	
 
 }
