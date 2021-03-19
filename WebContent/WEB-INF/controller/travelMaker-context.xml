@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-4.3.xsd
+	http://www.springframework.org/schema/mvc 
+	http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd"
+	>
+	
+	<!-- 다운로드비즈니스로직 처리해주는 클래스 Bean객체 만들기. 이렇게 만들어주면 fileDown이라는 이름으로 이 클래스가 객체생성 된 것 -->
+	<bean id="fileDown" class="test.spring.model.DownloadView"/>
+	
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="0"/>
+	</bean>
+	
+	<context:component-scan base-package="travelMaker"/>
+	
+	<!-- ViewResolver 세팅 -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/"/>
+		<property name="suffix" value=".jsp"/>			<!-- 이렇게 해주면 컨트롤러에서  전체경로를 쓰지 않아도 된다-->
+		<property name="order" value="1"/>
+	</bean>
+	
+	<!-- 파일업로드 세팅 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="-1"/> <!-- 최대 업로드 사이즈: byte기준으로. -1로 설정하면 제약이 없게 된다.-->
+		<property name="defaultEncoding" value="UTF-8"/> <!-- 기본 인코딩 설정. 예컨대 파일명이 한글이어도 깨지지 않도록. -->
+	</bean>
+
+    <!-- DB 데이터 소스 db커넥션정보를 쓴다-->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close"
+          p:driverClassName="oracle.jdbc.driver.OracleDriver"
+          p:url="jdbc:oracle:thin:@nullmaster.iptime.org:3000:ORCL"
+          p:username="java06"
+          p:password="java06" />
+       
+    <!-- 커넥션 풀 역할 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+       <property name="dataSource" ref="dataSource" />
+       <property name="configLocation" value="/WEB-INF/mybatis/mybatis-config.xml" />
+    </bean>
+    
+    <!-- 커넥션과 비슷한 역할 -->
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+       <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+
+	<!-- 한글깨짐 방지를 위한 처리 -->
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/html;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>application/json;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+</beans>
+
