@@ -28,7 +28,7 @@
   <properties>
   	<spring-version>4.3.25.RELEASE</spring-version>
   </properties>
-  
+
   <dependencies>
   
     <!-- spring-context: 기본 핵심 라이브러리 -->
