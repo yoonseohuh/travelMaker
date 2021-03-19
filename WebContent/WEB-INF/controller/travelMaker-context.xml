@@ -39,8 +39,8 @@
           destroy-method="close"
           p:driverClassName="oracle.jdbc.driver.OracleDriver"
           p:url="jdbc:oracle:thin:@nullmaster.iptime.org:3000:ORCL"
-          p:username="java06"
-          p:password="java06" />
+          p:username="team02"
+          p:password="team02" />
        
     <!-- 커넥션 풀 역할 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
