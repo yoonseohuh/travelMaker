@@ -7,4 +7,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/land/")
 public class LandmarkController {
 
+	@RequestMapping("landmark.tm")
+	public String landmark() {
+		return "client/landmark/landmark";
+	}
+	
+	@RequestMapping("landWrite.tm")
+	public String landWriteForm() {
+		return "client/landmark/landWriteForm";
+	}
+	
 }
