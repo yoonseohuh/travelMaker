@@ -8,5 +8,6 @@
 </head>
 <body>
 <h1>clientIndex</h1>
+${sessionScope.memId} 
 </body>
 </html>

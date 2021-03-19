@@ -1,12 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>loginForm</title>
 </head>
 <body>
-<h1>loginForm</h1>
+	<form action="/travelMaker/mem/loginPro.tm" method="post">
+		<table>
+			<tr>
+				<td><input type="text" name="id" placeholder="아이디" /></td>
+			</tr>
+			<tr>
+				<td><input type="password" name="pw" placeholder="비밀번호" /></td>
+			</tr>
+			<tr>
+				<td>
+					자동로그인 <input type="checkbox" name="auto" value="1" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="submit" value="로그인"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<a href="index.tm">ID/PW 찾기</a>
+				</td>
+			</tr>	
+		</table>
+	</form>
 </body>
 </html>

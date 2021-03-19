@@ -5,5 +5,12 @@
   
 <mapper namespace="tmUser">
 
-
+	<insert id="insertMember" parameterType="TmUserDTO">
+		insert into tmUser (id,pw,name,nickname,birth,email,gender,reg)  values (#{id},#{pw},#{name},#{nickname},#{birth},#{email},#{gender},sysdate)
+	</insert>
+	
+	<select id="idPwCheck" parameterType="TmUserDTO" resultType="int">
+		select count(*) from tmUser where id=#{id} and pw=#{pw}
+	</select>
+	
 </mapper>

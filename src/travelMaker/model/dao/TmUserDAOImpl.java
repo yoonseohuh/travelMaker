@@ -4,9 +4,25 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import travelMaker.model.dto.TmUserDTO;
+
 @Repository
 public class TmUserDAOImpl implements TmUserDAO {
 
 	@Autowired
 	private SqlSessionTemplate sqlSession = null;
+
+	//회원 정보 insert해주는 메서드
+	@Override
+	public void insertMember(TmUserDTO dto) {
+		sqlSession.insert("tmUser.insertMember",dto);
+	}
+
+	@Override
+	public int idPwCheck(TmUserDTO dto) {
+		//아이디 비밀번호 일치 하는지 확인해봐
+		int result = sqlSession.selectOne("tmUser.idPwCheck",dto);
+		
+		return result;
+	}
 }
