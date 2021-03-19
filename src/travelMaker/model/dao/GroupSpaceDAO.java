@@ -1,5 +1,9 @@
 package travelMaker.model.dao;
 
-public interface GroupSpaceDAO {
+import travelMaker.model.dto.GroupSpaceDTO;
 
+public interface GroupSpaceDAO {
+	
+	
+	public void insertMaking(GroupSpaceDTO dto) throws Exception;
 }
