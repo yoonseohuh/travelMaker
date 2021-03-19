@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>clientIndex</h1>
-<jsp:include page="/views/include/top.jsp"></jsp:include>
+탑
 </body>
 </html>
