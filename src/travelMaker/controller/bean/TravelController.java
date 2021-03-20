@@ -26,6 +26,12 @@ public class TravelController {
 	
 	@RequestMapping("makingWritePro.tm")
 	public String makingWritePro(GroupSpaceDTO dto) throws Exception{
+		System.out.println("po1 "+dto.getPo1());
+		System.out.println("po2 "+dto.getPo2());
+		System.out.println("po3 "+dto.getPo3());
+		System.out.println("closingDate "+dto.getClosingDate());
+		System.out.println("startDate "+dto.getStartDate());
+		System.out.println("endDate "+dto.getEndDate());
 		travelService.insertMaking(dto);
 		return "/client/travel/makingList";
 	}

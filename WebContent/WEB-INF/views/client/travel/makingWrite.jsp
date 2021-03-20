@@ -17,15 +17,16 @@
 			});
 			
 			
+	        
 		});
 	</script>
 </head>
 <body>
 	<h1>여행 개설하기</h1>
 	<form action="/travelMaker/travel/makingWritePro.tm" method="post">
-<%--	<input type="hidden" name="po1"/>
-		<input type="hidden" name="po2"/>
-		<input type="hidden" name="po3"/>	--%>
+		<input type="hidden" name="po1" id="po1"/>
+		<input type="hidden" name="po2" id="po2"/>
+		<input type="hidden" name="po3" id="po3"/>
 		<table border="1">
 			<tr>
 				<td>여행 제목</td>
