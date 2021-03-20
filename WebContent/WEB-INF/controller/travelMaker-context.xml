@@ -16,6 +16,8 @@
 	<bean id="fileDown" class="test.spring.model.DownloadView"/>
 	-->
 	
+	<mvc:resources location="/resources/" mapping="/resources/**"/>
+	
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
 		<property name="order" value="0"/>
 	</bean>
