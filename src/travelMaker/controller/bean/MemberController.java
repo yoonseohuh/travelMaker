@@ -1,5 +1,7 @@
 package travelMaker.controller.bean;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +18,14 @@ public class MemberController {
 	private MemberService memService = null;
 	
 	@RequestMapping("index.tm")
-	public String index() {
+	public String index(Model model) {
+		//쿠키 가져오기 
+		Map cooMap = memService.getAllCookies();
+		//로그인 분기처리할 변수 가져오기
+		int check = memService.checkCookie(cooMap);
+		
+		model.addAttribute("cooMap", cooMap);
+		model.addAttribute("check", check);
 		
 		return "client/index";
 	}
@@ -57,11 +66,20 @@ public class MemberController {
 	
 	//로그아웃
 	@RequestMapping("logout.tm")
-	public String logout() {
+	public String logout(TmUserDTO dto, String auto) {
 		//세션 지워주기 
+		memService.removeSession("memId");
+		//자동 로그인 했다면 쿠키 지워 주기 
+		memService.removeCookie(dto, auto);
 		
 		return "client/index";
 	}
 	
+	//비밀번호 찾기 
+	@RequestMapping("findPw.tm")
+	public String findPw() {
+		
+		return "client/member/findPw";
+	}
 	
 }

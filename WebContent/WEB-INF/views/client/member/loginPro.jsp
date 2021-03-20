@@ -8,7 +8,6 @@
 <title>loginPro</title>
 </head>
 <body>
-	${sessionScope.memId} 
 	<c:if test="${result != 1}">
 		<script>
 			alert("아이디 혹은 비밀 번호 정보가 일치 하지 않습니다!!")
