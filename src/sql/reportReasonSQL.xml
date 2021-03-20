@@ -4,7 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="reportReason">
-	<insert id="addReason" parameterType="ReportReasonDTO">
+	<insert id="insertReason" parameterType="ReportReasonDTO">
 		insert into REPORTREASON values(REPORTREASON_SEQ.nextVal,#{rType},#{rCont})
 	</insert>
+	
+	<select id="selectReason" parameterType="int" resultType="ReportReasonDTO">
+		select * from REPORTREASON where rType=#{rType} order by rNo
+	</select>
+	
+	<select id="selectReasonAll" resultType="ReportReasonDTO">
+		select * from REPORTREASON order by rNo
+	</select>
 </mapper>
