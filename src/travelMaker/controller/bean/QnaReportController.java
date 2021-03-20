@@ -18,6 +18,11 @@ public class QnaReportController {
 	@Autowired
 	private QnaReportServiceImpl qnaReportService = null;
 	
+	@RequestMapping("myQnaReportList.tm")
+	public String myQnaReportList() {
+		return "client/mypage/myQnaReportList";
+	}
+	
 	@RequestMapping("reasonInsert.tm")
 	public String reasonInsert(ReportReasonDTO dto) throws SQLException {		
 		qnaReportService.insertReason(dto);		
