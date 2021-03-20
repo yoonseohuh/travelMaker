@@ -5,5 +5,10 @@
   
 <mapper namespace="groupSpace">
 
-
+	<insert id="insertMaking" parameterType="GroupSpaceDTO">
+		insert into groupSpace values(groupSpace_seq.nextVal,#{id},#{subject},#{concept},#{maxNum},#{actualNum},#{closingDate},#{startDate},#{endDate},#{loc},#{dongsung},#{courseExpl},#{addExpl},#{po1},#{po2},#{po3},#{cost},#{status},#{likedCnt},#{readCnt},#{shared},#{genReview},sysdate)
+	</insert>
+	
+	
+	
 </mapper>
