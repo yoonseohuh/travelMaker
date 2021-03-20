@@ -8,7 +8,10 @@
 	<!-- //top end -->
 	
 	<div class="wrapAll">
+		
 		<jsp:include page="/WEB-INF/views/include/myMenu.jsp" />
+		<!-- myMenu end -->
+
 		<h1>myQnaReportList</h1>
 	</div>
 	<!-- //wrapAll end -->
