@@ -1,6 +1,9 @@
 package travelMaker.model.dao;
 
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +18,20 @@ public class ReportReasonDAOImpl implements ReportReasonDAO {
 	private SqlSessionTemplate sqlSession = null;
 	
 	@Override
-	public void addReason(ReportReasonDTO dto) throws SQLException {
-		System.out.println("dao!!!!");
-		System.out.println(dto.getrCont());
-		sqlSession.insert("reportReason.addReason", dto);
+	public void insertReason(ReportReasonDTO dto) throws SQLException {
+		sqlSession.insert("reportReason.insertReason", dto);
+	}
+	
+	@Override
+	public List selectReason(int rType) throws SQLException {		
+		List res = sqlSession.selectList("reportReason.selectReason", rType);		
+		return res;
+	}
+	
+	@Override
+	public List selectReasonAll() throws SQLException {		
+		List res = sqlSession.selectList("reportReason.selectReasonAll");		
+		return res;
 	}
 	
 }
