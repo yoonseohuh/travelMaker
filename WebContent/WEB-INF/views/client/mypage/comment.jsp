@@ -13,8 +13,11 @@
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
 	<!-- //top end -->
 	
-	<div class="wrapAll">	   
-	   
+	<div class="wrapAll">
+	
+		<jsp:include page="/WEB-INF/views/include/myMenu.jsp" />
+		<!-- myMenu end -->
+		
 		<c:if test="${count == 0}">
 		여행목록이 없다.
 		여행떠나라
