@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <div id="adminMenuWrap">
-	<p class="logo">Travel Maker</p>
+	<a href="/travelMaker/admin/index.tm"><p class="logo">Travel Maker</p></a>
 	<ul class="menu">
         <li><a href="/travelMaker/admin/index.tm">홈</a></li>
         <li><a href="#">회원관리</a></li>
