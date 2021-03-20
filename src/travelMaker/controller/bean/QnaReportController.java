@@ -33,7 +33,8 @@ public class QnaReportController {
 	}
 	
 	@RequestMapping("reportWritePro.tm")
-	public String reportWritePro(int rNo) {
+	public String reportWritePro(int rNo, Model model) {
+		model.addAttribute("rNo", rNo);
 		return "client/report/reportWritePro";
 	}
 	
