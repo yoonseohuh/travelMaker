@@ -1,10 +1,17 @@
 @charset "UTF-8";
 /*layout.css*/
 
+
+/*wrapAll*/
+.wrapAll {width: 100%; height: auto; min-height: 550px; padding: 160px 80px 80px;}
+.wrapAll.admin {padding: 80px 0 80px 330px;}
+
+
 /*top*/
 #top {width: 100%; height: 80px; background: #000; position: fixed;top: 0;left: 0; z-index:1;}
 #top .btnRightOpen {width: 40px; height: 40px; background: #eee; cursor: pointer; transition: .3s; position: absolute;top: 20px;right: 20px;}
 #top .btnRightOpen:hover {background: #555;}
+
 
 /*clientMenu*/
 #clientMenuWrap {display: none; width: 250px; height: 100vh; background: #333; position: fixed;top: 0;right: 0; z-index:3;}
@@ -12,22 +19,29 @@
 #clientMenuWrap .btnRightClose:hover {background: #555;}
 #clientMenuWrap .menu {margin: 80px 0;}
 #clientMenuWrap .menu li {height: 45px;}
-#clientMenuWrap .menu li a {display: block; width: 100%; height: 100%; line-height: 45px; text-indent: 25px; color: #fff;}
+#clientMenuWrap .menu li a {display: block; width: 100%; height: 100%; line-height: 45px; text-indent: 25px; color: #fff; transition:.3s;}
 #clientMenuWrap .menu li.on a {background: #fff; color: #000;}
 #clientMenuWrap .menu li a:hover {background: #fff; color: #000;}
 
 .mCover {display: none; width: 100%; height: 100vh; background: rgba(0,0,0,.8); position: fixed;top: 0;left: 0; z-index:2;}
 
+
 /*myMenu*/
 #myMenuWrap {overflow: hidden; margin: 0 0 30px;}
-#myMenuWrap li {float: left; margin: 0 20px 0 0;}
+#myMenuWrap li {float: left; margin: 0 5px 0 0;}
 #myMenuWrap li a {display: block; background: #aaa; color: #fff; transition:.3s; padding: 15px;}
 #myMenuWrap li.on a {background: #333;}
 #myMenuWrap li a:hover {background: #333;}
 
 
-/*wrapAll*/
-.wrapAll {width: 100%; height: auto; min-height: 550px; padding: 160px 80px 80px;}
+/*adminMenu*/
+#adminMenuWrap {width: 250px; height: 100vh; background: #5543FF; position: fixed;top: 0;left: 0;}
+#adminMenuWrap .logo {text-align: center; color: #fff; font-size: 30px; font-weight: 600; border-bottom: 3px solid #fff; padding-bottom: 20px; margin: 80px 25px 0;}
+#adminMenuWrap .menu {margin: 60px 0;}
+#adminMenuWrap .menu li {height: 45px;}
+#adminMenuWrap .menu li a {display: block; width: 100%; height: 100%; line-height: 45px; text-indent: 25px; color: #fff; transition:.3s;}
+#adminMenuWrap .menu li.on a {background: #2C1ED6;}
+#adminMenuWrap .menu li a:hover {background: #2C1ED6;}
 
 
 /*footer*/

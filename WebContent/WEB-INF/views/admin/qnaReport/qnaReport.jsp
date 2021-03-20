@@ -1,12 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+<jsp:include page="/WEB-INF/views/include/header.jsp" />
 <body>
-<h1>qnaReport</h1>
+   
+	<jsp:include page="/WEB-INF/views/include/adminMenu.jsp" />
+	<!-- //adminMenu end -->
+	
+	<div class="wrapAll admin">
+	
+		<h1>신고/문의관리</h1>
+		
+	</div>
+	<!-- //wrapAll end -->
+   
 </body>
 </html>
