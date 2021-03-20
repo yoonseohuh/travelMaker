@@ -16,7 +16,6 @@ public class TravelController {
 	
 	@RequestMapping("makingWrite.tm")
 	public String makingWrite() {
-		
 		return "/client/travel/makingWrite";
 	}
 	
@@ -31,6 +30,12 @@ public class TravelController {
 	public String makingList(Model model) {
 		
 		return "/client/travel/makingList";
+	}
+	
+	@RequestMapping("makingCont.tm")
+	public String makingCont() {
+		
+		return "/client/travel/makingCont";
 	}
 	
 	
