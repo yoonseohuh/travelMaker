@@ -138,4 +138,39 @@ public class MemberServiceImpl implements MemberService {
 	public void removeSession(String sessionName) {
 		RequestContextHolder.getRequestAttributes().removeAttribute(sessionName, RequestAttributes.SCOPE_SESSION);
 	}
+
+	//email 체크 
+	//있으면 1 없으면 -1
+	@Override
+	public TmUserDTO emailCheck(String email) {
+		//email 체크
+		int result = tmuserDAO.emailCheck(email);
+		TmUserDTO mem = null;
+		if(result==1) {	//email이 있으면 id 받아와라 
+			mem = getMemInfo(email);
+		}
+		return mem;
+	}
+	
+	//email로 회원정보 가져오기 
+	@Override
+	public TmUserDTO getMemInfo(String email) {
+		TmUserDTO mem = tmuserDAO.getMemInfo(email);
+		return mem;
+	}
+	
+	//id,email 찾기 
+	@Override
+	public int idEmailCheck(TmUserDTO dto) {
+		//id,email 맞는지 체크(맞으면 1, 아니면 0) 
+		int result = tmuserDAO.idEmailCheck(dto);
+	
+		return result;
+	}
+	
+	//비번 변경 
+	@Override
+	public void pwChange(TmUserDTO mem) {
+		tmuserDAO.pwChange(mem);
+	}
 }

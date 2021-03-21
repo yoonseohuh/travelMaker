@@ -10,6 +10,8 @@ public interface MemberService {
 	public void addMember(TmUserDTO dto);
 	//id,pw 체크 
 	public int idPwCheck(TmUserDTO dto);
+	//id,email 체크 
+	public int idEmailCheck(TmUserDTO dto);
 	//쿠키 생성
 	public void addCookie(TmUserDTO dto, String auto);
 	//쿠키 꺼내기
@@ -20,4 +22,10 @@ public interface MemberService {
 	public void removeCookie(TmUserDTO dto, String auto);
 	//세션 삭제
 	public void removeSession(String sessionName); 
+	//email 확인
+	public TmUserDTO emailCheck(String email);
+	//회원 정보 가져오기 
+	public TmUserDTO getMemInfo(String email);
+	//비밀번호 변경
+	public void pwChange(TmUserDTO mem);
 }

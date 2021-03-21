@@ -13,4 +13,20 @@
 		select count(*) from tmUser where id=#{id} and pw=#{pw}
 	</select>
 	
+	<select id="emailCheck" parameterType="string" resultType="int">
+		select count(*) from tmUser where email=#{email}
+	</select>
+	
+	<select id="getMemInfo" parameterType="string" resultType="TmUserDTO">
+		select * from tmUser where email=#{email}
+	</select>
+	
+	<select id="idEmailCheck" parameterType="TmUserDTO" resultType="int">
+		select count(*) from tmUser where id=#{id} and email=#{email}
+	</select>
+	
+	<update id="pwChange" parameterType="TmUserDTO">
+		update tmUser set pw=#{pw} where id=#{id}
+	</update>	
+	
 </mapper>

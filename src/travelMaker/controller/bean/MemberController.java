@@ -75,11 +75,52 @@ public class MemberController {
 		return "client/index";
 	}
 	
-	//비밀번호 찾기 
-	@RequestMapping("findPw.tm")
+	//아이디 찾기 
+	@RequestMapping("findIdForm.tm")
+	public String findIdForm() {
+		
+		return "client/member/findIdForm";
+	}
+	
+	//아이디 찾기 
+	//findIdForm에서 입력한 email을 받아와서 이 email의 아이디를 보여줘야함 
+	@RequestMapping("findIdPro.tm")
+	public String findIdPro(String email, Model model) {
+		TmUserDTO mem = memService.emailCheck(email);
+		model.addAttribute("mem", mem);
+		return "client/member/findIdPro";
+	}
+	
+	//비밀번호 찾기 form
+	@RequestMapping("findPw")
 	public String findPw() {
 		
 		return "client/member/findPw";
 	}
+	
+	//비밀번호 찾기 Pro
+	//아이디,비밀번호 맞는지 확인
+	//맞다면 비밀번호 변경 가능
+	@RequestMapping("modiPwForm")
+	public String findPwPro(TmUserDTO mem,Model model) {
+		int result = memService.idEmailCheck(mem);
+		model.addAttribute("result", result);
+		model.addAttribute("mem", mem);
+		return "client/member/modiPwForm";
+	}
+	
+	//비밀번호 재설정 Pro
+	@RequestMapping("modiPwPro")
+	public String modiPwPro(TmUserDTO mem,Model model) {
+		//비밀번호 업데이트 하는 메서드 
+		memService.pwChange(mem);
+		System.out.println("아이디: "+mem.getId());
+		System.out.println("비번: "+mem.getPw());
+		return "client/member/modiPwPro";
+	}
+	
+	
+	
+	
 	
 }
