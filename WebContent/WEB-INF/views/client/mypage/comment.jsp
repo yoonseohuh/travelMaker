@@ -4,6 +4,7 @@
 <html>
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
 <body>
+
 	
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
 	<!-- //top end -->
@@ -56,6 +57,7 @@
 		</div>
 		
 		<script>
+
 		$(document).ready(function(){
 	        $(".menu>a").click(function(){
 	            var submenu = $(this).next("ul");
