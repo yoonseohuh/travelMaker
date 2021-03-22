@@ -10,13 +10,12 @@ public interface UserCmtDAO {
 	
 	
 	//사용자가 참여중인 그룹넘버 가져오기
-	public List myGroupNo(String id) throws SQLException;
+	public List myGroup(String id) throws SQLException;
 	
-	//사용자가 참여중인 그룹의 정보 가져오기
-	public GroupSpaceDTO getMyGroupInfo(int gNo) throws SQLException;
+	//그룹고유번호 보내서 그룹정보 가져오기
+	public GroupSpaceDTO getGroupInfo(int num) throws SQLException;
 
-	//내가 여행한 목록 갯수 리턴
-	public int myGroupCount(String id) throws SQLException;
+
 	
 }
 

@@ -12,9 +12,15 @@ public interface TmUserDAO {
 	public int idEmailCheck(TmUserDTO dto);
 	//email 존재 확인 
 	public int emailCheck(String email);
-	//member 정보 가져오기 
+	//member 정보 가져오기 (email)
 	public TmUserDTO getMemInfo(String email);
 	//비밀번호 수정 
 	public void pwChange(TmUserDTO mem);
+
+	//member 정보가져오기(id)
+	public TmUserDTO getMember(String id);
+
+	//id 주고 성별 가져오기
+	public int getGender(String id);
 
 }

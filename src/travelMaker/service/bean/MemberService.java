@@ -28,4 +28,8 @@ public interface MemberService {
 	public TmUserDTO getMemInfo(String email);
 	//비밀번호 변경
 	public void pwChange(TmUserDTO mem);
+	//아이디 ***변환
+	public String idStar(String id) throws Exception;
+	//회원 정보 가져오기 
+	public TmUserDTO getMember(String id);
 }
