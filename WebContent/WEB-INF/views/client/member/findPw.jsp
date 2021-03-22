@@ -2,11 +2,22 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+<jsp:include page="/WEB-INF/views/include/header.jsp" />
 <body>
-<h1>findPw</h1>
+	<jsp:include page="/WEB-INF/views/include/top.jsp" />
+	<!-- //top end -->
+	
+	<div class="wrapAll">
+	    <h1>비밀번호 재설정</h1>
+		<form action="/travelMaker/mem/modiPwForm.tm">
+			<input type="text" name="id" placeholder="아이디"/>	<br />
+			<input type="text" name="email" placeholder="등록된 이메일"/>	<br />
+			<input type="submit" value="비밀번호 찾기" />
+		</form>	 
+	</div>
+	<!-- //wrapAll end -->
+	
+	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+	<!-- //footer end -->
 </body>
 </html>

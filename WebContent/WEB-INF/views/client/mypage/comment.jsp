@@ -5,7 +5,6 @@
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
 <body>
 
-   
 	
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
 	<!-- //top end -->
@@ -58,27 +57,28 @@
 		</div>
 		
 		<script>
-      $(document).ready(function(){
-           $(".menu>a").click(function(){
-               var submenu = $(this).next("ul");
-    
-               if( submenu.is(":visible") ){
-                   submenu.slideUp();
-               }else{
-                   submenu.slideDown();
-               }
-           });
-           $('#cont2').hide();
-           $('#tab1').click(function(){
-             $('#cont2').hide();
-             $('#cont1').fadeIn();
-          });
-          $('#tab2').click(function(){
-             $('#cont1').hide();
-             $('#cont2').fadeIn();
-          });
-       });   
-      </script>
+
+		$(document).ready(function(){
+	        $(".menu>a").click(function(){
+	            var submenu = $(this).next("ul");
+	 
+	            if( submenu.is(":visible") ){
+	                submenu.slideUp();
+	            }else{
+	                submenu.slideDown();
+	            }
+	        });
+	        $('#cont2').hide();
+	        $('#tab1').click(function(){
+	    		$('#cont2').hide();
+	    		$('#cont1').fadeIn();
+	    	});
+	    	$('#tab2').click(function(){
+	    		$('#cont1').hide();
+	    		$('#cont2').fadeIn();
+	    	});
+	    });	
+		</script>
 
 	</div>
 	<!-- //wrapAll end -->

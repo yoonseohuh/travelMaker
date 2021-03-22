@@ -25,4 +25,43 @@ public class TmUserDAOImpl implements TmUserDAO {
 		
 		return result;
 	}
+
+	@Override
+	public int emailCheck(String email) {
+		int result = sqlSession.selectOne("tmUser.emailCheck", email);
+		
+		return result;
+	}
+
+	@Override
+	public TmUserDTO getMemInfo(String email) {
+		TmUserDTO member =  sqlSession.selectOne("tmUser.getMemInfo", email);
+		return member;
+	}
+
+	@Override
+	public int idEmailCheck(TmUserDTO dto) {
+		int result = sqlSession.selectOne("tmUser.idEmailCheck",dto);
+		System.out.println("dao idemail" + result);
+		return result;
+	}
+
+	@Override
+	public void pwChange(TmUserDTO mem) {
+		sqlSession.update("tmUser.pwChange",mem);
+	}
+
+
+	@Override
+	public TmUserDTO getMember(String id) {
+		TmUserDTO member = sqlSession.selectOne("tmUser.getMember", id);
+		return member;
+	}
+
+	@Override
+	public int getGender(String id) {
+		return sqlSession.selectOne("tmUser.getGender",id);
+	}
+	
+
 }
