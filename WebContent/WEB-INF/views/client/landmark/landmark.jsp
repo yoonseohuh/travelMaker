@@ -9,7 +9,8 @@
 </head>
 <body>
 	<h1>landmark</h1>
-
+	
+	<!-- 검색창 -->
 	<div class="search">
 		<i class="fas fa-search"></i> <input type="text"> <i
 			class="fas fa-keyboard"></i> <i class="fas fa-microphone"></i>
