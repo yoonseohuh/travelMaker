@@ -5,7 +5,7 @@
 	<ul class="menu">
         <li><a href="/travelMaker/mem/index.tm">홈</a></li>
         <li><a href="/travelMaker/my/myPage.tm">내정보</a></li>
-        <li><a href="">여행떠나기</a></li>
+        <li><a href="/travelMaker/travel/makingWrite.tm">여행떠나기</a></li>
         <li><a href="">여행공유</a></li>
         <li><a href="">랜드마크</a></li>
         <li><a href="">랭크/포지션 안내</a></li>
@@ -20,6 +20,8 @@
 		$('#clientMenuWrap').children('.menu').children('li').eq(0).addClass('on');
 	}else if(nowUrl == "/travelMaker/my/myPage.tm" || "/travelMaker/cmt/comment.tm" || "/travelMaker/qr/myQnaReportList.tm"){
 		$('#clientMenuWrap').children('.menu').children('li').eq(1).addClass('on');
+	}else if(nowUrl == "/travelMaker/travel/makingWrite.tm"){
+		$('#clientMenuWrap').children('.menu').children('li').eq(2).addClass('on');
 	}
 </script>
 <div class="mCover"></div>
