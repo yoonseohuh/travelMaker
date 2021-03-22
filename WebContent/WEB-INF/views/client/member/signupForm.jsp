@@ -16,20 +16,12 @@
 					<td><input type="text" name="name" /></td>
 				</tr>
 				<tr>
-					<td>닉네임</td>
-					<td><input type="text" name="nickname" /></td>
-				</tr>
-				<tr>
 					<td>아이디</td>
 					<td><input type="text" name="id" /></td>
 				</tr>
 				<tr>
-					<td>중복체크</td>
+					<td>id중복체크</td>
 					<td><input type="button" value="중복체크" /></td>
-				</tr>
-				<tr>
-					<td>생년월일</td>
-					<td><input type="text" name="birth" /></td>
 				</tr>
 				<tr>
 					<td>비밀번호</td>
@@ -38,6 +30,14 @@
 				<tr>
 					<td>비밀번호 확인</td>
 					<td><input type="password" name="pwch" /></td>
+				</tr>
+				<tr>
+					<td>닉네임</td>
+					<td><input type="text" name="nickname" /></td>
+				</tr>
+				<tr>
+					<td>생년월일</td>
+					<td><input type="text" name="birth" /></td>
 				</tr>
 				<tr>
 					<td>email</td>

@@ -29,4 +29,8 @@
 		update tmUser set pw=#{pw} where id=#{id}
 	</update>	
 	
+	<select id="getMember" parameterType="string" resultType="TmUserDTO">
+		select * from tmUser where id=#{id}
+	</select>
+	
 </mapper>

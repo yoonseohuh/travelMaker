@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>travelMaker</title>
-	<link rel="shortcut icon" href="#">
+	<link rel="shortcut icon" href="">
 	
 	<!-- CSS -->
 	<link href="<c:url value="/resources/css/reset.css" />" rel="stylesheet">

@@ -173,4 +173,24 @@ public class MemberServiceImpl implements MemberService {
 	public void pwChange(TmUserDTO mem) {
 		tmuserDAO.pwChange(mem);
 	}
+	
+	//아이디 ***
+	@Override
+	public String idStar(String id)throws Exception {
+		int num = id.length()-3;
+		System.out.println("num "+ num );
+		String cutId = id.substring(0, num);
+		System.out.println("cut Id: "+cutId);
+		String comId = cutId + "***";
+		return comId;
+	}
+
+	@Override
+	public TmUserDTO getMember(String id) {
+		TmUserDTO member =  tmuserDAO.getMember(id);
+		return member;
+	}
+	
+	
+	
 }
