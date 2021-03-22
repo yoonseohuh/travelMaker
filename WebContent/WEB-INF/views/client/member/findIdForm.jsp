@@ -4,9 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>findIdForm</title>
 </head>
 <body>
-<h1>findIdForm</h1>
+	<h1>아이디 찾기</h1>
+	<form action="/travelMaker/mem/findIdPro.tm" method="post">
+		<input type="text" name="email" placeholder="등록된 email"/>
+		<input type="submit" value="아이디 확인" />
+	</form>
 </body>
 </html>
