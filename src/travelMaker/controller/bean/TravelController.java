@@ -1,13 +1,9 @@
 package travelMaker.controller.bean;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import travelMaker.model.dto.GroupSpaceDTO;
 import travelMaker.service.bean.TravelService;
 
@@ -20,12 +16,12 @@ public class TravelController {
 	
 	@RequestMapping("makingWrite.tm")
 	public String makingWrite() {
-		
 		return "/client/travel/makingWrite";
 	}
 	
 	@RequestMapping("makingWritePro.tm")
 	public String makingWritePro(GroupSpaceDTO dto) throws Exception{
+		System.out.println("po1:"+dto.getPo1()+"/po2:"+dto.getPo2()+"/po3:"+dto.getPo3());
 		travelService.insertMaking(dto);
 		return "/client/travel/makingList";
 	}
@@ -34,6 +30,12 @@ public class TravelController {
 	public String makingList(Model model) {
 		
 		return "/client/travel/makingList";
+	}
+	
+	@RequestMapping("makingCont.tm")
+	public String makingCont() {
+		
+		return "/client/travel/makingCont";
 	}
 	
 	

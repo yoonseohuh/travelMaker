@@ -1,48 +1,61 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+<jsp:include page="/WEB-INF/views/include/header.jsp" />
 <body>
-<h1>landmark</h1>
+   
+	<jsp:include page="/WEB-INF/views/include/top.jsp" />
+	<!-- //top end -->
 	
-	<!-- 지도  -->
-	<div id="map" style="width:500px;height:400px;"></div>
+	<div class="wrapAll">
+		
+		<a href="/travelMaker/land/landWrite.tm"><button>랜드마크작성</button></a>
+		
+		<!-- 검색창 -->
+		<div class="search">
+			<i class="fas fa-search"></i> <input type="text"> <i
+				class="fas fa-keyboard"></i> <i class="fas fa-microphone"></i>
+		</div>
+		<input type="button" class="box" value="장소 검색">
+		
+		<!-- 지도  -->
+		<div id="map" style="width: 1000px; height: 400px;"></div>
 	
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dbb3c6ebdae00379cc812a1240d45848"></script>
-	<script>
-		var container = document.getElementById('map');
-		var options = {
-			center: new kakao.maps.LatLng(33.450701, 126.570667),
-			level: 3
-		};
+		<script type="text/javascript"
+			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dbb3c6ebdae00379cc812a1240d45848"></script>
+		<script>
+			var container = document.getElementById('map');
+			var options = {
+				center : new kakao.maps.LatLng(33.450701, 126.570667),
+				level : 3
+			};
 	
-		var map = new kakao.maps.Map(container, options);
-		
-		// 클릭한 위치에 마커 생성
-		var marker = new kakao.maps.Marker({
-			// 지도 중심좌표에 마커 생성
-			position: map.getCenter()
-		});
-		// 지도에 마커 표시
-		marker.setMap(map);
-		
-		// 지도에 클릭 이벤트를 등록합니다
-		// 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
-		kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
-		    
-		    // 클릭한 위도, 경도 정보를 가져온다 
-		    var latlng = mouseEvent.latLng; 
-		    
-		    // 마커 위치를 클릭한 위치로 옮긴다
-		    marker.setPosition(latlng);
-		});
-		
-		
+			var map = new kakao.maps.Map(container, options);
+			
+			// 마커가 표시될 위치  
+			var markerPosition  = new kakao.maps.LatLng(33.450701, 126.570667); 
 
-	</script>
+			// 마커를 생성 메서드
+			var marker = new kakao.maps.Marker({
+			    position: markerPosition
+			});
+			// 지도에 마커 표시
+			marker.setMap(map);
+			// 인포윈도우를 생성합니다
+			var infowindow = new kakao.maps.InfoWindow({
+			    position : iwPosition, 
+			    content : iwContent 
+			});
+			  
+			// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+			infowindow.open(map, marker); 
+		</script>
+		
+	</div>
+	<!-- //wrapAll end -->
+	
+	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+	<!-- //footer end -->
+   
 </body>
 </html>
