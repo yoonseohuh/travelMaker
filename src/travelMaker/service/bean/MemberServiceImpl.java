@@ -150,7 +150,7 @@ public class MemberServiceImpl implements MemberService {
 			mem = getMemInfo(email);
 		}
 		return mem;
-	}
+	} 
 	
 	//email로 회원정보 가져오기 
 	@Override
