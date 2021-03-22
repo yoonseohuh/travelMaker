@@ -106,12 +106,14 @@
 					<c:if test="${sessionScope.memId!=content.id}">
 						<c:if test="${memIdGender==writerGender}">
 							<input type="button" value="신청" onclick="window.location='/travelMaker/travel/makingReq.tm?gNo=${content.gNo}'"/>
-						</c:if>
-						<c:if test="${memIdGender==0}">
-							남성 회원은 신청할 수 없습니다. 
-						</c:if>
-						<c:if test="${memIdGender==1}">
-							여성 회원은 신청할 수 없습니다. 
+						</c:if>						
+						<c:if test="${memIdGender!=writerGender}">
+							<c:if test="${memIdGender==0}">
+								남성 회원은 신청할 수 없습니다. 
+							</c:if>
+							<c:if test="${memIdGender==1}">
+								여성 회원은 신청할 수 없습니다. 
+							</c:if>
 						</c:if>
 					</c:if>
 					<input type="button" value="리스트" onclick="window.location='/travelMaker/travel/makingList.tm?pageNum=${pageNum}'"/>					
