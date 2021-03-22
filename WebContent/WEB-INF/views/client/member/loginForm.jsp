@@ -30,7 +30,8 @@
 				</tr>
 				<tr>
 					<td>
-						<a href="findIdForm.tm">ID/PW 찾기</a>
+						<a href="findIdForm.tm">ID 찾기</a>
+						<a href="findPw.tm">PW 재설정</a>
 					</td>
 				</tr>	
 			</table>

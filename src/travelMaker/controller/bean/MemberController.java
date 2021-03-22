@@ -2,6 +2,8 @@ package travelMaker.controller.bean;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,12 +39,12 @@ public class MemberController {
 		return "client/member/signupForm";
 	}
 	
-	//회원가입 처리, 성공적으로 가입했다고 표시해주는 페이지 
+	//회원가입 처리
 	@RequestMapping("signupPro.tm")
 	public String signupPro(TmUserDTO dto) {
 		
 		memService.addMember(dto);
-		return "client/member/signupPro";
+		return "redirect:index.tm";
 	}
 	
 	//로그인 폼
@@ -85,9 +87,13 @@ public class MemberController {
 	//아이디 찾기 
 	//findIdForm에서 입력한 email을 받아와서 이 email의 아이디를 보여줘야함 
 	@RequestMapping("findIdPro.tm")
-	public String findIdPro(String email, Model model) {
+	public String findIdPro(String email, Model model)throws Exception {
 		TmUserDTO mem = memService.emailCheck(email);
+		String id = mem.getId();
+		String comId = memService.idStar(id);
 		model.addAttribute("mem", mem);
+		model.addAttribute("comId", comId);
+		
 		return "client/member/findIdPro";
 	}
 	
@@ -114,13 +120,15 @@ public class MemberController {
 	public String modiPwPro(TmUserDTO mem,Model model) {
 		//비밀번호 업데이트 하는 메서드 
 		memService.pwChange(mem);
-		System.out.println("아이디: "+mem.getId());
-		System.out.println("비번: "+mem.getPw());
-		return "client/member/modiPwPro";
+		return "redirect:index.tm";
 	}
 	
-	
-	
+	//회원 정보 수정
+	@RequestMapping("myModi")
+	public String myModi(HttpSession session, Model model) {
+		memService.getMember((String)session.getAttribute("memId"));
+		return "client/mypage/myModi";
+	}
 	
 	
 }
