@@ -72,7 +72,7 @@ public class MemberController {
 		//자동 로그인 했다면 쿠키 지워 주기 
 		memService.removeCookie(dto, auto);
 		
-		return "client/index";
+		return "redirect:index.tm";
 	}
 	
 	//아이디 찾기 
