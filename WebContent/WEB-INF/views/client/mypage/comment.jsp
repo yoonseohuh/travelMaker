@@ -5,10 +5,7 @@
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
 <body>
 
-   	<style>
-    .menu a{cursor:pointer;}
-    .menu .hide{display:none;}
-	</style>
+   
 	
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
 	<!-- //top end -->
@@ -32,7 +29,7 @@
 			    <ul>
 			        <li class="menu">
 			            <a>전주여행</a>
-			            <ul class="hide">
+			            <ul style="display: none;">
 			                <li>메뉴1-1</li>
 			                <li>메뉴1-2</li>
 			                <li>메뉴1-3</li>
@@ -44,7 +41,7 @@
 			  
 			        <li class="menu">
 			            <a>광명동굴탐험</a>
-			            <ul class="hide">
+			            <ul style="display: none;">
 			                <li>메뉴2-1</li>
 			                <li>메뉴2-2</li>
 			                <li>메뉴2-3</li>
@@ -61,26 +58,27 @@
 		</div>
 		
 		<script>
-		$(document).ready(function(){
-	        $(".menu>a").click(function(){
-	            var submenu = $(this).next("ul");
-	 
-	            if( submenu.is(":visible") ){
-	                submenu.slideUp();
-	            }else{
-	                submenu.slideDown();
-	            }
-	        });
-	        $('#tab1').click(function(){
-	    		$('#cont2').hide();
-	    		$('#cont1').fadeIn();
-	    	});
-	    	$('#tab2').click(function(){
-	    		$('#cont1').hide();
-	    		$('#cont2').fadeIn();
-	    	});
-	    });	
-		</script>
+      $(document).ready(function(){
+           $(".menu>a").click(function(){
+               var submenu = $(this).next("ul");
+    
+               if( submenu.is(":visible") ){
+                   submenu.slideUp();
+               }else{
+                   submenu.slideDown();
+               }
+           });
+           $('#cont2').hide();
+           $('#tab1').click(function(){
+             $('#cont2').hide();
+             $('#cont1').fadeIn();
+          });
+          $('#tab2').click(function(){
+             $('#cont1').hide();
+             $('#cont2').fadeIn();
+          });
+       });   
+      </script>
 
 	</div>
 	<!-- //wrapAll end -->

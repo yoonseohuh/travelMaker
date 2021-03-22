@@ -18,38 +18,28 @@ public class UserCmtDAOImpl implements UserCmtDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession = null;
 	
-	//사용자가 참여중인 그룹넘버 가져오기
+	// groupMember테이블에서 사용자가 참여중인 그룹 가져오기
 	@Override
-	public List myGroupNo(String id) throws SQLException {
+	public List myGroup(String id) throws SQLException {
 		System.out.println("dao에서 id:" +id);
-		List myGroup = sqlSession.selectList("userCmt.myGroupNo", id);
-
+		List myGroup = sqlSession.selectList("userCmt.myGroup", id); // 그룹No list에 담아주고  서비스로 보냄
+		// dto여러줄이 list myGroup에 담겨서 보내짐
+		
 		
 		return myGroup;
 	}
 
-	//사용자가 참여중인 그룹의 정보 가져오기
+	
+	//그룹고유번호 보내서 그룹정보 가져오기 (그룹스페이스상태 4인것들)
 	@Override
-	public GroupSpaceDTO getMyGroupInfo(int gNo) throws SQLException {
-		GroupSpaceDTO dto = sqlSession.selectOne("userCmt.getMyGroupInfo", gNo);
-		System.out.println("디티오전?");
-		System.out.println(dto.getSubject());
-		System.out.println("안찍히니?");
-		return dto;
+	public GroupSpaceDTO getGroupInfo(int num) throws SQLException {
+		
+		GroupSpaceDTO gInfo = sqlSession.selectOne("userCmt.getGroupInfo", num);
+		
+		return gInfo;
 	}
 
 	
-	
-	
-	
-	@Override
-	public int myGroupCount(String id) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
-
 	
 
 
