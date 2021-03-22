@@ -50,4 +50,10 @@ public class TmUserDAOImpl implements TmUserDAO {
 	public void pwChange(TmUserDTO mem) {
 		sqlSession.update("tmUser.pwChange",mem);
 	}
+	
+	@Override
+	public int getGender(String id) {
+		return sqlSession.selectOne("tmUser.getGender",id);
+	}
+	
 }

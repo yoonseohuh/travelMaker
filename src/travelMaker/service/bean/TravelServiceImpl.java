@@ -13,6 +13,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import travelMaker.model.dao.GroupSpaceDAO;
+import travelMaker.model.dao.TmUserDAO;
 import travelMaker.model.dto.GroupSpaceDTO;
 
 @Service
@@ -20,6 +21,8 @@ public class TravelServiceImpl implements TravelService{
 	
 	@Autowired
 	private GroupSpaceDAO groupSpaceDAO = null;
+	@Autowired
+	private TmUserDAO tmUserDAO = null;
 	
 	//개설글 작성
 	@Override
@@ -68,7 +71,47 @@ public class TravelServiceImpl implements TravelService{
 		
 		return map;
 	}
+
+	//모집글 하나 가져오기
+	@Override
+	public GroupSpaceDTO getContent(int gNo) throws Exception {
+		GroupSpaceDTO content = groupSpaceDAO.getContent(gNo);
+		String cpt = content.getConcept();
+		if(cpt.equals("gourmet")) { content.setConcept("맛집"); }
+		else if(cpt.equals("healing")) { content.setConcept("힐링"); }
+		else if(cpt.equals("adventure")) { content.setConcept("모험"); }
+		else if(cpt.equals("tour")) { content.setConcept("관광"); }
+		else if(cpt.equals("camping")) { content.setConcept("캠핑"); }
+		
+		String loc = content.getLoc();
+		if(loc.equals("seoul")) { content.setLoc("서울"); }
+		else if(loc.equals("incheon")) { content.setLoc("인천"); }
+		else if(loc.equals("gyunggi")) { content.setLoc("경기"); }
+		else if(loc.equals("gangwon")) { content.setLoc("강원"); }
+		else if(loc.equals("sejong")) { content.setLoc("세종"); }
+		else if(loc.equals("daejeon")) { content.setLoc("대전"); }
+		else if(loc.equals("chungnam")) { content.setLoc("충청남도"); }
+		else if(loc.equals("chungbuk")) { content.setLoc("충청북도"); }
+		else if(loc.equals("gwangju")) { content.setLoc("광주"); }
+		else if(loc.equals("jeonnam")) { content.setLoc("전라남도"); }
+		else if(loc.equals("jeonbuk")) { content.setLoc("전라북도"); }
+		else if(loc.equals("busan")) { content.setLoc("부산"); }
+		else if(loc.equals("ulsan")) { content.setLoc("울산"); }
+		else if(loc.equals("daegu")) { content.setLoc("대구"); }
+		else if(loc.equals("gyungnam")) { content.setLoc("경상남도"); }
+		else if(loc.equals("gyungbuk")) { content.setLoc("경상북도"); }
+		else if(loc.equals("jeju")) { content.setLoc("제주도"); }
+
+		return content;
+	}
 	
+	//id 주고 성별 가져오기
+	public int getGender(String id) throws Exception {
+		return tmUserDAO.getGender(id);
+	}
 	
-	
+	//모집 게시글 삭제
+	public void deleteContent(int gNo) throws Exception {
+		groupSpaceDAO.deleteContent(gNo);
+	}
 }

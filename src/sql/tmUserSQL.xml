@@ -29,4 +29,8 @@
 		update tmUser set pw=#{pw} where id=#{id}
 	</update>	
 	
+	<select id="getGender" parameterType="string" resultType="int">
+		select gender from tmUser where id=#{id}
+	</select>
+	
 </mapper>

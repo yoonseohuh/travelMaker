@@ -6,7 +6,7 @@
         <li><a href="/travelMaker/mem/index.tm">홈</a></li>
         <li><a href="/travelMaker/my/myPage.tm">내정보</a></li>
 
-        <li><a href="/travelMaker/travel/makingWrite.tm">여행떠나기</a></li>
+        <li><a href="/travelMaker/travel/makingList.tm">여행떠나기</a></li>
 
         <li><a href="#">여행공유</a></li>
         <li><a href="/travelMaker/land/landmark.tm">랜드마크</a></li>
