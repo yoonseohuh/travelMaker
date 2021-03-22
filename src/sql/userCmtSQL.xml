@@ -5,5 +5,14 @@
   
 <mapper namespace="userCmt">
 
+<select id="myGroupNo" parameterType="string" resultType="GroupMemberDTO">
+	select * from GroupMember where id=#{id} and status=1
+</select>
+
+<select id="getMyGroupInfo" parameterType="int" resultType="GroupSpaceDTO">
+	select * from GroupSpace where gNo=#{gNo} and status=4
+</select>
+
+
 
 </mapper>

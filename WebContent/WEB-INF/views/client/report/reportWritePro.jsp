@@ -8,5 +8,6 @@
 </head>
 <body>
 <h1>reportWritePro</h1>
+<h3>rNo:${rNo}</h3>
 </body>
 </html>
