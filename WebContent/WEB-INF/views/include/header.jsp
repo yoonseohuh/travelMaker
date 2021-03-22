@@ -13,5 +13,6 @@
 	
 	<!-- JS -->
 	<script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js" />"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
