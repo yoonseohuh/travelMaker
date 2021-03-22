@@ -15,10 +15,17 @@
 	
 	<select id="getArticles" parameterType="hashmap" resultType="GroupSpaceDTO">
 		<![CDATA[
-		(select a.*, r FROM
-		(select groupSpace.*, rownum r from groupSpace where status=0 ORDER BY reg desc) a
-		where r>=#{start} and r<=${end})
+		(select a.*, r FROM (select groupSpace.*, rownum r from groupSpace where status=0 order by reg desc) a where r>=#{start} and r<=${end})
 		]]>
 	</select>
+	
+	<select id="getContent" parameterType="int" resultType="GroupSpaceDTO">
+		select * from groupSpace where gNo=#{gNo}
+	</select>
+	
+	<delete id="deleteContent" parameterType="int">
+		delete from groupSpace where gNo=#{value}
+	</delete>
+	
 	
 </mapper>

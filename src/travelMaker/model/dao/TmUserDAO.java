@@ -16,5 +16,6 @@ public interface TmUserDAO {
 	public TmUserDTO getMemInfo(String email);
 	//비밀번호 수정 
 	public void pwChange(TmUserDTO mem);
-
+	//id 주고 성별 가져오기
+	public int getGender(String id);
 }

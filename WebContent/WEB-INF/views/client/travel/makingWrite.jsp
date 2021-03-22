@@ -39,7 +39,7 @@
 					//buttonImage: "images/calendar.gif",
 					//buttonImageOnly: true,
 					buttonText: "날짜선택",
-					dateFormat: "yy-mm-dd",
+					dateFormat: "yymmdd",
 					changeMonth: true,
 					minDate: 0,
 					onClose: function(selectedDate) {    
@@ -53,7 +53,7 @@
 					//buttonImage: "images/calendar.gif",
 					//buttonImageOnly : true,
 					buttonText: "날짜선택",
-					dateFormat: "yy-mm-dd",
+					dateFormat: "yymmdd",
 					changeMonth: true,
 					onClose: function(selectedDate) {
 						$("#fromDate").datepicker("option","maxDate",selectedDate);	//시작일의 최대일은 종료일
@@ -63,7 +63,7 @@
 				$('#dueDate').datepicker({
 					showOn: "both",
 					buttonText: "날짜선택",
-					dateFormat: "yy-mm-dd",
+					dateFormat: "yymmdd",
 					changeMonth: true
 				});
 				

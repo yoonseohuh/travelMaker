@@ -18,13 +18,17 @@
 		</c:if>
 		
 		<c:if test="${count>0}">
-			<ol start="1">
+			<table>
 				<c:forEach var="article" items="${articleList}">
-					<li>
-						<a href="makingCont.tm?gNo=${article.gNo}&pageNum=${pageNum}">${article.subject}</a>
-					</li>
+				<tr>
+					<td>${number}</td>
+					<c:set var="number" value="${number-1}"/>
+					<td>
+						<a href="makingCont.tm?gNo=${article.gNo}&pageNum=${pageNum}">${article.subject}</a>					
+					</td>
+				</tr>
 				</c:forEach>
-			</ol>
+			</table>
 			현재 페이지: ${pageNum}
 			<div class="pageNumbers">
 				<c:set var="pageBlock" value="5"/>
@@ -37,15 +41,15 @@
 					<c:set var="endPage" value="${pageCount}"/>
 				</c:if>
 				
-				<%-- 앞으로 가는 기호 --%>
+				<!-- 앞으로 가는 기호 -->
 				<c:if test="${startPage>pageBlock}">
 					<a href="makingList.tm?pageNum=${startPage-pageBlock}"> &lt; </a>
 				</c:if>
-				<%-- 페이지번호 리스트 --%>
+				<!-- 페이지번호 리스트 -->
 				<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
 					<a href="makingList.tm?pageNum=${i}">&nbsp; ${i} &nbsp;</a>
 				</c:forEach>
-				<%-- 뒤로 가는 기호 --%>
+				<!-- 뒤로 가는 기호 -->
 				<c:if test="${endPage<pageCount}">
 					<a href="makingList.tm?pageNum=${startPage+pageBlock}"> &gt; </a>
 				</c:if>				

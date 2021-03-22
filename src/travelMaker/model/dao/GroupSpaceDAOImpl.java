@@ -13,17 +13,20 @@ public class GroupSpaceDAOImpl implements GroupSpaceDAO{
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession = null;
-
+	
+	//개설글 작성
 	@Override
 	public void insertMaking(GroupSpaceDTO dto) throws Exception {
 		sqlSession.insert("groupSpace.insertMaking",dto);
 	}
 	
+	//모집 중인 게시글 개수 리턴
 	@Override
 	public int getArticleCount() throws Exception {
 		return sqlSession.selectOne("groupSpace.getArticleCount");
 	}
 	
+	//모집중 게시글 보여주기
 	@Override
 	public List getArticles(int start, int end) throws Exception {
 		Map map = new HashMap();
@@ -32,7 +35,18 @@ public class GroupSpaceDAOImpl implements GroupSpaceDAO{
 		List articleList = sqlSession.selectList("groupSpace.getArticles",map);
 		return articleList;
 	}
+
+	//모집 중 게시글 내용 하나 가져오기
+	@Override
+	public GroupSpaceDTO getContent(int gNo) throws Exception {
+		return sqlSession.selectOne("groupSpace.getContent",gNo);
+	}
 	
+	//모집 게시글 삭제
+	@Override
+	public void deleteContent(int gNo) throws Exception {
+		sqlSession.delete("groupSpace.deleteContent",gNo);
+	}
 	
 	
 }
