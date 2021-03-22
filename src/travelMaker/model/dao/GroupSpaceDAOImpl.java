@@ -14,7 +14,7 @@ public class GroupSpaceDAOImpl implements GroupSpaceDAO{
 
 	@Override
 	public void insertMaking(GroupSpaceDTO dto) throws Exception {
-		// TODO Auto-generated method stub
+		sqlSession.insert("groupSpace.insertMaking",dto);
 		
 	}
 	

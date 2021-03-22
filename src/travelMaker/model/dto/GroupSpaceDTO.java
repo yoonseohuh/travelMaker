@@ -7,7 +7,7 @@ public class GroupSpaceDTO {
 	private Integer gNo, po1, po2, po3;
 	private String id, subject, concept;
 	private Integer maxNum, actualNum;
-	private Timestamp closingDate, startDate, endDate;
+	private String closingDate, startDate, endDate;
 	private String loc;
 	private Integer dongsung;
 	private String courseExpl, addExpl;
@@ -42,14 +42,14 @@ public class GroupSpaceDTO {
 	public Integer getActualNum() { return actualNum; }
 	public void setActualNum(Integer actualNum) { this.actualNum = actualNum; }
 	
-	public Timestamp getClosingDate() { return closingDate; }
-	public void setClosingDate(Timestamp closingDate) { this.closingDate = closingDate; }
+	public String getClosingDate() { return closingDate; }
+	public void setClosingDate(String closingDate) { this.closingDate = closingDate; }
 	
-	public Timestamp getStartDate() { return startDate; }
-	public void setStartDate(Timestamp startDate) { this.startDate = startDate; }
+	public String getStartDate() { return startDate; }
+	public void setStartDate(String startDate) { this.startDate = startDate; }
 	
-	public Timestamp getEndDate() { return endDate; }
-	public void setEndDate(Timestamp endDate) { this.endDate = endDate; }
+	public String getEndDate() { return endDate; }
+	public void setEndDate(String endDate) { this.endDate = endDate; }
 	
 	public String getLoc() { return loc; }
 	public void setLoc(String loc) { this.loc = loc; }
