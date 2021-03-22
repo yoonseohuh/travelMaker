@@ -1,10 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
-<body>
 	
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
 	
@@ -12,6 +8,8 @@
 		<h1>findIdPro</h1>
 		<c:if test="${mem != null}">
 			<h2>해당 아이디는 : ${comId}입니다</h2>
+			<input type="button" value="로그인" onclick="window.location='/travelMaker/mem/loginForm.tm'"/>
+			<input type="button" value="비밀번호 수정" onclick="window.location='/travelMaker/mem/myModiNick.tm'"/>
 		</c:if>
 	
 		<c:if test="${mem == null}">
@@ -25,6 +23,3 @@
 	
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	<!-- //footer end -->
-
-</body>
-</html>

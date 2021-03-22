@@ -1,13 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
-<head>
-<meta charset="UTF-8">
-<title>findIdForm</title>
-</head>
-<body>
+
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
 	<!-- //top end -->
 	
@@ -23,5 +16,3 @@
 	
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	<!-- //footer end -->
-</body>
-</html>
