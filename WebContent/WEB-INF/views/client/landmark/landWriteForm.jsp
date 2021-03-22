@@ -1,12 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
-<!DOCTYPE html>
-<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
-<body>
-
+   
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
 	<!-- //top end -->
-
+	
 	<div class="wrapAll">
 		<h1>landWriteForm</h1>
 		<!-- 검색창 -->
@@ -148,8 +145,8 @@
 				</tr>
 				<tr>
 					<td>공개범위</td>
-					<td><input type="radio" name="lOpen" value="allOp">전체 공개 
-						<input type="radio" name="lOpen" value="userOp">회원 공개
+					<td><input type="radio" name="lOpen" value="0">전체 공개 
+						<input type="radio" name="lOpen" value="1">회원 공개
 					</td>
 				</tr>
 				<tr>
@@ -162,12 +159,9 @@
 					</td>
 			</table>
 		</form>
-
+		
 	</div>
 	<!-- //wrapAll end -->
-
-	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
-	<!-- //footer end -->
-
-</body>
-</html>
+	
+<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+<!-- //footer end -->
