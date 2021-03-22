@@ -15,12 +15,7 @@ import travelMaker.service.bean.QnaReportServiceImpl;
 public class QnaReportController {
 	
 	@Autowired
-	private QnaReportServiceImpl qnaReportService = null;
-	
-	@RequestMapping("myQnaReportList.tm")
-	public String myQnaReportList() {
-		return "client/mypage/myQnaReportList";
-	}	
+	private QnaReportServiceImpl qnaReportService = null;	
 	
 	@RequestMapping("reportWriteForm.tm")
 	public String reportWriteForm(int rType, Model model) throws SQLException {		

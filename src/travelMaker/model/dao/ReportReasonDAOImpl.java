@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import travelMaker.model.dto.QnaBoardDTO;
 import travelMaker.model.dto.ReportReasonDTO;
 
 @Repository

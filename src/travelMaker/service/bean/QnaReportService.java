@@ -3,6 +3,7 @@ package travelMaker.service.bean;
 import java.sql.SQLException;
 import java.util.List;
 
+import travelMaker.model.dto.QnaBoardDTO;
 import travelMaker.model.dto.ReportReasonDTO;
 
 public interface QnaReportService {
@@ -12,5 +13,7 @@ public interface QnaReportService {
 	public List selectReason(int rType) throws SQLException;
 
 	public List selectReasonAll() throws SQLException;
+
+	public void insertQna(QnaBoardDTO dto) throws SQLException;
 
 }
