@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="qnaBoard">
-
-
+	<insert id="insertQna" parameterType="QnaBoardDTO">
+		insert into QNABOARD(qNo,id,rType,content,reg,rNo) values(QNABOARD_SEQ.nextVal,#{id},#{rType},#{content},sysdate,#{rNo})
+	</insert>
 </mapper>
