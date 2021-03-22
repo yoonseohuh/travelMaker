@@ -1,59 +1,49 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
-<body>
 
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
 	<!-- //top end -->
 	
 	<div class="wrapAll">
+		<jsp:include page="/WEB-INF/views/include/myMenu.jsp" />
+		<!-- myMenu end -->
 		<h2>회원 정보 수정</h2>
 		<form action="/travelMaker/mem/signupPro.tm" method="post">
 			<table>
 				<tr>
 					<td>이름</td>
-					<td><input type="text" name="name" /></td>
+					<td>${mem.name}</td>
 				</tr>
 				<tr>
 					<td>아이디</td>
-					<td><input type="text" name="id" /></td>
-				</tr>
-				<tr>
-					<td>id중복체크</td>
-					<td><input type="button" value="중복체크" /></td>
-				</tr>
-				<tr>
-					<td>비밀번호</td>
-					<td><input type="password" name="pw" /></td>
-				</tr>
-				<tr>
-					<td>비밀번호 확인</td>
-					<td><input type="password" name="pwch" /></td>
+					<td>${mem.id}</td>
 				</tr>
 				<tr>
 					<td>닉네임</td>
-					<td><input type="text" name="nickname" /></td>
+					<td>${mem.nickname}</td>
 				</tr>
 				<tr>
 					<td>생년월일</td>
-					<td><input type="text" name="birth" /></td>
+					<td>${mem.birth}</td>
 				</tr>
 				<tr>
 					<td>email</td>
-					<td><input type="text" name="email"/></td>
+					<td>${mem.email}</td>
 				</tr>
 				<tr>
 					<td>성별</td>
-					<td>
-						<input type="radio" name="gender" value=0 />남
-						<input type="radio" name="gender" value=1 />여
-					</td>
+					<c:if test="${mem.gender==0}">
+						<td>남자</td>
+					</c:if>
+					<c:if test="${mem.gender==1}">
+						<td>여자</td>
+					</c:if>
 				</tr>
 				<tr>
-					<td colspan="2" align="center">
-						<input type="submit" value="회원가입" />
+					<td>
+						<input type="button" value="닉네임 수정" onclick="window.location='/travelMaker/mem/myModiNick.tm'"/>
+						<input type="button" value="비밀번호 수정" onclick="window.location='/travelMaker/mem/myModiPw.tm'"/>
 					</td>
 				</tr>
 			</table>
@@ -64,5 +54,3 @@
 	
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	<!-- //footer end -->
-</body>
-</html>

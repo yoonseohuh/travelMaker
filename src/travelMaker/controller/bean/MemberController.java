@@ -126,9 +126,18 @@ public class MemberController {
 	//회원 정보 수정
 	@RequestMapping("myModi")
 	public String myModi(HttpSession session, Model model) {
-		memService.getMember((String)session.getAttribute("memId"));
+		TmUserDTO member = memService.getMember((String)session.getAttribute("memId"));
+		model.addAttribute("mem", member);
 		return "client/mypage/myModi";
 	}
+	
+	//닉네임 수정
+	@RequestMapping("myModiNick")
+	public String myModiNick() {
+		return "client/mypage/myModiNickForm";
+	}
+	
+
 	
 	
 }

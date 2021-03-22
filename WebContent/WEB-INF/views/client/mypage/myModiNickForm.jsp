@@ -6,7 +6,7 @@
 	
 	<div class="wrapAll">
 		
-		여기에 작성해주시오! 이곳이 body라고 생각하면 되오!!
+		modiNick
 		
 	</div>
 	<!-- //wrapAll end -->
