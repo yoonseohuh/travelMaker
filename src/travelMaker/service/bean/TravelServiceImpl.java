@@ -1,5 +1,6 @@
 package travelMaker.service.bean;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,11 +15,13 @@ import travelMaker.model.dao.GroupRequestDAO;
 import travelMaker.model.dao.GroupSpaceDAO;
 import travelMaker.model.dao.SmallPosDAO;
 import travelMaker.model.dao.TmUserDAO;
+import travelMaker.model.dao.UserRkDAO;
 import travelMaker.model.dto.GroupMemberDTO;
 import travelMaker.model.dto.GroupRequestDTO;
 import travelMaker.model.dto.GroupSpaceDTO;
 import travelMaker.model.dto.SmallPosDTO;
 import travelMaker.model.dto.TmUserDTO;
+import travelMaker.model.dto.UserRkDTO;
 
 @Service
 public class TravelServiceImpl implements TravelService{
@@ -33,6 +36,8 @@ public class TravelServiceImpl implements TravelService{
 	private SmallPosDAO smallPosDAO = null;
 	@Autowired
 	private GroupRequestDAO groupRequestDAO = null;
+	@Autowired
+	private UserRkDAO userRkDAO = null;
 	
 	//개설글 작성
 	@Override
@@ -181,8 +186,34 @@ public class TravelServiceImpl implements TravelService{
 		groupMemberDAO.insertMemToGroup(applicant);
 	}
 	
+	//회원 랭크 가져오기
+	public UserRkDTO getMemRk(String id) throws Exception {
+		TmUserDTO dto = tmUserDAO.getMember(id);
+		UserRkDTO rkInfo = userRkDAO.getRkInfo(dto.getRk());
+		return rkInfo;
+	}
 	
-	
-	
+	//상태에 따른 모든 여행 리스트의 그룹번호 가져온 다음 해당 groupSpace들을 리턴
+	@Override
+	public List getMyGroups(String id, int status) throws Exception {
+
+		List list = new ArrayList();		//GroupMemberDTO가 담기는 리스트
+		List gNoList = new ArrayList();		//gNo만 담을 리스트
+
+		list = groupMemberDAO.getMyGroups(id,status);
+		
+		for(int i=0 ; i<list.size() ; i++) {
+			GroupMemberDTO dto = (GroupMemberDTO)list.get(i);
+			gNoList.add(dto.getgNo());
+		}
+		
+		GroupSpaceDTO article = new GroupSpaceDTO();
+		List articleList = new ArrayList();		//실제 그룹방들을 담을 리스트
+		for(int i=0 ; i<gNoList.size(); i++) {
+			article = groupSpaceDAO.getContent((Integer)gNoList.get(i));
+			articleList.add(article);
+		}
+		return articleList;
+	}
 	
 }

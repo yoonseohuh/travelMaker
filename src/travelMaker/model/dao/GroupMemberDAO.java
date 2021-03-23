@@ -1,5 +1,7 @@
 package travelMaker.model.dao;
 
+import java.util.List;
+
 import travelMaker.model.dto.GroupMemberDTO;
 
 public interface GroupMemberDAO {
@@ -8,5 +10,6 @@ public interface GroupMemberDAO {
 	public int getMemStatus(int gNo, String id) throws Exception;
 	//그룹에 참여신청 처리
 	public void insertMemToGroup(GroupMemberDTO applicant) throws Exception;
-	
+	//상태에 따른 그룹 리스트(대기중/참여중/거절됨/강퇴됨) 가져오기
+	public List getMyGroups(String id, int status) throws Exception;
 }
