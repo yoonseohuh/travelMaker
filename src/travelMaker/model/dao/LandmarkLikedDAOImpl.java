@@ -1,9 +1,7 @@
 package travelMaker.model.dao;
 
-import java.sql.SQLException;
-
+import java.sql.SQLException;	
 import org.springframework.stereotype.Repository;
-
 import travelMaker.model.dto.LandmarkBoardDTO;
 
 @Repository

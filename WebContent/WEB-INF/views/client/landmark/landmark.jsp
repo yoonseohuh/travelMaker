@@ -13,9 +13,7 @@
 		
 		<script type="text/javascript"
 			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dbb3c6ebdae00379cc812a1240d45848"></script>
-		<script>
-			
-		</script>
+
 		
 		
 	</div>
