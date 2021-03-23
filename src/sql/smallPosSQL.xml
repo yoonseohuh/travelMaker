@@ -4,6 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="smallPos">
-
+	
+	<select id="getPosInfo" parameterType="int" resultType="SmallPosDTO">
+		select * from smallPos where posNo=#{value}
+	</select>
 
 </mapper>

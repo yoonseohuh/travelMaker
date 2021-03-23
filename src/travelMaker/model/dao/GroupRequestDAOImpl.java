@@ -1,5 +1,8 @@
 package travelMaker.model.dao;
 
-public class GroupRequestDAOImpl {
+import org.springframework.stereotype.Repository;
 
+@Repository
+public class GroupRequestDAOImpl implements GroupRequestDAO {
+	
 }

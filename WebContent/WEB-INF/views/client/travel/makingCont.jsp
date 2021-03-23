@@ -150,16 +150,16 @@
 					<c:if test="${sessionScope.memId!=content.id && content.maxNum<=content.actualNum}">
 						모집이 완료되었습니다. 
 					</c:if>
-					<c:if test="${memStatus==0}">
+					<c:if test="${sessionScope.memId!=content.id && memStatus==0}">
 						이미 신청하셨습니다.
 					</c:if>
-					<c:if test="${memStatus==1}">
+					<c:if test="${sessionScope.memId!=content.id && memStatus==1}">
 						이미 참여 중입니다.
 					</c:if>
-					<c:if test="${memStatus==2}">
+					<c:if test="${sessionScope.memId!=content.id && memStatus==2}">
 						이미 거절되었습니다.
 					</c:if>
-					<c:if test="${memStatus==3}">
+					<c:if test="${sessionScope.memId!=content.id && memStatus==3}">
 						개설자에 의해 강제퇴장된 여행입니다.
 					</c:if>
 					<input type="button" value="리스트" onclick="window.location='/travelMaker/travel/makingList.tm?pageNum=${pageNum}'"/>					
