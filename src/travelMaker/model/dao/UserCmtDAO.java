@@ -16,6 +16,11 @@ public interface UserCmtDAO {
 	public GroupSpaceDTO getGroupInfo(int num) throws SQLException;
 
 
+	//그룹고유번호로 참여중인 멤버 가져오기
+	public List getMem(int gNo) ;
 	
+
+		
+
 }
 

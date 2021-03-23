@@ -5,5 +5,8 @@
   
 <mapper namespace="groupRequest">
 
+	<insert id="insertRequest">
+		insert into groupRequest values(#{gNo},#{id},#{reqType},#{posNo},#{reqTxt},sysdate)
+	</insert>
 
 </mapper>

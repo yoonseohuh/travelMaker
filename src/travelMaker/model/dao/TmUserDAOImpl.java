@@ -64,7 +64,11 @@ public class TmUserDAOImpl implements TmUserDAO {
  
 	@Override
 	public int getGender(String id) {
-		return sqlSession.selectOne("tmUser.getGender",id);
+		int gender = -1;
+		if(id!=null) {
+			gender = sqlSession.selectOne("tmUser.getGender",id);
+		}
+		return gender;
 	}
 
 	@Override

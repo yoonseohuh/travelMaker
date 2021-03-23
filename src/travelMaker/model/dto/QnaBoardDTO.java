@@ -6,7 +6,8 @@ public class QnaBoardDTO {
 	private Integer qNo;
 	private String id;
 	private Integer rType;
-	private Integer rNo;	
+	private Integer rNo;
+	private String rCont;
 	private Integer status;
 	private String content;
 	private String feedback;
@@ -35,6 +36,13 @@ public class QnaBoardDTO {
 	}
 	public void setrNo(Integer rNo) {
 		this.rNo = rNo;
+	}
+	
+	public String getrCont() {
+		return rCont;
+	}
+	public void setrCont(String rCont) {
+		this.rCont = rCont;
 	}
 	public Integer getStatus() {
 		return status;

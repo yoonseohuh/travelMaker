@@ -64,7 +64,5 @@
 	<select id="getMemberCount" resultType="int">
 		select count(*) from tmUser 
 	</select>
-	
-	
-	
+
 </mapper>

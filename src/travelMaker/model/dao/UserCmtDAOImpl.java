@@ -41,7 +41,18 @@ public class UserCmtDAOImpl implements UserCmtDAO {
 
 	
 	
+	//그룹고유번호로 참여중인 멤버 가져오기  1=> 5명..2=>2명. 리스트에 담아줌
+	public List getMem(int gNo) {
+		List getMemList = sqlSession.selectList("userCmt.getMem",gNo);  //그룹멤버dto로 list에 담음
+		
+			
+		return getMemList;
+	}
+	
+	
+	
 
+	
 
 
 }
