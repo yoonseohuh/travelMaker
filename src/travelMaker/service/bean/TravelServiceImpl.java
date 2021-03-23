@@ -3,19 +3,20 @@ package travelMaker.service.bean;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
 import travelMaker.model.dao.GroupMemberDAO;
+import travelMaker.model.dao.GroupRequestDAO;
 import travelMaker.model.dao.GroupSpaceDAO;
+import travelMaker.model.dao.SmallPosDAO;
 import travelMaker.model.dao.TmUserDAO;
 import travelMaker.model.dto.GroupSpaceDTO;
+import travelMaker.model.dto.SmallPosDTO;
+import travelMaker.model.dto.TmUserDTO;
 
 @Service
 public class TravelServiceImpl implements TravelService{
@@ -26,6 +27,10 @@ public class TravelServiceImpl implements TravelService{
 	private TmUserDAO tmUserDAO = null;
 	@Autowired
 	private GroupMemberDAO groupMemberDAO = null;
+	@Autowired
+	private SmallPosDAO smallPosDAO = null;
+	@Autowired
+	private GroupRequestDAO groupRequestDAO = null;
 	
 	//개설글 작성
 	@Override
@@ -130,6 +135,31 @@ public class TravelServiceImpl implements TravelService{
 		}
 		return status;
 	}
+	
+	//회원 포지션 가져오기
+	@Override
+	public Map getUserPos(String id) throws Exception {
+		TmUserDTO dto = tmUserDAO.getMember(id);
+		int pos1 = dto.getPosition1();
+		int pos2 = dto.getPosition2();
+		System.out.println("pos1 "+pos1);
+		System.out.println("pos2 "+pos2);
+		Map map = new HashMap();
+		map.put("pos1",dto.getPosition1());
+		map.put("pos2",dto.getPosition2());
+		return map;
+	}
+	
+	//포지션 정보 가져오기
+	@Override
+	public SmallPosDTO getPosInfo(int posNo) throws Exception {
+		SmallPosDTO dto = smallPosDAO.getPosInfo(posNo);
+		return dto;
+	}
+	
+	//그룹 참여신청하기
+	
+	
 	
 	
 	

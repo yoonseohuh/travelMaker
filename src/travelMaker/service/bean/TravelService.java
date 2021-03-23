@@ -2,6 +2,8 @@ package travelMaker.service.bean;
 
 import java.util.Map;
 import travelMaker.model.dto.GroupSpaceDTO;
+import travelMaker.model.dto.SmallPosDTO;
+import travelMaker.model.dto.TmUserDTO;
 
 public interface TravelService {
 
@@ -17,5 +19,9 @@ public interface TravelService {
 	public void deleteContent(int gNo) throws Exception;
 	//해당 그룹 구성원의 상태 여부 (구성원 아니면 -1)
 	public int getMemStatus(int gNo, String id) throws Exception;
+	//회원의 포지션 가져오기
+	public Map getUserPos(String id) throws Exception;
+	//포지션 정보 가져오기
+	public SmallPosDTO getPosInfo(int posNo) throws Exception;
 	
 }

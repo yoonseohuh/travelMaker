@@ -1,17 +1,17 @@
 package travelMaker.controller.bean;
 
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
-
+import travelMaker.model.dto.GroupRequestDTO;
 import travelMaker.model.dto.GroupSpaceDTO;
+import travelMaker.model.dto.SmallPosDTO;
+import travelMaker.model.dto.TmUserDTO;
 import travelMaker.service.bean.TravelService;
 
 @Controller
@@ -76,14 +76,30 @@ public class TravelController {
 	}
 	
 	@RequestMapping("makingReq.tm")
-	public String makingReq(Model model) throws Exception {
+	public String makingReq(int gNo, Model model) throws Exception {
+		GroupSpaceDTO content = travelService.getContent(gNo);
 		
+		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
+		Map<String, Integer> map = travelService.getUserPos(id);
+		
+		SmallPosDTO posInfo1 = travelService.getPosInfo(map.get("pos1"));
+		SmallPosDTO posInfo2 = travelService.getPosInfo(map.get("pos2"));
+		
+		model.addAttribute("content",content);
+		model.addAttribute("id",id);
+		model.addAttribute("pos1",map.get("pos1"));
+		model.addAttribute("pos2",map.get("pos2"));
+		model.addAttribute("posInfo1",posInfo1);
+		model.addAttribute("posInfo2",posInfo2);
 		return "/client/travel/makingReq";
 	}
 	
 	@RequestMapping("makingReqPro.tm")
-	public String makingReqPro() throws Exception {
+	public String makingReqPro(GroupRequestDTO dto) throws Exception {
+		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
+		dto.setId(id);
 		//신청 처리하기
+		
 		return "redirect:makingList.tm";	
 	}
 	
