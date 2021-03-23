@@ -47,6 +47,7 @@
 				<c:if test="${pos2!=0}">
 					<input type="radio" name="posNo" value="${pos2}"/>${posInfo2.posName}
 				</c:if>
+				<br/><br/>* 모집 포지션에 일치하지 않아도 자유롭게 신청할 수 있습니다.
 			</div>
 			<h2>한마디</h2>
 			<textarea rows="5" cols="90" name="reqTxt" style="resize:none;"></textarea>

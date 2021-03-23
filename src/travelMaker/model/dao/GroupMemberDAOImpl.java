@@ -7,6 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import travelMaker.model.dto.GroupMemberDTO;
+
 @Repository
 public class GroupMemberDAOImpl implements GroupMemberDAO {
 	
@@ -24,6 +26,12 @@ public class GroupMemberDAOImpl implements GroupMemberDAO {
 			status = sqlSession.selectOne("groupMember.getMemStatus",map);
 		}
 		return status;
+	}
+
+	@Override
+	public void insertMemToGroup(GroupMemberDTO applicant) throws Exception {
+		sqlSession.insert("groupMember.insertMemToGroup",applicant);
+		
 	}
 	
 }

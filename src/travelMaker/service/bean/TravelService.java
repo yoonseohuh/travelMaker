@@ -1,6 +1,8 @@
 package travelMaker.service.bean;
 
 import java.util.Map;
+
+import travelMaker.model.dto.GroupRequestDTO;
 import travelMaker.model.dto.GroupSpaceDTO;
 import travelMaker.model.dto.SmallPosDTO;
 import travelMaker.model.dto.TmUserDTO;
@@ -23,5 +25,8 @@ public interface TravelService {
 	public Map getUserPos(String id) throws Exception;
 	//포지션 정보 가져오기
 	public SmallPosDTO getPosInfo(int posNo) throws Exception;
+	//그룹 참여 신청하기
+	public void applyForGroup(GroupRequestDTO dto) throws Exception;
+	
 	
 }
