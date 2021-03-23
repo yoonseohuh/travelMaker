@@ -42,12 +42,13 @@
 				</tr>
 				<tr>
 					<td>
-						<input type="button" value="닉네임 수정" onclick="window.location='/travelMaker/mem/myModiNick.tm'"/>
-						<input type="button" value="비밀번호 수정" onclick="window.location='/travelMaker/mem/myModiPw.tm'"/>
+						<input type="button" value="닉네임 수정" onclick="window.location='/travelMaker/mem/myModiNick.tm?id=${mem.id}&nickname=${mem.nickname}'"/>
+						<input type="button" value="비밀번호 수정" onclick="window.location='/travelMaker/mem/myModiPwForm.tm?id=${mem.id}&pw=${mem.pw}'"/>
 					</td>
 				</tr>
 			</table>
 		</form>
+		<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 		<h2>회원 탈퇴</h2>
 	</div>
 	<!-- //wrapAll end -->

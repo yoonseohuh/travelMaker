@@ -28,7 +28,6 @@
 	<update id="pwChange" parameterType="TmUserDTO">
 		update tmUser set pw=#{pw} where id=#{id}
 	</update>	
-	
 
 	<select id="getMember" parameterType="string" resultType="TmUserDTO">
 		select * from tmUser where id=#{id}
@@ -37,5 +36,10 @@
 	<select id="getGender" parameterType="string" resultType="int">
 		select gender from tmUser where id=#{id}
 	</select>
+	
+	<update id="updaNick" parameterType="string">
+		update tmUser set nickname=#{nickname} where id=#{id}
+	</update>	
+	
 	
 </mapper>

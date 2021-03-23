@@ -62,6 +62,11 @@ public class TmUserDAOImpl implements TmUserDAO {
 	public int getGender(String id) {
 		return sqlSession.selectOne("tmUser.getGender",id);
 	}
+
+	@Override
+	public void updaNick(TmUserDTO mem) {
+		sqlSession.update("tmUser.updaNick",mem);
+	}
 	
 
 }

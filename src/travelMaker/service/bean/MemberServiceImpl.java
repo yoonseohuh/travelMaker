@@ -184,11 +184,18 @@ public class MemberServiceImpl implements MemberService {
 		String comId = cutId + "***";
 		return comId;
 	}
-
+	
+	//id로 멤버 정보 가져오기
 	@Override
 	public TmUserDTO getMember(String id) {
 		TmUserDTO member =  tmuserDAO.getMember(id);
 		return member;
+	}
+	
+	//닉네임 업데이트
+	@Override
+	public void updaNick(TmUserDTO mem) {
+		tmuserDAO.updaNick(mem);
 	}
 	
 	

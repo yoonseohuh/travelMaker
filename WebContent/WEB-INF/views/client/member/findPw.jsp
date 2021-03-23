@@ -8,7 +8,7 @@
 		<form action="/travelMaker/mem/modiPwForm.tm">
 			<input type="text" name="id" placeholder="아이디"/>	<br />
 			<input type="text" name="email" placeholder="등록된 이메일"/>	<br />
-			<input type="submit" value="비밀번호 찾기" />
+			<input type="submit" value="비밀번호 재설정" />
 		</form>	 
 	</div>
 	<!-- //wrapAll end -->

@@ -97,7 +97,7 @@ public class MemberController {
 		return "client/member/findIdPro";
 	}
 	
-	//비밀번호 찾기 form
+	//비로그인 일 때 비밀번호 찾기 form
 	@RequestMapping("findPw")
 	public String findPw() {
 		
@@ -131,13 +131,44 @@ public class MemberController {
 		return "client/mypage/myModi";
 	}
 	
-	//닉네임 수정
+	//닉네임 수정 Form
 	@RequestMapping("myModiNick")
-	public String myModiNick() {
+	public String myModiNick(TmUserDTO mem,Model model) {
+		model.addAttribute("mem", mem);
 		return "client/mypage/myModiNickForm";
 	}
 	
+	//닉네임 수정 Pro
+	//nickname 받아서 db에서 update하는 작업
+	@RequestMapping("myModiNickPro")
+	public String myModiNickPro(TmUserDTO mem) {
+		memService.updaNick(mem);
+		//model.addAttribute("mem", mem);
+		return "redirect:myModi.tm";
+	}
 
+	//로그인 일 때 비밀번호 재설정 Form
+	@RequestMapping("myModiPwForm")
+	public String myModiPwForm(TmUserDTO mem,Model model) {
+		model.addAttribute("mem", mem);
+		
+		return "client/mypage/myModiPwForm";
+	}
 	
+	//로그인 일 때 비밀번호 재설정 Pro
+	@RequestMapping("myModiPwPro")
+	public String myModiPwPro(TmUserDTO mem) {
+		System.out.println("mem.id"+mem.getId());
+		System.out.println("mem.pw"+mem.getPw());
+		memService.pwChange(mem);
+		return "redirect:myModi.tm";
+	}
+	
+	//회원 탈퇴 
+	@RequestMapping("myDelete")
+	public String myDelete() {
+		
+		return "client/mypage/myDelete";
+	}
 	
 }

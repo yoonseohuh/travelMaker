@@ -16,11 +16,11 @@ public interface TmUserDAO {
 	public TmUserDTO getMemInfo(String email);
 	//비밀번호 수정 
 	public void pwChange(TmUserDTO mem);
-
 	//member 정보가져오기(id)
 	public TmUserDTO getMember(String id);
-
 	//id 주고 성별 가져오기
 	public int getGender(String id);
+	//닉네임 업데이트
+	public void updaNick(TmUserDTO mem);
 
 }

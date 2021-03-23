@@ -32,4 +32,6 @@ public interface MemberService {
 	public String idStar(String id) throws Exception;
 	//회원 정보 가져오기 
 	public TmUserDTO getMember(String id);
+	//닉네임 업데이트 
+	public void updaNick(TmUserDTO mem);
 }
