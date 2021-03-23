@@ -2,13 +2,18 @@ package travelMaker.controller.bean;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import travelMaker.model.dto.ReportReasonDTO;
+import travelMaker.service.bean.MemberService;
 import travelMaker.service.bean.QnaReportServiceImpl;
 
 @Controller
@@ -18,6 +23,9 @@ public class AdminController {
 	@Autowired
 	private QnaReportServiceImpl qnaReportService = null;
 	
+	@Autowired
+	private MemberService memService = null;
+	
 	//관리자 홈
 	@RequestMapping("index.tm")
 	public String index() {
@@ -26,6 +34,24 @@ public class AdminController {
 	
 	//회원관리
 	
+	//멤버 리스트 정렬 
+	@RequestMapping("member.tm")
+	public String member(String pageNum, HttpServletRequest request, Model model) {
+		System.out.println(1);
+		System.out.println(pageNum);
+		Map every = memService.getMembers(pageNum);
+		model.addAttribute("request", request);
+		model.addAttribute("pageNum", every.get("pageNum"));
+		model.addAttribute("pageSize", every.get("pageSize"));
+		model.addAttribute("currPage", every.get("currPage"));
+		model.addAttribute("startRow", every.get("startRow"));
+		model.addAttribute("endRow", every.get("endRow"));
+		model.addAttribute("number", every.get("number"));
+		model.addAttribute("count", every.get("count"));
+		model.addAttribute("memList", every.get("memList"));
+		model.addAttribute("search", every.get("search"));
+		return "admin/member/memberList";
+	}
 	//그룹관리
 	
 	//신고/문의관리

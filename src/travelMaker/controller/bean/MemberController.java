@@ -164,9 +164,21 @@ public class MemberController {
 		return "redirect:myModi.tm";
 	}
 	
-	//회원 탈퇴 
+	//회원 탈퇴 Form
 	@RequestMapping("myDelete")
-	public String myDelete() {
+	public String myDelete(String id,Model model) {
+		model.addAttribute("id", id);
+		return "client/mypage/myDelete";
+	}
+	
+	//회원 탈퇴 Pro
+	//아이디, 비밀번호를 받아서 맞으면 삭제 아니면 돌아가라 
+	@RequestMapping("myDeletePro")
+	public String myDeletePro(TmUserDTO mem) {
+		int result = memService.idPwCheck(mem);
+		if(result==1) {
+			memService.changeStat(2, mem.getId());
+		}
 		
 		return "client/mypage/myDelete";
 	}

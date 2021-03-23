@@ -34,4 +34,8 @@ public interface MemberService {
 	public TmUserDTO getMember(String id);
 	//닉네임 업데이트 
 	public void updaNick(TmUserDTO mem);
+	//회원 상태 변경 
+	public void changeStat(int status, String id);
+	//회원들 정보 가져오기 
+	public Map getMembers(String pageNum);
 }

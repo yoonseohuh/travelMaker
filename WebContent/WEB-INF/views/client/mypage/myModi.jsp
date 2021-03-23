@@ -50,6 +50,8 @@
 		</form>
 		<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 		<h2>회원 탈퇴</h2>
+		<h3>회원 탈퇴 시 바보이며 일주일간 바보입니다.</h3>
+		<input type="button" value="회원 탈퇴" onclick="window.location='/travelMaker/mem/myDelete.tm?id=${mem.id}'"/>
 	</div>
 	<!-- //wrapAll end -->
 	
