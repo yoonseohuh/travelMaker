@@ -85,6 +85,11 @@
 					$("#place_name").val(place.place_name);
 					$("#category_name").val(place.category_name);
 					$("#road_address_name").val(place.road_address_name);
+					$("#xLoc").val(place.x);
+					$("#yLoc").val(place.y);
+					
+					
+					/* $("#yLoc").val(); */
 				});
 			}
 			// 검색 버튼 클릭 이벤트 처리 
@@ -99,7 +104,7 @@
 			
 		});	
 		</script>
-		<form>
+		<form action="/travelMaker/land/landWritePro.tm" method="post">
 			<table>
 				<tr>
 					<td>랜드마크 장소명</td>
@@ -107,11 +112,19 @@
 				</tr>
 				<tr>
 					<td>작성자</td>
-					<td><input type="text" name="writer"></td>
+					<td><input type="text" name="writer" value="${sessionScope.memId}"></td>
 				</tr>
 				<tr>
 					<td>랜드마크 유형</td>
 					<td><input type="text" name="lType" id="category_name"></td>
+				</tr>
+				<tr>
+					<td>xLoc</td>
+					<td><input type="text" name="xLoc" id="xLoc"></td>
+				</tr>
+				<tr>
+					<td>yLoc</td>
+					<td><input type="text" name="yLoc" id="yLoc"></td>
 				</tr>
 				<tr>
 					<td>랜드마크 주소</td>
@@ -119,7 +132,8 @@
 				</tr>
 				<tr>
 					<td>공개범위</td>
-					<td><input type="radio" name="lOpen" value="0">전체 공개 
+					<td>
+						<input type="radio" name="lOpen" value="0">전체 공개
 						<input type="radio" name="lOpen" value="1">회원 공개
 					</td>
 				</tr>
