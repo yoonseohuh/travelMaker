@@ -15,4 +15,7 @@ public interface TravelService {
 	public int getGender(String id) throws Exception;
 	//모집 게시글 삭제
 	public void deleteContent(int gNo) throws Exception;
+	//해당 그룹 구성원의 상태 여부 (구성원 아니면 -1)
+	public int getMemStatus(int gNo, String id) throws Exception;
+	
 }

@@ -5,5 +5,13 @@
   
 <mapper namespace="groupMember">
 
-
+	<!-- null방지를 위해 getMemStatus 이전에 count수 먼저 체크 -->
+	<select id="getMemCnt" parameterType="hashmap" resultType="int">
+		select count(*) from groupMember where gNo=#{gNo} and id=#{id};
+	</select>
+	
+	<select id="getMemStatus" parameterType="hashmap" resultType="int">
+		select status from groupMember where gNo=#{gNo} and id=#{id}
+	</select>
+	
 </mapper>
