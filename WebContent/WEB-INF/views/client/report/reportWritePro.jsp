@@ -9,5 +9,7 @@
 <body>
 <h1>reportWritePro</h1>
 <h3>rNo:${rNo}</h3>
+<h3>rType:${rType}</h3>
+<h3>memId:${memId}</h3>
 </body>
 </html>

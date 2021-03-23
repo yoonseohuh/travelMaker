@@ -2,6 +2,7 @@ package travelMaker.service.bean;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import travelMaker.model.dto.QnaBoardDTO;
 import travelMaker.model.dto.ReportReasonDTO;
@@ -15,5 +16,9 @@ public interface QnaReportService {
 	public List selectReasonAll() throws SQLException;
 
 	public void insertQna(QnaBoardDTO dto) throws SQLException;
+
+	public Map getArticles(String pageNum) throws SQLException;
+
+	public String getRCont(QnaBoardDTO dto) throws SQLException;
 
 }

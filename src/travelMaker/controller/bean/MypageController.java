@@ -2,6 +2,7 @@ package travelMaker.controller.bean;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,23 +34,39 @@ public class MypageController {
 	//내정보 관리
 	
 	//문의 및 신고
-	@RequestMapping("myQnaReportList.tm")
-	public String myQnaReportList() {
-		return "client/mypage/myQnaReportList";
-	}
-	
 	@RequestMapping("myQnaWrite.tm")
-	public String myQnaWriteForm(int rType, Model model) throws SQLException {
+	public String myQnaWriteForm(int rType, String pageNum, Model model) throws SQLException {
 		List res = qnaReportService.selectReason(rType);
 		model.addAttribute("res", res);
 		model.addAttribute("rType", rType);
+		model.addAttribute("pageNum",pageNum);
 		return "client/mypage/myQnaWriteForm";
 	}
 	
 	@RequestMapping("myQnaWritePro.tm")
-	public String myQnaWritePro(QnaBoardDTO dto) throws SQLException {
+	public String myQnaWritePro(QnaBoardDTO dto, String pageNum, Model model) throws SQLException {
+		String rCont = qnaReportService.getRCont(dto);
+		dto.setrCont(rCont);
+		System.out.println("rCont");
 		qnaReportService.insertQna(dto);
+		model.addAttribute("pageNum",pageNum);
 		return "client/mypage/myQnaWritePro";
 	}
+	
+	@RequestMapping("myQnaReportList.tm")
+	public String myQnaReportList(String pageNum, Model model) throws SQLException {
+		Map map = qnaReportService.getArticles(pageNum);
+		
+		model.addAttribute("pageNum",map.get("pageNum"));
+		model.addAttribute("pageSize",map.get("pageSize"));
+		model.addAttribute("currPage",map.get("currPage"));
+		model.addAttribute("start",map.get("start"));
+		model.addAttribute("end",map.get("end"));
+		model.addAttribute("count",map.get("count"));
+		model.addAttribute("number",map.get("number"));
+		model.addAttribute("articleList",map.get("articleList"));
+		return "client/mypage/myQnaReportList";
+	}	
+	
 	
 }
