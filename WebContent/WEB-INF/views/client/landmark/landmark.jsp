@@ -8,8 +8,6 @@
 		
 		<a href="/travelMaker/land/landWrite.tm"><button>랜드마크 작성</button></a>
 		
-	
-		
 		<!-- 지도  -->
 		<div id="map" style="width: 1000px; height: 400px;"></div>
 	
