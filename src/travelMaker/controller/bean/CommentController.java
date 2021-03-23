@@ -34,7 +34,15 @@ public class CommentController {
 	public String commentWrite(String id, Model model)throws SQLException {
 		
 		id = "test4"; //임시 아이디 테스트
+		//여행목록 가져옴
 		List dtoList = commentService.getMyGroup(id);
+		
+		
+		System.out.println("찍히냐1");
+		List useNickList = commentService.groupUser(id);
+		System.out.println("찍히냐2");
+		
+		
 		model.addAttribute("dtoList", dtoList);
 	
 		return "client/mypage/commentWrite";
