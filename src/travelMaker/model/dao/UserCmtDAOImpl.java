@@ -43,22 +43,15 @@ public class UserCmtDAOImpl implements UserCmtDAO {
 	
 	//그룹고유번호로 참여중인 멤버 가져오기  1=> 5명..2=>2명. 리스트에 담아줌
 	public List getMem(int gNo) {
-		List getMem = sqlSession.selectList("userCmt.getMem",gNo);  //멤버들 아이디 리스트에 담았다
+		List getMemList = sqlSession.selectList("userCmt.getMem",gNo);  //그룹멤버dto로 list에 담음
 		
 			
-		
-		return getMem;
+		return getMemList;
 	}
 	
 	
 	
-	public String getNickName(String id) {
-		String nickName = sqlSession.selectOne("userCmt.getNickName", id);
-		
-		return nickName;
-	}
-	
-	
+
 	
 
 
