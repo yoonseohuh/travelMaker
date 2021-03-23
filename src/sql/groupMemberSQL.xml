@@ -18,4 +18,8 @@
 		insert into groupMember values(#{gNo},#{id},#{nickname},'',0)
 	</insert>
 	
+	<select id="getMyGroups" parameterType="hashmap" resultType="GroupMemberDTO">
+		select * from groupMember where id=#{id} and status=#{status}
+	</select>
+	
 </mapper>

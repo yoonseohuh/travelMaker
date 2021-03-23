@@ -1,5 +1,6 @@
 package travelMaker.controller.bean;
 
+import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import travelMaker.model.dto.GroupRequestDTO;
 import travelMaker.model.dto.GroupSpaceDTO;
 import travelMaker.model.dto.SmallPosDTO;
 import travelMaker.model.dto.TmUserDTO;
+import travelMaker.model.dto.UserRkDTO;
 import travelMaker.service.bean.TravelService;
 
 @Controller
@@ -36,8 +38,21 @@ public class TravelController {
 	
 	@RequestMapping("makingList.tm")
 	public String makingList(String pageNum, Model model) throws Exception {
-		Map map = travelService.getArticles(pageNum);
+		//유저 정보
+		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
+		model.addAttribute("id",id);
+		UserRkDTO rkInfo = travelService.getMemRk(id);
 		
+		//모든 여행 가져와서 상태가 참여 중(1)인 것만 담음
+		List JList = travelService.getMyGroups(id,1);
+		model.addAttribute("joiningList",JList);		
+		//모든 여행 가져와서 상태가 대기 중(0)인 것만 담음
+		List WList = travelService.getMyGroups(id,0);
+		model.addAttribute("waitingList",WList);
+
+		//모집 중인 여행
+		Map map = travelService.getArticles(pageNum);
+		model.addAttribute("rkInfo",rkInfo);
 		model.addAttribute("pageNum",map.get("pageNum"));
 		model.addAttribute("pageSize",map.get("pageSize"));
 		model.addAttribute("currPage",map.get("currPage"));
@@ -98,15 +113,15 @@ public class TravelController {
 	public String makingReqPro(GroupRequestDTO dto) throws Exception {
 		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
 		dto.setId(id);
-		
 		//신청 처리하기
 		travelService.applyForGroup(dto);
 		return "redirect:makingList.tm";	
 	}
 	
-	
-	
-	
-	
+	@RequestMapping("groupSpace.tm")
+	public String groupSpace(int gNo, Model model) throws Exception {
+		
+		return "/client/travel/groupSpace";
+	}
 	
 }

@@ -4,6 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="userRk">
-
+	
+	<select id="getRkInfo" parameterType="int" resultType="UserRkDTO">
+		select * from userRk where rkNo=#{value}
+	</select>
 
 </mapper>

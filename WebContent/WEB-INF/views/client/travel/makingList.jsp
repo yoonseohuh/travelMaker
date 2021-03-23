@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
 	
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
@@ -9,8 +11,41 @@
 	<div class="wrapAll">
 		<h1>Making List</h1>
 		
-		<input type="button" value="여행 만들기" onclick="window.location='/travelMaker/travel/makingWrite.tm'"/>
+		<c:if test="${id==null}">
+			로그인하시면 여행에 함께할 수 있습니다!
+		</c:if>
+		<c:if test="${id!=null}">
+			${id}님 환영합니다!
+			<c:if test="${rkInfo.rkNo==1}">
+			${rkInfo.rkName} 단계에서는 아직 여행을 만들 수 없어요. 가이드와 함께 하는 여행에 참여해볼까요?			
+			</c:if>
+			<c:if test="${rkInfo.rkNo>1}">
+				${rkInfo.rkName} 단계이시군요! 직접 여행을 만들어볼까요?	
+				<input type="button" value="여행 만들기" onclick="window.location='/travelMaker/travel/makingWrite.tm'"/>
+			</c:if>
+		</c:if>
 		
+		<h2>대기 중인 여행</h2>
+		<c:if test="${fn:length(waitingList)==0}">
+			대기 중인 여행이 없습니다.
+		</c:if>
+		<c:if test="${fn:length(waitingList)>0}">
+			<c:forEach var="wArticle" items="${waitingList}">
+				<a href="makingCont.tm?gNo=${wArticle.gNo}">${wArticle.subject}</a>
+			</c:forEach>
+		</c:if>
+		
+		<h2>참여 중인 여행</h2>
+		<c:if test="${fn:length(joiningList)==0}">
+			참여 중인 여행이 없습니다.
+		</c:if>
+		<c:if test="${fn:length(joiningList)>0}">
+			<c:forEach var="jArticle" items="${joiningList}">
+				<a href="groupSpace.tm?gNo=${jArticle.gNo}">${jArticle.subject}</a>
+			</c:forEach>
+		</c:if>
+		
+		<h2>모집 중인 여행</h2>
 		<c:if test="${count==0 || count==null}">
 			<h2>모집 중인 여행이 없습니다</h2>
 		</c:if>
