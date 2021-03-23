@@ -1,6 +1,7 @@
 package travelMaker.service.bean;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -184,11 +185,76 @@ public class MemberServiceImpl implements MemberService {
 		String comId = cutId + "***";
 		return comId;
 	}
-
+	
+	//id로 멤버 정보 가져오기
 	@Override
 	public TmUserDTO getMember(String id) {
 		TmUserDTO member =  tmuserDAO.getMember(id);
 		return member;
+	}
+	
+	//닉네임 업데이트
+	@Override
+	public void updaNick(TmUserDTO mem) {
+		tmuserDAO.updaNick(mem);
+	}
+	
+	//회원 상태 변경 
+	//정상 0/  활동정지 1/ 탈퇴2/ 관리자 99
+	@Override
+	public void changeStat(int status, String id) {
+		Map statMap = new HashMap();
+		statMap.put("status", status); 
+		statMap.put("id", id);
+		tmuserDAO.changeStat(statMap);
+	}
+
+	@Override
+	public Map getMembers(String pageNum) {
+		System.out.println(2);
+		System.out.println(pageNum);
+		RequestAttributes ra = RequestContextHolder.getRequestAttributes();
+		ServletRequestAttributes sra = (ServletRequestAttributes)ra;
+		HttpServletRequest request = sra.getRequest();
+		
+		int pageSize=3;
+		if(pageNum==null || pageNum.equals("pageNum") || pageNum.equals("")) {pageNum="1";}
+		int currPage = Integer.parseInt(pageNum);
+		int startRow = (currPage-1)*pageSize+1;
+		int endRow = currPage*pageSize;
+		
+		List memList = null;
+		
+		String search = request.getParameter("search");
+		
+		int count = 0;
+		
+		if(search != null) {
+			count = tmuserDAO.getSearchMemberCount(search);
+			if(count>0) {
+				memList=tmuserDAO.getSearchMembers(startRow, endRow, search);
+			}
+		}else {
+			count = tmuserDAO.getMemberCount();
+			if(count>0) {
+				memList=tmuserDAO.getMembers(startRow, endRow);
+			}
+		}
+		
+		int number=count -(currPage-1)*pageSize;
+		
+		Map every = new HashMap();
+		every.put("pageNum", pageNum);
+		every.put("pageSize", pageSize);
+		every.put("currPage", currPage);
+		every.put("startRow", startRow);
+		every.put("endRow", endRow);
+		every.put("number", number);
+		every.put("count", count);
+		every.put("memList", memList);
+		every.put("search", search);
+		
+		return every;
 	}
 	
 	
