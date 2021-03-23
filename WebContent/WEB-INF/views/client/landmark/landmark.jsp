@@ -14,18 +14,9 @@
 		<script type="text/javascript"
 			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dbb3c6ebdae00379cc812a1240d45848"></script>
 		<script>
-			var container = document.getElementById('map');
-			var options = {
-				center : new kakao.maps.LatLng(33.450701, 126.570667),
-				level : 3
-			};
-			// 지도 생성하기 
-			var map = new kakao.maps.Map(container, options);
-			
-			
-			
-			
+
 		</script>
+		
 		
 	</div>
 	<!-- //wrapAll end -->

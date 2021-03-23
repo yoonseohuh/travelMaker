@@ -12,11 +12,13 @@ public class LandmarkController {
 
 	@RequestMapping("landmark.tm")
 	public String landmark() {
+		
 		return "client/landmark/landmark";
 	}
 	
 	@RequestMapping("landWrite.tm")
 	public String landWriteForm(@ModelAttribute("dto") LandmarkBoardDTO dto) {
+		
 		
 		return "client/landmark/landWriteForm";
 	}
