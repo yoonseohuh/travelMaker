@@ -6,11 +6,12 @@
 	
 	<div class="wrapAll">
 		<h1>landWriteForm</h1>
+		
 		<!-- 검색창 -->
-		<form class="search">
-			<div>
-				<input type="text" id="keyword" name="keyword" placeholder="장소나 주소를 입력하세요." /> 
-				<button>검색</button>
+		<form id="search.keyword" class="KeywordSearch"  onsubmit="window.QUERY=this.elements[0].value;return false">
+			<div class="box_searchbar">
+				<input type="text" id="search.keyword.query" name="q" class="query tf_keyword bg_on" maxlength="100" autocomplete="off" accesskey="s">
+				<button type="button" id="search.keyword.submit" class="go ico_search btn_search">검색</button>
 			</div>
 		</form>
 		<br />
@@ -36,17 +37,18 @@
 
 			// 지도를 생성합니다    
 			var map = new kakao.maps.Map(mapContainer, mapOption);
-
+			
+			
 			// 장소 검색 객체를 생성합니다
 			var ps = new kakao.maps.services.Places();
 
 			function search(){
-				console.log($('#keyword').val());
+				var keyword = document.getElementById('keyword').value;
+				
+				// 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
+			    ps.keywordSearch( keyword, placesSearchCB); 
 			}
-			
-			// 키워드로 장소를 검색합니다
-			ps.keywordSearch('만리199', placesSearchCB);
-
+		
 			// 키워드 검색 완료 시 호출되는 콜백함수 입니다
 			function placesSearchCB(data, status, pagination) {
 				if (status === kakao.maps.services.Status.OK) {
