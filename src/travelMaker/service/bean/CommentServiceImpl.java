@@ -59,6 +59,7 @@ public class CommentServiceImpl implements CommentService {
 		return myGroup;
 	}
 	
+	
 	// 그그룹넘에 해당하는 사람들 가져오기
 	public List getGMem(int gNo) throws SQLException{
 		List gMem = userCmtDAO.getMem(gNo);
@@ -66,58 +67,28 @@ public class CommentServiceImpl implements CommentService {
 	}
 	
 
-	public String nickName(String id) throws SQLException{
-		String nickName = userCmtDAO.getNickName(id);
-		System.out.println("nickName" + nickName);
-		return nickName;
-	}
 
-	//아이디 닉넴으로 바꿔서 리스트담음 
-	public List idToNick(List gMem) throws SQLException{
-		for(int i = 0;  i < gMem.size(); i++) {
-			userCmtDAO.getNickName(((GroupMemberDTO)gMem.get(i)).getId());
-		}
-		
-		
-		return null;
-	}
 	
 	
 	//같은 여행그룹의 tmUSER 정보 담기  (필요에따라 빼써라)
 	public List groupUser(String id) throws SQLException {
 		
 		//그룹멤버dto담겨있음 gNo뽑아야함
-		List myG = getGroupNum(id);
+		List myG = getGroupNum(id);  //사용자가 가입된 그룹리스트
 		System.out.println("마이지사이즈" + myG.size());
-		//1.gno하나씩 뽑아서 멤버들 아이디 담음
-		List memIdList = new ArrayList();
-		List nickList = new ArrayList();
 		
+		//1.gno하나씩 뽑아서 그그룹에 해당하는 멤버들  닉네임담음
+		List memList = new ArrayList();
 		for(int i = 0; i < myG.size(); i++) {
-			//gMem이 리스트에 담김 테스트1,2,3,등)
-			List gMem = (getGMem(((GroupMemberDTO)myG.get(i)).getgNo()));
-			System.out.println("마이지멤사이즈" + gMem.size());
-			System.out.println("큰포문" + i);
-
-			
-			
-			for(int j = 0; j < gMem.size(); j++) {
-				System.out.println("작은포문" + j);
-				
-				System.out.println(nickName(((GroupMemberDTO)gMem.get(j)).getId()));
-				nickList.add(j, nickName(((GroupMemberDTO)gMem.get(j)).getId()));
-			//	String nn =nickName(((GroupMemberDTO)gMem.get(j)).getId());
-			//	System.out.println("이중포문 나옵니까" + j);
-				System.out.println("닉리스트" + nickList);
-				
-			}
-			
+			memList = userCmtDAO.getMem(((GroupMemberDTO)myG.get(i)).getgNo());
 		}
 		
-		System.out.println("닉넴리스트" + nickList.size());
+		//그룹넘 하나씩 보내서 멤버들 닉네임 가져온다
+	
+			
 		
 		
-		return nickList;
+		return memList;
 	}
 	
 	
@@ -148,18 +119,16 @@ public class CommentServiceImpl implements CommentService {
 
 
 
-	@Override
-	public String nick(String id) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
-		
-	
 
 	
-
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

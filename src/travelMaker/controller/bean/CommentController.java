@@ -39,11 +39,13 @@ public class CommentController {
 		
 		
 		System.out.println("찍히냐1");
-		List useNickList = commentService.groupUser(id);
+		//그룹멤버들dto로 가져옴
+		List memList = commentService.groupUser(id);
 		System.out.println("찍히냐2");
 		
 		
 		model.addAttribute("dtoList", dtoList);
+		model.addAttribute("memList", memList);
 	
 		return "client/mypage/commentWrite";
 	}

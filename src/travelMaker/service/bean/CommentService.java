@@ -29,12 +29,7 @@ public interface CommentService {
 	public List groupUser(String id) throws SQLException;
 	
 	
-	//닉넴한개
-	public String nick(String id) throws SQLException;
 	
-	
-	//아이디 닉넴으로 바꿔서 리스트담음 
-	public List idToNick(List gMem) throws SQLException;
 			
 	
 }
