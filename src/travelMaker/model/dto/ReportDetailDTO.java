@@ -7,6 +7,7 @@ public class ReportDetailDTO {
 	private Integer num;
 	private String id;
 	private Integer rType;
+	private Integer rCont;
 	private Integer rNo;
 	private Integer status;
 	private String feedback;
@@ -34,6 +35,12 @@ public class ReportDetailDTO {
 	}
 	public void setrType(Integer rType) {
 		this.rType = rType;
+	}	
+	public Integer getrCont() {
+		return rCont;
+	}
+	public void setrCont(Integer rCont) {
+		this.rCont = rCont;
 	}
 	public Integer getrNo() {
 		return rNo;

@@ -19,7 +19,7 @@
 				<tr>
 					<td>작성자</td>
 					<td>
-						${sessionScope.memId}						
+						${sessionScope.memId}
 					</td>
 				</tr>
 				<tr>
