@@ -15,7 +15,7 @@
 		<select name="subject">
 			<option value=null>여행을 선택하세요</option>
 				<c:forEach var="dto" items="${dtoList}">
-					<option value="${dto.gNo}">${dto.subject}</option>
+					<option value="${dto.gNo}">${dto.subject} ${dto.startDate} ~ ${dto.endDate}</option>
 				</c:forEach>
 		</select>
 		

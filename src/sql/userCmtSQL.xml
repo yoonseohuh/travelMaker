@@ -16,6 +16,13 @@
 	select * from GroupSpace where gNo=#{num} and status=4
 </select>
 
+<select id="getMem" parameterType="int" resultType="GroupMemberDTO">
+	select * from groupMember where gNo=#{gNo} and status=1
+</select>
+
+<select id="getNickName" parameterType="String" resultType="String">
+	select nickname from tmUser where id=#{id} and status=0
+</select>
 
 
 </mapper>
