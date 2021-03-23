@@ -98,8 +98,9 @@ public class TravelController {
 	public String makingReqPro(GroupRequestDTO dto) throws Exception {
 		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
 		dto.setId(id);
-		//신청 처리하기
 		
+		//신청 처리하기
+		travelService.applyForGroup(dto);
 		return "redirect:makingList.tm";	
 	}
 	

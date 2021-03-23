@@ -14,6 +14,8 @@ import travelMaker.model.dao.GroupRequestDAO;
 import travelMaker.model.dao.GroupSpaceDAO;
 import travelMaker.model.dao.SmallPosDAO;
 import travelMaker.model.dao.TmUserDAO;
+import travelMaker.model.dto.GroupMemberDTO;
+import travelMaker.model.dto.GroupRequestDTO;
 import travelMaker.model.dto.GroupSpaceDTO;
 import travelMaker.model.dto.SmallPosDTO;
 import travelMaker.model.dto.TmUserDTO;
@@ -158,7 +160,26 @@ public class TravelServiceImpl implements TravelService{
 	}
 	
 	//그룹 참여신청하기
-	
+	@Override
+	public void applyForGroup(GroupRequestDTO dto) throws Exception {
+		//닉네임 가져와야 함
+		TmUserDTO userInfo = tmUserDAO.getMember(dto.getId());
+		String nickname = userInfo.getNickname();
+		
+		//GroupRequestDTO에 담아 가져온 정보들 중 GroupMember테이블에 넣어야 할 정보를 뽑아 또 다른 DTO에 담은 후 insert
+		GroupMemberDTO applicant = new GroupMemberDTO();
+		applicant.setId(dto.getId());
+		applicant.setgNo(dto.getgNo());
+		applicant.setNickname(nickname);
+		
+		//groupRequest테이블에 insert
+		if(dto.getReqType()==0) {
+			dto.setPosNo(-1);
+		}
+		groupRequestDAO.applyForGroup(dto);
+		//groupMember테이블에 insert
+		groupMemberDAO.insertMemToGroup(applicant);
+	}
 	
 	
 	
