@@ -79,6 +79,7 @@ public class TravelServiceImpl implements TravelService{
 	@Override
 	public GroupSpaceDTO getContent(int gNo) throws Exception {
 		GroupSpaceDTO content = groupSpaceDAO.getContent(gNo);
+		
 		String cpt = content.getConcept();
 		if(cpt.equals("gourmet")) { content.setConcept("맛집"); }
 		else if(cpt.equals("healing")) { content.setConcept("힐링"); }
