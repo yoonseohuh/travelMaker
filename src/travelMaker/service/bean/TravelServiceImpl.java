@@ -12,6 +12,7 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import travelMaker.model.dao.GroupMemberDAO;
 import travelMaker.model.dao.GroupSpaceDAO;
 import travelMaker.model.dao.TmUserDAO;
 import travelMaker.model.dto.GroupSpaceDTO;
@@ -23,6 +24,8 @@ public class TravelServiceImpl implements TravelService{
 	private GroupSpaceDAO groupSpaceDAO = null;
 	@Autowired
 	private TmUserDAO tmUserDAO = null;
+	@Autowired
+	private GroupMemberDAO groupMemberDAO = null;
 	
 	//개설글 작성
 	@Override
@@ -46,7 +49,7 @@ public class TravelServiceImpl implements TravelService{
 	@Override
 	public Map getArticles(String pageNum) throws Exception {
 		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
-		int pageSize = 3;
+		int pageSize = 5;
 		if(pageNum==null || pageNum.equals("")) { pageNum="1"; }
 		int currPage = Integer.parseInt(pageNum);
 		int start = (currPage-1)*pageSize+1;
@@ -106,12 +109,28 @@ public class TravelServiceImpl implements TravelService{
 	}
 	
 	//id 주고 성별 가져오기
+	@Override
 	public int getGender(String id) throws Exception {
 		return tmUserDAO.getGender(id);
 	}
 	
 	//모집 게시글 삭제
+	@Override
 	public void deleteContent(int gNo) throws Exception {
 		groupSpaceDAO.deleteContent(gNo);
 	}
+	
+	//해당 그룹 구성원의 상태 여부 (구성원 아니면 -1)
+	@Override
+	public int getMemStatus(int gNo, String id) throws Exception {
+		int status = -1;
+		if(id!=null) {
+			status = groupMemberDAO.getMemStatus(gNo, id);
+		}
+		return status;
+	}
+	
+	
+	
+	
 }

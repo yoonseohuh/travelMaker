@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
-<body>
+	
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
 	<!-- //top end -->
 	
@@ -178,7 +177,7 @@
 								<option value="incheon">인천</option>							
 								<option value="gyunggi">경기</option>							
 							</optgroup>
-							<optgroup label="강원">						
+							<optgroup label="강원권">						
 								<option value="gangwon">강원</option>
 							</optgroup>
 							<optgroup label="충청권">
@@ -199,7 +198,7 @@
 								<option value="gyungnam">경상남도</option>
 								<option value="gyungbuk">경상북도</option>
 							</optgroup>
-							<optgroup label="제주">						
+							<optgroup label="제주권">						
 								<option value="jeju">제주</option>
 							</optgroup>
 						</select>
@@ -232,8 +231,6 @@
 	</div>
 	<!-- //wrapAll end -->
 	
-	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
-	<!-- //footer end -->
-</body>
-</html>
+<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+<!-- //footer end -->
 

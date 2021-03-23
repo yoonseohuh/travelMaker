@@ -1,14 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html>
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
-<body>
+	
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
 	<!-- //top end -->
 	
 	<div class="wrapAll">
+		<c:if test="${sessionScope.memId==null}">
+			<script>
+				alert("로그인 후에 이용 가능합니다");
+				history.go(-1);
+			</script>
+		</c:if>
+		
 		<script>
 			function removeCheck(){
 				if(confirm("정말 삭제하시겠습니까?")==true){
@@ -19,6 +24,7 @@
 			}
 		</script>
 		<form action="makingDel.tm?gNo=${content.gNo}" name="removefrm" method="post"></form>
+		
 		<h1>${content.subject}</h1>
 		<table>
 			<tr>
@@ -103,7 +109,7 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					<c:if test="${sessionScope.memId!=content.id}">
+					<c:if test="${sessionScope.memId!=content.id && content.status==0 && memStatus==-1}">
 						<c:if test="${memIdGender==writerGender}">
 							<input type="button" value="신청" onclick="window.location='/travelMaker/travel/makingReq.tm?gNo=${content.gNo}'"/>
 						</c:if>						
@@ -115,6 +121,12 @@
 								여성 회원은 신청할 수 없습니다. 
 							</c:if>
 						</c:if>
+					</c:if>
+					<c:if test="${sessionScope.memId!=content.id && content.maxNum<=content.actualNum}">
+						모집이 완료되었습니다. 
+					</c:if>
+					<c:if test="${memStatus==0}">
+						이미 신청하셨습니다.
 					</c:if>
 					<input type="button" value="리스트" onclick="window.location='/travelMaker/travel/makingList.tm?pageNum=${pageNum}'"/>					
 					<c:if test="${sessionScope.memId==content.id}">
@@ -128,5 +140,3 @@
 	
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 	<!-- //footer end -->
-</body>
-</html>

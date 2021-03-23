@@ -31,7 +31,7 @@ public class TravelController {
 	public String makingWritePro(String pageNum, GroupSpaceDTO dto, Model model) throws Exception {
 		travelService.insertMaking(dto);
 		model.addAttribute("pageNum",pageNum);
-		return "/client/travel/sendToMakingList";
+		return "redirect:makingList.tm";
 	}
 	
 	@RequestMapping("makingList.tm")
@@ -52,22 +52,44 @@ public class TravelController {
 	@RequestMapping("makingCont.tm")
 	public String makingCont(String pageNum, int gNo, Model model) throws Exception {
 		GroupSpaceDTO content = travelService.getContent(gNo);
+		
 		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
 		int writerGender = travelService.getGender(content.getId());
 		int memIdGender = travelService.getGender(id);
+		
+		int memStatus = travelService.getMemStatus(gNo, id);
+		
 		model.addAttribute("pageNum",pageNum);
 		model.addAttribute("content",content);
 		model.addAttribute("writerGender",writerGender);
 		model.addAttribute("id",id);
 		model.addAttribute("memIdGender",memIdGender);
+		model.addAttribute("memStatus",memStatus);
 		return "/client/travel/makingCont";
 	}
 	
 	@RequestMapping("makingDel.tm")
 	public String makingDel(int gNo) throws Exception {
 		travelService.deleteContent(gNo);
-		return "/client/travel/sendToMakingList";
+		System.out.println("deldel");
+		return "redirect:makingList.tm";
 	}
+	
+	@RequestMapping("makingReq.tm")
+	public String makingReq(Model model) throws Exception {
+		
+		return "/client/travel/makingReq";
+	}
+	
+	@RequestMapping("makingReqPro.tm")
+	public String makingReqPro() throws Exception {
+		//신청 처리하기
+		return "redirect:makingList.tm";	
+	}
+	
+	
+	
+	
 	
 	
 }
