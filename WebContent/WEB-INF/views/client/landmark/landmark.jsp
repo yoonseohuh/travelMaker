@@ -8,13 +8,13 @@
 		
 		<a href="/travelMaker/land/landWrite.tm"><button>랜드마크 작성</button></a>
 		
-		<!-- 지도  -->
+		<!-- 저장된 지도 띄워주기 -->
 		<div id="map" style="width: 1000px; height: 400px;"></div>
-	
+		
 		<script type="text/javascript"
 			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dbb3c6ebdae00379cc812a1240d45848"></script>
 		<script>
-
+			
 		</script>
 		
 		

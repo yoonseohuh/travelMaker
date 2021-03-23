@@ -29,6 +29,12 @@ public class LandmarkServiceImpl implements LandmarkService{
 	}
 
 	@Override
+	public String landmarkLiked() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public void addLikedCnt(int lNo, String id) throws SQLException {
 		// TODO Auto-generated method stub
 		
@@ -39,6 +45,7 @@ public class LandmarkServiceImpl implements LandmarkService{
 		// TODO Auto-generated method stub
 		
 	}
+
 
 	
 }
