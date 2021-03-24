@@ -16,8 +16,6 @@ public interface CommentService {
 	public List getMyGroup(String id) throws SQLException;
 	
 	
-	//닉넴
-	public List gMem(String id) throws SQLException;
 	
 	
 
@@ -29,7 +27,10 @@ public interface CommentService {
 	public List groupUser(String id) throws SQLException;
 	
 	
-	
 			
+	
+	
+	
+	
 	
 }

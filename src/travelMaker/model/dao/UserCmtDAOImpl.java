@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,13 +34,11 @@ public class UserCmtDAOImpl implements UserCmtDAO {
 	//그룹고유번호 보내서 그룹정보 가져오기 (그룹스페이스상태 4인것들)
 	@Override
 	public GroupSpaceDTO getGroupInfo(int num) throws SQLException {
-		
 		GroupSpaceDTO gInfo = sqlSession.selectOne("userCmt.getGroupInfo", num);
 		
 		return gInfo;
 	}
 
-	
 	
 	//그룹고유번호로 참여중인 멤버 가져오기  1=> 5명..2=>2명. 리스트에 담아줌
 	public List getMem(int gNo) {
@@ -49,9 +48,19 @@ public class UserCmtDAOImpl implements UserCmtDAO {
 		return getMemList;
 	}
 	
+	// 코멘트 남겼는지 확인
+	public int chComment(String id, String recId, int gNo ) {
+		Map map = new HashMap();
+		map.put("senId",id);
+		map.put("recId", recId);
+		map.put("gNo", gNo);
+		
+		int result = sqlSession.selectOne("userCmt.chcomment", map);
+		
+		return result;
+	}
 	
 	
-
 	
 
 
