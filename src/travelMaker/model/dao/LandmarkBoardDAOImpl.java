@@ -1,6 +1,7 @@
 package travelMaker.model.dao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +16,14 @@ public class LandmarkBoardDAOImpl implements LandmarkBoardDAO{
 	
 	@Override
 	public void insertLand(LandmarkBoardDTO dto) throws SQLException {
-		System.out.println(dto.getlName());
-		System.out.println(dto.getWriter());
-		sqlSession.insert("landmarkBoard.insertLand", dto);
+		// sqlSession 불러서 insert문 ("landmarkBoard는 뒤에 sql 매퍼에 이름 붙인놈이고 insertLand는 보드dao에 만들어준 이름?? or 뒤에 인서트 id ??")
+		sqlSession.insert("landmarkBoard.insertLand", dto); // 아 sql 매퍼에 landmarBoard라는 이름안에 insertLand id를 가진 놈을 부르는거구나
 	}
 
 	@Override
-	public LandmarkBoardDTO getLandInfo() {
-		// TODO Auto-generated method stub
-		return null;
+	public List getLand() {
+		List land = sqlSession.selectList("landmarkBoard.getLand");
+		return land;
 	}
 
 	@Override
