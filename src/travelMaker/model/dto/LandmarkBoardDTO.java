@@ -9,14 +9,12 @@ public class LandmarkBoardDTO {
 	private String lName;
 	private String lType;
 	private String addr;
-	private Integer xLoc;
-	private Integer yLoc;
+	private String xLoc;
+	private String yLoc;
 	private String lCont;
 	private Integer lOpen;
 	private Integer likedCnt;
 	private Timestamp reg;
-	
-	
 	public Integer getlNo() {
 		return lNo;
 	}
@@ -47,16 +45,16 @@ public class LandmarkBoardDTO {
 	public void setAddr(String addr) {
 		this.addr = addr;
 	}
-	public Integer getxLoc() {
+	public String getxLoc() {
 		return xLoc;
 	}
-	public void setxLoc(Integer xLoc) {
+	public void setxLoc(String xLoc) {
 		this.xLoc = xLoc;
 	}
-	public Integer getyLoc() {
+	public String getyLoc() {
 		return yLoc;
 	}
-	public void setyLoc(Integer yLoc) {
+	public void setyLoc(String yLoc) {
 		this.yLoc = yLoc;
 	}
 	public String getlCont() {
@@ -83,6 +81,5 @@ public class LandmarkBoardDTO {
 	public void setReg(Timestamp reg) {
 		this.reg = reg;
 	}
-	
-	
+		
 }

@@ -28,7 +28,6 @@
 	<update id="pwChange" parameterType="TmUserDTO">
 		update tmUser set pw=#{pw} where id=#{id}
 	</update>	
-	
 
 	<select id="getMember" parameterType="string" resultType="TmUserDTO">
 		select * from tmUser where id=#{id}
@@ -37,5 +36,47 @@
 	<select id="getGender" parameterType="string" resultType="int">
 		select gender from tmUser where id=#{id}
 	</select>
+	
+	<update id="updaNick" parameterType="string">
+		update tmUser set nickname=#{nickname} where id=#{id}
+	</update>	
+	
+	<update id="changeStat" parameterType="hashMap">
+		update tmUser set status=#{status} where id=#{id}
+	</update>
+	
+	<select id="getMembers" parameterType="hashMap" resultType="TmUserDTO">
+		<![CDATA[
+			select b.*, r from (select a.*,rownum r from
+			(select * from tmUser order by reg desc)a
+			order by reg desc)b where r>=#{start} AND r<=#{end}
+		]]>
+	</select>
+	
+	<select id="getSearchMembers" parameterType="string" resultType="TmUserDTO">
+		select * from tmUser where id=#{search}
+	</select>
+	
+	<select id="getSearchMemberCount" parameterType="string" resultType="int">
+		select count(*) from tmUser where id=#{search}
+	</select>
+	
+	<select id="getMemberCount" resultType="int">
+		select count(*) from tmUser 
+	</select>
+	
+	<select id="getPosName" parameterType="int" resultType="string">
+		select posName from smallpos where posno=#{posNo}
+	</select>
+
+	<select id="getAllPos" resultType="SmallPosDTO">
+		select posno,posname from smallpos order by posno
+	</select>
+	
+	<update id="updateMember" parameterType="TmUserDTO">
+		update tmUser set nickname=#{nickname},gender=#{gender},rk=#{rk},
+		position1=#{position1},position2=#{position2},travelCnt=#{travelCnt},status=#{status} 
+		where id=#{id}
+	</update>
 	
 </mapper>

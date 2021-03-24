@@ -34,10 +34,36 @@ public class CommentController {
 	public String commentWrite(String id, Model model)throws SQLException {
 		
 		id = "test4"; //임시 아이디 테스트
+		//여행목록 가져옴
 		List dtoList = commentService.getMyGroup(id);
+		
+		
+		//그룹멤버들dto로 가져옴
+		List fin = commentService.groupUser(id);
+		
+		
 		model.addAttribute("dtoList", dtoList);
+		model.addAttribute("fin", fin);
 	
 		return "client/mypage/commentWrite";
+	}
+	
+	//코멘트 작성 프로 페이지
+	@RequestMapping("commentWritePro.tm")
+	public String commentWritePro(String groupNum, String mem, String comment, Model model) {
+		
+		Map map = new HashMap();
+		map.put("groupNum", groupNum);
+		map.put("groupNum", groupNum);
+		map.put("groupNum", groupNum);
+		
+	
+		
+		model.addAttribute("groupNum", groupNum);
+		model.addAttribute("mem", mem);
+		model.addAttribute("comment", comment);
+		
+		return "client/mypage/commentWritePro";
 	}
 
 }

@@ -1,21 +1,27 @@
 package travelMaker.service.bean;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
 import travelMaker.model.dao.GroupMemberDAO;
+import travelMaker.model.dao.GroupRequestDAO;
 import travelMaker.model.dao.GroupSpaceDAO;
+import travelMaker.model.dao.SmallPosDAO;
 import travelMaker.model.dao.TmUserDAO;
+import travelMaker.model.dao.UserRkDAO;
+import travelMaker.model.dto.GroupMemberDTO;
+import travelMaker.model.dto.GroupRequestDTO;
 import travelMaker.model.dto.GroupSpaceDTO;
+import travelMaker.model.dto.SmallPosDTO;
+import travelMaker.model.dto.TmUserDTO;
+import travelMaker.model.dto.UserRkDTO;
 
 @Service
 public class TravelServiceImpl implements TravelService{
@@ -26,6 +32,12 @@ public class TravelServiceImpl implements TravelService{
 	private TmUserDAO tmUserDAO = null;
 	@Autowired
 	private GroupMemberDAO groupMemberDAO = null;
+	@Autowired
+	private SmallPosDAO smallPosDAO = null;
+	@Autowired
+	private GroupRequestDAO groupRequestDAO = null;
+	@Autowired
+	private UserRkDAO userRkDAO = null;
 	
 	//개설글 작성
 	@Override
@@ -79,6 +91,7 @@ public class TravelServiceImpl implements TravelService{
 	@Override
 	public GroupSpaceDTO getContent(int gNo) throws Exception {
 		GroupSpaceDTO content = groupSpaceDAO.getContent(gNo);
+		
 		String cpt = content.getConcept();
 		if(cpt.equals("gourmet")) { content.setConcept("맛집"); }
 		else if(cpt.equals("healing")) { content.setConcept("힐링"); }
@@ -130,7 +143,77 @@ public class TravelServiceImpl implements TravelService{
 		return status;
 	}
 	
+	//회원 포지션 가져오기
+	@Override
+	public Map getUserPos(String id) throws Exception {
+		TmUserDTO dto = tmUserDAO.getMember(id);
+		int pos1 = dto.getPosition1();
+		int pos2 = dto.getPosition2();
+		System.out.println("pos1 "+pos1);
+		System.out.println("pos2 "+pos2);
+		Map map = new HashMap();
+		map.put("pos1",dto.getPosition1());
+		map.put("pos2",dto.getPosition2());
+		return map;
+	}
 	
+	//포지션 정보 가져오기
+	@Override
+	public SmallPosDTO getPosInfo(int posNo) throws Exception {
+		SmallPosDTO dto = smallPosDAO.getPosInfo(posNo);
+		return dto;
+	}
 	
+	//그룹 참여신청하기
+	@Override
+	public void applyForGroup(GroupRequestDTO dto) throws Exception {
+		//닉네임 가져와야 함
+		TmUserDTO userInfo = tmUserDAO.getMember(dto.getId());
+		String nickname = userInfo.getNickname();
+		
+		//GroupRequestDTO에 담아 가져온 정보들 중 GroupMember테이블에 넣어야 할 정보를 뽑아 또 다른 DTO에 담은 후 insert
+		GroupMemberDTO applicant = new GroupMemberDTO();
+		applicant.setId(dto.getId());
+		applicant.setgNo(dto.getgNo());
+		applicant.setNickname(nickname);
+		
+		//groupRequest테이블에 insert
+		if(dto.getReqType()==0) {
+			dto.setPosNo(-1);
+		}
+		groupRequestDAO.applyForGroup(dto);
+		//groupMember테이블에 insert
+		groupMemberDAO.insertMemToGroup(applicant);
+	}
+	
+	//회원 랭크 가져오기
+	public UserRkDTO getMemRk(String id) throws Exception {
+		TmUserDTO dto = tmUserDAO.getMember(id);
+		UserRkDTO rkInfo = userRkDAO.getRkInfo(dto.getRk());
+		return rkInfo;
+	}
+	
+	//상태에 따른 모든 여행 리스트의 그룹번호 가져온 다음 해당 groupSpace들을 리턴
+	@Override
+	public List getMyGroups(String id, int status) throws Exception {
+
+		List list = new ArrayList();		//GroupMemberDTO가 담기는 리스트
+		List gNoList = new ArrayList();		//gNo만 담을 리스트
+
+		list = groupMemberDAO.getMyGroups(id,status);
+		
+		for(int i=0 ; i<list.size() ; i++) {
+			GroupMemberDTO dto = (GroupMemberDTO)list.get(i);
+			gNoList.add(dto.getgNo());
+		}
+		
+		GroupSpaceDTO article = new GroupSpaceDTO();
+		List articleList = new ArrayList();		//실제 그룹방들을 담을 리스트
+		for(int i=0 ; i<gNoList.size(); i++) {
+			article = groupSpaceDAO.getContent((Integer)gNoList.get(i));
+			articleList.add(article);
+		}
+		return articleList;
+	}
 	
 }

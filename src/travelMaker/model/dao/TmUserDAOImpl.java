@@ -1,5 +1,9 @@
 package travelMaker.model.dao;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -57,7 +61,7 @@ public class TmUserDAOImpl implements TmUserDAO {
 		TmUserDTO member = sqlSession.selectOne("tmUser.getMember", id);
 		return member;
 	}
-
+ 
 	@Override
 	public int getGender(String id) {
 		int gender = -1;
@@ -65,6 +69,68 @@ public class TmUserDAOImpl implements TmUserDAO {
 			gender = sqlSession.selectOne("tmUser.getGender",id);
 		}
 		return gender;
+	}
+
+	@Override
+	public void updaNick(TmUserDTO mem) {
+		sqlSession.update("tmUser.updaNick",mem);
+	}
+
+	@Override
+	public void changeStat(Map statMap) {
+		sqlSession.update("tmUser.changeStat", statMap);
+	}
+	
+	//멤버리스트 가져오기 (검색X)
+	@Override
+	public List getMembers(int startRow, int endRow) {
+		Map map = new HashMap();
+		map.put("start", startRow);
+		map.put("end", endRow);
+		List memberList =  sqlSession.selectList("tmUser.getMembers", map);
+		return memberList;
+	}
+	
+	//멤버리스트 가져오기 (아이디 검색)
+	@Override
+	public List getSearchMembers(int startRow, int endRow, String search) {
+		Map map = new HashMap();
+		map.put("start", startRow);
+		map.put("end", endRow);
+		map.put("search", search);
+		List memberList =  sqlSession.selectList("tmUser.getSearchMembers", map);
+		return memberList;
+	}
+	
+	//검색된 멤버수 
+	@Override
+	public int getSearchMemberCount(String search) {
+		int count = sqlSession.selectOne("tmUser.getSearchMemberCount", search);
+		return count;
+	}
+	
+	//검색 안한 멤버수
+	@Override
+	public int getMemberCount() {
+		int count = sqlSession.selectOne("tmUser.getMemberCount");
+		return count;
+	}
+
+	@Override
+	public String getPosName(int posNo) {
+		String pName=sqlSession.selectOne("tmUser.getPosName",posNo);
+		return pName;
+	}
+
+	@Override
+	public List getAllPos() {
+		List posList=sqlSession.selectList("tmUser.getAllPos");
+		return posList;
+	}
+
+	@Override
+	public void updateMember(TmUserDTO mem) {
+		sqlSession.update("tmUser.updateMember",mem);
 	}
 	
 

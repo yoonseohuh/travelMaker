@@ -1,5 +1,19 @@
 package travelMaker.model.dao;
 
-public class UserRkDAOImpl {
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+import travelMaker.model.dto.UserRkDTO;
+
+@Repository
+public class UserRkDAOImpl implements UserRkDAO {
+	
+	@Autowired
+	private SqlSessionTemplate sqlSession = null;
+	
+	@Override
+	public UserRkDTO getRkInfo(int rkNo) throws Exception {
+		return sqlSession.selectOne("userRk.getRkInfo",rkNo);
+	}
 }

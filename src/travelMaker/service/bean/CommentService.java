@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import travelMaker.model.dto.GroupMemberDTO;
 import travelMaker.model.dto.GroupSpaceDTO;
 
 public interface CommentService {
@@ -13,6 +14,21 @@ public interface CommentService {
 	
 	//내가 여행한 모든 여행그룹 가져오기
 	public List getMyGroup(String id) throws SQLException;
+	
+	
+	
+	
+
+	//사용자아이디가 참여중인 그룹넘들 가져오기
+	public List getGroupNum(String id) throws SQLException;
+
+	
+	////같은 여행그룹의 tmUSER 정보 담기  (필요에따라 빼써라)
+	public List groupUser(String id) throws SQLException;
+	
+	
+			
+	
 	
 	
 	

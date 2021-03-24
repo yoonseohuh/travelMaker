@@ -1,5 +1,8 @@
 package travelMaker.model.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import travelMaker.model.dto.TmUserDTO;
 
 public interface TmUserDAO {
@@ -16,11 +19,26 @@ public interface TmUserDAO {
 	public TmUserDTO getMemInfo(String email);
 	//비밀번호 수정 
 	public void pwChange(TmUserDTO mem);
-
 	//member 정보가져오기(id)
 	public TmUserDTO getMember(String id);
-
 	//id 주고 성별 가져오기
 	public int getGender(String id);
-
+	//닉네임 업데이트
+	public void updaNick(TmUserDTO mem);
+	//회원 상태 업데이트
+	public void changeStat(Map statMap);
+	//회원 리스트 가져오기(검색X)
+	public List getMembers(int startRow, int endRow);
+	//회원 리스트 가져오기(아이디 검색)
+	public List getSearchMembers(int startRow, int endRow,String search);
+	//회원 수 구하기 (아이디 검색)
+	public int getSearchMemberCount(String search);
+	//회원 수 구하기 (검색 X)
+	public int getMemberCount();
+	//posName 구하기 
+	public String getPosName(int posNo);
+	//pos 전체 가져오기 
+	public List getAllPos();
+	//회원 정보 수정 관리자
+	public void updateMember(TmUserDTO mem);
 }

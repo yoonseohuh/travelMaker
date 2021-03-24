@@ -10,10 +10,18 @@
 	select * from GroupMember where id=#{id} and status=1
 </select>
 
-
 <!-- 그룹고유번호/상태4인  그룹정보 가져오기 -->
 <select id="getGroupInfo" parameterType="int" resultType="GroupSpaceDTO">
 	select * from GroupSpace where gNo=#{num} and status=4
+</select>
+
+<select id="getMem" parameterType="int" resultType="GroupMemberDTO">
+	select * from groupMember where gNo=#{gNo} and status=1
+</select>
+
+<!-- comment 남겼는지 확인 -->
+<select id="chcomment" parameterType="Hashmap" resultType="int">
+	select count(*) from userCmt where receiver=#{recId} and sender=#{id} and gNo=#{gNo}
 </select>
 
 

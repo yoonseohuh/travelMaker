@@ -1,17 +1,19 @@
 package travelMaker.controller.bean;
 
+import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
-
+import travelMaker.model.dto.GroupRequestDTO;
 import travelMaker.model.dto.GroupSpaceDTO;
+import travelMaker.model.dto.SmallPosDTO;
+import travelMaker.model.dto.TmUserDTO;
+import travelMaker.model.dto.UserRkDTO;
 import travelMaker.service.bean.TravelService;
 
 @Controller
@@ -36,8 +38,21 @@ public class TravelController {
 	
 	@RequestMapping("makingList.tm")
 	public String makingList(String pageNum, Model model) throws Exception {
-		Map map = travelService.getArticles(pageNum);
+		//유저 정보
+		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
+		model.addAttribute("id",id);
+		UserRkDTO rkInfo = travelService.getMemRk(id);
 		
+		//모든 여행 가져와서 상태가 참여 중(1)인 것만 담음
+		List JList = travelService.getMyGroups(id,1);
+		model.addAttribute("joiningList",JList);		
+		//모든 여행 가져와서 상태가 대기 중(0)인 것만 담음
+		List WList = travelService.getMyGroups(id,0);
+		model.addAttribute("waitingList",WList);
+
+		//모집 중인 여행
+		Map map = travelService.getArticles(pageNum);
+		model.addAttribute("rkInfo",rkInfo);
 		model.addAttribute("pageNum",map.get("pageNum"));
 		model.addAttribute("pageSize",map.get("pageSize"));
 		model.addAttribute("currPage",map.get("currPage"));
@@ -76,15 +91,44 @@ public class TravelController {
 	}
 	
 	@RequestMapping("makingReq.tm")
-	public String makingReq(Model model) throws Exception {
+	public String makingReq(int gNo, Model model) throws Exception {
+		GroupSpaceDTO content = travelService.getContent(gNo);
 		
+		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
+		Map<String, Integer> map = travelService.getUserPos(id);
+		
+		SmallPosDTO posInfo1 = travelService.getPosInfo(map.get("pos1"));
+		SmallPosDTO posInfo2 = travelService.getPosInfo(map.get("pos2"));
+		
+		model.addAttribute("content",content);
+		model.addAttribute("id",id);
+		model.addAttribute("pos1",map.get("pos1"));
+		model.addAttribute("pos2",map.get("pos2"));
+		model.addAttribute("posInfo1",posInfo1);
+		model.addAttribute("posInfo2",posInfo2);
 		return "/client/travel/makingReq";
 	}
 	
 	@RequestMapping("makingReqPro.tm")
-	public String makingReqPro() throws Exception {
+	public String makingReqPro(GroupRequestDTO dto) throws Exception {
+		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
+		dto.setId(id);
 		//신청 처리하기
+		travelService.applyForGroup(dto);
 		return "redirect:makingList.tm";	
+	}
+	
+	@RequestMapping("groupSpace.tm")
+	public String groupSpace(int gNo, Model model) throws Exception {
+		//그룹 방에 필요한 것: ①개설자가 볼 신청자 목록 ②현재 멤버 리스트 ③채팅 ④일정 ⑤갤러리 ⑥그룹 상태
+		//gNo 주고 해당 개설자 ID 가져오기(groupSpace테이블)
+		GroupSpaceDTO dto = travelService.getContent(gNo);
+		String leader = dto.getId();
+		
+		
+		
+		model.addAttribute("leader",leader);
+		return "/client/travel/groupSpace";
 	}
 	
 	

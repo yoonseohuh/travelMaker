@@ -6,8 +6,13 @@
 	
 	<div class="wrapAll">
 		
-		modiNick
-		
+		<h2>닉네임 수정</h2>
+		<form action="/travelMaker/mem/myModiNickPro.tm" method="post">
+			<input type="hidden" name="id" value="${mem.id}"/>
+			<input type="text" name="crNick" value="현재닉네임: ${mem.nickname}" readonly/> <br/>
+			<input type="text" name="nickname" placeholder="새로운 닉네임" /> <br/>
+			<input type="submit" value="닉네임 수정" />
+		</form>
 	</div>
 	<!-- //wrapAll end -->
 	

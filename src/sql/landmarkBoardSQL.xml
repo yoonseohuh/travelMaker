@@ -4,6 +4,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="landmarkBoard">
-
-
+	<!-- 시퀀스는 대문자로 써야 들어가진다 -->
+	<insert id="insertLand" parameterType="LandmarkBoardDTO">
+		insert into LANDMARKBOARD(lNo,writer,lName,lType,addr,xLoc,yLoc,lCont,lOpen,reg) values(LANDMARKBOARD_SEQ.nextVal,#{writer},#{lName},#{lType},#{addr},#{xLoc},#{yLoc},#{lCont},#{lOpen},sysdate)
+	</insert>
+	
+	<select id="getLand" resultType="LandmarkBoardDTO">
+		select * from LANDMARKBOARD
+	</select>
 </mapper>

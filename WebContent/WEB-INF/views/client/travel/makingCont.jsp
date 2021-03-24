@@ -15,6 +15,26 @@
 		</c:if>
 		
 		<script>
+			$(document).ready(function(){
+				var sYYYY = $('#sDate').val().substr(0,4);
+				var sMM = $('#sDate').val().substr(4,2);
+				var sDD = $('#sDate').val().substr(7,2);
+				var startDate = new Date(sYYYY,sMM-1,sDD);
+				$('#sDate').val(startDate);
+				var eYYYY = $('#eDate').val().substr(0,4);
+				var eMM = $('#eDate').val().substr(4,2);
+				var eDD = $('#eDate').val().substr(7,2);
+				var endDate = new Date(eYYYY,eMM-1,eDD);
+				$('#eDate').val(endDate);
+				var cYYYY = $('#cDate').val().substr(0,4);
+				var cMM = $('#cDate').val().substr(4,2);
+				var cDD = $('#cDate').val().substr(7,2);
+				var closingDate = new Date(cYYYY,cMM-1,cDD);
+				$('#cDate').val(closingDate);
+				
+				$('#dGap').val((endDate-startDate)/(1000*3600*24));
+			});
+			
 			function removeCheck(){
 				if(confirm("정말 삭제하시겠습니까?")==true){
 					document.removefrm.submit();
@@ -23,8 +43,11 @@
 				}
 			}
 		</script>
-		<form action="makingDel.tm?gNo=${content.gNo}" name="removefrm" method="post"></form>
 		
+		<form action="makingDel.tm?gNo=${content.gNo}" name="removefrm" method="post"></form>
+		<input type="hidden" id="sDate" value="${content.startDate}"/>
+		<input type="hidden" id="eDate" value="${content.endDate}"/>
+		<input type="hidden" id="cDate" value="${content.closingDate}"/>
 		<h1>${content.subject}</h1>
 		<table>
 			<tr>
@@ -49,11 +72,13 @@
 				<td>날짜: </td>
 				<td>
 					<fmt:parseNumber value="${content.endDate-content.startDate}" var="dateGap"/>
+					
 					<c:if test="${dateGap==0}">
 						${content.startDate} (당일치기)
 					</c:if>
 					<c:if test="${dateGap>0}">
-						${content.startDate} ~ ${content.endDate} (${dateGap}박 ${dateGap+1}일)						
+						${content.startDate} ~ ${content.endDate}
+						<input type="text" id="dGap" readonly/>박
 					</c:if>
 				</td>
 			</tr>
@@ -125,8 +150,17 @@
 					<c:if test="${sessionScope.memId!=content.id && content.maxNum<=content.actualNum}">
 						모집이 완료되었습니다. 
 					</c:if>
-					<c:if test="${memStatus==0}">
+					<c:if test="${sessionScope.memId!=content.id && memStatus==0}">
 						이미 신청하셨습니다.
+					</c:if>
+					<c:if test="${sessionScope.memId!=content.id && memStatus==1}">
+						이미 참여 중입니다.
+					</c:if>
+					<c:if test="${sessionScope.memId!=content.id && memStatus==2}">
+						이미 거절되었습니다.
+					</c:if>
+					<c:if test="${sessionScope.memId!=content.id && memStatus==3}">
+						개설자에 의해 강제퇴장된 여행입니다.
 					</c:if>
 					<input type="button" value="리스트" onclick="window.location='/travelMaker/travel/makingList.tm?pageNum=${pageNum}'"/>					
 					<c:if test="${sessionScope.memId==content.id}">
