@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import travelMaker.model.dto.TmUserDTO;
+import travelMaker.model.dto.UserRkDTO;
 
 public interface TmUserDAO {
 	
@@ -41,4 +42,6 @@ public interface TmUserDAO {
 	public List getAllPos();
 	//회원 정보 수정 관리자
 	public void updateMember(TmUserDTO mem);
+	//관리자 랭크 정보 소환 !
+	public List getRk();
 }

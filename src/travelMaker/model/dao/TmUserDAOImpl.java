@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import travelMaker.model.dto.TmUserDTO;
+import travelMaker.model.dto.UserRkDTO;
 
 @Repository
 public class TmUserDAOImpl implements TmUserDAO {
@@ -131,6 +132,12 @@ public class TmUserDAOImpl implements TmUserDAO {
 	@Override
 	public void updateMember(TmUserDTO mem) {
 		sqlSession.update("tmUser.updateMember",mem);
+	}
+
+	@Override
+	public List getRk() {
+		List rkList = sqlSession.selectList("tmUser.getRk");
+		return rkList;
 	}
 	
 

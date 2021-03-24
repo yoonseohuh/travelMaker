@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import travelMaker.model.dto.TmUserDTO;
+import travelMaker.model.dto.UserRkDTO;
 
 public interface MemberService {
 
@@ -41,8 +42,10 @@ public interface MemberService {
 	public Map getMembers(String pageNum);
 	//posNo으로 posName 가져오기 
 	public String getPosName(int posNo);
-	//pos 전체 가져오기 
+	//posNo,posName 전체 가져오기 
 	public List getAllPos();
 	//관리자 회원 정보 변경 
 	public void updateMember(TmUserDTO mem);
+	//관리자 랭크 정보 소환 !
+	public List getRk();
 }
