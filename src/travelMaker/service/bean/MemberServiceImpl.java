@@ -256,6 +256,24 @@ public class MemberServiceImpl implements MemberService {
 		
 		return every;
 	}
+
+	@Override
+	public String getPosName(int posNo) {
+		String pName=tmuserDAO.getPosName(posNo);
+		return pName;
+	}
+
+	@Override
+	public List getAllPos() {
+		List posList = tmuserDAO.getAllPos();
+		
+		return posList;
+	}
+
+	@Override
+	public void updateMember(TmUserDTO mem) {
+		tmuserDAO.updateMember(mem);
+	}
 	
 	
 	

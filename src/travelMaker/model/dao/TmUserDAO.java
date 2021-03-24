@@ -35,4 +35,10 @@ public interface TmUserDAO {
 	public int getSearchMemberCount(String search);
 	//회원 수 구하기 (검색 X)
 	public int getMemberCount();
+	//posName 구하기 
+	public String getPosName(int posNo);
+	//pos 전체 가져오기 
+	public List getAllPos();
+	//회원 정보 수정 관리자
+	public void updateMember(TmUserDTO mem);
 }

@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
 
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
 	<!-- //top end -->
 	
 	<div class="wrapAll">
-		<h2>회원 관리</h2>
+		<h1>회원 관리</h1>
 		<!-- 가입된 회원이 없을 때  -->
 		<c:if test="${count==0 || count==null}">
 			<table>
@@ -62,15 +63,68 @@
 							${member.position2}
 						</td>
 						<td>
-							${member.reg}
+							<fmt:formatDate value="${member.reg}" type="both" pattern="yyyy.MM.dd a hh:mm"/>
 						</td>
 						<td>
-							<input type="button" value="누르지마시오"/>
+							<input type="button" value="회원 정보 수정" onclick="window.location='/travelMaker/admin/memberModiForm.tm?id=${member.id}'"/>
 						</td>
 					</tr>
 				</c:forEach>
 			</table>
+		<!-- 페이지 설정 -->
+		<c:set var="pageBlock" value="2"/>
+		<!-- 총 몇페이지인지 계산 -->
+		<fmt:parseNumber var="res" value="${count/pageSize}" integerOnly="true" />
+		<c:set var="pageCount" value="${res+(count%pageSize==0 ? 0 : 1)}"/>
+		<!-- startPage(< 6,7,8 >6!!) 구하기  -->
+		<fmt:parseNumber var="result" value="${(currPage-1)/pageBlock}" integerOnly="true" />
+		<c:set var="startPage" value="${result*pageBlock+1}"/>
+		<!-- endPage 구하기 -->
+		<c:set var="endPage" value="${startPage+pageBlock-1}"/>
+		<c:if test="${endPage>pageCount}">
+			<c:set var="endPage" value="${pageCount}"/>
 		</c:if>
+		<br/><br/><br/>
+		<div align="center">
+			<!-- 앞으로 가는 기호 -->
+			<c:if test="${search==null}">
+				<c:if test="${startPage>pageBlock}">
+					<a href="/travelMaker/admin/member.tm?pageNum=${startPage-pageBlock}" class="pageNums"> &lt;</a>
+				</c:if>
+			</c:if>
+			
+			<!-- 페이지 리스트 -->
+			<c:if test="${search==null}">
+				<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
+					<a href="/travelMaker/admin/member.tm?pageNum=${i}" class="pageNums"> &nbsp; ${i} &nbsp;</a>
+				</c:forEach>
+			</c:if>
+			
+			<!-- 뒤로 가는 기호 -->
+			<c:if test="${search==null}">
+				<c:if test="${endPage<pageCount}">
+					<a href="/travelMaker/admin/member.tm?pageNum=${startPage+pageBlock}" class="pageNums"> &gt;</a>
+				</c:if>
+			</c:if>
+		</div>
+		<br/><br/>
+		<!-- 검색  -->
+		<form action="/travelMaker/admin/member.tm">
+			<table>
+				<tr>
+					<td>아이디 검색</td>
+					<td><input type="text" name="search"/></td>
+					<td><input type="submit" value="검색"/></td>
+				</tr>
+			</table>
+		</form>
+		</c:if><!-- count>0 일 때  -->
+		
+		<!-- 전체 회원 보기  -->
+		<div align="center">
+			<button onclick="window.location='/travelMaker/admin/member.tm'">전체 회원 보기</button>
+		</div>
+		
 	</div>
 	<!-- //wrapAll end -->
 	
