@@ -11,6 +11,7 @@
 		<div>
 			<input type="text" id="searchKeyword">
 			<button id="searchBtn">검색</button>
+			<button id="deleteBtn">삭제</button>
 		</div>
 		<br />
 		<br />
@@ -101,7 +102,12 @@
 				search();
 			});
 			
-		});	
+		});
+		
+		// 문자 클리어 버튼
+		$('#deleteBtn').click(function(){
+			$('#searchKeyword').val("");
+		});
 		</script>
 		<form action="/travelMaker/land/landWritePro.tm" method="post">
 			<table>
