@@ -27,8 +27,7 @@ public class CommentServiceImpl implements CommentService {
 		
 		return gInfo;
 	}
-		
-	
+			
 	
 	//사용자가 여행한 모든 여행그룹 가져오기
 	@Override
@@ -43,8 +42,6 @@ public class CommentServiceImpl implements CommentService {
 		for(int i = 0 ; i < myGroup.size(); i++) {
 			dtoList.add(getGroupInfo(((GroupMemberDTO)myGroup.get(i)).getgNo()));
 		}
-		
-		
 		return dtoList;
 	}
 	
@@ -59,16 +56,12 @@ public class CommentServiceImpl implements CommentService {
 		return myGroup;
 	}
 	
-	
 	// 그그룹넘에 해당하는 사람들 가져오기
 	public List getGMem(int gNo) throws SQLException{
 		List gMem = userCmtDAO.getMem(gNo);
 		return gMem;
 	}
-	
-
-
-	
+		
 	
 	//같은 여행그룹의 tmUSER 정보 담기  (필요에따라 빼써라)
 	public List groupUser(String id) throws SQLException {
@@ -79,23 +72,39 @@ public class CommentServiceImpl implements CommentService {
 		
 		//1.gno하나씩 뽑아서 그그룹에 해당하는 멤버들  닉네임담음
 		List memList = new ArrayList();
+		
+		List comMemList = new ArrayList();
+		
+		List fin = new ArrayList();
 		for(int i = 0; i < myG.size(); i++) {
 			memList = userCmtDAO.getMem(((GroupMemberDTO)myG.get(i)).getgNo());
-		}
+			System.out.println(" 그룹번호" + ((GroupMemberDTO)myG.get(i)).getgNo());
+			//코멘트 남겼는지 확인할꺼
+			for(int j = 0; j < memList.size(); j++) {
+				int result = userCmtDAO.chComment(id,((GroupMemberDTO)memList.get(j)).getId(),((GroupMemberDTO)myG.get(i)).getgNo());
+				
+				if(result == 0) {
+					comMemList.add(i,((GroupMemberDTO)memList.get(j)));
+				}//if문
+				fin.add(i, comMemList);
+				
+			
+			}//작은  for문 memList돌린거
+			
+			
+		}//큰 for문 myG돌린거
+		System.out.println("fin리스트" + fin.size());
+		System.out.println("fin" + fin);
+		
+		
 		
 		//그룹넘 하나씩 보내서 멤버들 닉네임 가져온다
-	
-			
 		
-		
-		return memList;
+		return fin;
 	}
 	
 	
-	
-	
-
-	
+	/* 없애도 되는듯?.. 주석해도 에러안뜬다
 	@Override
 	public List gMem(String id) throws SQLException{
 		List group = userCmtDAO.myGroup(id);
@@ -107,16 +116,11 @@ public class CommentServiceImpl implements CommentService {
 			
 			//사용자가 참여중인 그룹 넘 보냄
 			userCmtDAO.getMem(((GroupMemberDTO)group.get(i)).getgNo());
-			 
-			 
 		}
-		
-		
-		
-		
 		return group;
 	}
-
+	*/
+	
 
 
 
