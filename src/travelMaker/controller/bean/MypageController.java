@@ -33,7 +33,7 @@ public class MypageController {
 	
 	//내정보 관리
 	
-	//문의 및 신고
+	//문의게시판
 	@RequestMapping("myQnaWrite.tm")
 	public String myQnaWriteForm(int rType, String pageNum, Model model) throws SQLException {
 		List res = qnaReportService.selectReason(rType);
@@ -47,7 +47,6 @@ public class MypageController {
 	public String myQnaWritePro(QnaBoardDTO dto, String pageNum, Model model) throws SQLException {
 		String rCont = qnaReportService.getRCont(dto);
 		dto.setrCont(rCont);
-		System.out.println("rCont");
 		qnaReportService.insertQna(dto);
 		model.addAttribute("pageNum",pageNum);
 		return "client/mypage/myQnaWritePro";
@@ -55,7 +54,7 @@ public class MypageController {
 	
 	@RequestMapping("myQnaReportList.tm")
 	public String myQnaReportList(String pageNum, Model model) throws SQLException {
-		Map map = qnaReportService.getArticles(pageNum);
+		Map map = qnaReportService.getQnas(pageNum);
 		
 		model.addAttribute("pageNum",map.get("pageNum"));
 		model.addAttribute("pageSize",map.get("pageSize"));
@@ -64,7 +63,7 @@ public class MypageController {
 		model.addAttribute("end",map.get("end"));
 		model.addAttribute("count",map.get("count"));
 		model.addAttribute("number",map.get("number"));
-		model.addAttribute("articleList",map.get("articleList"));
+		model.addAttribute("qnaList",map.get("qnaList"));
 		return "client/mypage/myQnaReportList";
 	}	
 	

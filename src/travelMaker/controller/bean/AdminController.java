@@ -2,6 +2,7 @@ package travelMaker.controller.bean;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,25 +29,66 @@ public class AdminController {
 	
 	//그룹관리
 	
-	//신고/문의관리
-	@RequestMapping("qnaReport.tm")
-	public String qnaReport() throws SQLException {
-		return "admin/qnaReport/qnaReport";
+	//문의관리
+	@RequestMapping("qna.tm")
+	public String qna(String pageNum, Model model) throws SQLException {
+		Map map = qnaReportService.getQnas(pageNum);
+		
+		model.addAttribute("pageNum",map.get("pageNum"));
+		model.addAttribute("pageSize",map.get("pageSize"));
+		model.addAttribute("currPage",map.get("currPage"));
+		model.addAttribute("start",map.get("start"));
+		model.addAttribute("end",map.get("end"));
+		model.addAttribute("count",map.get("count"));
+		model.addAttribute("number",map.get("number"));
+		model.addAttribute("qnaList",map.get("qnaList"));
+		return "admin/qna/qna";
 	}
 	
-	@RequestMapping("qnaReportCont.tm")
-	public String qnaReportCont() throws SQLException {
-		return "admin/qnaReport/qnaReportCont";
+	@RequestMapping("qnaCont.tm")
+	public String qnaCont() throws SQLException {
+		return "admin/qna/qnaCont";
 	}
 	
-	@RequestMapping("qnaReportWrite.tm")
-	public String qnaReportWrite() throws SQLException {
-		return "admin/qnaReport/qnaReportWrite";
+	@RequestMapping("qnaWrite.tm")
+	public String qnaWrite() throws SQLException {
+		return "admin/qna/qnaWrite";
 	}
 	
-	@RequestMapping("qnaReportModi.tm")
-	public String qnaReportModi() throws SQLException {
-		return "admin/qnaReport/qnaReportModi";
+	@RequestMapping("qnaModi.tm")
+	public String qnaModi() throws SQLException {
+		return "admin/qna/qnaModi";
+	}
+	
+	//신고관리
+	@RequestMapping("report.tm")
+	public String report(String pageNum, Model model) throws SQLException {
+		Map map = qnaReportService.getReports(pageNum);
+		
+		model.addAttribute("pageNum",map.get("pageNum"));
+		model.addAttribute("pageSize",map.get("pageSize"));
+		model.addAttribute("currPage",map.get("currPage"));
+		model.addAttribute("start",map.get("start"));
+		model.addAttribute("end",map.get("end"));
+		model.addAttribute("count",map.get("count"));
+		model.addAttribute("number",map.get("number"));
+		model.addAttribute("qnaList",map.get("qnaList"));
+		return "admin/report/report";
+	}
+	
+	@RequestMapping("reportCont.tm")
+	public String reportCont() throws SQLException {
+		return "admin/report/reportCont";
+	}
+	
+	@RequestMapping("reportWrite.tm")
+	public String reportWrite() throws SQLException {
+		return "admin/report/reportWrite";
+	}
+	
+	@RequestMapping("reportModi.tm")
+	public String reportModi() throws SQLException {
+		return "admin/report/reportModi";
 	}
 	
 	//신고사유/문의유형
@@ -54,7 +96,7 @@ public class AdminController {
 	public String reason(Model model) throws SQLException {
 		List res = qnaReportService.selectReasonAll();
 		model.addAttribute("res", res);
-		return "admin/qnaReport/reason";
+		return "admin/reason/reason";
 	}
 	
 	@RequestMapping("reasonInsert.tm")

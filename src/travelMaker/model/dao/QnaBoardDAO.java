@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import travelMaker.model.dto.QnaBoardDTO;
+import travelMaker.model.dto.ReportDetailDTO;
 
 public interface QnaBoardDAO {
 	public void insertQna(QnaBoardDTO dto) throws SQLException;
@@ -16,5 +17,5 @@ public interface QnaBoardDAO {
 
 	public void deleteContent(int gNo) throws SQLException;
 
-	public String getRCont(QnaBoardDTO dto) throws SQLException;
+	public String getRCont(QnaBoardDTO dto) throws SQLException;	
 }

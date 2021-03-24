@@ -12,7 +12,7 @@
 		
 		<div>
 			<h1>문의내역</h1>
-			<h1>${count}/${startPage}/현재 페이지: ${pageNum}</h1> 
+			<h3>${count}/${startPage}/현재 페이지: ${pageNum}</h3> 
 			<form action="/travelMaker/my/myQnaWrite.tm" method="get">
 				<input type="hidden" name="rType" value="5">
 				<input type="submit" value="1:1 문의작성">
@@ -23,21 +23,28 @@
 					<th>No</th>
 					<th>분류</th>
 					<th>내용</th>
+					<th>작성일</th>
 					<th>처리여부</th>
 				</tr>
-				<c:forEach var="article" items="${articleList}">
+				<c:forEach var="article" items="${qnaList}">
 				<tr>
 					<td>${number}</td>
 					<c:set var="number" value="${number-1}"/>
-					<td>/${article.rCont}/</td>
+					<td>${article.rCont}</td>
 					<td>
 						${article.content}		
 					</td>
+					<td>${article.reg}</td>
 					<td>
 						<c:if test="${article.status == 0}">N</c:if>
 						<c:if test="${article.status == 1}">Y</c:if>
 					</td>
 				</tr>
+				<%-- <tr>
+					<td></td>
+					<td colspan="2">${qnaList.feedback}</td>
+					<td colspan="2">${qnaList.fbReg}</td>
+				</tr> --%>
 				</c:forEach>
 			</table>
 			<div class="pageNumbers">
@@ -65,7 +72,7 @@
 				</c:if>				
 			</div>
 			<!-- pageNumbers end -->
-		</c:if>
+			</c:if>
 		</div>
 		
 		<div>

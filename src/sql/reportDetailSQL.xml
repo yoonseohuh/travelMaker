@@ -4,6 +4,29 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="reportDetail">
-
-
+	<select id="selectRCont" parameterType="ReportDetailDTO" resultType="String">
+		select rCont from REPORTREASON where rNo=#{rNo}
+	</select>
+	
+	<insert id="insertReport" parameterType="ReportDetailDTO">
+		insert into REPORTDETAIL(qNo,id,rType,content,reg,rNo,rCont) values(REPORTDETAIL_SEQ.nextVal,#{id},#{rType},#{content},sysdate,#{rNo},#{rCont})
+	</insert>
+	
+	<select id="getArticleCount" resultType="int">
+		select count(*) from QNABOARD
+	</select>
+	
+	<select id="getArticles" parameterType="hashmap" resultType="ReportDetailDTO">
+		<![CDATA[
+		(select a.*, r FROM (select QNABOARD.*, rownum r from QNABOARD where status=0 order by reg desc) a where r>=#{start} and r<=${end})
+		]]>
+	</select>
+	
+	<select id="getContent" parameterType="int" resultType="ReportDetailDTO">
+		select * from QNABOARD where qNo=#{qNo}
+	</select>
+	
+	<delete id="deleteReport" parameterType="int">
+		delete from QNABOARD where qNo=#{value}
+	</delete>
 </mapper>
