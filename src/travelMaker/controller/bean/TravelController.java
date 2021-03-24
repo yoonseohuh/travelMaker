@@ -120,8 +120,20 @@ public class TravelController {
 	
 	@RequestMapping("groupSpace.tm")
 	public String groupSpace(int gNo, Model model) throws Exception {
+		//그룹 방에 필요한 것: ①개설자가 볼 신청자 목록 ②현재 멤버 리스트 ③채팅 ④일정 ⑤갤러리 ⑥그룹 상태
+		//gNo 주고 해당 개설자 ID 가져오기(groupSpace테이블)
+		GroupSpaceDTO dto = travelService.getContent(gNo);
+		String leader = dto.getId();
 		
+		
+		
+		model.addAttribute("leader",leader);
 		return "/client/travel/groupSpace";
 	}
+	
+	
+	
+	
+	
 	
 }

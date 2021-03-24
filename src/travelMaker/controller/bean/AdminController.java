@@ -1,6 +1,7 @@
 package travelMaker.controller.bean;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import travelMaker.model.dao.TmUserDAO;
 import travelMaker.model.dto.ReportReasonDTO;
+import travelMaker.model.dto.TmUserDTO;
 import travelMaker.service.bean.MemberService;
 import travelMaker.service.bean.QnaReportServiceImpl;
 
@@ -52,6 +55,34 @@ public class AdminController {
 		model.addAttribute("search", every.get("search"));
 		return "admin/member/memberList";
 	}
+	
+	//멤버 정보 수정 Form
+	//회원 정보수정 버튼으로 id 넘겨 받음 
+	@RequestMapping("memberModiForm.tm")
+	public String memberModiForm(String id,Model model) {
+		//id로 mem 전체 정보 받아오기
+		TmUserDTO mem = memService.getMember(id);
+		//posNo으로 posName 구하는 메서드
+		String pName1 = memService.getPosName(mem.getPosition1());
+		String pName2 = memService.getPosName(mem.getPosition2());
+		//posNo,posName 전체 리스트로 가져오는 메서드
+		List posList =  memService.getAllPos();
+		model.addAttribute("mem", mem);
+		model.addAttribute("pName1", pName1);
+		model.addAttribute("pName2", pName2);
+		model.addAttribute("posList", posList);
+		
+		return "admin/member/memberModi";
+	}
+	
+	//멤버 정보 수정 Pro
+	@RequestMapping("memberModiPro.tm")
+	public String memberModiPro(TmUserDTO mem,Model model) {
+		//Form에서 받은 정보를 update 해주는 메서드 
+		memService.updateMember(mem);
+		return "redirect:member.tm";
+	}	
+	
 	//그룹관리
 	
 	//신고/문의관리
