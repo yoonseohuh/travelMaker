@@ -7,7 +7,7 @@
 	
 	<div class="wrapAll admin">
 	
-		<h1>신고/문의관리</h1>
+		<h1>문의관리</h1>
 		
 	</div>
 	<!-- //wrapAll end -->

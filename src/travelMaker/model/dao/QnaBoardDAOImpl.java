@@ -19,43 +19,44 @@ public class QnaBoardDAOImpl implements QnaBoardDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession = null;
 	
+	//문의유형 불러오기
 	@Override
 	public String getRCont(QnaBoardDTO dto) throws SQLException {
 		String rCont = sqlSession.selectOne("qnaBoard.selectRCont", dto);
 		return rCont;
 	}
 	
+	//문의게시글 등록
 	@Override
 	public void insertQna(QnaBoardDTO dto) throws SQLException {
 		sqlSession.insert("qnaBoard.insertQna", dto);
 	}
 	
-	//게시글 개수 리턴
+	//문의게시글 개수 리턴
 	@Override
 	public int getArticleCount() throws SQLException {
 		return sqlSession.selectOne("qnaBoard.getArticleCount");
 	}
 	
-	//게시글 보여주기
+	//문의게시글 보여주기
 	@Override
 	public List getArticles(int start, int end) throws SQLException {
 		Map map = new HashMap();
 		map.put("start",start);
 		map.put("end",end);
-		List articleList = sqlSession.selectList("qnaBoard.getArticles",map);
-		return articleList;
+		List qnaList = sqlSession.selectList("qnaBoard.getArticles",map);
+		return qnaList;
 	}
 
-	//게시글 내용 하나 가져오기
+	//문의게시글 내용 하나 가져오기
 	@Override
 	public QnaBoardDTO getContent(int qNo) throws SQLException {
 		return sqlSession.selectOne("qnaBoard.getContent",qNo);
 	}
 	
-	//게시글 삭제
+	//문의게시글 삭제
 	@Override
 	public void deleteContent(int qNo) throws SQLException {
-		sqlSession.delete("qnaBoard.deleteContent",qNo);
-	}
-	
+		sqlSession.delete("qnaBoard.deleteQna",qNo);
+	}	
 }
