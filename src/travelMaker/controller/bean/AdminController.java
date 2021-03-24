@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import travelMaker.model.dao.TmUserDAO;
 import travelMaker.model.dto.ReportReasonDTO;
 import travelMaker.model.dto.TmUserDTO;
+import travelMaker.model.dto.UserRkDTO;
 import travelMaker.service.bean.MemberService;
 import travelMaker.service.bean.QnaReportServiceImpl;
 
@@ -164,6 +165,35 @@ public class AdminController {
 	//공지사항
 	
 	//포지션/레벨
+	
+	//s포지션 리스트
+	@RequestMapping("rkPos.tm")
+	public String rkPos(Model model) {
+		List rkList = memService.getRk();
+		int number = 1;
+		model.addAttribute("rkList", rkList);
+		model.addAttribute("number", number);
+		return "admin/rankPosition/rkPos";
+	}
+	
+	//s포지션 추가
+	@RequestMapping("addRk.tm")
+	public String addRk(Model model) {
+		List rkList = memService.getRk();
+		int number = 1;
+		model.addAttribute("rkList", rkList);
+		model.addAttribute("number", number);
+		return "admin/rankPosition/addRk";
+	}
+	
+	//s포지션 추가 Pro
+		@RequestMapping("addRkPro.tm")
+		public String addRkPro(UserRkDTO rkdto) {
+			System.out.println(rkdto.getRkName());
+			return "redirect:rkPos.tm";
+		}
+	//s포지션 수정
+	//s포지션 삭제
 	
 	
 }

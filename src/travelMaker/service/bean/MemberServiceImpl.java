@@ -17,6 +17,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import travelMaker.model.dao.TmUserDAO;
 import travelMaker.model.dto.TmUserDTO;
+import travelMaker.model.dto.UserRkDTO;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -273,6 +274,12 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void updateMember(TmUserDTO mem) {
 		tmuserDAO.updateMember(mem);
+	}
+
+	@Override
+	public List getRk() {
+		List rkList = tmuserDAO.getRk();
+		return rkList;
 	}
 	
 	
