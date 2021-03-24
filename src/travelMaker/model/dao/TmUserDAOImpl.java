@@ -98,7 +98,7 @@ public class TmUserDAOImpl implements TmUserDAO {
 		map.put("start", startRow);
 		map.put("end", endRow);
 		map.put("search", search);
-		List memberList =  sqlSession.selectOne("tmUser.getSearchMembers", map);
+		List memberList =  sqlSession.selectList("tmUser.getSearchMembers", map);
 		return memberList;
 	}
 	
@@ -114,6 +114,23 @@ public class TmUserDAOImpl implements TmUserDAO {
 	public int getMemberCount() {
 		int count = sqlSession.selectOne("tmUser.getMemberCount");
 		return count;
+	}
+
+	@Override
+	public String getPosName(int posNo) {
+		String pName=sqlSession.selectOne("tmUser.getPosName",posNo);
+		return pName;
+	}
+
+	@Override
+	public List getAllPos() {
+		List posList=sqlSession.selectList("tmUser.getAllPos");
+		return posList;
+	}
+
+	@Override
+	public void updateMember(TmUserDTO mem) {
+		sqlSession.update("tmUser.updateMember",mem);
 	}
 	
 

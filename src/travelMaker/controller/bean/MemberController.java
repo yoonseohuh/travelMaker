@@ -89,8 +89,11 @@ public class MemberController {
 	@RequestMapping("findIdPro.tm")
 	public String findIdPro(String email, Model model)throws Exception {
 		TmUserDTO mem = memService.emailCheck(email);
-		String id = mem.getId();
-		String comId = memService.idStar(id);
+		String comId=null;
+		if(mem!=null) {
+			String id = mem.getId();
+			comId = memService.idStar(id);
+		}
 		model.addAttribute("mem", mem);
 		model.addAttribute("comId", comId);
 		

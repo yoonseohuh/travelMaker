@@ -53,7 +53,7 @@
 		]]>
 	</select>
 	
-	<select id="getSearchMembers" parameterType="hashMap" resultType="TmUserDTO">
+	<select id="getSearchMembers" parameterType="string" resultType="TmUserDTO">
 		select * from tmUser where id=#{search}
 	</select>
 	
@@ -64,5 +64,19 @@
 	<select id="getMemberCount" resultType="int">
 		select count(*) from tmUser 
 	</select>
+	
+	<select id="getPosName" parameterType="int" resultType="string">
+		select posName from smallpos where posno=#{posNo}
+	</select>
 
+	<select id="getAllPos" resultType="SmallPosDTO">
+		select posno,posname from smallpos order by posno
+	</select>
+	
+	<update id="updateMember" parameterType="TmUserDTO">
+		update tmUser set nickname=#{nickname},gender=#{gender},rk=#{rk},
+		position1=#{position1},position2=#{position2},travelCnt=#{travelCnt},status=#{status} 
+		where id=#{id}
+	</update>
+	
 </mapper>

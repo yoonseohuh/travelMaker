@@ -1,5 +1,6 @@
 package travelMaker.service.bean;
 
+import java.util.List;
 import java.util.Map;
 
 import travelMaker.model.dto.TmUserDTO;
@@ -38,4 +39,10 @@ public interface MemberService {
 	public void changeStat(int status, String id);
 	//회원들 정보 가져오기 
 	public Map getMembers(String pageNum);
+	//posNo으로 posName 가져오기 
+	public String getPosName(int posNo);
+	//pos 전체 가져오기 
+	public List getAllPos();
+	//관리자 회원 정보 변경 
+	public void updateMember(TmUserDTO mem);
 }
