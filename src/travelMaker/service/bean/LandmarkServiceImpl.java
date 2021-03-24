@@ -1,6 +1,7 @@
 package travelMaker.service.bean;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class LandmarkServiceImpl implements LandmarkService{
 	}
 
 	@Override
-	public LandmarkBoardDTO getLandInfo() {
+	public List getLand() {
 		// TODO Auto-generated method stub
 		return null;
 	}
