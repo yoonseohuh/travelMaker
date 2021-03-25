@@ -8,5 +8,9 @@
 	<insert id="insertRequest">
 		insert into groupRequest values(#{gNo},#{id},#{reqType},#{posNo},#{reqTxt},sysdate)
 	</insert>
+	
+	<select id="getRequests" parameterType="int" resultType="GroupRequestDTO">
+		select * from groupRequest where gNo=#{gNo}
+	</select>
 
 </mapper>

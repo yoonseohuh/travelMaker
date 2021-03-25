@@ -216,4 +216,22 @@ public class TravelServiceImpl implements TravelService{
 		return articleList;
 	}
 	
+	//그룹의 멤버들 가져오기
+	@Override
+	public List getMembers(int gNo) throws Exception {
+		List memList = new ArrayList();
+		memList = groupMemberDAO.getMembers(gNo);
+		return memList;
+	}
+	
+	//그룹에 들어온 신청 목록들 가져오기
+	@Override
+	public List getRequests(int gNo) throws Exception {
+		List reqList = new ArrayList();
+		reqList = groupRequestDAO.getRequests(gNo);
+		return reqList;
+	}
+	
+	
+	
 }

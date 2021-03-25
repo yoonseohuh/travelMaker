@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
+
+import travelMaker.model.dto.GroupMemberDTO;
 import travelMaker.model.dto.GroupRequestDTO;
 import travelMaker.model.dto.GroupSpaceDTO;
 import travelMaker.model.dto.SmallPosDTO;
@@ -121,13 +123,19 @@ public class TravelController {
 	@RequestMapping("groupSpace.tm")
 	public String groupSpace(int gNo, Model model) throws Exception {
 		//그룹 방에 필요한 것: ①개설자가 볼 신청자 목록 ②현재 멤버 리스트 ③채팅 ④일정 ⑤갤러리 ⑥그룹 상태
+		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
+		int idStatus = travelService.getMemStatus(gNo, id);
 		//gNo 주고 해당 개설자 ID 가져오기(groupSpace테이블)
-		GroupSpaceDTO dto = travelService.getContent(gNo);
-		String leader = dto.getId();
-		
-		
-		
+		GroupSpaceDTO grpSpace = travelService.getContent(gNo);
+		String leader = grpSpace.getId();
+		List grpMem = travelService.getMembers(gNo);
+		List grpReq = travelService.getRequests(gNo);
+		//일정 채팅 아직
+		model.addAttribute("id",id);
 		model.addAttribute("leader",leader);
+		model.addAttribute("grpSpace",grpSpace);
+		model.addAttribute("grpMem",grpMem);
+		model.addAttribute("grpReq",grpReq);
 		return "/client/travel/groupSpace";
 	}
 	

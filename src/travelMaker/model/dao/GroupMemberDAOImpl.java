@@ -45,5 +45,11 @@ public class GroupMemberDAOImpl implements GroupMemberDAO {
 		return list;
 	}
 	
+	@Override
+	public List getMembers(int gNo) throws Exception {
+		List list = new ArrayList();
+		list = sqlSession.selectList("groupMember.getMembers",gNo);
+		return list;
+	}
 	
 }
