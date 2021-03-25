@@ -19,16 +19,25 @@ public class LandmarkBoardDAOImpl implements LandmarkBoardDAO{
 		// sqlSession 불러서 insert문 ("landmarkBoard는 뒤에 sql 매퍼에 이름 붙인놈이고 insertLand는 보드dao에 만들어준 이름?? or 뒤에 인서트 id ??")
 		sqlSession.insert("landmarkBoard.insertLand", dto); // 아 sql 매퍼에 landmarBoard라는 이름안에 insertLand id를 가진 놈을 부르는거구나
 	}
-
+	
 	@Override
-	public List getLand() {
-		List land =  sqlSession.selectOne("landmarkBoard.getland");
+	public List getLand() throws SQLException {
+		List land =  sqlSession.selectOne("landmarkBoard.getLand");
 		return land;
 	}
 
 	@Override
 	public void getLandOpen(int lOpen) throws SQLException {
 		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void myLand(int lNo, String id) throws SQLException{
+		
+	}
+	@Override
+	public void myLandLiked(int lNo, String id) throws SQLException{
 		
 	}
 
