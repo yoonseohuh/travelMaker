@@ -26,5 +26,9 @@
 		select * from groupMember where gNo=#{gNo}
 	</select>
 	
+	<update id="changeMemStatus" parameterType="hashmap">
+		update groupMember set status=#{status} where gNo=#{gNo} and id=#{id}
+	</update>
+	
 	
 </mapper>

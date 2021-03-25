@@ -40,6 +40,7 @@ public interface TravelService {
 	public List getMembers(int gNo) throws Exception;
 	//그룹에 들어온 신청 목록들 가져오기
 	public List getRequests(int gNo) throws Exception;
-	
+	//신청 수락 및 거절 처리
+	public void acceptOrReject(String id, int gNo, int status) throws Exception;
 	
 }

@@ -175,7 +175,33 @@ public class TravelController {
 	}
 	
 	
+	@ResponseBody
+	@RequestMapping("accepted.tm")
+	public String accepted(@RequestBody Map<Object,Object> map) throws Exception {
+		String requestId = (String)map.get("requestId");
+		int gNo = Integer.parseInt((String)map.get("gNo"));
+		System.out.println(requestId);
+		System.out.println(gNo);
+		//gNo에 신청한 ID를 그룹에 참여 처리
+		travelService.acceptOrReject(requestId, gNo, 1);
+		ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.writeValueAsString("true");
+		return json;
+	}
 	
+	@ResponseBody
+	@RequestMapping("rejected.tm")
+	public String rejected(@RequestBody Map<Object,Object> map) throws Exception {
+		String requestId = (String)map.get("requestId");
+		int gNo = (Integer)map.get("gNo");
+		System.out.println(requestId);
+		System.out.println(gNo);
+		//gNo에 신청한 ID를 그룹에 거절 처리
+		travelService.acceptOrReject(requestId, gNo, 2);
+		ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.writeValueAsString("false");
+		return json;
+	}
 	
 	
 	
