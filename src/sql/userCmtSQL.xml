@@ -21,9 +21,29 @@
 
 <!-- comment 남겼는지 확인 -->
 <select id="chcomment" parameterType="Hashmap" resultType="int">
-	select count(*) from userCmt where receiver=#{recId} and sender=#{id} and gNo=#{gNo}
+	select count(*) from userCmt where receiver=#{recId} and sender=#{senId} and gNo=#{gNo}
 </select>
 
+
+<!-- 코멘트 넣기 -->
+<insert id="insertCom" parameterType="Hashmap">
+	insert into userCmt values(#{gNo}, comment_seq.nextval, #{recId}, #{senId}, #{comment}, 0, sysdate)
+</insert>
+
+<!-- 사용자 여행그룹 갯수 -->
+<select id="countGroup" parameterType="String" resultType="int">
+	select count(*) from groupMember where id=#{id}
+</select>
+
+<!-- 코멘트DTO가져오기 받는사람 : 사용자일떄-->
+<select id="comRecUser" parameterType="Hashmap" resultType="UserCmtDTO">
+	select * from userCmt where receiver=#{id} and status=0
+</select>
+
+<!-- 코멘트DTO가져오기 보낸사람 : 사용자일떄-->
+<select id="comSenUser" parameterType="Hashmap" resultType="UserCmtDTO">
+	select * from userCmt where sender=#{id} and status=0
+</select>
 
 
 </mapper>

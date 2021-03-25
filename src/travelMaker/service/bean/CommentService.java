@@ -26,9 +26,18 @@ public interface CommentService {
 	////같은 여행그룹의 tmUSER 정보 담기  (필요에따라 빼써라)
 	public List groupUser(String id) throws SQLException;
 	
+	//코멘트 insert문
+	public void insertCom(String id, String groupNum, String groupMem, String comment);
 	
+	
+	// 사용자 여행그룹 갯수 count
+	public int countGroup(String id);
+	
+	// 받는사람이 사용자인 코멘트DTO가져오기 
+	public List comRecUser(String id) throws SQLException;
 			
-	
+	// 보낸사람이 사용자인 코멘트DTO가져오기 
+	public List comSenUser(String id) throws SQLException;
 	
 	
 	

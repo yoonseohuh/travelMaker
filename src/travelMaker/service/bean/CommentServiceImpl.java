@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import travelMaker.model.dao.UserCmtDAO;
 import travelMaker.model.dto.GroupMemberDTO;
 import travelMaker.model.dto.GroupSpaceDTO;
+import travelMaker.model.dto.TmUserDTO;
+import travelMaker.model.dto.UserCmtDTO;
 
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -49,9 +51,7 @@ public class CommentServiceImpl implements CommentService {
 	//사용자아이디가 참여중인 그룹넘들 가져오기
 	public List getGroupNum(String id) throws SQLException{
 		//그룹멤버dto담겨있음
-		System.out.println("겟그룹넘전");
 		List myGroup = userCmtDAO.myGroup(id);
-		System.out.println("겟그룹넘후");
 	
 		return myGroup;
 	}
@@ -76,33 +76,86 @@ public class CommentServiceImpl implements CommentService {
 		List comMemList = new ArrayList();
 		
 		List fin = new ArrayList();
+		
+		
 		for(int i = 0; i < myG.size(); i++) {
-			memList = userCmtDAO.getMem(((GroupMemberDTO)myG.get(i)).getgNo());
+			memList = userCmtDAO.getMem(((GroupMemberDTO)myG.get(i)).getgNo());   //가입된 그룹번호를 하나씩 크게 돌려서 그 그룹에 해당하는 멤버들 목록에 담음?
 			System.out.println(" 그룹번호" + ((GroupMemberDTO)myG.get(i)).getgNo());
 			//코멘트 남겼는지 확인할꺼
 			for(int j = 0; j < memList.size(); j++) {
 				int result = userCmtDAO.chComment(id,((GroupMemberDTO)memList.get(j)).getId(),((GroupMemberDTO)myG.get(i)).getgNo());
 				
-				if(result == 0) {
-					comMemList.add(i,((GroupMemberDTO)memList.get(j)));
-				}//if문
-				fin.add(i, comMemList);
+				// 밑에서 사용자아이디인지 체크할 변수
+				String chId =((GroupMemberDTO)memList.get(j)).getId();
+				System.out.println(chId);
+				//System.out.println(" 그룹목록"+i +" : " + ((GroupMemberDTO)myG.get(i)).getgNo());
+				
+				System.out.println("result값" + result);
+				
+					if(result == 0 && !chId.equals(id)) {
+						comMemList.add(((GroupMemberDTO)memList.get(j)));
+						//System.out.println("멤버목록" + j + " : " + ((GroupMemberDTO)memList.get(j)).getId());
+					}
+				
 				
 			
 			}//작은  for문 memList돌린거
 			
 			
+			
 		}//큰 for문 myG돌린거
-		System.out.println("fin리스트" + fin.size());
-		System.out.println("fin" + fin);
-		
+		//fin.add(comMemList);
+
 		
 		
 		//그룹넘 하나씩 보내서 멤버들 닉네임 가져온다
 		
-		return fin;
+		return comMemList;
 	}
 	
+	
+	
+	
+	
+	//코멘트 insert문
+	public void insertCom(String id, String groupNum, String groupMem, String comment) {
+		
+		int gNo = Integer.parseInt(groupNum);
+		
+		userCmtDAO.insertCom(id, gNo, groupMem, comment);
+	}
+	
+	
+	// 사용자 여행그룹 갯수 count
+	public int countGroup(String id) {
+		int count = userCmtDAO.countGroup(id);
+
+		return count;
+	}
+	
+	
+	// 코멘트DTO가져오 받는사람 사용자
+	public List comRecUser(String id) throws SQLException {
+	
+		
+		List comRecUser = new ArrayList();
+	
+		
+		comRecUser = userCmtDAO.comRecUser(id);
+	
+		System.out.println("comRecUser" + comRecUser.size());
+		return comRecUser;
+	}
+	
+	// 보낸사람이 사용자인 코멘트DTO가져오기 
+	public List comSenUser(String id) throws SQLException {
+		
+		List comSenUser = new ArrayList();
+		comSenUser= userCmtDAO.comSenUser(id);
+		System.out.println("comSenUser :" + comSenUser.size());
+			
+		return comSenUser;
+	}
 	
 	/* 없애도 되는듯?.. 주석해도 에러안뜬다
 	@Override
@@ -120,11 +173,6 @@ public class CommentServiceImpl implements CommentService {
 		return group;
 	}
 	*/
-	
-
-
-
-	
 	
 	
 	
