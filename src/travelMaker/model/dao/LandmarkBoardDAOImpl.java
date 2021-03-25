@@ -21,8 +21,8 @@ public class LandmarkBoardDAOImpl implements LandmarkBoardDAO{
 	}
 	
 	@Override
-	public List getLand() throws SQLException {
-		List land =  sqlSession.selectOne("landmarkBoard.getLand");
+	public List getLands() throws SQLException {
+		List land =  sqlSession.selectList("landmarkBoard.getLands");
 		return land;
 	}
 
@@ -33,12 +33,15 @@ public class LandmarkBoardDAOImpl implements LandmarkBoardDAO{
 	}
 	
 	@Override
-	public void myLand(int lNo, String id) throws SQLException{
-		
+	public List myLand(String id) throws SQLException{
+		List myLand =  sqlSession.selectList("landmarkBoard.myLand", id);
+		return myLand;
 	}
+
 	@Override
-	public void myLandLiked(int lNo, String id) throws SQLException{
-		
+	public LandmarkBoardDTO getLand(int lNo) throws SQLException {
+		 LandmarkBoardDTO land  = sqlSession.selectOne("landmarkBoard.getLand", lNo);
+		return land;
 	}
 
 }
