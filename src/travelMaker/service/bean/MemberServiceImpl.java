@@ -281,6 +281,22 @@ public class MemberServiceImpl implements MemberService {
 		List rkList = tmuserDAO.getRk();
 		return rkList;
 	}
+
+	@Override
+	public void insertRank(UserRkDTO rkdto) {
+		tmuserDAO.insertRank(rkdto);
+	}
+
+	@Override
+	public UserRkDTO getRkInfo(int rkNo) {
+		UserRkDTO rdto = tmuserDAO.getRkInfo(rkNo);
+		return rdto;
+	}
+
+	@Override
+	public void updateRank(UserRkDTO rdto) {
+		tmuserDAO.updateRank(rdto);
+	}
 	
 	
 	

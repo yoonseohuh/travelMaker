@@ -9,9 +9,11 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class LandmarkLikedDAOImpl implements LandmarkLikedDAO {
+
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession = null;
+
 
 	@Override
 	public void insertLandLiked() throws Exception {
@@ -28,7 +30,5 @@ public class LandmarkLikedDAOImpl implements LandmarkLikedDAO {
 		// TODO Auto-generated method stub
 		
 	}
-
-
 
 }

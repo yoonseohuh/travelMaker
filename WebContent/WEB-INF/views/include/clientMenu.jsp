@@ -13,8 +13,11 @@
         <li><a href="#">랭크/포지션 안내</a></li>
         <li><a href="#">쪽지함</a></li>
         <li><a href="#">공지사항</a></li>
-
+        
+        <br/>
+		
         <li><a href="/travelMaker/admin/index.tm">관리자 페이지</a></li>
+        <li><a href="/travelMaker/qr/reportTest.tm">신고테스트</a></li>
     </ul>
 </div>
 <script>
