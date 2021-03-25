@@ -22,7 +22,7 @@ public class LandmarkBoardDAOImpl implements LandmarkBoardDAO{
 
 	@Override
 	public List getLand() {
-		List land = sqlSession.selectList("landmarkBoard.getLand");
+		List land =  sqlSession.selectOne("landmarkBoard.getland");
 		return land;
 	}
 
