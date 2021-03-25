@@ -3,6 +3,7 @@ package travelMaker.service.bean;
 import java.util.List;
 import java.util.Map;
 
+import travelMaker.model.dto.GroupMemberDTO;
 import travelMaker.model.dto.GroupRequestDTO;
 import travelMaker.model.dto.GroupSpaceDTO;
 import travelMaker.model.dto.SmallPosDTO;
@@ -33,7 +34,10 @@ public interface TravelService {
 	public UserRkDTO getMemRk(String id) throws Exception;
 	//상태에 따른 여행 리스트 가져오기
 	public List getMyGroups(String id, int status) throws Exception;
-	
+	//그룹의 멤버들 가져오기
+	public List getMembers(int gNo) throws Exception;
+	//그룹에 들어온 신청 목록들 가져오기
+	public List getRequests(int gNo) throws Exception;
 	
 	
 }

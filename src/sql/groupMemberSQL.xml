@@ -22,4 +22,9 @@
 		select * from groupMember where id=#{id} and status=#{status}
 	</select>
 	
+	<select id="getMembers" parameterType="int" resultType="GroupMemberDTO">
+		select * from groupMember where gNo=#{gNo}
+	</select>
+	
+	
 </mapper>
