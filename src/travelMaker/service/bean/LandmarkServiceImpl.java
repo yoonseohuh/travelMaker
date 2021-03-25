@@ -21,7 +21,7 @@ public class LandmarkServiceImpl implements LandmarkService{
 		// 오토와이어드 해놓은 landmarkBoardDAO를 불러서 고놈이 가지고 있는 insertLand를 한다.
 		landmarkBoardDAO.insertLand(dto);
 	}
-
+	
 	@Override	
 	public List getLand() throws SQLException{
 		List land = landmarkBoardDAO.getLand();
