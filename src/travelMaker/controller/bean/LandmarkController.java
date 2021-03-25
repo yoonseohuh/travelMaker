@@ -1,15 +1,17 @@
 package travelMaker.controller.bean;
 
 import java.sql.SQLException;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import travelMaker.model.dto.LandmarkBoardDTO;
 import travelMaker.service.bean.LandmarkService;
@@ -25,7 +27,7 @@ public class LandmarkController {
 	@RequestMapping("landmark.tm")
 	public String landmark(Model model) throws SQLException{
 		// 고유번호, 작성자, 장소명, 유형, 주소, 소개, 공개범위, x,y값
-		List land = landmarkService.getLand();
+		List land = landmarkService.getLands();
 		model.addAttribute("land", land);		
 		
 		return "client/landmark/landmark";
@@ -36,9 +38,18 @@ public class LandmarkController {
 	@ResponseBody
 	public List landmarkList() throws SQLException {
 		
-		List land = landmarkService.getLand();
+		List land = landmarkService.getLands();
 		
 		return land;
+	}
+	
+	// 하나 랜드마크 뿌려주기 
+	@RequestMapping("landmarkCont.tm")
+	public String landmarkCont(int lNo, Model model) throws SQLException {
+			LandmarkBoardDTO land = landmarkService.getLand(lNo);
+			//System.out.println("land"+land.getlNo());
+			model.addAttribute("land", land);
+		return "client/landmark/landmarkCont";
 	}
 	
 	// 랜드마크 작성 페이지
@@ -56,8 +67,18 @@ public class LandmarkController {
 		return "client/landmark/landWritePro";
 	}
 	
-	// 내가 작성한 랜드마크
-	
+	//나의 랜드마크
+	@RequestMapping("myLand.tm")
+	public String myLand(Model model) throws SQLException {
+		// 구면인데 초면 같으신 분
+		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
+		//내가 작성한 랜마
+		List myLand = landmarkService.myLand(id);
+		model.addAttribute("memId", id);
+		//내가 좋아요한 랜마 이건 나중에 추가
+		return "client/mypage/myLand";
+	}
+
 	
 	
 }

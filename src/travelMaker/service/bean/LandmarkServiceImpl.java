@@ -1,6 +1,6 @@
 package travelMaker.service.bean;
 
-import java.sql.SQLException;
+import java.sql.SQLException;	
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +15,7 @@ public class LandmarkServiceImpl implements LandmarkService{
 	
 	@Autowired
 	private LandmarkBoardDAO landmarkBoardDAO = null;
+
 	
 	@Override
 	public void insertLand(LandmarkBoardDTO dto) throws SQLException {
@@ -23,31 +24,42 @@ public class LandmarkServiceImpl implements LandmarkService{
 	}
 	
 	@Override	
-	public List getLand() throws SQLException{
-		List land = landmarkBoardDAO.getLand();
+	public List getLands() throws SQLException{
+		List land = landmarkBoardDAO.getLands();
 		return land;
 	}
 
 	@Override
-	public void addLikedCnt(int lNo, String id) throws SQLException {
+	public void addLikedCnt(String id) throws SQLException {
 		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public List myLand(String id) throws SQLException{
+		List myLand = landmarkBoardDAO.myLand(id);
+		return myLand;
+	}
+	
+	@Override
+	public void myLandLiked(String id) throws SQLException{
 		
 	}
 
 	@Override
-	public void getLandOpen(int lOpen) throws SQLException {
+	public LandmarkBoardDTO getLand(int lNo) throws SQLException {
+		LandmarkBoardDTO land = landmarkBoardDAO.getLand(lNo);
+		return land;
+	}
+
+	@Override
+	public void getLandOpen() throws SQLException {
 		// TODO Auto-generated method stub
 		
 	}
+
 	
-	@Override
-	public void myLand(int lNo, String id) throws SQLException{
-	}
-	
-	@Override
-	public void myLandLiked(int lNo, String id) throws SQLException{
-		
-	}
+
 
 	
 }
