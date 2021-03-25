@@ -16,6 +16,8 @@ public interface TravelService {
 	public void insertMaking(GroupSpaceDTO dto) throws Exception;
 	//개설글 전부 가져오기
 	public Map getArticles(String pageNum) throws Exception;
+	//모집글 날짜 검색
+	public Map getSearchArticles(String pageNum, String startD, String endD) throws Exception;
 	//개설글 하나 가져오기
 	public GroupSpaceDTO getContent(int gNo) throws Exception;
 	//id 주고 성별 가져오기

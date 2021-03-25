@@ -1,14 +1,23 @@
 package travelMaker.controller.bean;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import travelMaker.model.dto.GroupMemberDTO;
 import travelMaker.model.dto.GroupRequestDTO;
@@ -43,8 +52,13 @@ public class TravelController {
 		//유저 정보
 		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
 		model.addAttribute("id",id);
-		UserRkDTO rkInfo = travelService.getMemRk(id);
-		
+		UserRkDTO rkInfo = new UserRkDTO();
+		if(id!=null) {			
+			rkInfo = travelService.getMemRk(id);
+		}else if(id==null) {
+			rkInfo.setRkNo(0);
+			rkInfo.setRkName("비로그인");
+		}
 		//모든 여행 가져와서 상태가 참여 중(1)인 것만 담음
 		List JList = travelService.getMyGroups(id,1);
 		model.addAttribute("joiningList",JList);		
@@ -65,6 +79,26 @@ public class TravelController {
 		model.addAttribute("articleList",map.get("articleList"));
 		return "/client/travel/makingList";
 	}
+	
+	@ResponseBody
+	@RequestMapping("listSearch.tm")
+	public String listSearch(String pageNum, @RequestBody Map<Object,Object> map) throws Exception {
+	/*	인코딩처리
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html;charset=utf-8"); */
+	//	검색(시작일,종료일)값을 각각 변수에 담아 매개변수로 보내줌
+		String startD = (String)map.get("startD");
+		String endD = (String)map.get("endD");
+		System.out.println(startD);
+		System.out.println(endD);
+		Map listMap = new HashMap();
+		listMap = travelService.getSearchArticles(pageNum, startD, endD);
+		ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.writeValueAsString(listMap);
+
+		return json;
+	}
+	
 	
 	@RequestMapping("makingCont.tm")
 	public String makingCont(String pageNum, int gNo, Model model) throws Exception {
@@ -132,8 +166,9 @@ public class TravelController {
 		List grpReq = travelService.getRequests(gNo);
 		//일정 채팅 아직
 		model.addAttribute("id",id);
-		model.addAttribute("leader",leader);
+		model.addAttribute("idStatus",idStatus);
 		model.addAttribute("grpSpace",grpSpace);
+		model.addAttribute("leader",leader);
 		model.addAttribute("grpMem",grpMem);
 		model.addAttribute("grpReq",grpReq);
 		return "/client/travel/groupSpace";

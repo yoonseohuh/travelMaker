@@ -15,7 +15,7 @@
 	</select>
 	
 	<insert id="insertMemToGroup" parameterType="GroupMemberDTO">
-		insert into groupMember values(#{gNo},#{id},#{nickname},'',0)
+		insert into groupMember values(#{gNo},#{id},#{nickname},'',#{status})
 	</insert>
 	
 	<select id="getMyGroups" parameterType="hashmap" resultType="GroupMemberDTO">

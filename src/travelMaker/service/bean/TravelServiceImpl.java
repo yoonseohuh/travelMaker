@@ -42,6 +42,7 @@ public class TravelServiceImpl implements TravelService{
 	//개설글 작성
 	@Override
 	public void insertMaking(GroupSpaceDTO dto) throws Exception {
+		//개설글 작성
 		if(dto.getDongsung()==null) { dto.setDongsung(0); }
 		if(dto.getPo1()==null) { dto.setPo1(-1); }
 		if(dto.getPo2()==null) { dto.setPo2(-1); }
@@ -53,15 +54,21 @@ public class TravelServiceImpl implements TravelService{
 		dto.setShared(0);
 		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
 		dto.setId(id);
-
 		groupSpaceDAO.insertMaking(dto);
+		//개설자를 groupMember 테이블에도 멤버로서 인서트 시켜야 함
+		GroupMemberDTO applicant = new GroupMemberDTO();
+		applicant.setgNo(dto.getgNo());
+		applicant.setId(id);
+		TmUserDTO leaderInfo = tmUserDAO.getMember(id);
+		applicant.setNickname(leaderInfo.getNickname());
+		applicant.setStatus(1);
+		groupMemberDAO.insertMemToGroup(applicant);
 	}
 	
 	//모집 중인 개설글들 가져오기
 	@Override
 	public Map getArticles(String pageNum) throws Exception {
-		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
-		int pageSize = 5;
+		int pageSize = 8;
 		if(pageNum==null || pageNum.equals("")) { pageNum="1"; }
 		int currPage = Integer.parseInt(pageNum);
 		int start = (currPage-1)*pageSize+1;
@@ -86,7 +93,35 @@ public class TravelServiceImpl implements TravelService{
 		
 		return map;
 	}
-
+	
+	//모집글 날짜 검색
+	@Override
+	public Map getSearchArticles(String pageNum, String startD, String endD) throws Exception {
+		int pageSize = 8;
+		if(pageNum==null || pageNum.equals("")) { pageNum="1"; }
+		int currPage = Integer.parseInt(pageNum);
+		int start = (currPage-1)*pageSize+1;
+		int end = currPage*pageSize;
+		List articleList = null;
+		
+		int count = groupSpaceDAO.getSearchArticleCount(startD, endD);
+		if(count>0) {
+			articleList = groupSpaceDAO.getSearchArticles(start, end, startD, endD);
+		}
+		int number = count-(currPage-1)*pageSize;
+		
+		Map map = new HashMap();
+		map.put("pageNum",pageNum);
+		map.put("pageSize",pageSize);
+		map.put("currPage",currPage);
+		map.put("start",start);
+		map.put("end",end);
+		map.put("count",count);
+		map.put("number",number);
+		map.put("articleList",articleList);
+		return map;
+	}
+	
 	//모집글 하나 가져오기
 	@Override
 	public GroupSpaceDTO getContent(int gNo) throws Exception {
@@ -176,7 +211,7 @@ public class TravelServiceImpl implements TravelService{
 		applicant.setId(dto.getId());
 		applicant.setgNo(dto.getgNo());
 		applicant.setNickname(nickname);
-		
+		applicant.setStatus(0);
 		//groupRequest테이블에 insert
 		if(dto.getReqType()==0) {
 			dto.setPosNo(-1);
@@ -187,6 +222,7 @@ public class TravelServiceImpl implements TravelService{
 	}
 	
 	//회원 랭크 가져오기
+	@Override
 	public UserRkDTO getMemRk(String id) throws Exception {
 		TmUserDTO dto = tmUserDAO.getMember(id);
 		UserRkDTO rkInfo = userRkDAO.getRkInfo(dto.getRk());

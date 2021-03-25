@@ -9,26 +9,35 @@
 	
 	<div class="wrapAll">
 	<h1>${grpSpace.subject}의 그룹 방입니다.</h1>
-
 	
-	<h2>신청자 리스트</h2>
-	<c:if test="${fn:length(grpReq)==0}">
-		신청자가 없습니다. 
-	</c:if>
-	<c:if test="${fn:length(grpReq)>0}">
-		<c:forEach var="req" items="${grpReq}">
-			${req.id}님<br/>
-		</c:forEach>
+	<c:if test="${idStatus!=1}">
+		<script>
+			alert("해당 그룹의 멤버가 아닙니다");
+			location.href="/travelMaker/travel/makingList.tm";
+		</script>
 	</c:if>
 	
-	<h2>참여 멤버 리스트</h2>
-	<c:if test="${fn:length(grpMem)>0}">
-		<c:forEach var="mem" items="${grpMem}">
-			<c:if test="${mem.status==1}">
-				${mem.id}님<br/>
-			</c:if>			
-		</c:forEach>
+	<c:if test="${idStatus==1}">
+		<h2>신청자 리스트</h2>
+		<c:if test="${fn:length(grpReq)==0}">
+			신청자가 없습니다.
+		</c:if>
+		<c:if test="${fn:length(grpReq)>0}">
+			<c:forEach var="req" items="${grpReq}">
+				${req.id}님<br/>
+			</c:forEach>
+		</c:if>
+		
+		<h2>참여 멤버 리스트</h2>
+		<c:if test="${fn:length(grpMem)>0}">
+			<c:forEach var="mem" items="${grpMem}">
+				<c:if test="${mem.status==1}">
+					${mem.id}님<br/>
+				</c:if>			
+			</c:forEach>
+		</c:if>
 	</c:if>
+	
 	
 	
 	</div>
