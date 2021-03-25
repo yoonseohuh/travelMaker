@@ -5,7 +5,7 @@
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
 	<!-- //top end -->
 	
-	<div class="wrapAll">
+	<div class="wrapAll client">
 		<h1>
 			<c:if test="${rType == 0}">그룹 신고</c:if>
 			<c:if test="${rType == 1}">랜드마크 신고</c:if>

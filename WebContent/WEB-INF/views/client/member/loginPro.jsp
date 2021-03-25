@@ -5,7 +5,7 @@
 <jsp:include page="/WEB-INF/views/include/top.jsp" />
 	<!-- //top end -->
 	
-	<div class="wrapAll">
+	<div class="wrapAll client">
 		<c:if test="${result != 1}">
 			<script>
 				alert("아이디 혹은 비밀 번호 정보가 일치 하지 않습니다!!")

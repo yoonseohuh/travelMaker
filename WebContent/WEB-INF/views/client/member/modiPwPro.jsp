@@ -4,7 +4,7 @@
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
 	<!-- //top end -->
 	
-	<div class="wrapAll">
+	<div class="wrapAll client">
 		
 		여기에 작성해주시오! 이곳이 body라고 생각하면 되오!!
 		

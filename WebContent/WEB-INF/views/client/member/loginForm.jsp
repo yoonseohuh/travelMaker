@@ -5,7 +5,7 @@
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
 	<!-- //top end -->
 	
-	<div class="wrapAll">
+	<div class="wrapAll client">
 	    <form action="/travelMaker/mem/loginPro.tm" method="post">
 			<table>
 				<tr>

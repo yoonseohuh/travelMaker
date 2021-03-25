@@ -5,7 +5,7 @@
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
 	<!-- //top end -->
 	
-	<div class="wrapAll">
+	<div class="wrapAll client">
 		<h1>비밀번호 재설정</h1>
 		<c:if test="${result==1}">
 			<form action="/travelMaker/mem/modiPwPro.tm" method="post">
