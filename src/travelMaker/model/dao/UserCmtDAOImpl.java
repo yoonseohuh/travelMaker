@@ -61,6 +61,57 @@ public class UserCmtDAOImpl implements UserCmtDAO {
 	}
 	
 	
+	//코멘트 insert
+	public void insertCom(String id, int gNo, String groupMem, String comment) {
+		System.out.println(" id" +id +"쥐넘" +gNo+"그멤" + groupMem +"z코멘"+comment);
+
+		Map map = new HashMap();
+		map.put("senId",id);
+		map.put("gNo",gNo);
+		map.put("recId",groupMem);
+		map.put("comment",comment);
+
+		sqlSession.insert("userCmt.insertCom",map);
+		
+		
+	} 
+	
+	// 사용자 여행그룹 갯수 가져오기
+	public int countGroup(String id) {
+		int result = sqlSession.selectOne("userCmt.countGroup",id);
+		
+		return result;
+	}
+	
+	//받는 사람이 사용자인 코멘트DTO가져오기
+	public List comRecUser(String id) {
+		
+		List comRecUser = sqlSession.selectList("userCmt.comRecUser", id);
+		
+		return comRecUser;
+	}
+	
+	//보낸사람이 사용자인 코멘트DTO 가져오기
+	public List comSenUser(String id) {
+		List comSenUser = sqlSession.selectList("userCmt.comSenUser", id);
+		
+		return comSenUser;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 
 

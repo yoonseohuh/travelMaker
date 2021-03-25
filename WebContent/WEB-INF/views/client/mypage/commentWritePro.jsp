@@ -8,6 +8,6 @@
 </head>
 <body>
 
-	<p>${groupNum} / ${mem}  / ${comment} </p>
+	<p>그룹멤: ${groupMem} 그룹넘: ${groupNum} 코멘트: ${comment} </p>
 </body>
 </html>

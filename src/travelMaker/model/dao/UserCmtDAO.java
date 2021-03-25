@@ -23,7 +23,17 @@ public interface UserCmtDAO {
 	// 코멘트 남겼는지 확인
 	public int chComment(String id, String recId, int gNo );
 
-		
+	// 코멘트 insert
+	public void insertCom(String id, int gNo, String groupMem, String comment);
+	
+	// 사용자 여행그룹 갯수 가져오기
+		public int countGroup(String id);
+	
+	//받는 사람이 사용자인 코멘트DTO가져오기
+	public List comRecUser(String id);
+	
+	//보낸사람이 사용자인 코멘트DTO 가져오기
+	public List comSenUser(String id);
 
 }
 
