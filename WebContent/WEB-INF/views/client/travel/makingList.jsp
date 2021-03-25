@@ -32,14 +32,15 @@
 							console.log(searchValues.articleList[0].subject);
 							$('#articleTable').remove();
 							$('.pageNumbers').remove();
-							$('#list').append("<table><thead><tr><th>개설자</th><th>동성필터</th><th>여행제목</th></tr></thead><tbody>");
+							$('#searchTable').remove();
+							$('#list').append("<table id=\"searchTable\"><thead><tr><th>개설자</th><th>동성필터</th><th>여행제목</th></tr></thead><tbody>");
 							for(var i=0 ; i<searchValues.articleList.length ; i++ ){
 								$('#list').append("<tr><td>"+searchValues.articleList[i].id+"</td>");
 								$('#list').append("<td>"+searchValues.articleList[i].dongsung+"</td>");
-								$('#list').append("<td>"+searchValues.articleList[i].subject+"</td></tr>");
+								$('#list').append("<td><a href=\"makingCont.tm?gNo="+searchValues.articleList[i].gNo+"\">"+searchValues.articleList[i].subject+"</a></td></tr>");
 							}
 							$('#list').append("</tbody></table>");
-
+							
 						}
 					});
 				});
