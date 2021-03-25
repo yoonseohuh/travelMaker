@@ -14,4 +14,7 @@ public interface GroupMemberDAO {
 	public List getMyGroups(String id, int status) throws Exception;
 	//그룹 멤버들 가져오기
 	public List getMembers(int gNo) throws Exception;
+	//그룹 참여 수락 및 거절 처리
+	public void changeMemStatus(String id, int gNo, int status) throws Exception;
+	
 }

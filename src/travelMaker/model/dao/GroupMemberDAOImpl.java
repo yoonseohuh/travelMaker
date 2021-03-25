@@ -52,4 +52,13 @@ public class GroupMemberDAOImpl implements GroupMemberDAO {
 		return list;
 	}
 	
+	@Override
+	public void changeMemStatus(String id, int gNo, int status) throws Exception {
+		Map map = new HashMap();
+		map.put("id",id);
+		map.put("gNo",gNo);
+		map.put("status",status);
+		sqlSession.update("groupMember.changeMemStatus",map);
+	}
+	
 }

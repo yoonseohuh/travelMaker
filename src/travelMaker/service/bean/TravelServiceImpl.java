@@ -268,6 +268,11 @@ public class TravelServiceImpl implements TravelService{
 		return reqList;
 	}
 	
-	
+	//신청 수락 및 거절 처리
+	@Override
+	public void acceptOrReject(String id, int gNo, int status) throws Exception {
+		//상태 변경하는 메서드 활용하여 참여중(1)으로 변경함으로써 참여 처리
+		groupMemberDAO.changeMemStatus(id,gNo,status);
+	}
 	
 }
