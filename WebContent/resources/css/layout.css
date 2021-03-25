@@ -3,12 +3,12 @@
 
 
 /*wrapAll*/
-.wrapAll {width: 100%; height: auto; min-height: 550px; padding: 160px 80px 80px;}
+.wrapAll {width: 100%; height: auto; min-height: 550px; }
 .wrapAll.admin {padding: 80px 80px 80px 330px;}
 
 
 /*top*/
-#top {width: 100%; height: 80px; background: #000; position: fixed;top: 0;left: 0;padding:30.18px 100px; z-index:998;}
+#top {width: 100%; height: 80px; position: fixed;top: 0;left: 0;padding:30.18px 100px; z-index:998;}
 #top .logo {line-height: 24px; color: #fff; font-size: 23px; font-weight: 600; position: absolute;top: 28px;left: 30px;}
 #top .sign {line-height: 24px; float: right;}
 #top .sign a {color: #fff; font-size: 15px; font-weight: 200;}
