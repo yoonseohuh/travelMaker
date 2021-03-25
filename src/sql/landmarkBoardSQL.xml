@@ -19,5 +19,5 @@
 	
 	<select id="myLand" parameterType="string" resultType="LandmarkBoardDTO">
 		select * from LANDMARKBOARD where writer=#{id}
-	</select>
+	</select> 
 </mapper>
