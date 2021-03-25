@@ -44,4 +44,10 @@ public interface TmUserDAO {
 	public void updateMember(TmUserDTO mem);
 	//관리자 랭크 정보 소환 !
 	public List getRk();
+	//랭크 추가 
+	public void insertRank(UserRkDTO rkdto);
+	//랭크 정보 가져오기 
+	public UserRkDTO getRkInfo(int rkNo);
+	//랭크 정보 수정하기 
+	public void updateRank(UserRkDTO rdto);
 }

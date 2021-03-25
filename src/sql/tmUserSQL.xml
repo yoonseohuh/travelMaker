@@ -83,4 +83,17 @@
 		select * from userrk order by rkno
 	</select>
 	
+	<insert id="insertRank" parameterType="UserRKDTO">
+		insert into userrk values (userrk_seq.nextval,#{rkName},#{rkNeed},#{rkExpl},#{rkAddExpl})
+	</insert>	
+	
+	<select id="getRkInfo" parameterType="int" resultType="UserRKDTO">
+		select * from userrk where rkNo=#{value}
+	</select>
+	
+	<update id="updateRank" parameterType="UserRKDTO">
+		update userrk set rkName=#{rkName},rkNeed=#{rkNeed},rkExpl=#{rkExpl},rkAddExpl=#{rkAddExpl} where rkNo=#{rkNo}
+	</update>
+	
+	
 </mapper>
