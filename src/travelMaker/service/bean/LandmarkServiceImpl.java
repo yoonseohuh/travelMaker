@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import travelMaker.model.dao.LandmarkBoardDAO;
+import travelMaker.model.dao.LandmarkLikedDAO;
 import travelMaker.model.dto.LandmarkBoardDTO;
 
 @Service
@@ -15,6 +16,9 @@ public class LandmarkServiceImpl implements LandmarkService{
 	
 	@Autowired
 	private LandmarkBoardDAO landmarkBoardDAO = null;
+	
+	@Autowired
+	private LandmarkLikedDAO landmarkLikedDAO = null;
 
 	
 	@Override
