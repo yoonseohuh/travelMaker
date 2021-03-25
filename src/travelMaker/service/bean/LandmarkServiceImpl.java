@@ -39,7 +39,15 @@ public class LandmarkServiceImpl implements LandmarkService{
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	@Override
+	public void myLand(int lNo, String id) throws SQLException{
+	}
+	
+	@Override
+	public void myLandLiked(int lNo, String id) throws SQLException{
+		
+	}
 
 	
 }

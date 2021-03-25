@@ -10,10 +10,11 @@ public interface LandmarkBoardDAO {
 	// 랜드마크 생성 setlikedCnt 0 으로 맞추고 
 	public void insertLand(LandmarkBoardDTO dto) throws SQLException; 
 	// 랜드마크 가져오기
-	public List getLand();
+	public List getLand() throws SQLException;
 	// 랜드마크 공개범위 전체공개 0, 회원공개 1
 	public void getLandOpen(int lOpen) throws SQLException;
-	// 랜드마크 x 값 map??
-	// 랜드마크 y 값
-		
+	// 내가 작성한 랜드마크
+	public void myLand(int lNo, String id) throws SQLException;
+	// 내가 좋아요 한 랜드마크
+	public void myLandLiked(int lNo, String id) throws SQLException;
 }

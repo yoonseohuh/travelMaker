@@ -56,6 +56,8 @@ public class LandmarkController {
 		return "client/landmark/landWritePro";
 	}
 	
+	// 내가 작성한 랜드마크
+	
 	
 	
 }
