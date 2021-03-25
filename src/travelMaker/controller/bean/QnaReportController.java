@@ -20,19 +20,28 @@ public class QnaReportController {
 	
 	//신고사유/문의유형
 	@RequestMapping("reportWriteForm.tm")
-	public String reportWriteForm(int rType, Model model) throws SQLException {		
+	public String reportWriteForm(int rType, String idx, Model model) throws SQLException {		
 		List res = qnaReportService.selectReason(rType);
 		model.addAttribute("res", res);
 		model.addAttribute("rType", rType);
+		model.addAttribute("idx", idx);
 		return "client/report/reportWriteForm";
 	}
 	
 	@RequestMapping("reportWritePro.tm")
-	public String reportWritePro(int rNo, int rType, String memId, Model model) {
+	public String reportWritePro(int rNo, int rType, String memId, String idx, Model model) {
 		model.addAttribute("rNo", rNo);
 		model.addAttribute("rType", rType);
 		model.addAttribute("memId", memId);
+		model.addAttribute("idx", idx);
 		return "client/report/reportWritePro";
-	}	
+	}
+	
+	
+	//신고 테스트 페이지
+	@RequestMapping("reportTest.tm")
+	public String reportWritePro() {
+		return "client/report/reportTest";
+	}
 
 }
