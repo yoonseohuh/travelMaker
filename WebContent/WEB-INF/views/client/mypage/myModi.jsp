@@ -5,7 +5,7 @@
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
 	<!-- //top end -->
 	
-	<div class="wrapAll">
+	<div class="wrapAll client">
 		<jsp:include page="/WEB-INF/views/include/myMenu.jsp" />
 		<!-- myMenu end -->
 		<h2>회원 정보 수정</h2>

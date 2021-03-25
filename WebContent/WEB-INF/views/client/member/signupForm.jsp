@@ -4,7 +4,7 @@
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
 	<!-- //top end -->
 	
-	<div class="wrapAll">
+	<div class="wrapAll client">
 	   	<h2>회원 가입</h2>
 		<form action="/travelMaker/mem/signupPro.tm" method="post">
 			<table>

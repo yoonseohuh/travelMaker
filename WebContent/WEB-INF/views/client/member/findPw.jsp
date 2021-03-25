@@ -3,7 +3,7 @@
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
 	<!-- //top end -->
 	
-	<div class="wrapAll">
+	<div class="wrapAll client">
 	    <h1>비밀번호 재설정</h1>
 		<form action="/travelMaker/mem/modiPwForm.tm">
 			<input type="text" name="id" placeholder="아이디"/>	<br />

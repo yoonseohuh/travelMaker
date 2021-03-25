@@ -4,7 +4,7 @@
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
 	<!-- //top end -->
 	
-	<div class="wrapAll">
+	<div class="wrapAll client">
 	
 		<h1>채팅 신고하기 테스트 페이지</h1>
 		<h4>닉네임으로 유저 표시, 신고할 땐 아이디 넘겨줌</h4>

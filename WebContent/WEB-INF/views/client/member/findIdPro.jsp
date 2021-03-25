@@ -4,7 +4,7 @@
 	
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
 	
-	<div class="wrapAll">
+	<div class="wrapAll client">
 		<h1>findIdPro</h1>
 		<c:if test="${mem != null}">
 			<h2>해당 아이디는 : ${comId}입니다</h2>

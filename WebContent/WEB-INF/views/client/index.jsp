@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
-<!DOCTYPE html>
-<html>
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
-<body>
 
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
 	<!-- //top end -->
@@ -60,9 +57,3 @@
 	    </script>
 	</div>
 	<!-- //wrapAll end -->
-	
-	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
-	<!-- //footer end -->
-   
-</body>
-</html>
