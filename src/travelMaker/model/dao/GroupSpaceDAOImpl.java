@@ -26,6 +26,15 @@ public class GroupSpaceDAOImpl implements GroupSpaceDAO{
 		return sqlSession.selectOne("groupSpace.getArticleCount");
 	}
 	
+	//모집 중인 게시글 중 검색 결과에 부합하는 게시글 개수 리턴
+	@Override
+	public int getSearchArticleCount(String startD, String endD) throws Exception {
+		Map map = new HashMap();
+		map.put("startD",startD);
+		map.put("endD",endD);
+		return sqlSession.selectOne("groupSpace.getSearchArticleCount",map);
+	}
+	
 	//모집중 게시글 보여주기
 	@Override
 	public List getArticles(int start, int end) throws Exception {
@@ -35,7 +44,19 @@ public class GroupSpaceDAOImpl implements GroupSpaceDAO{
 		List articleList = sqlSession.selectList("groupSpace.getArticles",map);
 		return articleList;
 	}
-
+	
+	//모집 중인 게시글 중 검색 결과에 부합하는 게시글 보여주기
+	@Override
+	public List getSearchArticles(int start, int end, String startD, String endD) throws Exception {
+		Map map = new HashMap();
+		map.put("start",start);
+		map.put("end",end);
+		map.put("startD",startD);
+		map.put("endD",endD);
+		List articleList = sqlSession.selectList("groupSpace.getSearchArticles",map);
+		return articleList;
+	}
+	
 	//모집 중 게시글 내용 하나 가져오기
 	@Override
 	public GroupSpaceDTO getContent(int gNo) throws Exception {

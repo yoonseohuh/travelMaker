@@ -6,16 +6,31 @@
 <mapper namespace="groupSpace">
 
 	<insert id="insertMaking" parameterType="GroupSpaceDTO">
-		insert into groupSpace values(groupSpace_seq.nextVal,#{id},#{subject},#{concept},#{maxNum},#{actualNum},#{closingDate},#{startDate},#{endDate},#{loc},#{dongsung},#{courseExpl},#{addExpl},#{po1},#{po2},#{po3},#{cost},#{status},#{likedCnt},#{readCnt},#{shared},#{genReview},sysdate)
+		<selectKey keyProperty="gNo" resultType="int" order="BEFORE">
+			select groupSpace_seq.nextVal from dual
+		</selectKey>
+		insert into groupSpace values(#{gNo},#{id},#{subject},#{concept},#{maxNum},#{actualNum},#{closingDate},#{startDate},#{endDate},#{loc},#{dongsung},#{courseExpl},#{addExpl},#{po1},#{po2},#{po3},#{cost},#{status},#{likedCnt},#{readCnt},#{shared},#{genReview},sysdate)
 	</insert>
 	
 	<select id="getArticleCount" resultType="int">
 		select count(*) from groupSpace where status=0
 	</select>
 	
+	<select id="getSearchArticleCount" parameterType="hashmap" resultType="int">
+		<![CDATA[
+		select count(*) from groupSpace where status=0 and startDate>#{startD} and endDate<#{endD}
+		]]>
+	</select>
+	
 	<select id="getArticles" parameterType="hashmap" resultType="GroupSpaceDTO">
 		<![CDATA[
 		(select a.*, r FROM (select groupSpace.*, rownum r from groupSpace where status=0 order by reg desc) a where r>=#{start} and r<=${end})
+		]]>
+	</select>
+	
+	<select id="getSearchArticles" parameterType="hashmap" resultType="GroupSpaceDTO">
+		<![CDATA[
+		(select a.*, r FROM (select groupSpace.*, rownum r from groupSpace where status=0 order by reg desc) a where r>=#{start} and r<=${end} and startDate>#{startD} and endDate<#{endD})
 		]]>
 	</select>
 	

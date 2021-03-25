@@ -14,6 +14,7 @@ public class UserRkDAOImpl implements UserRkDAO {
 	
 	@Override
 	public UserRkDTO getRkInfo(int rkNo) throws Exception {
-		return sqlSession.selectOne("userRk.getRkInfo",rkNo);
+		UserRkDTO rkInfo = sqlSession.selectOne("userRk.getRkInfo",rkNo);
+		return rkInfo;
 	}
 }
