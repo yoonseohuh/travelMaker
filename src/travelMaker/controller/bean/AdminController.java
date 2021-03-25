@@ -166,7 +166,7 @@ public class AdminController {
 	
 	//포지션/레벨
 	
-	//s포지션 리스트
+	//랭크 리스트
 	@RequestMapping("rkPos.tm")
 	public String rkPos(Model model) {
 		List rkList = memService.getRk();
@@ -176,24 +176,50 @@ public class AdminController {
 		return "admin/rankPosition/rkPos";
 	}
 	
-	//s포지션 추가
+	//랭크 추가
 	@RequestMapping("addRk.tm")
 	public String addRk(Model model) {
 		List rkList = memService.getRk();
 		int number = 1;
 		model.addAttribute("rkList", rkList);
 		model.addAttribute("number", number);
+		System.out.println("rkList.size " + rkList.size());
 		return "admin/rankPosition/addRk";
 	}
 	
-	//s포지션 추가 Pro
-		@RequestMapping("addRkPro.tm")
-		public String addRkPro(UserRkDTO rkdto) {
-			System.out.println(rkdto.getRkName());
-			return "redirect:rkPos.tm";
-		}
-	//s포지션 수정
-	//s포지션 삭제
+	//랭크 추가 Pro
+	@RequestMapping("addRkPro.tm")
+	public String addRkPro(UserRkDTO rkdto) {
+		//포지션 insert 시키는 메서드 작성 
+		memService.insertRank(rkdto);
+		return "redirect:rkPos.tm";
+	}
 	
+	//랭크 수정
+	@RequestMapping("modifyFormRk.tm")
+	public String modifyRk(int rkNo,Model model) {
+		//rNo으로 해당 포지션 정보 불러오는 메서드 
+		UserRkDTO rdto = memService.getRkInfo(rkNo);
+		//랭크 전체 보면 서 수정할 수 있도록 전체 불러오기.
+		//하지만 지금하긴 귀찮은걸 keep
+		model.addAttribute("rdto",rdto);
+		return "admin/rankPosition/modifyFormRk";
+	}
+	
+	//랭크 수정 Pro
+	@RequestMapping("modifyProRk.tm")
+	public String modifyRkPro(UserRkDTO rdto) {
+		//랭크 update 하는 메서드 
+		memService.updateRank(rdto);
+		return "redirect:rkPos.tm";
+	}
+		
+	//랭크 삭제
+	@RequestMapping("deleteRk")
+	public String deleteRk(String rkNo) {
+		System.out.println("hi");
+		System.out.println("rkNo: "+rkNo);
+		return "redirect:rkPos.tm";
+	}
 	
 }

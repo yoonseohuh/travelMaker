@@ -139,6 +139,22 @@ public class TmUserDAOImpl implements TmUserDAO {
 		List rkList = sqlSession.selectList("tmUser.getRk");
 		return rkList;
 	}
+
+	@Override
+	public void insertRank(UserRkDTO rkdto) {
+		sqlSession.insert("tmUser.insertRank", rkdto);
+	}
+
+	@Override
+	public UserRkDTO getRkInfo(int rkNo) {
+		UserRkDTO rdto = sqlSession.selectOne("tmUser.getRkInfo", rkNo);
+		return rdto;
+	}
+
+	@Override
+	public void updateRank(UserRkDTO rdto) {
+		sqlSession.update("tmUser.updateRank", rdto);
+	}
 	
 
 }
