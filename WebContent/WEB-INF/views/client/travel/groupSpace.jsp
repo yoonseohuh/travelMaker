@@ -8,6 +8,20 @@
 	<!-- //top end -->
 	
 	<div class="wrapAll">
+	<script>
+		$('#accepted').click(function(){
+			$.ajax({
+				
+			});
+		});
+		$('#rejected').click(function(){
+			$.ajax({
+				
+			});
+		});
+	</script>
+	<!-- accept logic end -->
+	
 	<h1>${grpSpace.subject}의 그룹 방입니다.</h1>
 	
 	<c:if test="${idStatus!=1}">
@@ -24,7 +38,10 @@
 		</c:if>
 		<c:if test="${fn:length(grpReq)>0}">
 			<c:forEach var="req" items="${grpReq}">
-				${req.id}님<br/>
+				${req.id}님
+				<button id="accepted">수락</button>
+				<button id="rejected">거절</button>
+				<br/>
 			</c:forEach>
 		</c:if>
 		
