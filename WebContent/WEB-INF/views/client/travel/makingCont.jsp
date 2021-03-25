@@ -135,10 +135,10 @@
 			<tr>
 				<td colspan="2">
 					<c:if test="${sessionScope.memId!=content.id && content.status==0 && memStatus==-1}">
-						<c:if test="${memIdGender==writerGender}">
+						<c:if test="${memIdGender==writerGender || content.dongsung==0}">
 							<input type="button" value="신청" onclick="window.location='/travelMaker/travel/makingReq.tm?gNo=${content.gNo}'"/>
 						</c:if>						
-						<c:if test="${memIdGender!=writerGender}">
+						<c:if test="${memIdGender!=writerGender && content.dongsung==1}">
 							<c:if test="${memIdGender==0}">
 								남성 회원은 신청할 수 없습니다. 
 							</c:if>

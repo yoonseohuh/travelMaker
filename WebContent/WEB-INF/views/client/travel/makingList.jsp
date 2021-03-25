@@ -13,6 +13,19 @@
 		<script>
 			$(document).ready(function(){
 				
+				$('#startD').datepicker({
+					showOn: "both",
+					buttonText: "날짜선택",
+					dateFormat: "yymmdd",
+					changeMonth: true
+				});
+				$('#endD').datepicker({
+					showOn: "both",
+					buttonText: "날짜선택",
+					dateFormat: "yymmdd",
+					changeMonth: true
+				});
+				
 				$('#searchForm').submit(function(event){
 					event.preventDefault();
 					var data = {};
@@ -91,8 +104,8 @@
 		
 		<!-- 검색창 -->
 		<form id="searchForm" method="post">
-			IN <input type="text" name="startD"/>
-			OUT <input type="text" name="endD"/>
+			IN <input type="text" id="startD" name="startD"/>
+			OUT <input type="text" id="endD" name="endD"/>
 			<input type="submit" value="검색"/>
 		</form>
 		
