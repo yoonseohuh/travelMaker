@@ -95,5 +95,23 @@
 		update userrk set rkName=#{rkName},rkNeed=#{rkNeed},rkExpl=#{rkExpl},rkAddExpl=#{rkAddExpl} where rkNo=#{rkNo}
 	</update>
 	
+	<delete id="deleteRk" parameterType="string">
+		delete from userrk where rkNo=#{rkNo}
+	</delete>
 	
+	<select id="getSPos" resultType="SmallPosDTO">
+		select * from smallpos order by posNo
+	</select>
+	
+	<select id="getPosCount" resultType="int">
+		select count(*) from smallpos
+	</select>
+	
+	<select id="getPosList" parameterType="hashmap" resultType="SmallPosDTO">
+		<![CDATA[
+			select b.*, r from (select a.*,rownum r from
+			(select * from smallpos order by posNo)a
+			order by posNo)b where r>=#{start} AND r<=#{end}
+		]]>
+	</select>
 </mapper>

@@ -155,6 +155,32 @@ public class TmUserDAOImpl implements TmUserDAO {
 	public void updateRank(UserRkDTO rdto) {
 		sqlSession.update("tmUser.updateRank", rdto);
 	}
+
+	@Override
+	public void deleteRk(String rkNo) {
+		sqlSession.delete("tmUser.deleteRk",rkNo);
+	}
+
+	@Override
+	public List getSPos() {
+		List sPosList = sqlSession.selectList("tmUser.getSPos");
+		return sPosList;
+	}
+
+	@Override
+	public int getPosCount() {
+		int count =sqlSession.selectOne("tmUser.getPosCount");
+		return count;
+	}
+	//start, end 주고 spos 긁어오기 
+	@Override
+	public List getPosList(int start, int end) {
+		Map map = new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		List sPosList = sqlSession.selectList("tmUser.getPosList", map);
+		return sPosList;
+	}
 	
 
 }

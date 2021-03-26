@@ -12,7 +12,7 @@
 		<c:if test="${count==0 || count==null}">
 			<table>
 				<tr>
-					<td><h3>가입된 회원이 없습니다. </h3></td>
+					<td><h3>가입된 회원이 없습니다.</h3></td>
 				</tr>
 			</table>
 		</c:if>
@@ -32,58 +32,42 @@
 					<th>가입일시</th>
 					<th>회원관리</th>
 				</tr>
-				<c:forEach var="member" items="${memList}">
-					<tr>
-						<td>
-							${number}
-							<c:set var="number" value="${number-1}"/>
-						</td>
-						<td>
-							${member.id}
-						</td>
-						<td>
-							${member.pw}
-						</td>
-						<td>
-							${member.name}
-						</td>
-						<td>
-							${member.nickname}
-						</td>
-						<td>
-							${member.gender}
-						</td>
-						<td>
-							${member.rk}
-						</td>
-						<td>
-							${member.position1}
-						</td>
-						<td>
-							${member.position2}
-						</td>
-						<td>
-							<fmt:formatDate value="${member.reg}" type="both" pattern="yyyy.MM.dd a hh:mm"/>
-						</td>
-						<td>
-							<input type="button" value="회원 정보 수정" onclick="window.location='/travelMaker/admin/memberModiForm.tm?id=${member.id}'"/>
-						</td>
-					</tr>
-				</c:forEach>
+			<c:forEach var="member" items="${memList}">
+				<tr>
+					<td>
+						${number}
+						<c:set var="number" value="${number-1}"/>
+					</td>
+					<td>${member.id}</td>
+					<td>${member.pw}</td>
+					<td>${member.name}</td>
+					<td>${member.nickname}</td>
+					<td>${member.gender}</td>
+					<td>${member.rk}</td>
+					<td>${member.position1}</td>
+					<td>${member.position2}</td>
+					<td>
+						<fmt:formatDate value="${member.reg}" type="both" pattern="yyyy.MM.dd a hh:mm"/>
+					</td>
+					<td>
+						<input type="button" value="회원 정보 수정" onclick="window.location='/travelMaker/admin/memberModiForm.tm?id=${member.id}'"/>
+					</td>
+				</tr>
+			</c:forEach>
 			</table>
-		<!-- 페이지 설정 -->
-		<c:set var="pageBlock" value="2"/>
-		<!-- 총 몇페이지인지 계산 -->
-		<fmt:parseNumber var="res" value="${count/pageSize}" integerOnly="true" />
-		<c:set var="pageCount" value="${res+(count%pageSize==0 ? 0 : 1)}"/>
-		<!-- startPage(< 6,7,8 >6!!) 구하기  -->
-		<fmt:parseNumber var="result" value="${(currPage-1)/pageBlock}" integerOnly="true" />
-		<c:set var="startPage" value="${result*pageBlock+1}"/>
-		<!-- endPage 구하기 -->
-		<c:set var="endPage" value="${startPage+pageBlock-1}"/>
-		<c:if test="${endPage>pageCount}">
-			<c:set var="endPage" value="${pageCount}"/>
-		</c:if>
+			<!-- 페이지 설정 -->
+			<c:set var="pageBlock" value="2"/>
+			<!-- 총 몇페이지인지 계산 -->
+			<fmt:parseNumber var="res" value="${count/pageSize}" integerOnly="true" />
+			<c:set var="pageCount" value="${res+(count%pageSize==0 ? 0 : 1)}"/>
+			<!-- startPage(< 6,7,8 >6!!) 구하기  -->
+			<fmt:parseNumber var="result" value="${(currPage-1)/pageBlock}" integerOnly="true" />
+			<c:set var="startPage" value="${result*pageBlock+1}"/>
+			<!-- endPage 구하기 -->
+			<c:set var="endPage" value="${startPage+pageBlock-1}"/>
+			<c:if test="${endPage>pageCount}">
+				<c:set var="endPage" value="${pageCount}"/>
+			</c:if>
 		<br/><br/><br/>
 		<div align="center">
 			<!-- 앞으로 가는 기호 -->

@@ -54,4 +54,11 @@ public interface MemberService {
 	public UserRkDTO getRkInfo(int rkNo);
 	//랭크 정보 수정하기 
 	public void updateRank(UserRkDTO rdto);
+	//랭크 삭제하기 
+	public void deleteRk(String rkNo); 
+	//포지션 소분류 싹 긁어오기 
+	public List getSPos();
+	//포지션 Map 생성
+	public Map getPositions(String pageNum);
+	
 }

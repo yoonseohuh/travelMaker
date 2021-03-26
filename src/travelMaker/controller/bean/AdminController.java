@@ -41,8 +41,6 @@ public class AdminController {
 	//멤버 리스트 정렬 
 	@RequestMapping("member.tm")
 	public String member(String pageNum, HttpServletRequest request, Model model) {
-		System.out.println(1);
-		System.out.println(pageNum);
 		Map every = memService.getMembers(pageNum);
 		model.addAttribute("request", request);
 		model.addAttribute("pageNum", every.get("pageNum"));
@@ -56,6 +54,24 @@ public class AdminController {
 		model.addAttribute("search", every.get("search"));
 		return "admin/member/memberList";
 	}
+	
+	//포지션 리스트 
+		@RequestMapping("posList.tm")
+		public String smallPos(String pageNum,Model model) {
+			//포지션 대분류 리스트
+			//포지션 소분류 리스트
+			//Map으로  list, request, pageNum등을 받아오는 메서드 작성 
+			Map every = memService.getPositions(pageNum);
+			model.addAttribute("pageNum", every.get("pageNum"));
+			model.addAttribute("pageSize", every.get("pageSize"));
+			model.addAttribute("currPage", every.get("currPage"));
+			model.addAttribute("startRow", every.get("startRow"));
+			model.addAttribute("endRow", every.get("endRow"));
+			model.addAttribute("number", every.get("number"));
+			model.addAttribute("count", every.get("count"));
+			model.addAttribute("sPosList", every.get("sPosList"));
+			return "admin/rankPosition/posList";
+		}
 	
 	//멤버 정보 수정 Form
 	//회원 정보수정 버튼으로 id 넘겨 받음 
@@ -164,7 +180,7 @@ public class AdminController {
 	
 	//공지사항
 	
-	//포지션/레벨
+	//포지션/랭크
 	
 	//랭크 리스트
 	@RequestMapping("rkPos.tm")
@@ -215,11 +231,16 @@ public class AdminController {
 	}
 		
 	//랭크 삭제
-	@RequestMapping("deleteRk")
+	@RequestMapping("deleteRk.tm")
 	public String deleteRk(String rkNo) {
-		System.out.println("hi");
-		System.out.println("rkNo: "+rkNo);
+		//rkNo으로 랭크 삭제하는 메서드
+		//int rkNo1 = Integer.parseInt(rkNo);
+		 memService.deleteRk(rkNo); 
+		 
 		return "redirect:rkPos.tm";
 	}
+	
+	
+	
 	
 }
