@@ -14,7 +14,7 @@
 	    			}
 	    		}
 	    	</script>
-	<div class="wrapAll">
+	<div class="wrapAll admin">
 		<input type="button" value="랭크 추가" onclick="window.location='/travelMaker/admin/addRk.tm'"/>
 		<c:if test="${fn:length(rkList)!=0}">
 			<table>
@@ -31,24 +31,24 @@
 		<c:if test="${fn:length(rkList)==0}">
 			<h3>랭크를 추가해주세요</h3>
 		</c:if>
-		   		<c:forEach var="rk" items="${rkList}">
-			   		<table>
-			    		<tr>
-			    			<td>
-			    				${number}
-			    				<c:set var="number" value="${number+1}"/>
-			    			</td> 
-			    			<td>${rk.rkName}</td>
-			    			<td>${rk.rkNeed}</td>
-			    			<td>${rk.rkExpl}</td>
-			    			<td>${rk.rkAddExpl}</td>
-			    			<td>
-			    				<input type="button" value="수정" onclick="window.location='/travelMaker/admin/modifyFormRk.tm?rkNo=${rk.rkNo}'"/>
-			    				<input type="button" value="삭제" onclick="de(${rk.rkNo})"/>
-			    			</td>
-			    		</tr>
-			    	</table>	
-		    	</c:forEach>
+   		<c:forEach var="rk" items="${rkList}">
+	   		<table>
+	    		<tr>
+	    			<td>
+	    				${number}
+	    				<c:set var="number" value="${number+1}"/>
+	    			</td> 
+	    			<td>${rk.rkName}</td>
+	    			<td>${rk.rkNeed}</td>
+	    			<td>${rk.rkExpl}</td>
+	    			<td>${rk.rkAddExpl}</td>
+	    			<td>
+	    				<input type="button" value="수정" onclick="window.location='/travelMaker/admin/modifyFormRk.tm?rkNo=${rk.rkNo}'"/>
+	    				<input type="button" value="삭제" onclick="de(${rk.rkNo})"/>
+	    			</td>
+	    		</tr>
+	    	</table>	
+    	</c:forEach>
 
 	</div>
 	<!-- //wrapAll end -->

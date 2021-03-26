@@ -212,8 +212,6 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public Map getMembers(String pageNum) {
-		System.out.println(2);
-		System.out.println(pageNum);
 		RequestAttributes ra = RequestContextHolder.getRequestAttributes();
 		ServletRequestAttributes sra = (ServletRequestAttributes)ra;
 		HttpServletRequest request = sra.getRequest();
@@ -296,6 +294,54 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void updateRank(UserRkDTO rdto) {
 		tmuserDAO.updateRank(rdto);
+	}
+
+	@Override
+	public void deleteRk(String rkNo) { 
+		tmuserDAO.deleteRk(rkNo);
+	}
+
+	@Override
+	public List getSPos() {
+		List sPosList = tmuserDAO.getSPos();
+		return sPosList;
+	}
+	
+	//포지션 맵 만들기 !
+	@Override
+	public Map getPositions(String pageNum) {
+		RequestAttributes ra = RequestContextHolder.getRequestAttributes();
+		ServletRequestAttributes sra = (ServletRequestAttributes)ra;
+		HttpServletRequest request = sra.getRequest();
+		
+		int pageSize=4;
+		if(pageNum==null || pageNum.equals("pageNum") || pageNum.equals("")) {pageNum="1";}
+		int currPage = Integer.parseInt(pageNum);
+		int startRow = (currPage-1)*pageSize+1;
+		int endRow = currPage*pageSize;
+		
+		List sPosList = null;
+		
+		//여기랑
+		int count = tmuserDAO.getPosCount();
+		if(count>0) {
+			//여기 메서드 새로 짜면 됨 
+			sPosList=tmuserDAO.getPosList(startRow, endRow);
+		} 
+		
+		int number=count -(currPage-1)*pageSize;
+		
+		Map every = new HashMap();
+		every.put("pageNum", pageNum);
+		every.put("pageSize", pageSize);
+		every.put("currPage", currPage);
+		every.put("startRow", startRow);
+		every.put("endRow", endRow);
+		every.put("number", number);
+		every.put("count", count);
+		every.put("sPosList", sPosList);
+		
+		return every;
 	}
 	
 	
