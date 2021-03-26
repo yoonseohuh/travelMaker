@@ -19,6 +19,7 @@ public interface GroupSpaceDAO {
 	public GroupSpaceDTO getContent(int gNo) throws Exception;
 	//모집 게시글 삭제
 	public void deleteContent(int gNo) throws Exception;
-	
+	//참여 인원수 카운트 증감시키기
+	public void updateActNum(int gNo, int num) throws Exception;
 	
 }

@@ -155,6 +155,7 @@
 					</c:if>
 					<c:if test="${sessionScope.memId!=content.id && memStatus==1}">
 						이미 참여 중입니다.
+						<input type="button" value="그룹 공간으로" onclick="window.location='/travelMaker/travel/groupSpace.tm?gNo=${content.gNo}'"/>
 					</c:if>
 					<c:if test="${sessionScope.memId!=content.id && memStatus==2}">
 						이미 거절되었습니다.

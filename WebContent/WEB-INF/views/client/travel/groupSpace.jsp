@@ -23,11 +23,16 @@
 						contentType: "application/json",
 						data: JSON.stringify(data),
 						success: function(res){
-							console.log(res);
+							$('#addMem').append(res);
 						}
 					});
 				});
 				$('#rejected').submit(function(event){
+					event.preventDefault();
+					var data = {};
+					$.each($(this).serializeArray(), function(index, i){
+						data[i.name] = i.value;
+					});
 					$.ajax({
 						url: "/travelMaker/travel/rejected.tm",
 						type: "POST",
@@ -36,6 +41,7 @@
 						data: JSON.stringify(data),
 						success: function(res){
 							console.log(res);
+							
 						}					
 					});
 				});
@@ -54,33 +60,53 @@
 		
 		<c:if test="${idStatus==1}">
 			<c:if test="${id==leader}">
-				<h2>신청자 리스트</h2>
-				<c:if test="${fn:length(grpReq)==0}">
+				<h2>새로 들어온 신청</h2>
+				<c:if test="${fn:length(awaiters)==0}">
 					신청자가 없습니다.
 				</c:if>
-				<c:if test="${fn:length(grpReq)>0}">
-				<c:forEach var="mem" items="${grpMem}">
-					<c:if test="${mem.status==0}">
-						<c:forEach var="req" items="${grpReq}">
-							${req.id}님	&nbsp;	${req.reqTxt}
-							<form action="#" id="accepted" method="post">
-								<input type="hidden" name="requestId" value="${req.id}"/>
-								<input type="hidden" name="gNo" value="${req.gNo}"/>
-								<input type="submit" value="수락"/>
-							</form>
-							<form action="#" id="rejected" method="post">
-								<input type="hidden" name="requestId" value="${req.id}"/>
-								<input type="hidden" name="gNo" value="${req.gNo}"/>
-								<input type="submit" value="거절"/>
-							</form>
-							<br/>
+				<c:if test="${fn:length(awaiters)>0}">
+					<table id="applicants">
+						<tr>
+							<th>아이디</th>
+							<th>신청유형</th>
+							<th>신청포지션</th>
+							<th>한마디</th>
+							<th>수락/거절</th>
+						</tr>
+						<c:forEach var="req" items="${awaiters}">
+							<tr>
+								<td>${req.id}</td>
+								<td>
+									<c:if test="${req.reqType==0}">일반</c:if>
+									<c:if test="${req.reqType==1}">가이드</c:if>
+								</td>
+								<td>
+									<c:if test="${req.posNo!=-1}">${req.posNo}</c:if>
+								</td>
+								<td>
+									${req.reqTxt}
+								</td>
+								<td>
+									<form action="#" id="accepted" method="post">
+										<input type="hidden" name="requestId" value="${req.id}"/>
+										<input type="hidden" name="gNo" value="${req.gNo}"/>
+										<input type="submit" value="수락"/>
+									</form>
+									<form action="#" id="rejected" method="post">
+										<input type="hidden" name="requestId" value="${req.id}"/>
+										<input type="hidden" name="gNo" value="${req.gNo}"/>
+										<input type="submit" value="거절"/>
+									</form>
+								</td>
+							</tr>
 						</c:forEach>
-					</c:if>				
-				</c:forEach>
+					</table>
 				</c:if>
 			</c:if>
 			
-			<h2>참여 멤버 리스트</h2>
+			<h2>참여 중인 멤버</h2>
+				<div id="addMem">
+				</div>
 			<c:if test="${fn:length(grpMem)>0}">
 				<c:forEach var="mem" items="${grpMem}">
 					<c:if test="${mem.status==1}">
@@ -88,9 +114,10 @@
 					</c:if>			
 				</c:forEach>
 			</c:if>
+			
+			<h2>모집 현황</h2>
+			
 		</c:if>
-		
-		
 		
 	</div>
 	<!-- //wrapAll end -->

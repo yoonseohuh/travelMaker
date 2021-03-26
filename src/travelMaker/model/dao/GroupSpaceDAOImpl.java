@@ -69,5 +69,14 @@ public class GroupSpaceDAOImpl implements GroupSpaceDAO{
 		sqlSession.delete("groupSpace.deleteContent",gNo);
 	}
 	
+	//참여 인원수 카운트 증감시키기
+	@Override
+	public void updateActNum(int gNo, int num) throws Exception {
+		Map map = new HashMap();
+		map.put("gNo",gNo);
+		map.put("actualNum",num);
+		sqlSession.update("groupSpace.updateActNum",map);
+	}
+	
 	
 }

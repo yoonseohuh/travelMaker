@@ -62,6 +62,8 @@ public class TravelServiceImpl implements TravelService{
 		TmUserDTO leaderInfo = tmUserDAO.getMember(id);
 		applicant.setNickname(leaderInfo.getNickname());
 		applicant.setStatus(1);
+		//개설자 포함 인원수이므로 actualNum에 1추가
+		groupSpaceDAO.updateActNum(dto.getgNo(), 1);
 		groupMemberDAO.insertMemToGroup(applicant);
 	}
 	
@@ -271,8 +273,19 @@ public class TravelServiceImpl implements TravelService{
 	//신청 수락 및 거절 처리
 	@Override
 	public void acceptOrReject(String id, int gNo, int status) throws Exception {
-		//상태 변경하는 메서드 활용하여 참여중(1)으로 변경함으로써 참여 처리
+		//1(수락)이 넘어오면 groupSpace의 actualNum +1 / 2(거절)가 넘어오면 변화 없음 / 3(강퇴)이 넘어오면  actualNum -1
+		if(status==1) {
+			GroupSpaceDTO article = groupSpaceDAO.getContent(gNo);
+			if(article.getActualNum()<article.getMaxNum()) {
+				groupSpaceDAO.updateActNum(gNo,1);
+			}
+		}else if(status==3) {
+			groupSpaceDAO.updateActNum(gNo,-1);
+		}
 		groupMemberDAO.changeMemStatus(id,gNo,status);
+		System.out.println(id);
+		System.out.println(gNo);
+		System.out.println(status);
 	}
 	
 }
