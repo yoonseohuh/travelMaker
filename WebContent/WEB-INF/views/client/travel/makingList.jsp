@@ -64,7 +64,7 @@
 		<h1>Making List</h1>
 		
 		<c:if test="${id==null}">
-			로그인하시면 여행에 함께할 수 있습니다!
+			로그인하시면 여행에 함께할 수 있습니다!	
 		</c:if>
 		<c:if test="${id!=null}">
 			${id}님 환영합니다!
@@ -72,7 +72,7 @@
 			${rkInfo.rkName} 단계에서는 아직 여행을 만들 수 없어요. 가이드와 함께 하는 여행에 참여해볼까요?			
 			</c:if>
 			<c:if test="${rkInfo.rkNo>1}">
-				${rkInfo.rkName} 단계이시군요! 직접 여행을 만들어볼까요?	
+				${rkInfo.rkName} 단계이시군요! 직접 여행을 만들어볼까요?
 				<input type="button" value="여행 만들기" onclick="window.location='/travelMaker/travel/makingWrite.tm'"/>
 			</c:if>
 		</c:if>

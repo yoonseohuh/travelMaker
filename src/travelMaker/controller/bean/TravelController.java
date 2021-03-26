@@ -164,7 +164,17 @@ public class TravelController {
 		String leader = grpSpace.getId();
 		List grpMem = travelService.getMembers(gNo);
 		List grpReq = travelService.getRequests(gNo);
+		//groupMember status가 0인 레코드만 뽑아서 groupRequest 정보를 담아 신청자 명단에 사용
+		List<GroupRequestDTO> awaiters = new ArrayList<GroupRequestDTO>();
+		for(int i=0;i<grpReq.size();i++) {
+			GroupRequestDTO req = (GroupRequestDTO)grpReq.get(i);
+			int status = travelService.getMemStatus(gNo, req.getId());
+			if(status==0) {
+				awaiters.add(req);
+			}
+		}
 		//일정 채팅 아직
+		model.addAttribute("awaiters",awaiters);
 		model.addAttribute("id",id);
 		model.addAttribute("idStatus",idStatus);
 		model.addAttribute("grpSpace",grpSpace);
@@ -182,10 +192,10 @@ public class TravelController {
 		int gNo = Integer.parseInt((String)map.get("gNo"));
 		System.out.println(requestId);
 		System.out.println(gNo);
-		//gNo에 신청한 ID를 그룹에 참여 처리
+		//gNo에 신청한 ID를 그룹에 참여 처리 && groupSpace테이블에 actualNum +1 처리
 		travelService.acceptOrReject(requestId, gNo, 1);
 		ObjectMapper mapper = new ObjectMapper();
-		String json = mapper.writeValueAsString("true");
+		String json = mapper.writeValueAsString(requestId);
 		return json;
 	}
 	
@@ -193,13 +203,13 @@ public class TravelController {
 	@RequestMapping("rejected.tm")
 	public String rejected(@RequestBody Map<Object,Object> map) throws Exception {
 		String requestId = (String)map.get("requestId");
-		int gNo = (Integer)map.get("gNo");
+		int gNo = Integer.parseInt((String)map.get("gNo"));
 		System.out.println(requestId);
 		System.out.println(gNo);
 		//gNo에 신청한 ID를 그룹에 거절 처리
 		travelService.acceptOrReject(requestId, gNo, 2);
 		ObjectMapper mapper = new ObjectMapper();
-		String json = mapper.writeValueAsString("false");
+		String json = mapper.writeValueAsString(requestId);
 		return json;
 	}
 	

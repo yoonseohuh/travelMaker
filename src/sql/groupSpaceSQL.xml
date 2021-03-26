@@ -42,5 +42,8 @@
 		delete from groupSpace where gNo=#{value}
 	</delete>
 	
+	<update id="updateActNum" parameterType="hashmap">
+		update groupSpace set actualNum=actualNum+#{actualNum} where gNo=#{gNo}
+	</update>
 	
 </mapper>

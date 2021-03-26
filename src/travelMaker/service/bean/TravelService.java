@@ -43,4 +43,7 @@ public interface TravelService {
 	//신청 수락 및 거절 처리
 	public void acceptOrReject(String id, int gNo, int status) throws Exception;
 	
+	
+	
+	
 }
