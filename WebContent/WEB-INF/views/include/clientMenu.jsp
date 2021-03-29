@@ -10,7 +10,7 @@
         <li><a href="#">여행공유</a></li>
         <li><a href="/travelMaker/land/landmark.tm">랜드마크</a></li>
         <li><a href="#">랭크/포지션 안내</a></li>
-        <li><a href="#">쪽지함</a></li>
+        <li><a href="/travelMaker/msg/message.tm">쪽지함</a></li>
         <li><a href="#">공지사항</a></li>
         
         <br/>

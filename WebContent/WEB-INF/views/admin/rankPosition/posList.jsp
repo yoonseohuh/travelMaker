@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<jsp:include page="/WEB-INF/views/include/header.jsp" />
-<jsp:include page="/WEB-INF/views/include/top.jsp" />
-	<!-- //top end -->
-	    	
+	
+	<jsp:include page="/WEB-INF/views/include/header.jsp" />
+	<jsp:include page="/WEB-INF/views/include/adminMenu.jsp" />
+	<!-- //adminMenu end -->
+	
 	<div class="wrapAll admin">
+
 		<c:if test="${count==0 || count==null}">
 			<table>
 				<tr>
