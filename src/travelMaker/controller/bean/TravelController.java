@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -174,7 +178,13 @@ public class TravelController {
 				awaiters.add(req);
 			}
 		}
+		
+		//갤러리
+		List gList = travelService.getGroupImgs(gNo);
+		model.addAttribute("gList",gList);
+		
 		//일정 채팅 아직
+		model.addAttribute("gNo",gNo);
 		model.addAttribute("awaiters",awaiters);
 		model.addAttribute("id",id);
 		model.addAttribute("idStatus",idStatus);
@@ -214,15 +224,9 @@ public class TravelController {
 		return json;
 	}
 	
-	
-	@RequestMapping("uploadForm.tm")
-	public String uploadForm() {
-		return "/client/travel/imgUploadPractice";
-	}
-	
 	@RequestMapping("uploadPro.tm")
 	public String uploadPro(MultipartHttpServletRequest request) throws Exception {
-		
+												//ServletContext context
 		MultipartFile mf = null;
 		String finalName = null;
 		
@@ -234,11 +238,21 @@ public class TravelController {
 			String ext = orgName.substring(orgName.lastIndexOf('.'));
 			long date = System.currentTimeMillis();
 			finalName = imgName+date+ext;										//sample1616999640437.jpg
+			/*
+			String ctx = context.getServletContextName();
+			System.out.println("ctx: "+ctx);
+			Set e = context.getResourcePaths("/jsp");
+			Object [] array = e.toArray();
+			int i = 0;
+			while(i<array.length) {
+				System.out.println(i+"번째 "+array[i].toString());
+			}
+			 */
 			String path = request.getRealPath("save");
 			String imgPath = path+"\\"+finalName;
 			File copyFile = new File(imgPath);					//D:\yoonseohuh\framework\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\travelMaker\save\sample1616999640437.jpg
 			mf.transferTo(copyFile);
-			
+			System.out.println(copyFile);
 			//DB에 저장
 			GalleryDTO dto = new GalleryDTO();
 			dto.setgNo(Integer.parseInt(request.getParameter("gNo")));
@@ -249,8 +263,8 @@ public class TravelController {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		return "redirect:makingList.tm";
+		String gNo = request.getParameter("gNo");
+		return "redirect:groupSpace.tm?gNo="+gNo;
 	}
 	
 	@RequestMapping("gallery.tm")
@@ -258,7 +272,7 @@ public class TravelController {
 		System.out.println(gNo);
 		List list = travelService.getGroupImgs(gNo);
 		model.addAttribute("list",list);
-		return "/client/travel/galleryPractice";
+		return "/client/travel/gallery";
 	}
 	
 	

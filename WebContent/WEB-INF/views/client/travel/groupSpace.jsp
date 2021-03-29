@@ -198,16 +198,29 @@
 		<div class="gsRight">
 			<div class="swiper-container gsGallery">
 				<div class="swiper-wrapper">
-				  <div class="swiper-slide add"></div>
-				  <div class="swiper-slide">Slide 1</div>
-				  <div class="swiper-slide">Slide 2</div>
-				  <div class="swiper-slide">Slide 3</div>
-				  <div class="swiper-slide">Slide 4</div>
-				  <div class="swiper-slide">Slide 5</div>
-				  <div class="swiper-slide">Slide 6</div>
-				  <div class="swiper-slide">Slide 7</div>
-				  <div class="swiper-slide">Slide 8</div>
-				  <div class="swiper-slide">Slide 9</div>
+					<div class="swiper-slide add">
+						<form action="/travelMaker/travel/uploadPro.tm" method="post" enctype="multipart/form-data">
+							<input type="hidden" name="writer" value="${id}"/>
+							<input type="hidden" name="gNo" value="${gNo}"/>
+							<input type="file" name="img"/>
+							<input type="submit" value="업로드"/>
+						</form>
+					</div>
+					<c:forEach var="gList" items="${gList}">
+						<div class="swiper-slide">
+								<img src="/travelMaker/save/${gList.pRoot}" width="200"/>
+								<!-- 좋아요 ajax로 처리 아직 안함 -->
+						</div>
+					</c:forEach>
+					<div class="swiper-slide">Slide 1</div>
+					<div class="swiper-slide">Slide 2</div>
+					<div class="swiper-slide">Slide 3</div>
+					<div class="swiper-slide">Slide 4</div>
+					<div class="swiper-slide">Slide 5</div>
+					<div class="swiper-slide">Slide 6</div>
+					<div class="swiper-slide">Slide 7</div>
+					<div class="swiper-slide">Slide 8</div>
+					<div class="swiper-slide">Slide 9</div>
 				</div>
 				<!-- Add Pagination -->
 				<div class="swiper-pagination"></div>
