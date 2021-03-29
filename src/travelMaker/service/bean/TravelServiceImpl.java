@@ -4,18 +4,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
+import travelMaker.model.dao.GalleryDAO;
+import travelMaker.model.dao.GalleryLikedDAO;
 import travelMaker.model.dao.GroupMemberDAO;
 import travelMaker.model.dao.GroupRequestDAO;
 import travelMaker.model.dao.GroupSpaceDAO;
 import travelMaker.model.dao.SmallPosDAO;
 import travelMaker.model.dao.TmUserDAO;
 import travelMaker.model.dao.UserRkDAO;
+import travelMaker.model.dto.GalleryDTO;
 import travelMaker.model.dto.GroupMemberDTO;
 import travelMaker.model.dto.GroupRequestDTO;
 import travelMaker.model.dto.GroupSpaceDTO;
@@ -38,6 +39,12 @@ public class TravelServiceImpl implements TravelService{
 	private GroupRequestDAO groupRequestDAO = null;
 	@Autowired
 	private UserRkDAO userRkDAO = null;
+	@Autowired
+	private GalleryDAO galleryDAO = null;
+	@Autowired
+	private GalleryLikedDAO galleryLikedDAO = null;
+	
+	
 	
 	//개설글 작성
 	@Override
@@ -287,5 +294,30 @@ public class TravelServiceImpl implements TravelService{
 		System.out.println(gNo);
 		System.out.println(status);
 	}
+	
+	//갤러리 이미지 업로드
+	@Override
+	public void uploadImage(GalleryDTO dto) throws Exception {
+		galleryDAO.uploadImage(dto);
+	}
+	
+	//그룹 갤러리 이미지들 가져오기
+	@Override
+	public List getGroupImgs(int gNo) throws Exception {
+		List list = new ArrayList();
+		list = galleryDAO.getGroupImgs(gNo);
+		return list;
+	}
+	
+	//사진 좋아요
+	@Override
+	public void imgLiked(String id, int gNo, int pNo) throws Exception {
+		//Gallery 테이블에 해당 사진 likedCnt 1 추가
+		galleryDAO.updateLikedCnt(pNo);
+		//GallertLiked 테이블에 레코드 추가
+		galleryLikedDAO.imgLiked(id,gNo,pNo);
+	}
+	
+	
 	
 }

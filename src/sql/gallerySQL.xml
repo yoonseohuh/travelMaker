@@ -5,5 +5,16 @@
   
 <mapper namespace="gallery">
 
+	<insert id="uploadImage" parameterType="GalleryDTO">
+		insert into gallery values(#{gNo}, gallery_seq.nextVal, #{writer}, #{pRoot}, 0, sysdate)
+	</insert>
+	
+	<select id="getGroupImgs" parameterType="int" resultType="GalleryDTO">
+		select * from gallery where gNo=${value}
+	</select>
+	
+	<update id="updateLikedCnt" parameterType="int">
+		update gallery set likedCnt=likedCnt+1 where pNo=#{value}
+	</update>
 
 </mapper>
