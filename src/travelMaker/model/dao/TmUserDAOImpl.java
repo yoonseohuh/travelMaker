@@ -188,5 +188,21 @@ public class TmUserDAOImpl implements TmUserDAO {
 		sqlSession.insert("tmUser.addSPos", spdto);
 	}
 	
+	//포지션 한 줄 정보가져오기 
+	@Override
+	public SmallPosDTO getSPosInfo(int posNo) {
+		SmallPosDTO spdto = sqlSession.selectOne("tmUser.getSPosInfo", posNo);
+		return spdto;
+	}
 
+	@Override
+	public void updatePos(SmallPosDTO spdto) {
+		sqlSession.update("tmUser.updatePos", spdto);
+	}
+
+	@Override
+	public void deletePos(String posNo) {
+		sqlSession.delete("tmUser.deletePos", posNo);
+	}
+		
 }
