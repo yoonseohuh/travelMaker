@@ -31,9 +31,10 @@ public class UserCmtDAOImpl implements UserCmtDAO {
 	}
 
 	
-	//그룹고유번호 보내서 그룹정보 가져오기 (그룹스페이스상태 4인것들)
+	//그룹고유번호 보내서 그룹정보 가져오기 
 	@Override
 	public GroupSpaceDTO getGroupInfo(int num) throws SQLException {
+		
 		GroupSpaceDTO gInfo = sqlSession.selectOne("userCmt.getGroupInfo", num);
 		
 		return gInfo;

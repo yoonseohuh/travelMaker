@@ -47,6 +47,7 @@
 		</c:if>
 		
 		<c:if test="${count >0}">  <!-- 여행간게 1개라도 있으면 ! -->
+		
 		<div id="cont1">
 			<h1>너에게 난..?</h1>
 			<div>
@@ -86,27 +87,18 @@
 			        </c:forEach>
 			    </ul>
 			</div>
-		</div>
+		</div>						
 		
-		
-		
-		</c:if>
-			
-			
-			
-			
-			
-		<!-- 테스트 -->
-		
+		</c:if>	
 
-
-		
+	
 		<!-- 코멘트 작성  -->
 		<div id="cont2">
 			<br/>
 			<form action="/travelMaker/cmt/commentWritePro.tm" method="get">
-			<input type="hidden" name="id" value="test4" />
-		     	여행목록 : 
+			<input type="hidden" name="id" value="${sessionScope.memId}" />
+			<input type="hidden" name="result" value="1" />
+		     	여행목록 : ${sessionScope.memId}
 				<select name="groupNum" id="group">
 					<option value="" selected disabled hidden>여행을 선택하세요</option>
 					<c:forEach var="group" items="${dtoList}">
@@ -117,13 +109,14 @@
 				
 				동행자 : 							
 		   		<select name="groupMem">
+		   		<option value="" selected disabled hidden>동행자를 선택하세요</option>
 		   		<c:forEach var="fin" items="${fin}" >
 		   				<c:if test="${fin.gNo == 4}">
 		   					<option value="${fin.id}">${fin.gNo}/${fin.nickname}/${fin.id}</option>
 		   				</c:if>
 		   		</c:forEach>
 		   		</select> <br/>
-		   		<textarea rows="10" cols="72" name="comment"></textarea>
+		   		<textarea rows="10" cols="72" name="comment" required></textarea>
 		   		<input type="submit" value="버튼" />
 		   	</form>
 	   		

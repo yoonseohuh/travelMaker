@@ -27,7 +27,7 @@ public interface CommentService {
 	public List groupUser(String id) throws SQLException;
 	
 	//코멘트 insert문
-	public void insertCom(String id, String groupNum, String groupMem, String comment);
+	public int insertCom(String id, String groupNum, String groupMem, String comment);
 	
 	
 	// 사용자 여행그룹 갯수 count

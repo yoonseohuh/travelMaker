@@ -10,9 +10,9 @@
 	select * from GroupMember where id=#{id} and status=1
 </select>
 
-<!-- 그룹고유번호/상태4인  그룹정보 가져오기 -->
+<!-- 그룹고유번호에 맞는 그룹정보 가져오기 -->
 <select id="getGroupInfo" parameterType="int" resultType="GroupSpaceDTO">
-	select * from GroupSpace where gNo=#{num} and status=4
+	select * from GroupSpace where gNo=#{num}
 </select>
 
 <select id="getMem" parameterType="int" resultType="GroupMemberDTO">

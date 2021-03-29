@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import travelMaker.model.dto.MessageDTO;
 import travelMaker.service.bean.MessageService;
@@ -24,8 +26,10 @@ public class MessageController {
 	@RequestMapping("message.tm")
 	public String message(Model model) {
 		
+		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
+		
 		//임시아이디
-		String id = "test4";
+		//String id = "test4";
 		
 		// 보낸 쪽지 가져오기
 		List senMsgList = messageService.getSenMsg(id);
@@ -53,7 +57,8 @@ public class MessageController {
 	// 메세지 작성 pro
 	@RequestMapping("messageWritePro.tm")
 	public String messageWritePro(MessageDTO msgDto, Model model) {
-		msgDto.setSender("test4");
+		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
+		msgDto.setSender(id);
 		int result = messageService.insertMsg(msgDto);
 		model.addAttribute("result", result);
 		
