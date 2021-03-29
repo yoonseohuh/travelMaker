@@ -49,7 +49,7 @@
 	    		<tr>
 	    			<td>${spo.posCate}</td>
 	    			<td>${spo.posNo}</td>
-	    			<td><img src="<c:url value="/resources/test/${spo.posRoot}"/>" width="100" height="100"></td>
+	    			<td><img src="<c:url value="/resources/upload/${spo.posRoot}"/>" width="100" height="100"></td>
 	    			<td>${spo.posName}</td>
 	    			<td>${spo.posExpl}</td>
 	    			<td class="modiBtn">
