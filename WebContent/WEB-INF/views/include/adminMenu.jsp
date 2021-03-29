@@ -27,9 +27,5 @@
 		$('#adminMenuWrap').children('.menu').children('li').eq(4).addClass('on');
 	}else if(nowUrl == "/travelMaker/admin/reason.tm" || "/travelMaker/admin/reasonInsert.tm"){
 		$('#adminMenuWrap').children('.menu').children('li').eq(5).addClass('on');
-	}else if(nowUrl == "/travelMaker/admin/rkPos.tm"){
-		$('#adminMenuWrap').children('.menu').children('li').eq(7).addClass('on');
-	}else if(nowUrl == "/travelMaker/admin/posList.tm"){
-		$('#adminMenuWrap').children('.menu').children('li').eq(8).addClass('on');
 	}
 </script>

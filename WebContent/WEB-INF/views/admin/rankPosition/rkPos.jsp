@@ -4,19 +4,40 @@
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 	<jsp:include page="/WEB-INF/views/include/adminMenu.jsp" />
 	<!-- //adminMenu end -->
-	
-	    	<script>
-	    		function de(index){
-	    			var check = confirm("삭제?");
-	    			if(check){
-	    				location.href="/travelMaker/admin/deleteRk.tm?rkNo="+index;
-	    			}else{
-	    				document.write("삭제ㄴㄴ");
-	    			}
-	    		}
-	    	</script>
+   	<script>
+   		function de(index){
+   			var check = confirm("삭제?");
+   			if(check){
+   				location.href="/travelMaker/admin/deleteRk.tm?rkNo="+index;
+   			}else{
+   				location.href="/travelMaker/admin/rkPos.tm";
+   			}
+   		}
+   	</script>
+   	
 	<div class="wrapAll admin">
-		<input type="button" value="랭크 추가" onclick="window.location='/travelMaker/admin/addRk.tm'"/>
+		<c:if test="${fn:length(rkList)==0}">
+			<h3>랭크를 추가해주세요</h3>
+		</c:if>
+		<form action="/travelMaker/admin/addRkPro.tm" method="post">
+			<table>
+	    		<tr>
+					<th>등급이름</th>
+					<th>요구횟수</th>
+					<th>주요설명</th>
+					<th>부가설명</th>
+					<th>버튼</th>
+				</tr>
+				<tr>
+					<td><input type="text" name="rkName"/></td>
+					<td><input type="text" name="rkNeed"/></td>
+					<td><input type="text" name="rkExpl"/></td>
+					<td><input type="text" name="rkAddExpl"/></td>
+					<td><input type="submit" value="추가"/></td>
+				</tr>
+	  		  </table>
+		</form>
+		<br/><br/>
 		<c:if test="${fn:length(rkList)!=0}">
 			<table>
 				<tr>
@@ -27,13 +48,7 @@
 					<th>부가설명</th>
 					<th>버튼</th>
 				</tr>
-			</table>
-		</c:if>
-		<c:if test="${fn:length(rkList)==0}">
-			<h3>랭크를 추가해주세요</h3>
-		</c:if>
    		<c:forEach var="rk" items="${rkList}">
-	   		<table>
 	    		<tr>
 	    			<td>
 	    				${number}
@@ -48,9 +63,9 @@
 	    				<input type="button" value="삭제" onclick="de(${rk.rkNo})"/>
 	    			</td>
 	    		</tr>
-	    	</table>	
     	</c:forEach>
-
+	    	</table>	
+		</c:if>
 	</div>
 	<!-- //wrapAll end -->
 	

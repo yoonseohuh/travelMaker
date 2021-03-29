@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import travelMaker.model.dto.SmallPosDTO;
 import travelMaker.model.dto.TmUserDTO;
 import travelMaker.model.dto.UserRkDTO;
 
@@ -180,6 +181,11 @@ public class TmUserDAOImpl implements TmUserDAO {
 		map.put("end", end);
 		List sPosList = sqlSession.selectList("tmUser.getPosList", map);
 		return sPosList;
+	}
+
+	@Override
+	public void addSPos(SmallPosDTO spdto) {
+		sqlSession.insert("tmUser.addSPos", spdto);
 	}
 	
 

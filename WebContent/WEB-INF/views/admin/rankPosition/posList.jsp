@@ -8,7 +8,6 @@
 	<!-- //adminMenu end -->
 	
 	<div class="wrapAll admin">
-
 		<c:if test="${count==0 || count==null}">
 			<table>
 				<tr>
@@ -16,6 +15,27 @@
 				</tr>
 			</table>
 		</c:if>
+		
+		<form action="/travelMaker/admin/addSPosPro.tm" method="post" enctype="multipart/form-data">
+			<table>
+	    		<tr>
+					<th>포지션 분류</th>
+					<th>이모티콘</th>
+					<th>포지션 이름</th>
+					<th>포지션 설명</th>
+					<th>버튼</th>
+				</tr>
+				<tr>
+					<td><input type="text" name="posCate"/></td>
+					<td><input type="file" name="img"/></td>
+					<td><input type="text" name="posName"/></td>
+					<td><input type="text" name="posExpl"/></td>
+					<td><input type="submit" value="추가"/></td>
+				</tr>
+	  		  </table>
+		</form>
+		<br/><br/>
+		
 		<c:if test="${count>0}">
 			<table>
 				<tr>
@@ -29,10 +49,10 @@
 	    		<tr>
 	    			<td>${spo.posCate}</td>
 	    			<td>${spo.posNo}</td>
-	    			<td>${spo.posRoot}</td>
+	    			<td><img src="<c:url value="/resources/test/${spo.posRoot}"/>" width="100" height="100"></td>
 	    			<td>${spo.posName}</td>
 	    			<td>${spo.posExpl}</td>
-	    			<td>
+	    			<td class="modiBtn">
 	    				<input type="button" value="수정" onclick="window.location='/travelMaker/admin/modifyFormRk.tm?rkNo=${rk.rkNo}'"/>
 	    				<input type="button" value="삭제" onclick="de(${rk.rkNo})"/>
 	    			</td>
@@ -76,5 +96,5 @@
 	</div>
 	<!-- //wrapAll end -->
 	
-	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
-	<!-- //footer end -->
+</body>
+</html>

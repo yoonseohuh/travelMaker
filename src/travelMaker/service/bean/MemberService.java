@@ -3,6 +3,7 @@ package travelMaker.service.bean;
 import java.util.List;
 import java.util.Map;
 
+import travelMaker.model.dto.SmallPosDTO;
 import travelMaker.model.dto.TmUserDTO;
 import travelMaker.model.dto.UserRkDTO;
 
@@ -60,5 +61,6 @@ public interface MemberService {
 	public List getSPos();
 	//포지션 Map 생성
 	public Map getPositions(String pageNum);
-	
+	//포지션 추가 
+	public void addSPos(SmallPosDTO spdto);
 }

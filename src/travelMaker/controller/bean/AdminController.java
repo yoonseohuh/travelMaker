@@ -1,5 +1,6 @@
 package travelMaker.controller.bean;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
@@ -12,9 +13,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import travelMaker.model.dao.TmUserDAO;
 import travelMaker.model.dto.ReportReasonDTO;
+import travelMaker.model.dto.SmallPosDTO;
 import travelMaker.model.dto.TmUserDTO;
 import travelMaker.model.dto.UserRkDTO;
 import travelMaker.service.bean.MemberService;
@@ -55,23 +59,6 @@ public class AdminController {
 		return "admin/member/memberList";
 	}
 	
-	//포지션 리스트 
-		@RequestMapping("posList.tm")
-		public String smallPos(String pageNum,Model model) {
-			//포지션 대분류 리스트
-			//포지션 소분류 리스트
-			//Map으로  list, request, pageNum등을 받아오는 메서드 작성 
-			Map every = memService.getPositions(pageNum);
-			model.addAttribute("pageNum", every.get("pageNum"));
-			model.addAttribute("pageSize", every.get("pageSize"));
-			model.addAttribute("currPage", every.get("currPage"));
-			model.addAttribute("startRow", every.get("startRow"));
-			model.addAttribute("endRow", every.get("endRow"));
-			model.addAttribute("number", every.get("number"));
-			model.addAttribute("count", every.get("count"));
-			model.addAttribute("sPosList", every.get("sPosList"));
-			return "admin/rankPosition/posList";
-		}
 	
 	//멤버 정보 수정 Form
 	//회원 정보수정 버튼으로 id 넘겨 받음 
@@ -192,25 +179,73 @@ public class AdminController {
 		return "admin/rankPosition/rkPos";
 	}
 	
-	//랭크 추가
-	@RequestMapping("addRk.tm")
-	public String addRk(Model model) {
-		List rkList = memService.getRk();
-		int number = 1;
-		model.addAttribute("rkList", rkList);
-		model.addAttribute("number", number);
-		System.out.println("rkList.size " + rkList.size());
-		return "admin/rankPosition/addRk";
-	}
-	
 	//랭크 추가 Pro
 	@RequestMapping("addRkPro.tm")
 	public String addRkPro(UserRkDTO rkdto) {
-		//포지션 insert 시키는 메서드 작성 
+		//랭크 insert 시키는 메서드 작성 
 		memService.insertRank(rkdto);
 		return "redirect:rkPos.tm";
 	}
-	
+	//포지션 리스트 
+	@RequestMapping("posList.tm")
+	public String smallPos(String pageNum,Model model) {
+		//포지션 대분류 리스트
+		//포지션 소분류 리스트
+		//Map으로  list, request, pageNum등을 받아오는 메서드 작성 
+		Map every = memService.getPositions(pageNum);
+		model.addAttribute("pageNum", every.get("pageNum"));
+		model.addAttribute("pageSize", every.get("pageSize"));
+		model.addAttribute("currPage", every.get("currPage"));
+		model.addAttribute("startRow", every.get("startRow"));
+		model.addAttribute("endRow", every.get("endRow"));
+		model.addAttribute("number", every.get("number"));
+		model.addAttribute("count", every.get("count"));
+		model.addAttribute("sPosList", every.get("sPosList"));
+		return "admin/rankPosition/posList";
+	}
+
+//포지션 추가 Pro
+	@RequestMapping("addSPosPro.tm")
+	public String addSPos(SmallPosDTO spdto, MultipartHttpServletRequest request) {
+		//포지션 insert 시키는 메서드 
+		MultipartFile mf = null;
+		String newName = null;
+		try {
+			
+			//파일 정보 담기.
+			mf = request.getFile("img");
+			long size = mf.getSize();
+			System.out.println(size);
+			
+			//이름 중복처리하여 저장시키는 버전.
+			// 오리지널 파일명 가져오기 
+			String orgName = mf.getOriginalFilename();
+			System.out.println("orgName:" + orgName);
+			//이름 나누기 확장자 빼기
+			String imgName = orgName.substring(0, orgName.lastIndexOf('.'));
+			System.out.println("imgName: "+imgName);
+			// 확장자 가져오기
+			String ext = orgName.substring(orgName.lastIndexOf('.'));
+			System.out.println("ext : " + ext);
+			// 시간 추가한 새이름 저장될 이름!
+			long date= System.currentTimeMillis();
+			newName= imgName + date + ext;
+			System.out.println("newName:" + newName);
+			//파일 저장
+			String path = request.getRealPath("/resources/test"); 
+			System.out.println("path:" + path);
+			String imgPath = path + "\\" + newName;
+			System.out.println("imgPath :" +imgPath);
+			File copyFile = new File(imgPath);
+			mf.transferTo(copyFile);
+			spdto.setPosRoot(newName);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		//포지션 추가하는 메서드 
+		memService.addSPos(spdto);
+		return "redirect:posList.tm";
+	}
 	//랭크 수정
 	@RequestMapping("modifyFormRk.tm")
 	public String modifyRk(int rkNo,Model model) {

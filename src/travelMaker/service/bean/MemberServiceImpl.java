@@ -16,6 +16,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import travelMaker.model.dao.TmUserDAO;
+import travelMaker.model.dto.SmallPosDTO;
 import travelMaker.model.dto.TmUserDTO;
 import travelMaker.model.dto.UserRkDTO;
 
@@ -342,6 +343,11 @@ public class MemberServiceImpl implements MemberService {
 		every.put("sPosList", sPosList);
 		
 		return every;
+	}
+
+	@Override
+	public void addSPos(SmallPosDTO spdto) {
+		tmuserDAO.addSPos(spdto);
 	}
 	
 	

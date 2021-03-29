@@ -114,4 +114,8 @@
 			order by posNo)b where r>=#{start} AND r<=#{end}
 		]]>
 	</select>
+	
+	<insert id="addSPos" parameterType="SmallPosDTO">
+		insert into smallpos values (#{posCate},SMALLPOS_seq.nextval,#{posName},#{posExpl},#{posRoot})
+	</insert>	
 </mapper>
