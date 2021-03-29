@@ -28,5 +28,5 @@
 	</div>
 	<!-- //wrapAll end -->
 	
-	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+	<jsp:include page="/WEB-INF/views/include/footer.jsp" /> 
 	<!-- //footer end -->
