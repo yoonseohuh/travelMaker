@@ -207,10 +207,10 @@
 						</form>
 					</div>
 					<c:forEach var="gList" items="${gList}">
-						<div class="swiper-slide">
-								<img src="/travelMaker/save/${gList.pRoot}" width="200"/>
-								<!-- 좋아요 ajax로 처리 아직 안함 -->
-						</div>
+					<div class="swiper-slide">
+						<img src="/travelMaker/save/${gList.pRoot}" width="200"/>
+						<!-- 좋아요 ajax로 처리 아직 안함 -->
+					</div>
 					</c:forEach>
 					<div class="swiper-slide">Slide 1</div>
 					<div class="swiper-slide">Slide 2</div>
