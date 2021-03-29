@@ -6,7 +6,9 @@
 	<!-- //top end -->
 	
 	<div class="wrapAll">
-		<h1>내가 작성한 랜드마크 삭제 pro</h1>
+		<h1>내가 작성한 랜드마크 삭제 pro</h1> 
+		
+		
 		
 	</div>
 	<!-- //wrapAll end -->
