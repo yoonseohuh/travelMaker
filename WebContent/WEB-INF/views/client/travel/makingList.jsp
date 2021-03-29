@@ -9,7 +9,7 @@
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
 	<!-- //top end -->
 	
-	<div class="wrapAll">
+	<div class="wrapAll client">
 		<script>
 			$(document).ready(function(){
 				
@@ -108,39 +108,29 @@
 			OUT <input type="text" id="endD" name="endD"/>
 			<input type="submit" value="검색"/>
 		</form>
+
 		
 		<c:if test="${count>0}">
 			<div id="list">
-				<table id="articleTable">
-					<thead>
-						<tr>
-							<th>No.</th>
-							<th>개설자</th>
-							<th>동성필터</th>
-							<th>여행제목</th>
-						</tr>
-					</thead>
-					<c:forEach var="article" items="${articleList}" varStatus="status">
-					<tbody>
-						<tr>
-							<td>${number}</td>
-							<c:set var="number" value="${number-1}"/>
-							<td>${article.id}</td>
-							<td>
-								<c:if test="${article.dongsung==1}">
-									동성만
-								</c:if>
-								<c:if test="${article.dongsung==0}">
-									성별 무관
-								</c:if>
-							</td>
-							<td>
-								<a href="makingCont.tm?gNo=${article.gNo}&pageNum=${pageNum}">${article.subject}</a>					
-							</td>
-						</tr>
-					</tbody>
-					</c:forEach>
-				</table>
+				<div id="articleTable">				
+					<ul class="makingList">
+						<c:forEach var="article" items="${articleList}" varStatus="status">
+						<li>
+							<a href="makingCont.tm?gNo=${article.gNo}&pageNum=${pageNum}"></a>
+							<p class="no">${number}</p><c:set var="number" value="${number-1}"/>
+							<p class="tit">${article.subject}</p>
+							<p class="date">${article.startDate}~${article.endDate}</p>
+							<p class="maker">${article.id}</p>
+							<c:if test="${article.dongsung==1}">
+								<p class="gen">동성만</p>
+							</c:if>
+							<c:if test="${article.dongsung==0}">
+								<p class="gen">성별 무관</p>
+							</c:if>							
+						</li>
+						</c:forEach>
+					</ul>					
+				</div> 
 			</div>
 			현재 페이지: ${pageNum}
 			<div class="pageNumbers">
@@ -172,5 +162,5 @@
 	</div>
 	<!-- //wrapAll end -->
 	
-	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
-	<!-- //footer end -->
+<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+<!-- //footer end -->

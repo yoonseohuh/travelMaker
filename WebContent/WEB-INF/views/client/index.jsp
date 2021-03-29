@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
 
-	<jsp:include page="/WEB-INF/views/include/top.jsp" />
+	<jsp:include page="/WEB-INF/views/include/top_index.jsp" />
 	<!-- //top end -->
 	
 	<div class="wrapAll">
