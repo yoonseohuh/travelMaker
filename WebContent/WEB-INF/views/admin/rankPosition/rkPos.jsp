@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<jsp:include page="/WEB-INF/views/include/header.jsp" />
-	<jsp:include page="/WEB-INF/views/include/top.jsp" />
-	<!-- //top end -->
+	<jsp:include page="/WEB-INF/views/include/header.jsp" />
+	<jsp:include page="/WEB-INF/views/include/adminMenu.jsp" />
+	<!-- //adminMenu end -->
+	
 	    	<script>
 	    		function de(index){
 	    			var check = confirm("삭제?");
