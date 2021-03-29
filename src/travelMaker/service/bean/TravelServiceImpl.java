@@ -8,11 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
+
+import travelMaker.model.dao.ChattingDAO;
 import travelMaker.model.dao.GalleryDAO;
 import travelMaker.model.dao.GalleryLikedDAO;
 import travelMaker.model.dao.GroupMemberDAO;
 import travelMaker.model.dao.GroupRequestDAO;
 import travelMaker.model.dao.GroupSpaceDAO;
+import travelMaker.model.dao.ScheduleDAO;
 import travelMaker.model.dao.SmallPosDAO;
 import travelMaker.model.dao.TmUserDAO;
 import travelMaker.model.dao.UserRkDAO;
@@ -43,9 +46,12 @@ public class TravelServiceImpl implements TravelService{
 	private GalleryDAO galleryDAO = null;
 	@Autowired
 	private GalleryLikedDAO galleryLikedDAO = null;
-	
-	
-	
+	/*
+	@Autowired
+	private ScheduleDAO scheduleDAO = null;
+	@Autowired
+	private ChattingDAO chattingDAO = null;	
+	*/
 	//개설글 작성
 	@Override
 	public void insertMaking(GroupSpaceDTO dto) throws Exception {
@@ -309,13 +315,13 @@ public class TravelServiceImpl implements TravelService{
 		return list;
 	}
 	
-	//사진 좋아요
+	//사진 좋아요(다시 못 누르게 할 것인지 다시 누르면 좋아요 취소할 것인지..)
 	@Override
 	public void imgLiked(String id, int gNo, int pNo) throws Exception {
 		//Gallery 테이블에 해당 사진 likedCnt 1 추가
 		galleryDAO.updateLikedCnt(pNo);
 		//GallertLiked 테이블에 레코드 추가
-		galleryLikedDAO.imgLiked(id,gNo,pNo);
+		galleryLikedDAO.imgLiked(id, gNo, pNo);
 	}
 	
 	
