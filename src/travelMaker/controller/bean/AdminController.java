@@ -232,7 +232,7 @@ public class AdminController {
 			newName= imgName + date + ext;
 			System.out.println("newName:" + newName);
 			//파일 저장
-			String path = request.getRealPath("/resources/test"); 
+			String path = request.getRealPath("/resources/upload"); 
 			System.out.println("path:" + path);
 			String imgPath = path + "\\" + newName;
 			System.out.println("imgPath :" +imgPath);
