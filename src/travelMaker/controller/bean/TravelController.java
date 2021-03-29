@@ -5,12 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
-import javax.servlet.ServletContext;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,9 +15,7 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import travelMaker.model.dto.GalleryDTO;
 import travelMaker.model.dto.GroupMemberDTO;
 import travelMaker.model.dto.GroupRequestDTO;
@@ -247,7 +240,7 @@ public class TravelController {
 			while(i<array.length) {
 				System.out.println(i+"번째 "+array[i].toString());
 			}
-			 */
+			*/
 			String path = request.getRealPath("save");
 			String imgPath = path+"\\"+finalName;
 			File copyFile = new File(imgPath);					//D:\yoonseohuh\framework\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\travelMaker\save\sample1616999640437.jpg
@@ -274,6 +267,11 @@ public class TravelController {
 		model.addAttribute("list",list);
 		return "/client/travel/gallery";
 	}
+	
+	
+	
+	
+	
 	
 	
 }
