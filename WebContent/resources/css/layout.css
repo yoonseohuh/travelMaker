@@ -3,38 +3,28 @@
 
 
 /*wrapAll*/
-.wrapAll {width: 100%; height: auto; min-height: 550px;}
+.wrapAll {overflow: hidden; width: 100%; height: auto; min-height: 550px;}
 .wrapAll.client {background: #ccc; padding: 80px;}
 .wrapAll.admin {padding: 80px 80px 80px 330px;}
 
 
-/*top.css*/
-/*basic*/
-
-#top {
-    width: 100%;
-    height: 80px;
-    padding:28.5px 110px 0 ;
-    position: fixed;
-    z-index:999;
-}
-
+/*top_index*/
 /*logo*/
-#top .logo {line-height: 24px; color: #fff; font-size: 23px; font-weight: 600; position: absolute;top: 28px;left: 30px;}
+#logo {line-height: 24px; color: #fff; font-size: 23px; font-weight: 600; position: fixed;top: 28px;left: 30px; z-index:997;}
 
 /*sign*/
-#top .sign {line-height: 24px; float: right;}
-#top .sign a {color: #fff; font-size: 18px; font-weight: 600; margin-left: 15px;}
+#sign {position: fixed;top: 28px;right: 110px; z-index:997;}
+#sign a {line-height: 24px; color: #fff; font-size: 18px; font-weight: 600; margin-left: 15px;}
 
 /*ham*/
-#top .ham {
+#ham {
     position: absolute;
     top: 27px; right: 35px;
     width: 42px; height: 30px;
     cursor:pointer;
     z-index: 999;
 }
-#top .ham span {
+#ham span {
     display: block;
     background: #fff;
     width: 42px;
@@ -42,25 +32,32 @@
     border-radius: 3px;
     transition: margin 0.25s 0.25s, transform 0.25s ;
 }
-#top .ham .bar1 {margin-bottom: 8px;}
-#top .ham .bar3 {margin-top: 8px;}
+#ham .bar1 {margin-bottom: 8px;}
+#ham .bar3 {margin-top: 8px;}
 
-#top .ham.active span {
+#ham.active span {
     transition: margin 0.25s, transform 0.25s 0.25s;
 }
 
-#top .ham.active .bar1 {
+#ham.active .bar1 {
     margin-top: 8px;
     margin-bottom: -4px;
     transform: rotate(45deg);
 }
-#top .ham.active .bar2 {
+#ham.active .bar2 {
     transform: rotate(45deg);        
 }
-#top .ham.active .bar3 {
+#ham.active .bar3 {
     margin-top: -4px;
     transform: rotate(135deg);
 }
+
+/*top*/
+#top {width: 100%; height:80px; transition: .3s; position: fixed;top: 0;left: 0; z-index:999;}
+#top.nav-up {top: -80px;}
+#top.nav-down {top: 0;}
+#top #logo {position: absolute;top: 28px;left: 30px; z-index:997;}
+#top #sign {position: absolute;top: 28px;right: 110px; z-index:997;}
 
 /*clientMenu*/
 #clientMenuWrap {display: none; width: 350px; height: 100vh; background: #333; position: fixed;top: 0;right: 0; z-index:998;}
@@ -71,7 +68,7 @@
 #clientMenuWrap .menu li a:hover {background: #fff; color: #000;}
 
 /*mCover*/
-#top .mCover {
+#mCover {
     display: none;
     width: 100%;
     height: 100vh;
@@ -101,23 +98,5 @@
 
 
 /*footer*/
-#footer {width: 100%; height: 250px; background: #777;}
-
-
-/*SCROLLBAR IE*/
-* {scrollbar-arrow-color:#9D9992; scrollbar-3dlight-color:#D4D0C8; scrollbar-darkshadow-color:#D4D0C8; scrollbar-face-color:#FFFFFF; scrollbar-hightlight-color:#FFFFFF; scrollbar-shadow-color:#FFFFFF; scrollbar-track-color:#EAE7E1;}
-
-
-/*SCROLLBAR Chrome, Safari*/
-::-webkit-scrollbar {width: 5px; border: 3px solid #ddd; }
-::-webkit-scrollbar-button:start:decrement, ::-webkit-scrollbar-button:end:increment {display: block; height: 10px; background: #efefef}
-::-webkit-scrollbar-track {background: #efefef; -webkit-border-radius: 10px; border-radius:10px; -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.2)}
-::-webkit-scrollbar-thumb {height: 50px; width: 50px; background: rgba(0,0,0,.2); -webkit-border-radius: 8px; border-radius: 8px; -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.1)}
-
-
-/*table*/
-table {width: 100%; text-align: center;}
-table th {height: 55px; line-height: 55px; background: #888; color: #fff; font-size:15px; font-weight: 600;}
-table td {height: 70px; line-height: 70px; border-bottom: 1px solid #e8e8e8; font-size:17px;}
-table input {width: 80%; font-size:17px;}
+#footer {width: 100%; height: 150px; background: #777;}
 
