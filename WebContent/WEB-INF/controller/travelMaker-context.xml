@@ -37,7 +37,11 @@
 		<property name="maxUploadSize" value="-1"/> <!-- 최대 업로드 사이즈: byte기준으로. -1로 설정하면 제약이 없게 된다.-->
 		<property name="defaultEncoding" value="UTF-8"/> <!-- 기본 인코딩 설정. 예컨대 파일명이 한글이어도 깨지지 않도록. -->
 	</bean>
-
+	<!-- 파일 업로드 디렉토리 설정
+	<bean id="uploadPath" class="java.lang.String">
+		<constructor-arg value="D:\yoonseohuh\framework\workspace\travelMaker\tmGallery"/>
+	</bean>
+	 -->
     <!-- DB 데이터 소스 db커넥션정보를 쓴다-->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
           destroy-method="close"

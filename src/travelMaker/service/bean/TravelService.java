@@ -3,6 +3,7 @@ package travelMaker.service.bean;
 import java.util.List;
 import java.util.Map;
 
+import travelMaker.model.dto.GalleryDTO;
 import travelMaker.model.dto.GroupMemberDTO;
 import travelMaker.model.dto.GroupRequestDTO;
 import travelMaker.model.dto.GroupSpaceDTO;
@@ -42,8 +43,11 @@ public interface TravelService {
 	public List getRequests(int gNo) throws Exception;
 	//신청 수락 및 거절 처리
 	public void acceptOrReject(String id, int gNo, int status) throws Exception;
-	
-	
-	
+	//갤러리 이미지 업로드
+	public void uploadImage(GalleryDTO dto) throws Exception;
+	//그룹 갤러리 이미지들 가져오기
+	public List getGroupImgs(int gNo) throws Exception;
+	//사진 좋아요
+	public void imgLiked(String id, int gNo, int pNo) throws Exception;
 	
 }

@@ -1,13 +1,11 @@
 package travelMaker.controller.bean;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import travelMaker.model.dto.GalleryDTO;
 import travelMaker.model.dto.GroupMemberDTO;
 import travelMaker.model.dto.GroupRequestDTO;
 import travelMaker.model.dto.GroupSpaceDTO;
@@ -213,6 +214,52 @@ public class TravelController {
 		return json;
 	}
 	
+	
+	@RequestMapping("uploadForm.tm")
+	public String uploadForm() {
+		return "/client/travel/imgUploadPractice";
+	}
+	
+	@RequestMapping("uploadPro.tm")
+	public String uploadPro(MultipartHttpServletRequest request) throws Exception {
+		
+		MultipartFile mf = null;
+		String finalName = null;
+		
+		try {
+			mf = request.getFile("img");
+			long size = mf.getSize();
+			String orgName = mf.getOriginalFilename();							//sample.jpg
+			String imgName = orgName.substring(0, orgName.lastIndexOf('.'));	//sample
+			String ext = orgName.substring(orgName.lastIndexOf('.'));
+			long date = System.currentTimeMillis();
+			finalName = imgName+date+ext;										//sample1616999640437.jpg
+			String path = request.getRealPath("save");
+			String imgPath = path+"\\"+finalName;
+			File copyFile = new File(imgPath);					//D:\yoonseohuh\framework\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\travelMaker\save\sample1616999640437.jpg
+			mf.transferTo(copyFile);
+			
+			//DB에 저장
+			GalleryDTO dto = new GalleryDTO();
+			dto.setgNo(Integer.parseInt(request.getParameter("gNo")));
+			dto.setWriter(request.getParameter("writer"));
+			dto.setpRoot(finalName);
+			travelService.uploadImage(dto);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "redirect:makingList.tm";
+	}
+	
+	@RequestMapping("gallery.tm")
+	public String gallery(int gNo, Model model) throws Exception {
+		System.out.println(gNo);
+		List list = travelService.getGroupImgs(gNo);
+		model.addAttribute("list",list);
+		return "/client/travel/galleryPractice";
+	}
 	
 	
 }
