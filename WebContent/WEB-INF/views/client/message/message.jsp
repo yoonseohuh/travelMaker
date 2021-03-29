@@ -28,6 +28,8 @@
 	    		$('#cont2').fadeIn();
 	    	});
 	    });	
+		
+		
 		</script>
 		
 		<br/><br/><br/><br/>
@@ -37,16 +39,23 @@
 		
 		
 		<div id="cont1">
-		
 		<h1>보낸쪽지함</h1>
 		<button onclick="window.location='messageWrite.tm'">쪽지쓰기</button>
 		<form action="messageDel.tm" method="get">
 			<input type="submit" value="삭제" />
+			<div>
+			<ul>
 			<c:forEach var="senMsgList" items="${senMsgList}"> 
-				<input type="checkbox" name="msgNo" value="${senMsgList.mNo}" />${senMsgList.mNo} / ${senMsgList.receiver}/ ${senMsgList.sender} / ${senMsgList.mCont} /${senMsgList.mStatus} / ${senMsgList.reg}<br/>
+				<li class="menu">
+				<input type="checkbox" name="msgNo" value="${senMsgList.mNo}" /><a>${senMsgList.mNo} /받는사람 : ${senMsgList.receiver}/ 보낸사람: ${senMsgList.sender}  / ${senMsgList.mStatus} / ${senMsgList.reg}  ▼ </a>
+					<ul style="display:none;">
+						<li><textarea rows="10" cols="50" readonly style="resize: none;">내용 : ${senMsgList.mCont}</textarea></li><br/>
+					</ul>
+				</li>
 			</c:forEach>
+			</ul>
+			</div>
 		</form>
-
 		</div>
 		
 		
@@ -54,12 +63,21 @@
 		<div id="cont2">
 		<h1>받은쪽지함</h1>
 		<button onclick="window.location='messageWrite.tm'">쪽지쓰기</button>
-			<form action="messageDel.tm" method="get">
-				<input type="submit" value="삭제" />
-				<c:forEach var="recMsgList" items="${recMsgList}"> 
-					<input type="checkbox" value="${recMsgList.mNo}">${recMsgList.mNo} / ${recMsgList.receiver}/ ${recMsgList.sender} / ${recMsgList.mCont} /${recMsgList.mStatus} / ${recMsgList.reg}<br/>
-				</c:forEach>
-			</form>
+		<form action="messageDel.tm" method="get">
+			<input type="submit" value="삭제" />
+			<div>
+			<ul>
+			<c:forEach var="recMsgList" items="${recMsgList}"> 
+				<li class="menu">
+				<input type="checkbox" name="msgNo" value="${recMsgList.mNo}" /><a>${recMsgList.mNo} /받는사람: ${recMsgList.receiver}/ 보낸사람: ${recMsgList.sender}  / ${recMsgList.mStatus} / ${recMsgList.reg}  ▼ </a>
+					<ul style="display:none;">
+						<li><textarea rows="10" cols="50" readonly style="resize: none;">내용 : ${recMsgList.mCont}</textarea></li><br/>
+					</ul>
+				</li>
+			</c:forEach>
+			</ul>
+			</div>
+		</form>
 		</div>
 		
 		
