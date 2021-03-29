@@ -6,44 +6,29 @@
 	<!-- //top end -->
 	
 	<div class="wrapAll">
-	<br/><br/><br/><br/><br/><br/>
+		<!-- 자기자신일때도 처리..세션스코프? -->
+		<c:if test="${result == 1}">
+			<script>
+				alert("전송완료");
+				location.href = "messageWrite.tm";
+			</script>
+			
+		</c:if>
 	
-		<h1>쪽지쓰기</h1>
-		<form action="/travelMaker/msg/messageWritePro.tm" method="get">
-			
-			
-			
-			받는이 <input type="text" name="receiver" required /> <br/>
-			<textarea rows="10" cols="30" name="mCont" required></textarea><br/>
-			<button onclick=" " >취소</button> 
-			
-			
-			
-			<input type="submit" value="보내기" />
-		</form>
+		<c:if test="${result == 0}">
+			<script>
+				alert("아이디를 확인해주세요!");	
+				history.go(-1);
+			</script>
+		</c:if>
+		
+		
+		
+	
+		
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		
+		
 
 
 

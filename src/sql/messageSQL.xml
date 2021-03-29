@@ -5,5 +5,24 @@
   
 <mapper namespace="message">
 
+<!-- 메세지 insert -->
+<insert id="insertMsg" parameterType="MessageDTO">
+	insert into message values(message_seq.nextval,#{receiver},#{sender},#{mCont},0, sysdate)
+</insert>
+
+<!-- 아이디있는지 체크 -->
+<select id="idCh" parameterType="String" resultType="int">
+	select count(*) from tmUser where id=#{id} and status=0
+</select>
+
+<!-- 메세지 보낸사람:사용자 조회  -->
+<select id="getSenMsg" parameterType="String" resultType="MessageDTO">
+	select * from message where sender=#{id}
+</select>
+
+<!-- 메세지 받은 사람:사용자 조회 -->
+<select id="getRecMsg" parameterType="String" resultType="MessageDTO">
+	select * from message where receiver=#{id}
+</select>
 
 </mapper>
