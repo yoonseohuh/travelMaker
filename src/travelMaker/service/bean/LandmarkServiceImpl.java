@@ -5,8 +5,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import travelMaker.model.dao.LandmarkBoardDAO;
+import travelMaker.model.dao.LandmarkLikedDAO;
 import travelMaker.model.dto.LandmarkBoardDTO;
 
 @Service
@@ -15,6 +18,9 @@ public class LandmarkServiceImpl implements LandmarkService{
 	
 	@Autowired
 	private LandmarkBoardDAO landmarkBoardDAO = null;
+	
+	@Autowired
+	private LandmarkLikedDAO landmarkLikedDAO = null;
 
 	
 	@Override
@@ -37,6 +43,7 @@ public class LandmarkServiceImpl implements LandmarkService{
 	
 	@Override
 	public List myLand(String id) throws SQLException{
+		
 		List myLand = landmarkBoardDAO.myLand(id);
 		return myLand;
 	}
@@ -48,7 +55,7 @@ public class LandmarkServiceImpl implements LandmarkService{
 
 	@Override
 	public LandmarkBoardDTO getLand(int lNo) throws SQLException {
-		LandmarkBoardDTO land = landmarkBoardDAO.getLand(lNo);
+		LandmarkBoardDTO land =  landmarkBoardDAO.getLand(lNo);
 		return land;
 	}
 

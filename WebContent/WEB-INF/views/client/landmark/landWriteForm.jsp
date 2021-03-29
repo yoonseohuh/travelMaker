@@ -5,11 +5,15 @@
 	<!-- //top end -->
 	
 	<div class="wrapAll">
+		
 		<h1>landWriteForm</h1>
 		
 		<!-- 검색창 -->
+		<br />
+		<br /><br /><br /><br />
 		<div>
-			<input type="text" id="searchKeyword">
+			<input type="text" id="searchKeyword" /><br />
+		<br />
 			<button id="searchBtn">검색</button>
 			<button id="deleteBtn">삭제</button>
 		</div>
@@ -152,6 +156,9 @@
 					</td>
 			</table>
 		</form>
+		
+	</div>
+	<!-- //wrapAll end -->
 		
 	</div>
 	<!-- //wrapAll end -->

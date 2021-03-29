@@ -5,12 +5,26 @@
 <!-- //top end -->
 
 <div class="wrapAll">
-	<h1>MyLand</h1>
+	<h1>MyLand 페이지</h1>
 	<a href="/travelMaker/land/landWrite.tm"><button>생성</button></a>
-
+	
 	<!-- 내가 작성한 랜드마크 -->
 	<!-- lName, addr, lType, writer   -->
-
+	<h3> 내가 작성한 랜드마크</h3>
+	<table>
+		<tr>
+			<td>${myLand.lName}</td>
+		</tr>
+		<tr>
+			<td>${myLand.addr}</td>
+		</tr>
+		<tr>
+			<td>${myLand.lType}</td>
+		</tr>
+		<tr>
+			<td>${myLand.writer}</td>
+		</tr>
+	</table>
 
 
 

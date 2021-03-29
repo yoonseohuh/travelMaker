@@ -25,4 +25,9 @@
 	select * from message where receiver=#{id}
 </select>
 
+<!-- 메세지 삭제 -->
+<delete id="deleteMsg" parameterType="int">
+	delete from message where mNo=#{mNo}
+</delete>
+
 </mapper>
