@@ -61,4 +61,10 @@ public interface TmUserDAO {
 	public List getPosList(int start, int end);
 	//포지션 추가하기 
 	public void addSPos(SmallPosDTO spdto);
+	//포지션 정보 가져오기 
+	public SmallPosDTO getSPosInfo(int posNo);
+	//포지션 정보 수정
+	public void updatePos(SmallPosDTO spdto);
+	//포지션 삭제
+	public void deletePos(String posNo); 
 }

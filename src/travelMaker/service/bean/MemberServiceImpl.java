@@ -330,7 +330,7 @@ public class MemberServiceImpl implements MemberService {
 			sPosList=tmuserDAO.getPosList(startRow, endRow);
 		} 
 		
-		int number=count -(currPage-1)*pageSize;
+		int number=count-(currPage-1)*pageSize;
 		
 		Map every = new HashMap();
 		every.put("pageNum", pageNum);
@@ -344,10 +344,29 @@ public class MemberServiceImpl implements MemberService {
 		
 		return every;
 	}
-
+	
+	//s포지션 추가하기 
 	@Override
 	public void addSPos(SmallPosDTO spdto) {
 		tmuserDAO.addSPos(spdto);
+	}
+	
+	//포지션 한 줄 정보가져오기 
+	@Override
+	public SmallPosDTO getSPosInfo(int posNo) {
+		SmallPosDTO spdto = tmuserDAO.getSPosInfo(posNo);
+		return spdto;
+	}
+	
+	//포지션 업데이트
+	@Override
+	public void updatePos(SmallPosDTO spdto) {
+		tmuserDAO.updatePos(spdto);
+	}
+
+	@Override
+	public void deletePos(String posNo) {
+		tmuserDAO.deletePos(posNo);
 	}
 	
 	

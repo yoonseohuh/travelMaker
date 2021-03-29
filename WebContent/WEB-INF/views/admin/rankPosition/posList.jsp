@@ -2,11 +2,19 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-	
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 	<jsp:include page="/WEB-INF/views/include/adminMenu.jsp" />
 	<!-- //adminMenu end -->
-	
+	<script>
+   		function dee(index){
+   			var check = confirm("삭제하시겠습니까?");
+   			if(check){
+   				location.href="/travelMaker/admin/deletePos.tm?posNo="+index;
+   			}else{
+   				location.href="/travelMaker/admin/posList.tm";
+   			}
+   		}
+   	</script>
 	<div class="wrapAll admin">
 		<c:if test="${count==0 || count==null}">
 			<table>
@@ -39,22 +47,25 @@
 		<c:if test="${count>0}">
 			<table>
 				<tr>
+					<th>No.</th>
 					<th>포지션 대분류</th>
-					<th>포지션 번호</th>
 					<th>이모티콘</th>
 					<th>포지션 이름</th>
 					<th>설명</th>
 				</tr>
 			<c:forEach var="spo" items="${sPosList}">
 	    		<tr>
+	    			<td>
+						${number}
+						<c:set var="number" value="${number-1}"/>
+					</td>
 	    			<td>${spo.posCate}</td>
-	    			<td>${spo.posNo}</td>
 	    			<td><img src="<c:url value="/resources/upload/${spo.posRoot}"/>" width="100" height="100"></td>
 	    			<td>${spo.posName}</td>
 	    			<td>${spo.posExpl}</td>
-	    			<td class="modiBtn">
-	    				<input type="button" value="수정" onclick="window.location='/travelMaker/admin/modifyFormRk.tm?rkNo=${rk.rkNo}'"/>
-	    				<input type="button" value="삭제" onclick="de(${rk.rkNo})"/>
+	    			<td >
+	    				<input type="button" value="수정" onclick="window.location='/travelMaker/admin/modifyFormPos.tm?posNo=${spo.posNo}'"/>
+	    				<input type="button" value="삭제 ${spo.posNo}" onclick="dee(${spo.posNo})"/>
 	    			</td>
 	    		</tr>
 	    	</c:forEach>

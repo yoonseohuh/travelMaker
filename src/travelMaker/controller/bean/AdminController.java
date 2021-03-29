@@ -186,6 +186,34 @@ public class AdminController {
 		memService.insertRank(rkdto);
 		return "redirect:rkPos.tm";
 	}
+
+	//랭크 수정
+	@RequestMapping("modifyFormRk.tm")
+	public String modifyRk(int rkNo,Model model) {
+		//rNo으로 해당 랭크 정보 불러오는 메서드 
+		UserRkDTO rdto = memService.getRkInfo(rkNo);
+		model.addAttribute("rdto",rdto);
+		return "admin/rankPosition/modifyFormRk";
+	}
+
+	//랭크 수정 Pro
+	@RequestMapping("modifyProRk.tm")
+	public String modifyRkPro(UserRkDTO rdto) {
+		//랭크 update 하는 메서드 
+		memService.updateRank(rdto);
+		return "redirect:rkPos.tm";
+	}
+		
+	//랭크 삭제
+	@RequestMapping("deleteRk.tm")
+	public String deleteRk(String rkNo) {
+		//rkNo으로 랭크 삭제하는 메서드
+		//int rkNo1 = Integer.parseInt(rkNo);
+		System.out.println(rkNo);
+		memService.deleteRk(rkNo); 
+		 
+		return "redirect:rkPos.tm";
+	}
 	//포지션 리스트 
 	@RequestMapping("posList.tm")
 	public String smallPos(String pageNum,Model model) {
@@ -204,7 +232,7 @@ public class AdminController {
 		return "admin/rankPosition/posList";
 	}
 
-//포지션 추가 Pro
+	//포지션 추가 Pro
 	@RequestMapping("addSPosPro.tm")
 	public String addSPos(SmallPosDTO spdto, MultipartHttpServletRequest request) {
 		//포지션 insert 시키는 메서드 
@@ -232,8 +260,7 @@ public class AdminController {
 			newName= imgName + date + ext;
 			System.out.println("newName:" + newName);
 			//파일 저장
-			//String path = request.getRealPath("/resources/upload"); 
-			String path = "/resources/upload";
+			String path = request.getRealPath("/resources/upload"); 
 			System.out.println("path:" + path);
 			String imgPath = path + "\\" + newName;
 			System.out.println("imgPath :" +imgPath);
@@ -247,36 +274,67 @@ public class AdminController {
 		memService.addSPos(spdto);
 		return "redirect:posList.tm";
 	}
-	//랭크 수정
-	@RequestMapping("modifyFormRk.tm")
-	public String modifyRk(int rkNo,Model model) {
-		//rNo으로 해당 포지션 정보 불러오는 메서드 
-		UserRkDTO rdto = memService.getRkInfo(rkNo);
-		//랭크 전체 보면 서 수정할 수 있도록 전체 불러오기.
-		//하지만 지금하긴 귀찮은걸 keep
-		model.addAttribute("rdto",rdto);
-		return "admin/rankPosition/modifyFormRk";
+	//포지션 수정
+	@RequestMapping("modifyFormPos.tm")
+	public String modifyFormPos(int posNo,Model model) {
+		//posNo으로 해당 포지션 정보 불러오는 메서드 
+		SmallPosDTO spdto = memService.getSPosInfo(posNo);
+		System.out.println(spdto.getPosName());
+		model.addAttribute("spdto",spdto);
+		return "admin/rankPosition/modifyFormPos";
 	}
 	
-	//랭크 수정 Pro
-	@RequestMapping("modifyProRk.tm")
-	public String modifyRkPro(UserRkDTO rdto) {
-		//랭크 update 하는 메서드 
-		memService.updateRank(rdto);
-		return "redirect:rkPos.tm";
+	//포지션 수정 Pro
+	@RequestMapping("modifyProPos.tm")
+	public String modifyProPos(SmallPosDTO spdto, MultipartHttpServletRequest request) {
+		//포지션 insert 시키는 메서드 
+		MultipartFile mf = null;
+		String newName = null;
+		try {
+			
+			//파일 정보 담기.
+			mf = request.getFile("img");
+			long size = mf.getSize();
+			System.out.println(size);
+			
+			//이름 중복처리하여 저장시키는 버전.
+			// 오리지널 파일명 가져오기 
+			String orgName = mf.getOriginalFilename();
+			System.out.println("orgName:" + orgName);
+			//이름 나누기 확장자 빼기
+			String imgName = orgName.substring(0, orgName.lastIndexOf('.'));
+			System.out.println("imgName: "+imgName);
+			// 확장자 가져오기
+			String ext = orgName.substring(orgName.lastIndexOf('.'));
+			System.out.println("ext : " + ext);
+			// 시간 추가한 새이름 저장될 이름!
+			long date= System.currentTimeMillis();
+			newName= imgName + date + ext;
+			System.out.println("newName:" + newName);
+			//파일 저장
+			String path = request.getRealPath("/resources/upload"); 
+			System.out.println("path:" + path);
+			String imgPath = path + "\\" + newName;
+			System.out.println("imgPath :" +imgPath);
+			File copyFile = new File(imgPath);
+			mf.transferTo(copyFile);
+			spdto.setPosRoot(newName);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		//포지션 update 하는 메서드 
+		memService.updatePos(spdto);
+		return "redirect:posList.tm";
 	}
-		
-	//랭크 삭제
-	@RequestMapping("deleteRk.tm")
-	public String deleteRk(String rkNo) {
+	
+	//포지션 삭제
+	@RequestMapping("deletePos.tm")
+	public String deletePos(String posNo) {
 		//rkNo으로 랭크 삭제하는 메서드
-		//int rkNo1 = Integer.parseInt(rkNo);
-		 memService.deleteRk(rkNo); 
+		memService.deletePos(posNo); 
 		 
-		return "redirect:rkPos.tm";
+		return "redirect:posList.tm";
 	}
-	
-	
 	
 	
 }

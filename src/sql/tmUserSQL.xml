@@ -110,12 +110,25 @@
 	<select id="getPosList" parameterType="hashmap" resultType="SmallPosDTO">
 		<![CDATA[
 			select b.*, r from (select a.*,rownum r from
-			(select * from smallpos order by posNo)a
-			order by posNo)b where r>=#{start} AND r<=#{end}
+			(select * from smallpos order by posNo desc)a
+			order by posNo desc)b where r>=#{start} AND r<=#{end}
 		]]>
 	</select>
 	
 	<insert id="addSPos" parameterType="SmallPosDTO">
 		insert into smallpos values (#{posCate},SMALLPOS_seq.nextval,#{posName},#{posExpl},#{posRoot})
 	</insert>	
+	
+	<select id="getSPosInfo" parameterType="int" resultType="SmallPosDTO">
+		select * from smallpos where posNo=#{value}
+	</select>
+	
+	<update id="updatePos" parameterType="SmallPosDTO">
+		update smallpos set posCate=#{posCate},posRoot=#{posRoot},posName=#{posName},posExpl=#{posExpl} where posNo=#{posNo}
+	</update>
+	
+	<delete id="deletePos" parameterType="string">
+		delete from smallpos where posNo=#{posNo}
+	</delete>
+	
 </mapper>
