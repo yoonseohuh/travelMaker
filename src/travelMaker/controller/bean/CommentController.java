@@ -39,6 +39,7 @@ public class CommentController {
 		
 		// 여행 갯수 가져옴
 		int count = commentService.countGroup(id);
+		System.out.println("여행목록 카운트" + count);
 		
 		//받는사람이 사용자인 userCmtDTO가져오기
 		List comRecUser = commentService.comRecUser(id);
