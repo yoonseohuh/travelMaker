@@ -5,14 +5,22 @@
 <head>
 	<meta charset="UTF-8">
 	<title>travelMaker</title>
-  
+  	
+  	<!-- FONTS -->
+  	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+  	
 	<!-- CSS -->
 	<link href="<c:url value="/resources/css/reset.css" />" rel="stylesheet">
+	<link href="<c:url value="/resources/css/common.css" />" rel="stylesheet">
 	<link href="<c:url value="/resources/css/layout.css" />" rel="stylesheet">
 	<link href="<c:url value="/resources/css/fullpage.css" />" rel="stylesheet">
+	<link href="<c:url value="/resources/css/swiper.css" />" rel="stylesheet">
+	<link href="<c:url value="/resources/css/contents.css" />" rel="stylesheet">
 	
 	<!-- JS -->
 	<script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js" />"></script>	
-	<script type="text/javascript" src="<c:url value="/resources/js/fullpage.js" />"></script>	
+	<script type="text/javascript" src="<c:url value="/resources/js/fullpage.js" />"></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/swiper.min.js" />"></script>
 </head>
 <body>

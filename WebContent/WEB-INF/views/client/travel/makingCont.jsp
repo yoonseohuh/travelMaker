@@ -6,7 +6,7 @@
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
 	<!-- //top end -->
 	
-	<div class="wrapAll">
+	<div class="wrapAll client">
 		<c:if test="${sessionScope.memId==null}">
 			<script>
 				alert("로그인 후에 이용 가능합니다");
