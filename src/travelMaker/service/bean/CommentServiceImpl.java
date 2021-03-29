@@ -26,7 +26,7 @@ public class CommentServiceImpl implements CommentService {
 	// 사용자가 참여중인 그룹스페이스를 한줄씩(groupSpaceDTO) 가져올것임
 	public GroupSpaceDTO getGroupInfo(int num) throws SQLException{
 		GroupSpaceDTO gInfo = userCmtDAO.getGroupInfo(num);
-		
+		System.out.println("서비스에서 그룹명이 안뜨나? " + gInfo.getSubject());
 		return gInfo;
 	}
 			
@@ -42,7 +42,12 @@ public class CommentServiceImpl implements CommentService {
 		
 		List dtoList = new ArrayList(); //null만한거는 무슨차이일까?..
 		for(int i = 0 ; i < myGroup.size(); i++) {
-			dtoList.add(getGroupInfo(((GroupMemberDTO)myGroup.get(i)).getgNo()));
+			System.out.println("마이그룹사이즈" + myGroup.size());
+			System.out.println(i + "번쨰 : " + ((GroupMemberDTO)myGroup.get(i)).getgNo());
+			  GroupSpaceDTO gInfo = getGroupInfo(((GroupMemberDTO)myGroup.get(i)).getgNo());
+			  if(gInfo.getStatus() == 4) { //GroupSpace 여행상태가 4인것들만 담는다
+				  dtoList.add(gInfo);
+			  }						
 		}
 		return dtoList;
 	}
@@ -97,18 +102,13 @@ public class CommentServiceImpl implements CommentService {
 						//System.out.println("멤버목록" + j + " : " + ((GroupMemberDTO)memList.get(j)).getId());
 					}
 				
-				
 			
 			}//작은  for문 memList돌린거
-			
 			
 			
 		}//큰 for문 myG돌린거
 		//fin.add(comMemList);
 
-		
-		
-		//그룹넘 하나씩 보내서 멤버들 닉네임 가져온다
 		
 		return comMemList;
 	}
@@ -118,11 +118,13 @@ public class CommentServiceImpl implements CommentService {
 	
 	
 	//코멘트 insert문
-	public void insertCom(String id, String groupNum, String groupMem, String comment) {
+	public int insertCom(String id, String groupNum, String groupMem, String comment) {
 		
 		int gNo = Integer.parseInt(groupNum);
-		
 		userCmtDAO.insertCom(id, gNo, groupMem, comment);
+		int result = 1;
+		
+		return result;
 	}
 	
 	
