@@ -3,6 +3,7 @@ package travelMaker.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import travelMaker.model.dto.SmallPosDTO;
 import travelMaker.model.dto.TmUserDTO;
 import travelMaker.model.dto.UserRkDTO;
 
@@ -58,4 +59,6 @@ public interface TmUserDAO {
 	public int getPosCount();
 	//start,end 주고 포지션 소분류 긁어오기 
 	public List getPosList(int start, int end);
+	//포지션 추가하기 
+	public void addSPos(SmallPosDTO spdto);
 }
