@@ -21,6 +21,7 @@
 	<!-- JS -->
 	<script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js" />"></script>	
 	<script type="text/javascript" src="<c:url value="/resources/js/fullpage.js" />"></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/scrolloverflow.js" />"></script>
 	<script type="text/javascript" src="<c:url value="/resources/js/swiper.min.js" />"></script>
 </head>
 <body>
