@@ -40,7 +40,7 @@ public class LandmarkBoardDAOImpl implements LandmarkBoardDAO{
 
 	@Override
 	public LandmarkBoardDTO getLand(int lNo) throws SQLException {
-		 LandmarkBoardDTO land  = sqlSession.selectOne("landmarkBoard.getLand", lNo);
+		LandmarkBoardDTO land =  sqlSession.selectOne("landmarkBoard.getLand", lNo);
 		return land;
 	}
 

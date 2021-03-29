@@ -22,6 +22,8 @@ public interface LandmarkService {
 	public 	List myLand(String id) throws SQLException;
 	// 내가 좋아요 한 랜드마크
 	public void myLandLiked(String id) throws SQLException;
+
+
 	
 
 

@@ -7,7 +7,7 @@
 
 <div class="wrapAll">
 
-	<a href="/travelMaker/land/landWrite.tm"><button>랜드마크 작성</button></a>
+
 
 	<!-- 지도 -->
 	<div id="map" style="width: 1000px; height: 400px;"></div>
@@ -49,8 +49,6 @@
 			
 			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 			
-			
-			
 			// *** 마커 생성 *** 
 			// 마커 이미지의 이미지 주소입니다
 			var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
@@ -62,6 +60,7 @@
 			    
 			    // 마커 이미지를 생성합니다    
 			    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+			   
 			    
 			    // 마커를 생성합니다
 			    var marker = new kakao.maps.Marker({
@@ -71,25 +70,24 @@
 			        image : markerImage, // 마커 이미지 
 			        clickable: true
 			    });
-
-			    // 인포윈도우를 생성합니다
-			    var infowindow = new kakao.maps.InfoWindow({
-			        content : iwContent,
-			        removable : iwRemoveable
-			    });
-
-			    // 마커에 클릭이벤트를 등록합니다
-			    kakao.maps.event.addListener(marker, 'click', function() {
-			          // 마커 위에 인포윈도우를 표시합니다
-			          infowindow.open(map, marker);  
-			    });
-				 // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-			    var iwContent = '<div style="padding:5px;"> 홀리쉣더뿨킹</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-			        iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-
-			    
+			  
 			}// for
 			
+			
+			 // 마커에 클릭이벤트를 등록합니다
+			kakao.maps.event.addListener(marker,'click',function() {// 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+				infowindow.setContent('<div style="padding:5px;font-size:12px;">'+ place.place_name + '</div>');
+				infowindow.open(map, marker);
+				// 마커를 클릭하면, 해당 정보를 태그에 추가 
+				$("#place_name").val(place.place_name);
+				$("#category_name").val(place.category_name);
+				$("#road_address_name").val(place.road_address_name);
+				$("#xLoc").val(place.y);	// place.x로 하면 y값이 들어가서 place.y로 해야 경도 가 맞음 
+				$("#yLoc").val(place.x);	// 마찬가지로 place.x가 y값으로 들어가야 위도가 맞음
+				
+				/* $("#yLoc").val(); */
+			});
+				
 			
 		}//markers
 		
@@ -97,16 +95,16 @@
 		});//ready
 		
 		</script>
-	
-		
-		
-	<%-- <c:forEach var="land" items="${land}">
+	<a href="/travelMaker/land/landWrite.tm"><button>랜드마크 작성</button></a>
+
+	<!-- 
+ 		<c:forEach var="land" items="${land}">
 			<h4>writer : ${land.writer}</h4>
 			<h4>lName : ${land.lName}</h4>
 			<h4>addr : ${land.addr}</h4>
-			<h4>loc : ${land.xLoc},${land.yLoc}</h4>
-		</c:forEach> --%>
-
+			<h4></h4>
+		</c:forEach>
+		</form> -->
 </div>
 <!-- //wrapAll end -->
 

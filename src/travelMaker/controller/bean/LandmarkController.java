@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,19 +44,20 @@ public class LandmarkController {
 		return land;
 	}
 	
-	// 하나 랜드마크 뿌려주기 
+	// 랜드마크 클릭 시 랜드마크 가져오기
 	@RequestMapping("landmarkCont.tm")
 	public String landmarkCont(int lNo, Model model) throws SQLException {
-			LandmarkBoardDTO land = landmarkService.getLand(lNo);
-			//System.out.println("land"+land.getlNo());
-			model.addAttribute("land", land);
+		 LandmarkBoardDTO land =  landmarkService.getLand(lNo);
+		 System.out.println(land);
+		 model.addAttribute("land", land);
 		return "client/landmark/landmarkCont";
 	}
+
 	
 	// 랜드마크 작성 페이지
 	@RequestMapping("landWrite.tm")
 	public String landWriteForm(LandmarkBoardDTO dto) {
-		// 좋아요 수 0으로 시작? 
+		
 		return "client/landmark/landWriteForm";
 	}
 	
@@ -69,15 +71,26 @@ public class LandmarkController {
 	
 	//나의 랜드마크
 	@RequestMapping("myLand.tm")
-	public String myLand(Model model) throws SQLException {
+	public String myLand(HttpSession session, Model model) throws SQLException {
 		// 구면인데 초면 같으신 분
 		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
 		//내가 작성한 랜마
 		List myLand = landmarkService.myLand(id);
 		model.addAttribute("memId", id);
+		model.addAttribute("myLand", myLand);
 		//내가 좋아요한 랜마 이건 나중에 추가
 		return "client/mypage/myLand";
 	}
+	
+	@RequestMapping("myLandDelete.tm")
+	public String myLandDelete(HttpSession session) {
+		
+		return "client/mypage/myLandDelete";
+	}
+	
+	
+	
+	// 
 
 	
 	

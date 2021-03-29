@@ -13,8 +13,8 @@
 		select * from LANDMARKBOARD
 	</select>
 	
-	<select id="getLand" resultType="LandmarkBoardDTO">
-		select * from LANDMARKBOARD where lNo=#{lNo}
+	<select id="getLand" parameterType="int" resultType="LandmarkBoardDTO">
+		select * from LANDMARKBOARD where lNo = #{value}
 	</select>
 	
 	<select id="myLand" parameterType="string" resultType="LandmarkBoardDTO">
