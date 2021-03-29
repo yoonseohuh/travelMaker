@@ -25,7 +25,7 @@ public class MessageController {
 	public String message(Model model) {
 		
 		//임시아이디
-		String id = "smlee";
+		String id = "test4";
 		
 		// 보낸 쪽지 가져오기
 		List senMsgList = messageService.getSenMsg(id);
@@ -53,18 +53,21 @@ public class MessageController {
 	// 메세지 작성 pro
 	@RequestMapping("messageWritePro.tm")
 	public String messageWritePro(MessageDTO msgDto, Model model) {
-		msgDto.setSender("smlee");
+		msgDto.setSender("test4");
 		int result = messageService.insertMsg(msgDto);
 		model.addAttribute("result", result);
 		
 		return "client/message/messageWritePro";
 	}
 	
-	//메세지 삭제
 	
+	//메세지 삭제
 	@RequestMapping("messageDel.tm")
-	public String messageDel(String msgNo) {
-		System.out.println(); 
+	public String messageDel(String msgNo, Model model) {
+		int mNo = Integer.parseInt(msgNo);
+		int result = messageService.deleteMsg(mNo);
+		//result 1이면 삭제 완료
+		model.addAttribute("result", result);
 		return "client/message/messageDel";
 	}
 	

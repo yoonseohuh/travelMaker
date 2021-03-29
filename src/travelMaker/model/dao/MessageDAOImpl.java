@@ -44,5 +44,12 @@ public class MessageDAOImpl implements MessageDAO {
 	}
 
 	
+	// 메세지 삭제
+	public int deleteMsg(int mNo) {
+		sqlSession.delete("message.deleteMsg", mNo);
+		int result = 1;
+		
+		return result;
+	}
 	
 }

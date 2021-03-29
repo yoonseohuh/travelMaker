@@ -47,4 +47,11 @@ public class MessageServiceImpl implements MessageService {
 		return recMsgList;
 	}
 	
+	// 메세지 삭제
+	public int deleteMsg(int mNo) {
+		int result = messageDAO.deleteMsg(mNo);
+		
+		return result;
+	}
+	
 }

@@ -18,4 +18,7 @@ public interface MessageDAO {
 	// 메세지 받는사람:사용자 가져오기
 	public List getRecMsg(String id);
 	
+	// 메세지 삭제
+	public int deleteMsg(int mNo);
+	
 }
