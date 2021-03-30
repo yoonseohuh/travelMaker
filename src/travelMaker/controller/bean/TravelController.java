@@ -315,18 +315,39 @@ public class TravelController {
 	
 	@RequestMapping("gallery.tm")
 	public String gallery(int gNo, Model model) throws Exception {
+		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
+		int idStatus = travelService.getMemStatus(gNo, id);
 		GroupSpaceDTO grp = travelService.getContent(gNo);
 		List list = travelService.getGroupImgs(gNo);
+		
+		model.addAttribute("idStatus",idStatus);
 		model.addAttribute("grp",grp);
 		model.addAttribute("list",list);
 		return "/client/travel/gallery";
 	}
 	
+	@ResponseBody
 	@RequestMapping("galleryLiked.tm")
-	public String galleryLiked() throws Exception {
-		return "";
+	public String galleryLiked(@RequestBody Map<Object, Object> map) throws Exception {
+		String id = (String)map.get("id");
+		int gNo = Integer.parseInt((String)map.get("gNo"));
+		int pNo = Integer.parseInt((String)map.get("pNo"));
+		//좋아요 처리
+		travelService.imgLiked(id,gNo,pNo);
+		//(메서드 재활용을 위해) 해당 그룹의 이미지 정보 전체를 담아와서 좋아요 된 pNo의 레코드만 res라는 DTO에 담아 리턴
+		GalleryDTO res = new GalleryDTO();
+		List wholeList = travelService.getGroupImgs(gNo);
+		for(int i=0 ; i<wholeList.size() ; i++){
+			GalleryDTO dto = (GalleryDTO)wholeList.get(i);
+			if(pNo==dto.getpNo()){
+				res = dto;
+			}
+		}
+
+		ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.writeValueAsString(res);
+		return json;
 	}
-	
 	
 	
 	
