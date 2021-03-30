@@ -1,6 +1,8 @@
 package travelMaker.controller.bean;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -231,21 +233,19 @@ public class TravelController {
 			String ext = orgName.substring(orgName.lastIndexOf('.'));
 			long date = System.currentTimeMillis();
 			finalName = imgName+date+ext;										//sample1616999640437.jpg
-			/*
-			String ctx = context.getServletContextName();
-			System.out.println("ctx: "+ctx);
-			Set e = context.getResourcePaths("/jsp");
-			Object [] array = e.toArray();
-			int i = 0;
-			while(i<array.length) {
-				System.out.println(i+"번째 "+array[i].toString());
-			}
-			*/
+
 			String path = request.getRealPath("save");
 			String imgPath = path+"\\"+finalName;
 			File copyFile = new File(imgPath);					//D:\yoonseohuh\framework\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\travelMaker\save\sample1616999640437.jpg
 			mf.transferTo(copyFile);
 			System.out.println(copyFile);
+			
+			/*서버 폴더에 저장된 이미지 복사해서 github에 공유하는 workspace에도 넣기
+			FileInputStream fis = new FileInputStream(copyFile);
+			FileOutputStream fos = new FileOutputStream(copyFile);
+			*/
+			
+			
 			//DB에 저장
 			GalleryDTO dto = new GalleryDTO();
 			dto.setgNo(Integer.parseInt(request.getParameter("gNo")));
