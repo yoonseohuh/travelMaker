@@ -73,20 +73,6 @@
 			  
 			}// for
 			
-			
-			 // 마커에 클릭이벤트를 등록합니다
-			kakao.maps.event.addListener(marker,'click',function() {// 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-				infowindow.setContent('<div style="padding:5px;font-size:12px;">'+ place.place_name + '</div>');
-				infowindow.open(map, marker);
-				// 마커를 클릭하면, 해당 정보를 태그에 추가 
-				$("#place_name").val(place.place_name);
-				$("#category_name").val(place.category_name);
-				$("#road_address_name").val(place.road_address_name);
-				$("#xLoc").val(place.y);	// place.x로 하면 y값이 들어가서 place.y로 해야 경도 가 맞음 
-				$("#yLoc").val(place.x);	// 마찬가지로 place.x가 y값으로 들어가야 위도가 맞음
-				
-				/* $("#yLoc").val(); */
-			});
 				
 			
 		}//markers
