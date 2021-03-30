@@ -67,4 +67,6 @@ public interface TmUserDAO {
 	public void updatePos(SmallPosDTO spdto);
 	//포지션 삭제
 	public void deletePos(String posNo); 
+	//id 중복 체크 
+	public int idCheck(String id);
 }

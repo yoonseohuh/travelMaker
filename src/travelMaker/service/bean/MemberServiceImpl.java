@@ -368,6 +368,12 @@ public class MemberServiceImpl implements MemberService {
 	public void deletePos(String posNo) {
 		tmuserDAO.deletePos(posNo);
 	}
+
+	@Override
+	public int idCheck(String id) {
+		int check = tmuserDAO.idCheck(id);
+		return check;
+	}
 	
 	
 	

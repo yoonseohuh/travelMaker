@@ -5,6 +5,9 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -186,4 +189,19 @@ public class MemberController {
 		return "client/mypage/myDelete";
 	}
 	
+	@RequestMapping("ajaxIdCheck.tm")
+	public ResponseEntity<String> ajaxIdAvail(String id) throws Exception {
+	String result = "";
+	//매개변수로 전달 받은 id가 DB에 존재하는지 확인
+	int check = memService.idCheck(id);	//1이면 이미 존재, 0이면 존재 X
+	if(check == 1) {
+		result = "이미 사용중입니다";
+	}else {
+		result = "사용가능";
+	}
+	HttpHeaders responseHeaders = new HttpHeaders();
+	responseHeaders.add("Content-Type", "text/html;charset=utf-8");
+	
+	return new ResponseEntity<String>(result, responseHeaders, HttpStatus.CREATED);
+	}
 }
