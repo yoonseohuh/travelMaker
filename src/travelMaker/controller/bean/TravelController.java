@@ -270,8 +270,12 @@ public class TravelController {
 	
 	@RequestMapping("gallery.tm")
 	public String gallery(int gNo, Model model) throws Exception {
+		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
+		int idStatus = travelService.getMemStatus(gNo, id);
 		GroupSpaceDTO grp = travelService.getContent(gNo);
 		List list = travelService.getGroupImgs(gNo);
+		
+		model.addAttribute("idStatus",idStatus);
 		model.addAttribute("grp",grp);
 		model.addAttribute("list",list);
 		return "/client/travel/gallery";
