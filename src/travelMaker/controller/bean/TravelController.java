@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -173,6 +174,50 @@ public class TravelController {
 				awaiters.add(req);
 			}
 		}
+		
+		
+		//jbr여기부터...
+		//status = 1 인 멤버들의 그룹리퀘스트dto
+		List<GroupRequestDTO> joinMem = new ArrayList<GroupRequestDTO>();
+		for(int i=0;i<grpReq.size();i++) {
+			GroupRequestDTO req = (GroupRequestDTO)grpReq.get(i);
+			int status = travelService.getMemStatus(gNo, req.getId());
+			if(status==1) {
+				joinMem.add(req);
+			}
+		}
+		
+		//joinMem의 posNo를 리스트에 담는다
+		List<Integer> posList = new ArrayList<Integer>();
+		for(int i = 0; i < joinMem.size(); i++) {
+			posList.add(((GroupRequestDTO)joinMem.get(i)).getPosNo());
+		}
+		
+		 System.out.println("포스넘 출려되니?" + posList);
+		//중복제거..
+		HashSet posListFin = new HashSet();
+		posListFin.addAll(posList);
+		posList.clear();
+		posList.addAll(posListFin);
+
+		System.out.println("포지션리스트" + posListFin);
+		int nomalCnt = 0;
+		Map map = new HashMap();
+		
+	
+	/*	
+		for(int i = 0; i < posList.size(); i++) {
+			if(posList.get(i) == -1) {   //포지션에 번호가 -1 이면
+				nomalCnt = nomalCnt + 1 ;   // +1추가
+			}else { //그게아니면
+			ListtravelService.getPosInfo(posList.get(i));
+			}
+		}
+	*/	
+		//jbr여기까지...
+		
+		
+		
 		
 		//갤러리
 		List gList = travelService.getGroupImgs(gNo);
