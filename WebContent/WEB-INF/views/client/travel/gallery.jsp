@@ -7,6 +7,7 @@
 	<!-- //top end -->
 	
 	<div class="wrapAll client">
+	<h1>${grp.subject} 그룹 갤러리</h1>
 	
 	
 	
