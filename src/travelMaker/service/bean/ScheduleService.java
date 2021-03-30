@@ -15,7 +15,7 @@ public interface ScheduleService {
 	// 일정 리스트
 	public List getSchedule(int gNo) throws Exception;
 	// 일정 삭제
-	public void deleteSchedule(ScheduleDTO dto) throws Exception;
+	public void deleteSchedule(int sNo) throws Exception;
 	
 
 

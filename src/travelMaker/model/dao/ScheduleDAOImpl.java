@@ -30,8 +30,8 @@ public class ScheduleDAOImpl implements ScheduleDAO {
 	@Override
 	public void updateSchedule(ScheduleDTO dto) throws Exception {
 		sqlSession.update("schedule.updateSchedule", dto);
-		System.out.println(dto.getsCont());
-		System.out.println(dto.getsNo());
+		//System.out.println(dto.getsCont());
+		//System.out.println(dto.getsNo());
 	}
 	
 	@Override
@@ -46,8 +46,9 @@ public class ScheduleDAOImpl implements ScheduleDAO {
 	}
 	
 	@Override
-	public void deleteSchedule(ScheduleDTO dto) throws Exception{
-		
+	public void deleteSchedule(int sNo) throws Exception{
+		sqlSession.delete("schedule.deleteSchedule", sNo);
+		System.out.println("sNo 다오임플"+ sNo);
 	}
 
 

@@ -16,8 +16,8 @@
 		update SCHEDULE set sDate=#{sDate}, sCont=#{sCont} where sNo=#{sNo}
 	</update>
 	
-	<delete id="deleteSchedule" parameterType="ScheduleDTo">
-		
+	<delete id="deleteSchedule" parameterType="int">
+		delete from SCHEDULE where sNo=#{sNo}
 	</delete>
 
 </mapper>

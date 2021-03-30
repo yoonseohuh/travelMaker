@@ -38,8 +38,9 @@ public class ScheduleServiceImpl implements ScheduleService{
 	}
 	
 	@Override
-	public void deleteSchedule(ScheduleDTO dto) throws Exception{
-		
+	public void deleteSchedule(int sNo) throws Exception{
+		scheduleDAO.deleteSchedule(sNo);
+		System.out.println("sNo 서비스"+ sNo);
 	}
 	
 
