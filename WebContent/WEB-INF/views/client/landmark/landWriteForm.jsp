@@ -159,9 +159,7 @@
 		
 	</div>
 	<!-- //wrapAll end -->
-		
-	</div>
-	<!-- //wrapAll end -->
+
 	
 <jsp:include page="/WEB-INF/views/include/footer.jsp" />
 <!-- //footer end -->
