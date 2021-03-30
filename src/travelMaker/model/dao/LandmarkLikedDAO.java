@@ -11,6 +11,8 @@ public interface LandmarkLikedDAO {
 	public void addLikedCnt() throws SQLException;
 	// 내가 좋아요 한 랜드마크
 	public void myLandLiked(String id) throws SQLException;
+
+	
 	
 	
 }

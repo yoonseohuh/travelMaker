@@ -20,4 +20,8 @@
 	<select id="myLand" parameterType="string" resultType="LandmarkBoardDTO">
 		select * from LANDMARKBOARD where writer=#{id}
 	</select> 
+	
+	<delete id="deletemyLand" parameterType="string" >
+		delete * from LANDMARKBOARD where id=#{id}
+	</delete>
 </mapper>

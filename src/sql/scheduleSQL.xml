@@ -4,6 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="schedule">
+	<insert id="insertSchedule" parameterType="hashmap">
+		insert into SCHEDULE values(#{gNo},SCHEDULE_SEQ.nextval,#{sDate},#{sCont})
+	</insert>
+	
+	<select id=""></select>
 
 
 </mapper>

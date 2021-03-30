@@ -64,6 +64,11 @@ public class LandmarkServiceImpl implements LandmarkService{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public void deleteMyLand(String id) throws SQLException{
+		landmarkBoardDAO.deletemyLand(id);
+	}
 
 	
 

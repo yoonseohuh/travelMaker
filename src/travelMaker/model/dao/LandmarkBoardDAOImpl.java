@@ -43,5 +43,9 @@ public class LandmarkBoardDAOImpl implements LandmarkBoardDAO{
 		LandmarkBoardDTO land =  sqlSession.selectOne("landmarkBoard.getLand", lNo);
 		return land;
 	}
+	
+	public void deletemyLand(String id) throws SQLException{
+		sqlSession.delete("landmarkBoard.deletemyLand", id);
+	}
 
 }
