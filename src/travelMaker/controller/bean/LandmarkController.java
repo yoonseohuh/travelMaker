@@ -28,6 +28,7 @@ public class LandmarkController {
 	@RequestMapping("landmark.tm")
 	public String landmark(Model model) throws SQLException{
 		// 고유번호, 작성자, 장소명, 유형, 주소, 소개, 공개범위, x,y값
+		
 		List land = landmarkService.getLands();
 		model.addAttribute("land", land);		
 		

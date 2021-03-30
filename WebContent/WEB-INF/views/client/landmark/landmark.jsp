@@ -68,26 +68,7 @@
 			        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
 			        image : markerImage, // 마커 이미지 
 			    }); 
-			    
-		function tableLand(){
-					
-					var tl = new Array();
-					var html='';
-					
-					var lName = $("#place_name").val(place.place_name);
-					var lType = $("#category_name").val(place.category_name);
-					var addr = $("#road_address_name").val(place.road_address_name);
-					var lCont = $("#lCont").val();
-					html += '<tr>'
-					html += '<td>'+lName+'</td>'
-					html += '<td>'+lType+'</td>'
-					html += '<td>'+addr+'</td>'
-					html += '<td>'+lCont+'</td>'
-					
-					$("#landMarkTbody").emty();
-					$("#landMarkTbody").append(html);
-					
-				}
+		
 			  
 			}// for
 			
@@ -101,40 +82,31 @@
 		</script>
 	<a href="/travelMaker/land/landWrite.tm"><button>랜드마크 작성</button></a>
 
-	<table id="landMarkTable">
-		<thead>
+	<table>
 		<c:forEach var="land" items="${land}">
 		<input type="hidden" name="lNo" value="${land.lNo}"/>
+			<tr>	
+				<td>${land.writer}님의 랜드마크 입니다.</td>
+			</tr>
 			<tr>
-				<td>장소명 : ${land.lName}</td>
+				<td>${land.lOpen}</td>
+			</tr>
+			<tr>
+				<td>${land.lName}</td>
 			</tr>
 			<tr>	
-				<td>작성자 : ${land.writer}</td>
+				<td>${land.lType}</td>
 			</tr>
 			<tr>	
-				<td>유형 : ${land.lType}</td>
+				<td>${land.addr}</td>
 			</tr>
 			<tr>	
-				<td>주소 : ${land.addr}</td>
-			</tr>
-			<tr>	
-				<td>소개 : ${land.lCont}</td>
+				<td>${land.lCont}</td>
 			</tr>
 		</c:forEach>
-		</thead>
-		<tbody id="landMarkTbody">
-
-		</tbody>
 	</table>
 
-	<!-- 
- 		<c:forEach var="land" items="${land}">
-			<h4>writer : ${land.writer}</h4>
-			<h4>lName : ${land.lName}</h4>
-			<h4>addr : ${land.addr}</h4>
-			<h4></h4>
-		</c:forEach>
-		</form> -->
+	
 </div>
 <!-- //wrapAll end -->
 
