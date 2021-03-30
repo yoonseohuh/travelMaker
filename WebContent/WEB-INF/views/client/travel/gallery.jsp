@@ -9,7 +9,13 @@
 	<div class="wrapAll client">
 	<h1>${grp.subject} 그룹 갤러리</h1>
 	
-	
+	<ul class="gallery">
+		<li>gallery1</li>
+		<li>gallery2</li>
+		<li>gallery3</li>
+		<li>gallery4</li>
+		<li>gallery5</li>
+	</ul>
 	
 	
 	
