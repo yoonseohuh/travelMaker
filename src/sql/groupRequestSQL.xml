@@ -12,5 +12,5 @@
 	<select id="getRequests" parameterType="int" resultType="GroupRequestDTO">
 		select * from groupRequest where gNo=#{gNo}
 	</select>
-
+	
 </mapper>
