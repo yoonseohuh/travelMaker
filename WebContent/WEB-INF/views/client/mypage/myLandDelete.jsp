@@ -7,7 +7,8 @@
 	
 	<div class="wrapAll">
 		<h1>내가 작성한 랜드마크 삭제</h1>
-		<form action="/travelMaker/myLandDeletePro.tm" method="post">
+		<form action="/travelMaker/land/myLandDeletePro.tm" method="post">
+		<input type="hidden" name="lNo" value="${lNo}"/>
 			<table>
 				<tr>
 					<td></td>

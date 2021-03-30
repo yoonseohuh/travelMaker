@@ -37,7 +37,8 @@
 	
 	</script>
 	<h1>LandmarkCont</h1>
-	<form method="get">
+	<form action="/travelMaker/land/myLandDelete.tm" method="post">
+	<input type="hidden" name="lNo" value="${land.lNo}"/>
 	<table>
 		<tr>
 			<td>${land.lName}</td>
@@ -57,7 +58,7 @@
 		<tr>
 			<td><button id="boardLiked">좋아요</button></td>
 			<td><button id="report">신고하기</button></td>
-			<td><input type="button">삭제</td>
+			<td><input type="submit" value="삭제"></td>
 		</tr>
 	</table>
 

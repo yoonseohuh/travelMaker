@@ -78,14 +78,23 @@ public class LandmarkController {
 		List myLand = landmarkService.myLand(id);
 		model.addAttribute("memId", id);
 		model.addAttribute("myLand", myLand);
-		//내가 좋아요한 랜마 이건 나중에 추가
+		//내가 좋아요한 랜드마크
 		return "client/mypage/myLand";
 	}
 	
 	@RequestMapping("myLandDelete.tm")
-	public String myLandDelete(HttpSession session) {
-		
+	public String myLandDelete(int lNo) {
+		System.out.println(lNo);
 		return "client/mypage/myLandDelete";
+	}
+	@RequestMapping("myLandDeletePro.tm")
+	public String myLandDeletePro(HttpSession session, String pw, String lNo) throws SQLException{
+		//아이디, 비밀번호 일치하는지 확인하는 메서드 
+		// 맞으면 삭제해주는 메서드
+		//landmarkService.deleteMyLand(pw);
+		System.out.println(pw);
+		System.out.println(lNo);
+		return "redirect:/myLand.tm";
 	}
 	
 	

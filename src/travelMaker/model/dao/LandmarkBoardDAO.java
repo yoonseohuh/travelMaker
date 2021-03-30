@@ -17,7 +17,8 @@ public interface LandmarkBoardDAO {
 	public List myLand(String id) throws SQLException;
 	// 랜드마크 가져오기
 	public LandmarkBoardDTO getLand(int lNo) throws SQLException;
-
+	// 내가 작성한 랜드마크 삭제
+	public void deletemyLand(String id) throws SQLException;
 
 
 }
