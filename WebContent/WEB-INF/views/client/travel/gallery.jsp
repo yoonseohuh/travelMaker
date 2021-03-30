@@ -24,6 +24,7 @@
 					data: JSON.stringify(data),
 					success: function(res){
 						console.log(res);
+						console.log("//");
 						console.log(data);					
 					}
 				});
