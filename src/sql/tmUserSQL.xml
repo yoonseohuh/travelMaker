@@ -131,4 +131,8 @@
 		delete from smallpos where posNo=#{posNo}
 	</delete>
 	
+	<select id="idCheck" parameterType="string" resultType="int">
+		select count(*) from tmUser where id=#{id}
+	</select>
+	
 </mapper>

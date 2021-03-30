@@ -204,5 +204,11 @@ public class TmUserDAOImpl implements TmUserDAO {
 	public void deletePos(String posNo) {
 		sqlSession.delete("tmUser.deletePos", posNo);
 	}
+
+	@Override
+	public int idCheck(String id) {
+		int check = sqlSession.selectOne("tmUser.idCheck", id);
+		return check;
+	}
 		
 }
