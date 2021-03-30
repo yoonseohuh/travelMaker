@@ -7,8 +7,6 @@
 
 <div class="wrapAll">
 
-
-
 	<!-- 지도 -->
 	<div id="map" style="width: 1000px; height: 400px;"></div>
 
@@ -62,26 +60,72 @@
 			    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
 			   
 			    
+			    
 			    // 마커를 생성합니다
 			    var marker = new kakao.maps.Marker({
 			        map: map, // 마커를 표시할 지도
 			        position: positions[i].latlng, // 마커를 표시할 위치
 			        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
 			        image : markerImage, // 마커 이미지 
-			        clickable: true
-			    });
+			    }); 
+			    
+		function tableLand(){
+					
+					var tl = new Array();
+					var html='';
+					
+					var lName = $("#place_name").val(place.place_name);
+					var lType = $("#category_name").val(place.category_name);
+					var addr = $("#road_address_name").val(place.road_address_name);
+					var lCont = $("#lCont").val();
+					html += '<tr>'
+					html += '<td>'+lName+'</td>'
+					html += '<td>'+lType+'</td>'
+					html += '<td>'+addr+'</td>'
+					html += '<td>'+lCont+'</td>'
+					
+					$("#landMarkTbody").emty();
+					$("#landMarkTbody").append(html);
+					
+				}
 			  
 			}// for
 			
-				
 			
 		}//markers
+		
 		
 		
 		});//ready
 		
 		</script>
 	<a href="/travelMaker/land/landWrite.tm"><button>랜드마크 작성</button></a>
+
+	<table id="landMarkTable">
+		<thead>
+		<c:forEach var="land" items="${land}">
+		<input type="hidden" name="lNo" value="${land.lNo}"/>
+			<tr>
+				<td>장소명 : ${land.lName}</td>
+			</tr>
+			<tr>	
+				<td>작성자 : ${land.writer}</td>
+			</tr>
+			<tr>	
+				<td>유형 : ${land.lType}</td>
+			</tr>
+			<tr>	
+				<td>주소 : ${land.addr}</td>
+			</tr>
+			<tr>	
+				<td>소개 : ${land.lCont}</td>
+			</tr>
+		</c:forEach>
+		</thead>
+		<tbody id="landMarkTbody">
+
+		</tbody>
+	</table>
 
 	<!-- 
  		<c:forEach var="land" items="${land}">

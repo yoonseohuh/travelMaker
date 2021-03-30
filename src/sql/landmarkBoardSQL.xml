@@ -22,6 +22,6 @@
 	</select> 
 	
 	<delete id="deletemyLand" parameterType="string" >
-		delete * from LANDMARKBOARD where id=#{id}
+		delete from LANDMARKBOARD where id=#{id}
 	</delete>
 </mapper>
