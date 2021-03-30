@@ -58,9 +58,6 @@ public class CommentController {
 		model.addAttribute("comRecUser", comRecUser);
 		model.addAttribute("comSenUser", comSenUser);
 		
-		System.out.println("받은사람 :" + ((UserCmtDTO)comRecUser.get(1)).getSender());
-		System.out.println("왔다");
-		
 		return "client/mypage/comment";
 	}
 

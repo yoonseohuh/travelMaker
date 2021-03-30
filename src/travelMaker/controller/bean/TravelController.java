@@ -1,6 +1,8 @@
 package travelMaker.controller.bean;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -222,6 +224,8 @@ public class TravelController {
 												//ServletContext context
 		MultipartFile mf = null;
 		String finalName = null;
+		FileInputStream fis = null;
+		FileOutputStream fos = null;
 		
 		try {
 			mf = request.getFile("img");
@@ -231,21 +235,25 @@ public class TravelController {
 			String ext = orgName.substring(orgName.lastIndexOf('.'));
 			long date = System.currentTimeMillis();
 			finalName = imgName+date+ext;										//sample1616999640437.jpg
-			/*
-			String ctx = context.getServletContextName();
-			System.out.println("ctx: "+ctx);
-			Set e = context.getResourcePaths("/jsp");
-			Object [] array = e.toArray();
-			int i = 0;
-			while(i<array.length) {
-				System.out.println(i+"번째 "+array[i].toString());
-			}
-			*/
+
 			String path = request.getRealPath("save");
 			String imgPath = path+"\\"+finalName;
 			File copyFile = new File(imgPath);					//D:\yoonseohuh\framework\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\travelMaker\save\sample1616999640437.jpg
 			mf.transferTo(copyFile);
 			System.out.println(copyFile);
+			
+			//서버 폴더에 저장된 이미지 복사해서 github에 공유하는 workspace에도 넣기
+			fis = new FileInputStream(copyFile);
+			fos = new FileOutputStream(new File("D:\\yoonseohuh\\framework\\workspace\\travelMaker\\tmGallery\\"+finalName));
+			int readBuffer = 0;
+            byte [] buffer = new byte[(int)copyFile.length()];
+            System.out.println(copyFile.length());
+            while((readBuffer = fis.read(buffer))!=-1) {
+                fos.write(buffer, 0, readBuffer);
+            }
+            fis.close();
+            fos.close();
+            
 			//DB에 저장
 			GalleryDTO dto = new GalleryDTO();
 			dto.setgNo(Integer.parseInt(request.getParameter("gNo")));
@@ -262,14 +270,17 @@ public class TravelController {
 	
 	@RequestMapping("gallery.tm")
 	public String gallery(int gNo, Model model) throws Exception {
-		System.out.println(gNo);
+		GroupSpaceDTO grp = travelService.getContent(gNo);
 		List list = travelService.getGroupImgs(gNo);
+		model.addAttribute("grp",grp);
 		model.addAttribute("list",list);
 		return "/client/travel/gallery";
 	}
 	
-	
-	
+	@RequestMapping("galleryLiked.tm")
+	public String galleryLiked() throws Exception {
+		return "";
+	}
 	
 	
 	

@@ -197,6 +197,7 @@
 		
 		<div class="gsRight">
 			<div class="swiper-container gsGallery">
+			<input type="button" value="갤러리로 이동" onclick="window.location='/travelMaker/travel/gallery.tm?gNo=${gNo}'"/>
 				<div class="swiper-wrapper">
 					<div class="swiper-slide add">
 						<form action="/travelMaker/travel/uploadPro.tm" method="post" enctype="multipart/form-data">
@@ -209,7 +210,6 @@
 					<c:forEach var="gList" items="${gList}">
 					<div class="swiper-slide">
 						<img src="/travelMaker/save/${gList.pRoot}" width="200"/>
-						<!-- 좋아요 ajax로 처리 아직 안함 -->
 					</div>
 					</c:forEach>
 					<div class="swiper-slide">Slide 1</div>
