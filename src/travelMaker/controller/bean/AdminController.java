@@ -1,6 +1,8 @@
 package travelMaker.controller.bean;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
@@ -234,10 +236,13 @@ public class AdminController {
 
 	//포지션 추가 Pro
 	@RequestMapping("addSPosPro.tm")
-	public String addSPos(SmallPosDTO spdto, MultipartHttpServletRequest request) {
+	public String addSPos(SmallPosDTO spdto, MultipartHttpServletRequest request)throws Exception {
 		//포지션 insert 시키는 메서드 
 		MultipartFile mf = null;
 		String newName = null;
+		FileInputStream fis = null;
+		FileOutputStream fos = null;
+		
 		try {
 			
 			//파일 정보 담기.
@@ -267,6 +272,18 @@ public class AdminController {
 			File copyFile = new File(imgPath);
 			mf.transferTo(copyFile);
 			spdto.setPosRoot(newName);
+			
+			//서버 폴더에 저장된 이미지 복사해서 github에 공유하는 workspace에도 넣기
+			fis = new FileInputStream(copyFile);
+			fos = new FileOutputStream(new File("D:\\hun2\\project2\\travelMaker\\tmGallery\\posIcon\\"+newName));
+			int readBuffer = 0;			
+            byte [] buffer = new byte[(int)copyFile.length()];
+            System.out.println(copyFile.length());
+            while((readBuffer = fis.read(buffer))!=-1) {
+                fos.write(buffer, 0, readBuffer);
+            }
+            fis.close();
+            fos.close();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -290,6 +307,9 @@ public class AdminController {
 		//포지션 insert 시키는 메서드 
 		MultipartFile mf = null;
 		String newName = null;
+		FileInputStream fis = null;
+		FileOutputStream fos = null;
+		
 		try {
 			
 			//파일 정보 담기.
@@ -319,6 +339,18 @@ public class AdminController {
 			File copyFile = new File(imgPath);
 			mf.transferTo(copyFile);
 			spdto.setPosRoot(newName);
+			
+			//서버 폴더에 저장된 이미지 복사해서 github에 공유하는 workspace에도 넣기
+			fis = new FileInputStream(copyFile);
+			fos = new FileOutputStream(new File("D:\\hun2\\project2\\travelMaker\\tmGallery\\posIcon\\"+newName));
+			int readBuffer = 0;			
+            byte [] buffer = new byte[(int)copyFile.length()];
+            System.out.println(copyFile.length());
+            while((readBuffer = fis.read(buffer))!=-1) {
+                fos.write(buffer, 0, readBuffer);
+            }
+            fis.close();
+            fos.close();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
