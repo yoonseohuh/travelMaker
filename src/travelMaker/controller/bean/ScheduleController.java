@@ -41,13 +41,17 @@ public class ScheduleController {
 	@RequestMapping("scheduleModi.tm")
 	public String scheduleModi(ScheduleDTO dto) throws Exception {
 		scheduleService.updateSchedule(dto);
-		System.out.println(dto);
-		return "redirect:scheduleList.tm?gNo="+dto.getgNo();
+		//System.out.println(dto.getgNo());
+		String gNo = Integer.toString(dto.getgNo());
+		return "redirect:scheduleList.tm?gNo="+gNo;
 	}
 	
 	@RequestMapping("scheduleDelete.tm")
-	public String DeleteSchedule(ScheduleDTO dto) throws Exception {
-		return "";
+	public String DeleteSchedule(int gNo, int sNo) throws Exception {
+		scheduleService.deleteSchedule(sNo);
+		
+		System.out.println("sNo 컨트롤러:"+sNo);
+		return "redirect:scheduleList.tm?gNo="+gNo;
 	} 
 	
 	
