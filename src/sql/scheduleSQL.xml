@@ -8,7 +8,16 @@
 		insert into SCHEDULE values(#{gNo},SCHEDULE_SEQ.nextval,#{sDate},#{sCont})
 	</insert>
 	
-	<select id=""></select>
-
+	<select id="selectSchedule" parameterType="int" resultType="ScheduleDTO">
+		select * from SCHEDULE where gNo=#{gNo}
+	</select>
+	
+	<update id="updateSchedule" parameterType="ScheduleDTO">
+		update SCHEDULE set sDate=#{sDate}, sCont=#{sCont} where sNo=#{sNo}
+	</update>
+	
+	<delete id="deleteSchedule" parameterType="int">
+		delete from SCHEDULE where sNo=#{sNo}
+	</delete>
 
 </mapper>

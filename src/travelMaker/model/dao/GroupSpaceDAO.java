@@ -1,6 +1,8 @@
 package travelMaker.model.dao;
 
 import java.util.List;
+
+import travelMaker.model.dto.GroupRequestDTO;
 import travelMaker.model.dto.GroupSpaceDTO;
 
 public interface GroupSpaceDAO {
@@ -20,6 +22,5 @@ public interface GroupSpaceDAO {
 	//모집 게시글 삭제
 	public void deleteContent(int gNo) throws Exception;
 	//참여 인원수 카운트 증감시키기
-	public void updateActNum(int gNo, int num) throws Exception;
-	
+	public void updateActNum(int gNo, int num) throws Exception;	
 }
