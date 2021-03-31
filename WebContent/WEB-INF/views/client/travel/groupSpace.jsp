@@ -44,7 +44,7 @@
 						success: function(res){
 							console.log(res);
 							
-						}					
+						}
 					});
 				});
 			});
@@ -148,8 +148,9 @@
 					<li>
 						<p class="tit2">일정</p>
 						<div id="ingPlan">
-							<textarea>210329 13:00
-								KFC가서 할인쿠폰쓰고 점심 먹기
+							
+							<textarea style="resize:none;">
+							
 							</textarea>
 						</div>
 						<!-- //plan end -->

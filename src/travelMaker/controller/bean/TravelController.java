@@ -66,7 +66,7 @@ public class TravelController {
 		//모든 여행 가져와서 상태가 대기 중(0)인 것만 담음
 		List WList = travelService.getMyGroups(id,0);
 		model.addAttribute("waitingList",WList);
-
+		
 		//모집 중인 여행
 		Map map = travelService.getArticles(pageNum);
 		model.addAttribute("rkInfo",rkInfo);
