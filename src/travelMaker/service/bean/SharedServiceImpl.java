@@ -12,8 +12,8 @@ public class SharedServiceImpl implements SharedService {
 	private SharedDAO sharedDAO = null;
 	
 	@Override
-	public int shared() throws Exception {
-		// TODO Auto-generated method stub
+	public int getshared(int gNo) throws Exception {
+		sharedDAO.getshared(gNo);
 		return 0;
 	}
 

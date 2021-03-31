@@ -3,6 +3,6 @@ package travelMaker.model.dao;
 
 public interface SharedDAO {
 	
-	public int shared() throws Exception;
+	public int getshared(int gNo) throws Exception;
 
 }

@@ -13,4 +13,9 @@ public class SharedController {
 	@Autowired
 	private SharedService sharedService = null;
 
+	@RequestMapping("sharedList.tm")
+	public String sharedlist(int gNo) throws Exception{
+		sharedService.getshared(gNo);
+		return "shared/sharedlist";
+	}
 }

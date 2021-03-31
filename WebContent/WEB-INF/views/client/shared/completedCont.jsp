@@ -1,12 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-<h1>completedCont</h1>
-</body>
-</html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<jsp:include page="/WEB-INF/views/include/header.jsp" />
+   
+	<jsp:include page="/WEB-INF/views/include/top.jsp" />
+	<!-- //top end -->
+	
+	<div class="wrapAll">
+		<h1>completeCont</h1>
+		
+	</div>
+	<!-- //wrapAll end -->
+	
+<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+<!-- //footer end -->
