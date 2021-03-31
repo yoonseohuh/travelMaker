@@ -1,7 +1,9 @@
 package travelMaker.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +28,17 @@ public class GroupRequestDAOImpl implements GroupRequestDAO {
 		return list;
 	}
 	
+	// jbr :  신청자들 pos 카운트
+	@Override
+	public int posCount(int gNo, int posNo) {
+		Map map = new HashMap();
+		map.put("gNo", gNo);
+		map.put("posNo", posNo);
+		
+		
+		int posCnt = sqlSession.selectOne("groupRequest.posCount", map);
+		
+		return posCnt;
+	}
 	
 }

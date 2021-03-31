@@ -50,4 +50,7 @@ public interface TravelService {
 	//사진 좋아요
 	public void imgLiked(String id, int gNo, int pNo) throws Exception;
 	
+	// jbr : 그룹리퀘스트 pos 신청자수 세기
+	public int posCount(int gNo, int posNo);
+	
 }

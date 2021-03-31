@@ -11,4 +11,7 @@ public interface GroupRequestDAO {
 	//그룹 신청건들 가져오기
 	public List getRequests(int gNo) throws Exception;
 	
+	// jbr :  신청자들 pos 카운트
+	public int posCount(int gNo, int posNo);
+	
 }

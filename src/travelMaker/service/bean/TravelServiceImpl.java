@@ -325,5 +325,12 @@ public class TravelServiceImpl implements TravelService{
 	}
 	
 	
+	// jbr : 그룹리퀘스트 pos 신청자수 세기
+	@Override
+	public int posCount(int gNo, int posNo) {
+		int posCnt = groupRequestDAO.posCount(gNo,posNo);
+		return posCnt;
+	}
+	
 	
 }

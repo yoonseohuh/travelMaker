@@ -23,4 +23,6 @@ public interface GroupSpaceDAO {
 	public void deleteContent(int gNo) throws Exception;
 	//참여 인원수 카운트 증감시키기
 	public void updateActNum(int gNo, int num) throws Exception;	
+	
+	
 }

@@ -46,4 +46,6 @@
 		update groupSpace set actualNum=actualNum+#{actualNum} where gNo=#{gNo}
 	</update>
 	
+	
+	
 </mapper>
