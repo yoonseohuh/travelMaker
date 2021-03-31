@@ -148,13 +148,17 @@
 						<p class="tit2">일정</p>
 						<div id="ingPlan">
 							<c:forEach var="list" items="${scheList}">
+							<form action="scheduleModi.tm?gNo=${gNo}&sNo=${list.sNo}&sDate=${list.sDate}&sCont=${list.sCont}" method="get">
 								<input type="hidden" name="gNo" value="${list.gNo}"/>
 								<input type="hidden" name="sNo" value="${list.sNo}"/>
 								날짜 <input type="text" name="sDate" value="${list.sDate}"/>
 								일정 <input type="text" name="sCont" value="${list.sCont}"/>
-								<button onclick="window.location='scheduleModi.tm?gNo=${gNo}&sNo=${list.sNo}&sDate=${list.sDate}&sCont=${list.sCont}'">수정</button>
-								<button onclick="window.location='scheduleDel.tm?gNo=${gNo}&sNo=${list.sNo}'">삭제</button>
+								<input type="submit" name="수정" />
+								<!--  <button onclick="window.location='scheduleModi.tm?gNo=${gNo}&sNo=${list.sNo}&sDate=${list.sDate}&sCont=${list.sCont}'">수정</button> -->
+								<input type="button" value="삭제" onclick="window.location='/travelMaker/travel/scheduleDel.tm?gNo=${gNo}&sNo=${list.sNo}'" />
+								
 								<br/>
+							</form>
 							</c:forEach>
 							<c:if test="${id==leader}">
 								<form action="schedulePro.tm">
