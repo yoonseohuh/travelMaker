@@ -36,7 +36,9 @@
 			</div>
 			<div class="pstn">
 				<h2>모집 포지션</h2>
-				${content.po1} / ${content.po2} / ${content.po3}
+				<c:forEach var="i" items="${posList}">
+					${i} /
+				</c:forEach>
 				<h2>지원 포지션</h2>
 				<c:if test="${pos1==0 && pos2==0}">
 					${id}님은 아직 지원 가능한 포지션이 없습니다.

@@ -111,10 +111,16 @@
 					<li>
 						<p class="tit2">참여 중인 멤버</p>
 						<div id="ingMem">
+							<h3>개설자 ${leader}님</h3><br/>
 							<c:if test="${fn:length(grpMem)>0}">
 							<c:forEach var="mem" items="${grpMem}">
 								<c:if test="${mem.status==1}">
-									<p>${mem.id}님</p>
+									<p>
+										${mem.id}님
+										<c:if test="${mem.id!=id}">
+											<input type="button" onclick="window.location='/travelMaker/msg/messageWrite.tm?receiver=${mem.id}&sender=${id}'" value="쪽지쓰기"/>
+										</c:if>
+									</p>
 								</c:if>			
 							</c:forEach>
 							</c:if>

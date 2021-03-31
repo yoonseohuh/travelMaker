@@ -54,6 +54,7 @@
 					buttonText: "날짜선택",
 					dateFormat: "yymmdd",
 					changeMonth: true,
+					minDate: 0,
 					onClose: function(selectedDate) {
 						$("#fromDate").datepicker("option","maxDate",selectedDate);	//시작일의 최대일은 종료일
 					}
@@ -63,7 +64,8 @@
 					showOn: "both",
 					buttonText: "날짜선택",
 					dateFormat: "yymmdd",
-					changeMonth: true
+					minDate: 0,
+					changeMonth: true,
 				});
 				
 				/*
@@ -134,13 +136,9 @@
 				<tr>
 					<td>가이드</td>
 					<td>
-						<input type="checkbox" name="chk" value="1"/>포지션1 &nbsp;
-						<input type="checkbox" name="chk" value="2"/>포지션2 &nbsp;
-						<input type="checkbox" name="chk" value="3"/>포지션3 &nbsp;
-						<input type="checkbox" name="chk" value="4"/>포지션4 &nbsp;
-						<input type="checkbox" name="chk" value="5"/>포지션5 &nbsp;
-						<input type="checkbox" name="chk" value="6"/>포지션6 &nbsp;
-						<input type="checkbox" name="chk" value="7"/>포지션7 &nbsp;
+						<c:forEach var="pos" items="${posList}">
+							<input type="checkbox" name="chk" value="${pos.posNo}"/>${pos.posName} &nbsp;
+						</c:forEach>
 					</td>
 				</tr>
 				<tr>

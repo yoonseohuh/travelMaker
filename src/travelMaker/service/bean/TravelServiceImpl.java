@@ -342,7 +342,6 @@ public class TravelServiceImpl implements TravelService{
 	//cyh
 	@Override
 	public void updateSchedule(ScheduleDTO dto) throws Exception {
-		System.out.println("서비스 왔니");
 		scheduleDAO.updateSchedule(dto);
 	}
 	
