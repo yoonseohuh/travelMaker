@@ -12,12 +12,17 @@
 		<form action="/travelMaker/msg/messageWritePro.tm" method="get">
 			
 			
-			<c:if test="${reply == null }">
+			<c:if test="${reply == null && receiver == null }"> 
 			받는이 <input type="text" name="receiver" required /> <br/>
 			</c:if>
 			<c:if test="${reply != null }">
 			받는이 <input type="text" name="receiver"  value="${reply}" required /> <br/>
 			</c:if>
+			<c:if test="${receiver != null }">
+			받는이 <input type="text" name="receiver"  value="${receiver}" required /> <br/>
+			</c:if>
+
+			
 			<textarea rows="10" cols="30" name="mCont" required></textarea><br/>
 			<button onclick=" " >취소</button> 
 			
