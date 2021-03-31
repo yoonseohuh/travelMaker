@@ -11,8 +11,8 @@ public class SharedDAOImpl  implements SharedDAO{
 	private SqlSessionTemplate sqlSession = null;
 	
 	@Override
-	public int shared() throws Exception {
-		// TODO Auto-generated method stub
+	public int getshared(int gNo) throws Exception {
+		sqlSession.selectOne("shared.select", gNo);
 		return 0;
 	}
 
