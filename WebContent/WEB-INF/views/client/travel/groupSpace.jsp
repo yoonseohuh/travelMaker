@@ -170,7 +170,7 @@
 								<form action="schedulePro.tm">
 									<input type="hidden" name="gNo" value="${gNo}"/>
 									<select name="sDate">
-										<c:forEach var="i" begin="${grpSpace.startDate}" end="${grpSpace.endDate}">
+										<c:forEach var="i" items="${dateList}">
 												<option value="${i}">${i}</option>
 										</c:forEach>
 									</select>
@@ -183,9 +183,15 @@
 					</li>
 					<li>
 						<p class="tit2">예산</p>
-						<p id="ingCost">123</p>
+						<p id="ingCost"><fmt:formatNumber type="number" maxFractionDigits="3" value="${grpSpace.cost}"/>원</p>
 						<!-- //cost end -->
-					</li>					
+					</li>
+					<li>
+						<p class="tit2">날짜 관련(임시로 이 위치에)</p>
+						시작일 ${grpSpace.startDate} /
+						종료일 ${grpSpace.endDate}
+						<input type="hidden" value="${eDate}" id="eDate"/>					
+					</li>
 				</ul>
 				<!-- //groupCont2 end -->
 				

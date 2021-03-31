@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -270,6 +271,28 @@ public class TravelController {
 			}
 		}
 		//jbr여기까지...
+		
+		//시작일, 종료일, 마감일 DATE 타입으로 변환해서 보내주기
+		DateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		Date sDate = sdf.parse(grpSpace.getStartDate());
+		Date eDate = sdf.parse(grpSpace.getEndDate());
+		Date cDate = sdf.parse(grpSpace.getClosingDate());
+		Date today = new Date();
+		long endStartGap = Math.abs((eDate.getTime()-sDate.getTime())/(24*60*60*1000));		//시작일과 종료일 사이의 갭
+		long closeTodayGap = Math.abs((cDate.getTime()-today.getTime())/(24*60*60*1000));	//오늘 날짜와 마감일 사이의 갭
+		model.addAttribute("esGap",endStartGap);
+		model.addAttribute("ctGap",closeTodayGap);
+		
+		//시작일과 종료일 사이의 날짜들을 배열에 담아 보내주기
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(sDate);
+		cal.add(Calendar.DATE, -1);	//시작일부터
+		List dateList = new ArrayList();
+		for(long i=0 ; i<=endStartGap ; i++) {
+			cal.add(Calendar.DATE, 1);
+			dateList.add(sdf.format(cal.getTime()));
+		}
+		model.addAttribute("dateList",dateList);
 		
 		//일정
 		List scheList = travelService.getSchedule(gNo);
