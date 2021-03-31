@@ -18,7 +18,7 @@ public class ScheduleDAOImpl implements ScheduleDAO {
 	
 
 	@Override
-	public void insertSchedule(String gNo, String sDate, String sCont) throws Exception {
+	public void insertSchedule(int gNo, String sDate, String sCont) throws Exception {
 		Map map = new HashMap();
 		map.put("gNo", gNo);
 		map.put("sDate", sDate);
@@ -29,9 +29,8 @@ public class ScheduleDAOImpl implements ScheduleDAO {
 
 	@Override
 	public void updateSchedule(ScheduleDTO dto) throws Exception {
+		System.out.println("DAO왔니 "+dto.getsCont());		
 		sqlSession.update("schedule.updateSchedule", dto);
-		//System.out.println(dto.getsCont());
-		//System.out.println(dto.getsNo());
 	}
 	
 	@Override
