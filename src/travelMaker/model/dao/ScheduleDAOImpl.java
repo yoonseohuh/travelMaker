@@ -47,7 +47,6 @@ public class ScheduleDAOImpl implements ScheduleDAO {
 	@Override
 	public void deleteSchedule(int sNo) throws Exception{
 		sqlSession.delete("schedule.deleteSchedule", sNo);
-		System.out.println("sNo 다오임플"+ sNo);
 	}
 
 

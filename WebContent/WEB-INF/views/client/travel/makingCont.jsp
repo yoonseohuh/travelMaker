@@ -61,7 +61,9 @@
 			<tr>
 				<td>모집 유형: </td>
 				<td>
-					${content.po1} / ${content.po2} / ${content.po3}
+					<c:forEach var="i" items="${posList}">
+						${i} /
+					</c:forEach>
 				</td>
 			</tr>
 			<tr>

@@ -27,6 +27,7 @@ import travelMaker.model.dto.ScheduleDTO;
 import travelMaker.model.dto.SmallPosDTO;
 import travelMaker.model.dto.TmUserDTO;
 import travelMaker.model.dto.UserRkDTO;
+import travelMaker.service.bean.MemberService;
 import travelMaker.service.bean.TravelService;
 
 @Controller
@@ -35,9 +36,13 @@ public class TravelController {
 
 	@Autowired
 	private TravelService travelService = null;
+	@Autowired
+	private MemberService memberService = null;
 	
 	@RequestMapping("makingWrite.tm")
 	public String makingWrite(String pageNum, Model model) {
+		List posList = memberService.getAllPos();
+		model.addAttribute("posList",posList);
 		model.addAttribute("pageNum",pageNum);
 		return "/client/travel/makingWrite";
 	}
@@ -109,9 +114,22 @@ public class TravelController {
 		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
 		int writerGender = travelService.getGender(content.getId());
 		int memIdGender = travelService.getGender(id);
-		
 		int memStatus = travelService.getMemStatus(gNo, id);
-		
+		List posList = new ArrayList();
+		SmallPosDTO dto = new SmallPosDTO();
+		if(content.getPo1()!=-1) {
+			dto = travelService.getPosInfo(content.getPo1());
+			posList.add(dto.getPosName());
+		}
+		if(content.getPo2()!=-1) {
+			dto = travelService.getPosInfo(content.getPo2());
+			posList.add(dto.getPosName());			
+		}
+		if(content.getPo3()!=-1) {
+			dto = travelService.getPosInfo(content.getPo3());
+			posList.add(dto.getPosName());			
+		}
+		model.addAttribute("posList",posList);
 		model.addAttribute("pageNum",pageNum);
 		model.addAttribute("content",content);
 		model.addAttribute("writerGender",writerGender);
@@ -134,10 +152,26 @@ public class TravelController {
 		
 		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
 		Map<String, Integer> map = travelService.getUserPos(id);
-		
+		//지원자 포지션
 		SmallPosDTO posInfo1 = travelService.getPosInfo(map.get("pos1"));
 		SmallPosDTO posInfo2 = travelService.getPosInfo(map.get("pos2"));
+		//모집 포지션
+		SmallPosDTO dto = new SmallPosDTO();
+		List posList = new ArrayList();
+		if(content.getPo1()!=-1) {
+			dto = travelService.getPosInfo(content.getPo1());
+			posList.add(dto.getPosName());
+		}
+		if(content.getPo2()!=-1) {
+			dto = travelService.getPosInfo(content.getPo2());
+			posList.add(dto.getPosName());			
+		}
+		if(content.getPo3()!=-1) {
+			dto = travelService.getPosInfo(content.getPo3());
+			posList.add(dto.getPosName());			
+		}
 		
+		model.addAttribute("posList",posList);
 		model.addAttribute("content",content);
 		model.addAttribute("id",id);
 		model.addAttribute("pos1",map.get("pos1"));
@@ -365,7 +399,6 @@ public class TravelController {
 	
 	@RequestMapping("scheduleModi.tm")
 	public String scheduleModi(ScheduleDTO dto) throws Exception {
-		System.out.println("컨트롤러 탔냐고");
 		travelService.updateSchedule(dto);
 		return "redirect:groupSpace.tm?gNo="+dto.getgNo();
 	}
