@@ -7,6 +7,7 @@ import travelMaker.model.dto.GalleryDTO;
 import travelMaker.model.dto.GroupMemberDTO;
 import travelMaker.model.dto.GroupRequestDTO;
 import travelMaker.model.dto.GroupSpaceDTO;
+import travelMaker.model.dto.ScheduleDTO;
 import travelMaker.model.dto.SmallPosDTO;
 import travelMaker.model.dto.TmUserDTO;
 import travelMaker.model.dto.UserRkDTO;
@@ -52,5 +53,18 @@ public interface TravelService {
 	
 	// jbr : 그룹리퀘스트 pos 신청자수 세기
 	public int posCount(int gNo, int posNo);
+	
+	// cyh 일정 생성
+	public void insertSchedule(int gNo, String sDate, String sCont) throws Exception;
+	// cyh 일정 수정
+	public void updateSchedule(ScheduleDTO dto) throws Exception;
+	// cyh 일정 뿌려주기 
+	public void selectSchedule(int gNo) throws Exception;
+	// cyh 일정 리스트
+	public List getSchedule(int gNo) throws Exception;
+	// cyh 일정 삭제
+	public void deleteSchedule(int sNo) throws Exception;
+	
+	
 	
 }

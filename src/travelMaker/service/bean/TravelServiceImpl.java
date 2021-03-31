@@ -23,6 +23,7 @@ import travelMaker.model.dto.GalleryDTO;
 import travelMaker.model.dto.GroupMemberDTO;
 import travelMaker.model.dto.GroupRequestDTO;
 import travelMaker.model.dto.GroupSpaceDTO;
+import travelMaker.model.dto.ScheduleDTO;
 import travelMaker.model.dto.SmallPosDTO;
 import travelMaker.model.dto.TmUserDTO;
 import travelMaker.model.dto.UserRkDTO;
@@ -46,9 +47,9 @@ public class TravelServiceImpl implements TravelService{
 	private GalleryDAO galleryDAO = null;
 	@Autowired
 	private GalleryLikedDAO galleryLikedDAO = null;
-	/*
 	@Autowired
 	private ScheduleDAO scheduleDAO = null;
+	/*
 	@Autowired
 	private ChattingDAO chattingDAO = null;	
 	*/
@@ -331,6 +332,42 @@ public class TravelServiceImpl implements TravelService{
 		int posCnt = groupRequestDAO.posCount(gNo,posNo);
 		return posCnt;
 	}
+	
+	//cyh
+	@Override
+	public void insertSchedule(int gNo, String sDate, String sCont) throws Exception {
+		scheduleDAO.insertSchedule(gNo, sDate, sCont);		
+	}
+
+	//cyh
+	@Override
+	public void updateSchedule(ScheduleDTO dto) throws Exception {
+		System.out.println("서비스 왔니");
+		scheduleDAO.updateSchedule(dto);
+	}
+	
+	//cyh
+	@Override
+	public List getSchedule(int gNo) throws Exception{
+		List scheList = scheduleDAO.getSchedule(gNo);
+		return scheList;
+	}
+	
+	//cyh
+	@Override
+	public void selectSchedule(int gNo) throws Exception{
+		scheduleDAO.selectSchedule(gNo);
+	}
+	
+	//cyh
+	@Override
+	public void deleteSchedule(int sNo) throws Exception{
+		scheduleDAO.deleteSchedule(sNo);
+		System.out.println("sNo 서비스"+ sNo);
+	}
+	
+	
+	
 	
 	
 }

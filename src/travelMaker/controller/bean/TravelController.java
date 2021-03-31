@@ -23,6 +23,7 @@ import travelMaker.model.dto.GalleryDTO;
 import travelMaker.model.dto.GroupMemberDTO;
 import travelMaker.model.dto.GroupRequestDTO;
 import travelMaker.model.dto.GroupSpaceDTO;
+import travelMaker.model.dto.ScheduleDTO;
 import travelMaker.model.dto.SmallPosDTO;
 import travelMaker.model.dto.TmUserDTO;
 import travelMaker.model.dto.UserRkDTO;
@@ -221,14 +222,15 @@ public class TravelController {
 		}
 		//jbr여기까지...
 		
-		
-		
+		//일정
+		List scheList = travelService.getSchedule(gNo);
 		
 		//갤러리
 		List gList = travelService.getGroupImgs(gNo);
 		model.addAttribute("gList",gList);
 		
-		//일정 채팅 아직
+		//채팅 아직
+		model.addAttribute("scheList",scheList);
 		model.addAttribute("posMem",posMem);
 		model.addAttribute("gNo",gNo);
 		model.addAttribute("awaiters",awaiters);
@@ -355,6 +357,23 @@ public class TravelController {
 		return json;
 	}
 	
+	@RequestMapping("schedulePro.tm")
+	public String schedulePro(int gNo, String sDate, String sCont) throws Exception {
+		travelService.insertSchedule(gNo, sDate, sCont);
+		return "redirect:groupSpace.tm?gNo="+gNo;
+	}
 	
+	@RequestMapping("scheduleModi.tm")
+	public String scheduleModi(ScheduleDTO dto) throws Exception {
+		System.out.println("컨트롤러 탔냐고");
+		travelService.updateSchedule(dto);
+		return "redirect:groupSpace.tm?gNo="+dto.getgNo();
+	}
+	
+	@RequestMapping("scheduleDel.tm")
+	public String scheduleDel(int gNo, int sNo) throws Exception {
+		travelService.deleteSchedule(sNo);
+		return "redirect:groupSpace.tm?gNo="+gNo;
+	} 
 	
 }
