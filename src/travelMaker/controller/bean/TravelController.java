@@ -3,7 +3,10 @@ package travelMaker.controller.bean;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -129,6 +132,18 @@ public class TravelController {
 			dto = travelService.getPosInfo(content.getPo3());
 			posList.add(dto.getPosName());			
 		}
+		//시작일, 종료일, 마감일 DATE 타입으로 변환해서 보내주기
+		DateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		Date sDate = sdf.parse(content.getStartDate());
+		Date eDate = sdf.parse(content.getEndDate());
+		Date cDate = sdf.parse(content.getClosingDate());
+		Date today = new Date();
+		long endStartGap = Math.abs((eDate.getTime()-sDate.getTime())/(24*60*60*1000));
+		long closeTodayGap = Math.abs((cDate.getTime()-today.getTime())/(24*60*60*1000));
+		
+		model.addAttribute("esGap",endStartGap);
+		model.addAttribute("ctGap",closeTodayGap);
+		
 		model.addAttribute("posList",posList);
 		model.addAttribute("pageNum",pageNum);
 		model.addAttribute("content",content);
