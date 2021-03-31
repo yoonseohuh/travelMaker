@@ -30,4 +30,14 @@
 	delete from message where mNo=#{mNo}
 </delete>
 
+<!-- 사용자가 받은쪽지 카운트 -->
+<select id="recMsgCnt" parameterType="String" resultType="int">
+	select count(*) from message where receiver=#{id}
+</select>
+
+<!-- 사용자가 보낸쪽지 카운트 -->
+<select id="senMsgCnt" parameterType="String" resultType="int">
+	select count(*) from message where sender=#{id}
+</select>
+
 </mapper>

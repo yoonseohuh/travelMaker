@@ -21,4 +21,10 @@ public interface MessageDAO {
 	// 메세지 삭제
 	public int deleteMsg(int mNo);
 	
+	// 사용자가 받은 쪽지 카운트
+	public int recMsgCnt(String id);
+	
+	// 사용자가 보낸 쪽지 카운트
+	public int senMsgCnt(String id);
+	
 }
