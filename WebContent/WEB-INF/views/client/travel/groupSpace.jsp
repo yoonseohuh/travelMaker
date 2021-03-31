@@ -125,7 +125,7 @@
 						<p class="tit2">모집 현황</p>
 						<div id="ingPos">
 						<c:forEach var="posMem" items="${posMem}">
-							<p>${posMem}명</p>
+							<p>${posMem.key} : ${posMem.value}명</p>
 						</c:forEach>
 						</div>
 						<!-- //ingPos end -->
