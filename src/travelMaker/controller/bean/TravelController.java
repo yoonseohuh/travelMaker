@@ -193,7 +193,7 @@ public class TravelController {
 			posList.add(((GroupRequestDTO)joinMem.get(i)).getPosNo());
 		}
 		
-		 System.out.println("포스넘 출려되니?" + posList);
+		 System.out.println("포스넘 출력되니?" + posList);
 		//중복제거..
 		HashSet posListFin = new HashSet();
 		posListFin.addAll(posList);
@@ -201,19 +201,24 @@ public class TravelController {
 		posList.addAll(posListFin);
 
 		System.out.println("포지션리스트" + posListFin);
-		int nomalCnt = 0;
-		Map map = new HashMap();
 		
-	
-	/*	
-		for(int i = 0; i < posList.size(); i++) {
+		
+		Map map = new HashMap();
+		Map posMem = new HashMap(); 
+		
+		for(int i = 0; i < posList.size(); i++) { 
 			if(posList.get(i) == -1) {   //포지션에 번호가 -1 이면
-				nomalCnt = nomalCnt + 1 ;   // +1추가
+				int nomalCnt = travelService.posCount(gNo,posList.get(i));
+				System.out.println("일반 :" + nomalCnt + "명");
+				posMem.put("일반",nomalCnt);
 			}else { //그게아니면
-			ListtravelService.getPosInfo(posList.get(i));
+				SmallPosDTO dto = travelService.getPosInfo(posList.get(i));
+				System.out.println(i + "번째 dto : " + dto.getPosName());
+				int posCnt = travelService.posCount(gNo,posList.get(i));
+				System.out.println( posList.get(i) + "번 "+ dto.getPosName() + "포지션 :" + posCnt + "명");
+				posMem.put(dto.getPosName(),posCnt);
 			}
 		}
-	*/	
 		//jbr여기까지...
 		
 		
@@ -224,6 +229,7 @@ public class TravelController {
 		model.addAttribute("gList",gList);
 		
 		//일정 채팅 아직
+		model.addAttribute("posMem",posMem);
 		model.addAttribute("gNo",gNo);
 		model.addAttribute("awaiters",awaiters);
 		model.addAttribute("id",id);
