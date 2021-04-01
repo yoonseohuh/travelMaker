@@ -89,5 +89,13 @@ public class GroupSpaceDAOImpl implements GroupSpaceDAO{
 		return groupAllList;
 	}
 	
+	//그룹 상태 변경
+	@Override
+	public void changeGrpStatus(int gNo, int status) throws Exception {
+		Map map = new HashMap();
+		map.put("gNo",gNo);
+		map.put("status",status);
+		sqlSession.update("groupSpace.changeGrpStatus",map);
+	}
 	
 }

@@ -51,6 +51,8 @@
 		select * from groupspace order by gNo DESC
 	</select>
 	
-	
+	<update id="changeGrpStatus" parameterType="hashmap">
+		update groupSpace set status=#{status} where gNo=#{gNo}
+	</update>
 	
 </mapper>

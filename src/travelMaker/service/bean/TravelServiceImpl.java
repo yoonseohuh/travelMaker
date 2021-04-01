@@ -393,4 +393,10 @@ public class TravelServiceImpl implements TravelService{
 		return last;
 	}
 	
+	//그룹 여행 상태 변경
+	@Override
+	public void changeGrpStatus(int gNo, int status) throws Exception {
+		groupSpaceDAO.changeGrpStatus(gNo, status);
+	}
+	
 }

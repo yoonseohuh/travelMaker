@@ -76,5 +76,7 @@ public interface TravelService {
 	//마지막 채팅 메시지 출력
 	public ChattingDTO getLastChat(int gNo) throws Exception;
 	
+	//그룹 여행 상태 변경
+	public void changeGrpStatus(int gNo, int status) throws Exception;
 	
 }

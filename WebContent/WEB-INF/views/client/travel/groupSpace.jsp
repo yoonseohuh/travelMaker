@@ -78,7 +78,7 @@
 					$('#viewChatWrap').load(currentLocation + ' #viewChatWrap');			
 				}
 				$(".viewChatWrap").scrollTop($(".viewChatWrap")[0].scrollHeight);
-			/*	https://songjihyeon.tistory.com/21
+			/*	https://songjihyeon.tistory.com/21	
 				0.3초 간격으로 현재 시간과 DB에 저장된 채팅 글을 체크하는 함수 호출. 새로운 채팅 글이 입력될 때만 readAjax함수를 호출.
 				var gn = $('#gNo').val();
 				console.log(gn);
@@ -183,7 +183,10 @@
 							</c:forEach>
 						</table>
 					</c:if>
+					
+					
 				</c:if>
+				<!-- if: leader end -->
 				
 				<ul class="groupCont1">
 					<li>

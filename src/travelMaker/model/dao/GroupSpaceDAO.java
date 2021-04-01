@@ -26,6 +26,7 @@ public interface GroupSpaceDAO {
 	
 	//jbr 그룹관리 : 전체 그룹목록 가져오기
 	public List<GroupSpaceDTO> groupAllList();
-	
+	//그룹 상태 변경
+	public void changeGrpStatus(int gNo, int status) throws Exception;
 	
 }
