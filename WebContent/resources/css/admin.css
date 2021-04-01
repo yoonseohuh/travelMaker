@@ -1,0 +1,8 @@
+@charset "UTF-8";
+
+/*admin.css*/
+
+/*group*/
+.adminGroup {overflow: hidden;}
+.adminGroup li {float: left; width:24.25%; height: 200px; background: #ccc; padding: 40px; margin: 0 1% 1% 0;}
+.adminGroup li:nth-child(4n) {margin: 0 0 1% 0;}
