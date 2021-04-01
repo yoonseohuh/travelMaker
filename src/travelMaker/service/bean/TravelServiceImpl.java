@@ -368,11 +368,19 @@ public class TravelServiceImpl implements TravelService{
 	//jbr 그룹관리 : 전체 그룹목록 가져오기
 	@Override
 	public List<GroupSpaceDTO> groupAllList() {
+		
 		List groupAllList = groupSpaceDAO.groupAllList();
 		
 		return groupAllList;
 	}
 	
+	
+	// jbr 그룹관리 : 그룹 개수 가져오기
+	@Override
+	public int groupCnt() {
+		int groupCnt = groupSpaceDAO.groupCnt();
+		return groupCnt;
+	}
 	
 	
 	

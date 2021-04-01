@@ -68,6 +68,9 @@ public interface TravelService {
 	//jbr 그룹관리 : 전체 그룹목록 가져오기
 	public List<GroupSpaceDTO> groupAllList();
 	
+	// jbr 그룹관리 : 그룹 개수 가져오기
+	public int groupCnt();
+	
 	
 	
 }
