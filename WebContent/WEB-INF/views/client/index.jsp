@@ -42,17 +42,7 @@
 			</div>		
         </div>        
         <div class="section" id="section1">
-            <div class="slide active" id="slide1" data-anchor="slide1">
-                 <h1>2-1section</h1>
-                 <h2>세션확인 :${sessionScope.memId}</h2> 
-                 <h2>쿠키확인 :${cooMap.autoId}</h2>                 
-            </div>
-            <div class="slide" id="slide2" data-anchor="slide2">
-                <h1>2-2section</h1>                
-            </div>
-            <div class="slide" id="slide3" data-anchor="slide3">
-                <h1>2-3section</h1>
-            </div>    
+            
         </div>
         <div class="section" id="section2">
             <h1>3section</h1>

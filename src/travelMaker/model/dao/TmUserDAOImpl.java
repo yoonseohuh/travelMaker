@@ -210,5 +210,11 @@ public class TmUserDAOImpl implements TmUserDAO {
 		int check = sqlSession.selectOne("tmUser.idCheck", id);
 		return check;
 	}
+
+	@Override
+	public List selPosList(String posCate) {
+		List sPosList = sqlSession.selectList("tmUser.selPosList", posCate);
+		return sPosList;
+	}
 		
 }

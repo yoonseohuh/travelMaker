@@ -135,4 +135,7 @@
 		select count(*) from tmUser where id=#{id}
 	</select>
 	
+	<select id="selPosList" parameterType="string" resultType="SmallPosDTO">
+		select * from smallpos where posCate=#{posCate}
+	</select>
 </mapper>
