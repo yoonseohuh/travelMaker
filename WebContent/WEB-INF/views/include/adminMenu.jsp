@@ -4,7 +4,7 @@
 	<ul class="menu">
         <li><a href="/travelMaker/admin/index.tm">홈</a></li>
         <li><a href="/travelMaker/admin/member.tm">회원관리</a></li>
-        <li><a href="#">그룹관리</a></li>
+        <li><a href="/travelMaker/admin/adminGroup.tm">그룹관리</a></li>
         <li><a href="/travelMaker/admin/qna.tm">문의관리</a></li>
         <li><a href="/travelMaker/admin/report.tm">신고관리</a></li>
         <li><a href="/travelMaker/admin/reason.tm">신고사유/문의유형</a></li>
@@ -21,6 +21,8 @@
 		$('#adminMenuWrap').children('.menu').children('li').eq(0).addClass('on');
 	}else if(nowUrl == "/travelMaker/admin/member.tm"){
 		$('#adminMenuWrap').children('.menu').children('li').eq(1).addClass('on');
+	}else if(nowUrl == "/travelMaker/admin/adminGroup.tm"){
+		$('#adminMenuWrap').children('.menu').children('li').eq(2).addClass('on');
 	}else if(nowUrl == "/travelMaker/admin/qna.tm"){
 		$('#adminMenuWrap').children('.menu').children('li').eq(3).addClass('on');
 	}else if(nowUrl == "/travelMaker/admin/report.tm"){

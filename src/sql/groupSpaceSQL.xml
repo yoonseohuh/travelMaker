@@ -46,6 +46,11 @@
 		update groupSpace set actualNum=actualNum+#{actualNum} where gNo=#{gNo}
 	</update>
 	
+	<!-- jbr 그룹관리 : 전체 그룹 가져오기 -->
+	<select id="groupAllList" resultType="GroupSpaceDTO">
+		select * from groupspace order by gNo DESC
+	</select>
+	
 	
 	
 </mapper>

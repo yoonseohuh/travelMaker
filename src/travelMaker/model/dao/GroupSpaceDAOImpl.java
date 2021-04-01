@@ -81,5 +81,13 @@ public class GroupSpaceDAOImpl implements GroupSpaceDAO{
 	}
 	
 	
+	//jbr 그룹관리 : 전체 그룹목록 가져오기
+	@Override
+	public List<GroupSpaceDTO> groupAllList() {
+		List groupAllList = sqlSession.selectList("groupSpace.groupAllList");
+		
+		return groupAllList;
+	}
+	
 	
 }
