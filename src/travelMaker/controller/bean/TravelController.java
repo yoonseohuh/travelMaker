@@ -362,7 +362,6 @@ public class TravelController {
 	@ResponseBody
 	@RequestMapping("showChat.tm")
 	public String showChat(@RequestBody int gNo) throws Exception {
-		System.out.println("showChat에 gNo 넘어왔니 "+gNo);
 		List chatList = travelService.getChats(gNo);
 		ObjectMapper mapper = new ObjectMapper();
 		String json = mapper.writeValueAsString(chatList);

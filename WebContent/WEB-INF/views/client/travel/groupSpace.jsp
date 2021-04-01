@@ -12,7 +12,7 @@
 		
 		<div class="gsLeft">
 			<script>
-			$(document).ready(function(){
+			$(document).ready(function(){	
 				$('#accepted').submit(function(event){
 					event.preventDefault();
 					var data = {};
@@ -44,7 +44,6 @@
 						data: JSON.stringify(data),
 						success: function(res){
 							console.log(res);
-							
 						}
 					});
 				});
@@ -78,7 +77,7 @@
 					var currentLocation = window.location;
 					$('#viewChatWrap').load(currentLocation + ' #viewChatWrap');			
 				}
-				
+				$(".viewChatWrap").scrollTop($(".viewChatWrap")[0].scrollHeight);
 			/*	https://songjihyeon.tistory.com/21
 				0.3초 간격으로 현재 시간과 DB에 저장된 채팅 글을 체크하는 함수 호출. 새로운 채팅 글이 입력될 때만 readAjax함수를 호출.
 				var gn = $('#gNo').val();
@@ -239,7 +238,6 @@
 								날짜 <input type="text" name="sDate" value="${list.sDate}"/>
 								일정 <input type="text" name="sCont" value="${list.sCont}"/>
 								<input type="submit" name="수정" />
-								<!--  <button onclick="window.location='scheduleModi.tm?gNo=${gNo}&sNo=${list.sNo}&sDate=${list.sDate}&sCont=${list.sCont}'">수정</button> -->
 								<input type="button" value="삭제" onclick="window.location='/travelMaker/travel/scheduleDel.tm?gNo=${gNo}&sNo=${list.sNo}'" />
 								
 								<br/>
