@@ -65,6 +65,9 @@ public interface TravelService {
 	// cyh 일정 삭제
 	public void deleteSchedule(int sNo) throws Exception;
 	
+	//jbr 그룹관리 : 전체 그룹목록 가져오기
+	public List<GroupSpaceDTO> groupAllList();
+	
 	
 	
 }

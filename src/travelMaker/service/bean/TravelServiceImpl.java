@@ -365,6 +365,13 @@ public class TravelServiceImpl implements TravelService{
 		System.out.println("sNo 서비스"+ sNo);
 	}
 	
+	//jbr 그룹관리 : 전체 그룹목록 가져오기
+	@Override
+	public List<GroupSpaceDTO> groupAllList() {
+		List groupAllList = groupSpaceDAO.groupAllList();
+		
+		return groupAllList;
+	}
 	
 	
 	

@@ -24,5 +24,8 @@ public interface GroupSpaceDAO {
 	//참여 인원수 카운트 증감시키기
 	public void updateActNum(int gNo, int num) throws Exception;	
 	
+	//jbr 그룹관리 : 전체 그룹목록 가져오기
+	public List<GroupSpaceDTO> groupAllList();
+	
 	
 }

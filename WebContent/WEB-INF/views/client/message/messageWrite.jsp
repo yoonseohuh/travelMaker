@@ -24,7 +24,7 @@
 
 			
 			<textarea rows="10" cols="30" name="mCont" required></textarea><br/>
-			<button onclick=" " >취소</button> 
+			<button onclick="window.location='message.tm" >취소</button> 
 			
 			
 			
