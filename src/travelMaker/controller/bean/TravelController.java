@@ -473,10 +473,10 @@ public class TravelController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("recruitEnd.tm")
-	public String recruitEnd(@RequestBody int gNo) throws Exception {
-		//모집 마감 처리
-		travelService.changeGrpStatus(gNo,1);
+	@RequestMapping("changeStatus.tm")
+	public String recruitEnd(@RequestBody int gNo, @RequestBody int status) throws Exception {
+		//넘어오는 status 값으로 변경
+		travelService.changeGrpStatus(gNo,status);
 		ObjectMapper mapper = new ObjectMapper();
 		String json = mapper.writeValueAsString("");
 		return json;
