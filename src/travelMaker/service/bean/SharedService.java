@@ -2,9 +2,15 @@ package travelMaker.service.bean;
 
 import java.util.Map;
 
+import travelMaker.model.dto.GroupSpaceDTO;
+
 public interface SharedService {
 
 	public Map getArtilces(String pageNum) throws Exception;
+
+	public GroupSpaceDTO getArticle(int num) throws Exception;
+
+
 
 	
 

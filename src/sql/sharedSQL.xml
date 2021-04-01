@@ -17,5 +17,9 @@
 		]]>
 		
 	</select>
+	
+	<select id="selectArticle">
+		select * from groupSpace where num=#{value} and gNo=#{gNo} and shared=1
+	</select>
   		
 </mapper>
