@@ -293,7 +293,6 @@ public class TravelController {
 			dateList.add(sdf.format(cal.getTime()));
 		}
 		model.addAttribute("dateList",dateList);
-		
 		//일정
 		List scheList = travelService.getSchedule(gNo);
 		

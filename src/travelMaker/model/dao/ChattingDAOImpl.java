@@ -1,5 +1,8 @@
 package travelMaker.model.dao;
 
-public class ChattingDAOImpl {
+import org.springframework.stereotype.Repository;
 
+@Repository
+public class ChattingDAOImpl implements ChattingDAO {
+	
 }
