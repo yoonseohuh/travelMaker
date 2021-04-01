@@ -52,4 +52,18 @@ public class MessageDAOImpl implements MessageDAO {
 		return result;
 	}
 	
+	
+	// 사용자가 받은 쪽지 카운트
+	public int recMsgCnt(String id) {
+		int recMsgCnt = sqlSession.selectOne("message.recMsgCnt", id);
+		return recMsgCnt;
+	}
+	
+	// 사용자가 보낸 쪽지 카운트
+	public int senMsgCnt(String id) {
+		int senMsgCnt = sqlSession.selectOne("message.senMsgCnt", id);
+		
+		return senMsgCnt;
+	}	
+	
 }

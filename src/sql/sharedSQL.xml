@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="shared">
+
+	<select id="getAllCount" resultType="int">
+		select count(*) from groupSpace
+	</select>
+
+	<select id="sharedList" parameterType="hashmap" resultType="GroupSpaceDTO">
+		<![CDATA[
+		SELECT B.*, r FROM
+		(SELECT A.*, rownum r FROM 
+		(SELECT * FROM board ORDER BY ref DESC, re_step ASC) A 
+		ORDER BY ref DESC, re_step ASC) B WHERE r >= #{start} AND r <= #{end}
+		]]>
+		
+	</select>
+	
+	<select id="selectArticle">
+		select * from groupSpace where num=#{value} and gNo=#{gNo} and shared=1
+	</select>
+  		
+</mapper>

@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
 	
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
@@ -11,7 +12,7 @@
 		
 		<div class="gsLeft">
 			<script>
-			$(document).ready(function(){
+			$(document).ready(function(){	
 				$('#accepted').submit(function(event){
 					event.preventDefault();
 					var data = {};
@@ -43,14 +44,91 @@
 						data: JSON.stringify(data),
 						success: function(res){
 							console.log(res);
-							
-						}					
+						}
 					});
 				});
+				//채팅 입력
+				$('#chatForm').submit(function(event){
+					event.preventDefault();
+					var data = {};
+					$.each($(this).serializeArray(), function(index, i){
+						data[i.name] = i.value;
+					});
+					$.ajax({
+						url: "/travelMaker/travel/sendChat.tm",
+						type: "POST",
+						dataType: "json",
+						contentType: "application/json",
+						data: JSON.stringify(data),
+						success: function(res){
+							console.log(res);
+							$('#sendChat').val("");
+						}
+					});
+				});
+				
+				var gn = $('#gNo').val();
+				console.log(gn);
+				
+				setInterval(getChatLists, 1000);
+				
+				function getChatLists(){
+					console.log("실행");
+					var currentLocation = window.location;
+					$('#viewChatWrap').load(currentLocation + ' #viewChatWrap');			
+				}
+				$(".viewChatWrap").scrollTop($(".viewChatWrap")[0].scrollHeight);
+			/*	https://songjihyeon.tistory.com/21	
+				0.3초 간격으로 현재 시간과 DB에 저장된 채팅 글을 체크하는 함수 호출. 새로운 채팅 글이 입력될 때만 readAjax함수를 호출.
+				var gn = $('#gNo').val();
+				console.log(gn);
+				
+				setInterval(function(){
+					$.ajax({
+						url: "/travelMaker/travel/lastDate.tm",
+						cache: false,
+						async: false,
+						data: {gNo: gn},
+						success: function(res){
+							if(lastDateTime < res){
+								readAjax(lastDateTime);
+								lastDateTime = res;
+							}else{
+								lastDateTime = res;
+							}
+						}
+					});
+				},100);
+				
+				function readAjax(compareTime){
+					$.ajax({
+						method: "POST",
+						url: "/travelMaker/travel/read.tm",
+						dataType: "json",
+						cache: false,
+						async: false,
+						data: {
+							"lastDate": compareTime
+						},
+						success: function(data){
+							if(data.length==0){
+								return;
+							}else{
+								$.each(data, function(index, entry){
+									//채팅창 div에 맞게 글을 뿌려주자
+									$('.viewChatWrap').append(res);
+									$(".viewChatWrap").scrollTop($(".viewChatWrap")[0].scrollHeight);	//스크롤바 맨 밑으로 유지
+								});
+							}
+						}
+					});
+				}					*/
+				
 			});
 			</script>
 			<!-- //accept logic end -->		
 			
+			<input type="hidden" id="gNo" value="${gNo}"/>
 			<p class="tit1">${grpSpace.subject}의 그룹 방입니다.</p>
 			
 			<c:if test="${idStatus!=1}">
@@ -105,18 +183,27 @@
 							</c:forEach>
 						</table>
 					</c:if>
+					
+					
 				</c:if>
+				<!-- if: leader end -->
 				
 				<ul class="groupCont1">
 					<li>
 						<p class="tit2">참여 중인 멤버</p>
 						<div id="ingMem">
+							<h3>개설자 ${leader}님</h3><br/>
 							<c:if test="${fn:length(grpMem)>0}">
-							<c:forEach var="mem" items="${grpMem}">
-								<c:if test="${mem.status==1}">
-									<p>${mem.id}님</p>
-								</c:if>			
-							</c:forEach>
+								<c:forEach var="mem" items="${grpMem}">
+									<c:if test="${mem.status==1}">
+										<p>
+											${mem.id}님
+											<c:if test="${mem.id!=id}">
+												<input type="button" onclick="window.location='/travelMaker/msg/messageWrite.tm?receiver=${mem.id}&sender=${id}'" value="쪽지쓰기"/>
+											</c:if>
+										</p>
+									</c:if>			
+								</c:forEach>
 							</c:if>
 						</div>
 						<!-- //ingMem end -->
@@ -124,10 +211,9 @@
 					<li>
 						<p class="tit2">모집 현황</p>
 						<div id="ingPos">
-							<p>pos1</p>
-							<p>pos2</p>
-							<p>pos3</p>
-							<p>pos4</p>
+						<c:forEach var="posMem" items="${posMem}">
+							<p>${posMem.key} : ${posMem.value}명</p>
+						</c:forEach>
 						</div>
 						<!-- //ingPos end -->
 					</li>
@@ -148,42 +234,76 @@
 					<li>
 						<p class="tit2">일정</p>
 						<div id="ingPlan">
-							<textarea>210329 13:00
-								KFC가서 할인쿠폰쓰고 점심 먹기
-							</textarea>
+							<c:forEach var="list" items="${scheList}">
+							<form action="scheduleModi.tm?gNo=${gNo}&sNo=${list.sNo}&sDate=${list.sDate}&sCont=${list.sCont}" method="get">
+								<input type="hidden" name="gNo" value="${list.gNo}"/>
+								<input type="hidden" name="sNo" value="${list.sNo}"/>
+								날짜 <input type="text" name="sDate" value="${list.sDate}"/>
+								일정 <input type="text" name="sCont" value="${list.sCont}"/>
+								<input type="submit" name="수정" />
+								<input type="button" value="삭제" onclick="window.location='/travelMaker/travel/scheduleDel.tm?gNo=${gNo}&sNo=${list.sNo}'" />
+								
+								<br/>
+							</form>
+							</c:forEach>
+							<c:if test="${id==leader}">
+								<form action="schedulePro.tm">
+									<input type="hidden" name="gNo" value="${gNo}"/>
+									<select name="sDate">
+										<c:forEach var="i" items="${dateList}">
+												<option value="${i}">${i}</option>
+										</c:forEach>
+									</select>
+									<input type="text" name="sCont"/>
+									<input type="submit" value="작성"/>
+								</form>
+							</c:if>
 						</div>
 						<!-- //plan end -->
 					</li>
 					<li>
 						<p class="tit2">예산</p>
-						<p id="ingCost">123</p>
+						<p id="ingCost"><fmt:formatNumber type="number" maxFractionDigits="3" value="${grpSpace.cost}"/>원</p>
 						<!-- //cost end -->
-					</li>					
+					</li>
+					<li>
+						<p class="tit2">날짜 관련(임시로 이 위치에)</p>
+						시작일 ${grpSpace.startDate} /
+						종료일 ${grpSpace.endDate}
+						<input type="hidden" value="${eDate}" id="eDate"/>					
+					</li>
 				</ul>
 				<!-- //groupCont2 end -->
 				
 				<div class="groupCont3">
 					<p class="tit2">채팅</p>
 					<div class="chat">
-						<ul class="viewChatWrap">
-							<li>hi1</li>
-							<li>hi2</li>
-							<li>hi3</li>
-							<li class="mine">hi4</li>
-							<li>hi5</li>
-							<li>hi1</li>
-							<li>hi2</li>
-							<li>hi3</li>
-							<li class="mine">hi4</li>
-							<li>hi5</li>
+						<ul id="viewChatWrap" class="viewChatWrap">
+							<c:if test="${fn:length(chatList)==0}">
+								아직 작성된 채팅이 없습니다.
+							</c:if>
+							<c:forEach var="chatList" items="${chatList}">
+								<c:if test="${chatList.writer==id}">
+									<li class="mine">
+										${chatList.cont} (<fmt:formatDate value="${chatList.reg}" type="both" dateStyle="short" timeStyle="short"/>)
+									</li>						
+								</c:if>
+								<c:if test="${chatList.writer!=id}">
+									<li>
+										${chatList.writer}님: ${chatList.cont} (<fmt:formatDate value="${chatList.reg}" type="both" dateStyle="short" timeStyle="short"/>)
+									</li>						
+								</c:if>
+							</c:forEach>
 						</ul>
 						<script>
 						$(".viewChatWrap").scrollTop($(".viewChatWrap")[0].scrollHeight);							
 						</script>
 						<div class="sendChatWrap">								
-							<form action="" method="get">
-								<input type="text" id="sendChat" />
-								<input type="submit" id="sendChatBtn" value="전송" />
+							<form action="#" id="chatForm" method="post">
+								<input type="hidden" value="${gNo}" name="gNo"/>
+								<input type="hidden" value="${id}" name="writer"/>
+								<input type="text" id="sendChat" name="cont"/>
+								<input type="submit" id="sendChatBtn" value="전송"/>
 							</form>
 						</div>
 					</div>

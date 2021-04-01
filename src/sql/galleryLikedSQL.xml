@@ -8,5 +8,12 @@
 	<insert id="insertImgLiked" parameterType="hashmap">
 		insert into galleryLiked values(#{id},#{gNo},#{pNo})
 	</insert>
-
+	
+	<select id="likedCount" parameterType="hashmap" resultType="int">
+		select count(*) from galleryLiked where id=#{id} and pNo=#{pNo}
+	</select>
+	
+	
+	
+	
 </mapper>

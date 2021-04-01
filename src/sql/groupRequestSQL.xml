@@ -13,4 +13,9 @@
 		select * from groupRequest where gNo=#{gNo}
 	</select>
 	
+	<!-- pos카운트 -->
+	<select id="posCount" parameterType="Hashmap"  resultType="int">
+		select count(*) from grouprequest where gNo=#{gNo} and posNo=#{posNo}
+	</select>
+	
 </mapper>

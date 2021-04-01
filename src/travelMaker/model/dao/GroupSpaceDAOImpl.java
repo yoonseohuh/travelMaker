@@ -81,4 +81,21 @@ public class GroupSpaceDAOImpl implements GroupSpaceDAO{
 	}
 	
 	
+	//jbr 그룹관리 : 전체 그룹목록 가져오기
+	@Override
+	public List<GroupSpaceDTO> groupAllList() {
+		List groupAllList = sqlSession.selectList("groupSpace.groupAllList");
+		
+		return groupAllList;
+	}
+	
+	//그룹 상태 변경
+	@Override
+	public void changeGrpStatus(int gNo, int status) throws Exception {
+		Map map = new HashMap();
+		map.put("gNo",gNo);
+		map.put("status",status);
+		sqlSession.update("groupSpace.changeGrpStatus",map);
+	}
+	
 }

@@ -36,20 +36,29 @@ public class MessageController {
 		
 		// 받은 쪽지 가져오기
 		List recMsgList = messageService.getRecMsg(id); 
+
+		// 사용자가 받은 쪽지 카운트
+		int recMsgCnt = messageService.recMsgCnt(id);
+		
+		//사용자가 보낸 쪽지 카운트
+		int senMsgCnt = messageService.senMsgCnt(id);
+		
 		
 		model.addAttribute("senMsgList", senMsgList);
 		model.addAttribute("recMsgList", recMsgList);
-		
-		
-		
+		model.addAttribute("recMsgCnt", recMsgCnt);
+		model.addAttribute("senMsgCnt", senMsgCnt);
 		return "client/message/message";
 	}
 	
 	
 	// 메세지 작성
 	@RequestMapping("messageWrite.tm")
-	public String messageWrite(String receiver, Model model) {
+	public String messageWrite(String receiver, Model model, String reply) {
+		System.out.println("답장받는사람" + reply);
+		
 		model.addAttribute("receiver",receiver);
+		model.addAttribute("reply", reply);
 		return "client/message/messageWrite";
 	}
 	
@@ -60,8 +69,8 @@ public class MessageController {
 		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
 		msgDto.setSender(id);
 		int result = messageService.insertMsg(msgDto);
-		model.addAttribute("result", result);
 		
+		model.addAttribute("result", result);
 		return "client/message/messageWritePro";
 	}
 	

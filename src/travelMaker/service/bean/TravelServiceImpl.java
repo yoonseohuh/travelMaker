@@ -19,10 +19,12 @@ import travelMaker.model.dao.ScheduleDAO;
 import travelMaker.model.dao.SmallPosDAO;
 import travelMaker.model.dao.TmUserDAO;
 import travelMaker.model.dao.UserRkDAO;
+import travelMaker.model.dto.ChattingDTO;
 import travelMaker.model.dto.GalleryDTO;
 import travelMaker.model.dto.GroupMemberDTO;
 import travelMaker.model.dto.GroupRequestDTO;
 import travelMaker.model.dto.GroupSpaceDTO;
+import travelMaker.model.dto.ScheduleDTO;
 import travelMaker.model.dto.SmallPosDTO;
 import travelMaker.model.dto.TmUserDTO;
 import travelMaker.model.dto.UserRkDTO;
@@ -46,12 +48,11 @@ public class TravelServiceImpl implements TravelService{
 	private GalleryDAO galleryDAO = null;
 	@Autowired
 	private GalleryLikedDAO galleryLikedDAO = null;
-	/*
 	@Autowired
 	private ScheduleDAO scheduleDAO = null;
 	@Autowired
-	private ChattingDAO chattingDAO = null;	
-	*/
+	private ChattingDAO chattingDAO = null;
+	
 	//개설글 작성
 	@Override
 	public void insertMaking(GroupSpaceDTO dto) throws Exception {
@@ -325,5 +326,77 @@ public class TravelServiceImpl implements TravelService{
 	}
 	
 	
+	// jbr : 그룹리퀘스트 pos 신청자수 세기
+	@Override
+	public int posCount(int gNo, int posNo) {
+		int posCnt = groupRequestDAO.posCount(gNo,posNo);
+		return posCnt;
+	}
+	
+	//cyh
+	@Override
+	public void insertSchedule(int gNo, String sDate, String sCont) throws Exception {
+		scheduleDAO.insertSchedule(gNo, sDate, sCont);		
+	}
+
+	//cyh
+	@Override
+	public void updateSchedule(ScheduleDTO dto) throws Exception {
+		scheduleDAO.updateSchedule(dto);
+	}
+	
+	//cyh
+	@Override
+	public List getSchedule(int gNo) throws Exception{
+		List scheList = scheduleDAO.getSchedule(gNo);
+		return scheList;
+	}
+	
+	//cyh
+	@Override
+	public void selectSchedule(int gNo) throws Exception{
+		scheduleDAO.selectSchedule(gNo);
+	}
+	
+	//cyh
+	@Override
+	public void deleteSchedule(int sNo) throws Exception{
+		scheduleDAO.deleteSchedule(sNo);
+		System.out.println("sNo 서비스"+ sNo);
+	}
+	
+	//jbr 그룹관리 : 전체 그룹목록 가져오기
+	@Override
+	public List<GroupSpaceDTO> groupAllList() {
+		List groupAllList = groupSpaceDAO.groupAllList();
+		
+		return groupAllList;
+	}
+	
+	//채팅 입력
+	@Override
+	public void sendChat(int gNo, String writer, String cont) throws Exception {
+		chattingDAO.sendChat(gNo, writer, cont);
+	}
+	
+	//채팅 리스트 출력
+	@Override
+	public List getChats(int gNo) throws Exception {
+		List chatList = chattingDAO.getChats(gNo);
+		return chatList;
+	}
+	
+	//마지막 채팅 메시지 출력
+	@Override
+	public ChattingDTO getLastChat(int gNo) throws Exception {
+		ChattingDTO last = chattingDAO.getLastChat(gNo);
+		return last;
+	}
+	
+	//그룹 여행 상태 변경
+	@Override
+	public void changeGrpStatus(int gNo, int status) throws Exception {
+		groupSpaceDAO.changeGrpStatus(gNo, status);
+	}
 	
 }

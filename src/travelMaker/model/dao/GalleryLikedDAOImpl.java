@@ -23,5 +23,14 @@ public class GalleryLikedDAOImpl implements GalleryLikedDAO {
 		sqlSession.insert("galleryLiked.insertImgLiked",map);
 	}
 	
+	//사진 좋아요 이미 했는지 체크
+	@Override
+	public int likedCount(String id, int pNo) throws Exception {
+		Map map = new HashMap();
+		map.put("id",id);
+		map.put("pNo",pNo);
+		int count = sqlSession.selectOne("galleryLiked.likedCount", map);
+		return count;
+	}
 	
 }

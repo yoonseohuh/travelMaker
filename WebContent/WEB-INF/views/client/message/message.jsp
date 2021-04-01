@@ -34,13 +34,45 @@
 		
 		<br/><br/><br/><br/>
 		<h1>이곳은 쪽지함이다</h1>
-		<a id="tab1">보낸쪽지함</a> | <a id="tab2">받은쪽지함</a>
+		<a id="tab1">받은쪽지함</a> | <a id="tab2">보낸쪽지함</a>
 		
 		
 		
 		<div id="cont1">
+		<h1>받은쪽지함</h1>
+		<button onclick="window.location='messageWrite.tm'">쪽지쓰기</button>
+		<c:if test="${recMsgCnt == 0}">
+		저런 ! 받은 쪽지가 없네요^^ 
+		</c:if>
+		<c:if test="${recMsgCnt > 0}">
+		<form action="messageDel.tm" method="get">
+			<input type="submit" value="삭제" />
+			<div>
+			<ul>
+			<c:forEach var="recMsgList" items="${recMsgList}"> 
+				<li class="menu">
+				<input type="checkbox" name="msgNo" value="${recMsgList.mNo}" /><a>${recMsgList.mNo} /받는사람: ${recMsgList.receiver}/ 보낸사람: ${recMsgList.sender}  / ${recMsgList.mStatus} / ${recMsgList.reg}  ▼ </a>
+					<ul style="display:none;">
+						<li><textarea rows="10" cols="50" readonly style="resize: none;">내용 : ${recMsgList.mCont}</textarea></li><br/>
+						<input type="button" name="dap" value="답장" onclick="window.location='messageWrite.tm?reply=${recMsgList.sender}'" />
+					</ul>
+				</li>
+			</c:forEach>
+			</ul>
+			</div>
+		</form>
+		</c:if>
+		</div>
+		
+		
+		
+		<div id="cont2">
 		<h1>보낸쪽지함</h1>
 		<button onclick="window.location='messageWrite.tm'">쪽지쓰기</button>
+		<c:if test="${senMsgCnt == 0}">
+		보낸쪽지가 없습니다.
+		</c:if>
+		<c:if test="${senMsgCnt > 0}">
 		<form action="messageDel.tm" method="get">
 			<input type="submit" value="삭제" />
 			<div>
@@ -56,28 +88,7 @@
 			</ul>
 			</div>
 		</form>
-		</div>
-		
-		
-		
-		<div id="cont2">
-		<h1>받은쪽지함</h1>
-		<button onclick="window.location='messageWrite.tm'">쪽지쓰기</button>
-		<form action="messageDel.tm" method="get">
-			<input type="submit" value="삭제" />
-			<div>
-			<ul>
-			<c:forEach var="recMsgList" items="${recMsgList}"> 
-				<li class="menu">
-				<input type="checkbox" name="msgNo" value="${recMsgList.mNo}" /><a>${recMsgList.mNo} /받는사람: ${recMsgList.receiver}/ 보낸사람: ${recMsgList.sender}  / ${recMsgList.mStatus} / ${recMsgList.reg}  ▼ </a>
-					<ul style="display:none;">
-						<li><textarea rows="10" cols="50" readonly style="resize: none;">내용 : ${recMsgList.mCont}</textarea></li><br/>
-					</ul>
-				</li>
-			</c:forEach>
-			</ul>
-			</div>
-		</form>
+		</c:if>
 		</div>
 		
 		

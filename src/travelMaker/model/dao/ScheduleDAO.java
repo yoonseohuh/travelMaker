@@ -7,7 +7,7 @@ import travelMaker.model.dto.ScheduleDTO;
 public interface ScheduleDAO {
 	
 	// 일정 생성
-	public void insertSchedule(String gNo, String sDate, String sCont) throws Exception;
+	public void insertSchedule(int gNo, String sDate, String sCont) throws Exception;
 	// 일정 수정
 	public void updateSchedule(ScheduleDTO dto) throws Exception;
 	//  일정 뿌려주기

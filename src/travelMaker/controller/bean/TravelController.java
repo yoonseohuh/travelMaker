@@ -3,7 +3,11 @@ package travelMaker.controller.bean;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -19,13 +23,17 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import travelMaker.model.dto.ChattingDTO;
 import travelMaker.model.dto.GalleryDTO;
 import travelMaker.model.dto.GroupMemberDTO;
 import travelMaker.model.dto.GroupRequestDTO;
 import travelMaker.model.dto.GroupSpaceDTO;
+import travelMaker.model.dto.ScheduleDTO;
 import travelMaker.model.dto.SmallPosDTO;
 import travelMaker.model.dto.TmUserDTO;
 import travelMaker.model.dto.UserRkDTO;
+import travelMaker.service.bean.MemberService;
 import travelMaker.service.bean.TravelService;
 
 @Controller
@@ -34,9 +42,13 @@ public class TravelController {
 
 	@Autowired
 	private TravelService travelService = null;
+	@Autowired
+	private MemberService memberService = null;
 	
 	@RequestMapping("makingWrite.tm")
 	public String makingWrite(String pageNum, Model model) {
+		List posList = memberService.getAllPos();
+		model.addAttribute("posList",posList);
 		model.addAttribute("pageNum",pageNum);
 		return "/client/travel/makingWrite";
 	}
@@ -66,7 +78,7 @@ public class TravelController {
 		//모든 여행 가져와서 상태가 대기 중(0)인 것만 담음
 		List WList = travelService.getMyGroups(id,0);
 		model.addAttribute("waitingList",WList);
-
+		
 		//모집 중인 여행
 		Map map = travelService.getArticles(pageNum);
 		model.addAttribute("rkInfo",rkInfo);
@@ -108,9 +120,34 @@ public class TravelController {
 		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
 		int writerGender = travelService.getGender(content.getId());
 		int memIdGender = travelService.getGender(id);
-		
 		int memStatus = travelService.getMemStatus(gNo, id);
+		List posList = new ArrayList();
+		SmallPosDTO dto = new SmallPosDTO();
+		if(content.getPo1()!=-1) {
+			dto = travelService.getPosInfo(content.getPo1());
+			posList.add(dto.getPosName());
+		}
+		if(content.getPo2()!=-1) {
+			dto = travelService.getPosInfo(content.getPo2());
+			posList.add(dto.getPosName());			
+		}
+		if(content.getPo3()!=-1) {
+			dto = travelService.getPosInfo(content.getPo3());
+			posList.add(dto.getPosName());			
+		}
+		//시작일, 종료일, 마감일 DATE 타입으로 변환해서 보내주기
+		DateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		Date sDate = sdf.parse(content.getStartDate());
+		Date eDate = sdf.parse(content.getEndDate());
+		Date cDate = sdf.parse(content.getClosingDate());
+		Date today = new Date();
+		long endStartGap = Math.abs((eDate.getTime()-sDate.getTime())/(24*60*60*1000));
+		long closeTodayGap = Math.abs((cDate.getTime()-today.getTime())/(24*60*60*1000));
 		
+		model.addAttribute("esGap",endStartGap);
+		model.addAttribute("ctGap",closeTodayGap);
+		
+		model.addAttribute("posList",posList);
 		model.addAttribute("pageNum",pageNum);
 		model.addAttribute("content",content);
 		model.addAttribute("writerGender",writerGender);
@@ -133,10 +170,26 @@ public class TravelController {
 		
 		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
 		Map<String, Integer> map = travelService.getUserPos(id);
-		
+		//지원자 포지션
 		SmallPosDTO posInfo1 = travelService.getPosInfo(map.get("pos1"));
 		SmallPosDTO posInfo2 = travelService.getPosInfo(map.get("pos2"));
+		//모집 포지션
+		SmallPosDTO dto = new SmallPosDTO();
+		List posList = new ArrayList();
+		if(content.getPo1()!=-1) {
+			dto = travelService.getPosInfo(content.getPo1());
+			posList.add(dto.getPosName());
+		}
+		if(content.getPo2()!=-1) {
+			dto = travelService.getPosInfo(content.getPo2());
+			posList.add(dto.getPosName());			
+		}
+		if(content.getPo3()!=-1) {
+			dto = travelService.getPosInfo(content.getPo3());
+			posList.add(dto.getPosName());			
+		}
 		
+		model.addAttribute("posList",posList);
 		model.addAttribute("content",content);
 		model.addAttribute("id",id);
 		model.addAttribute("pos1",map.get("pos1"));
@@ -175,7 +228,6 @@ public class TravelController {
 			}
 		}
 		
-		
 		//jbr여기부터...
 		//status = 1 인 멤버들의 그룹리퀘스트dto
 		List<GroupRequestDTO> joinMem = new ArrayList<GroupRequestDTO>();
@@ -193,7 +245,7 @@ public class TravelController {
 			posList.add(((GroupRequestDTO)joinMem.get(i)).getPosNo());
 		}
 		
-		 System.out.println("포스넘 출려되니?" + posList);
+		 System.out.println("포스넘 출력되니?" + posList);
 		//중복제거..
 		HashSet posListFin = new HashSet();
 		posListFin.addAll(posList);
@@ -201,29 +253,61 @@ public class TravelController {
 		posList.addAll(posListFin);
 
 		System.out.println("포지션리스트" + posListFin);
-		int nomalCnt = 0;
-		Map map = new HashMap();
 		
-	
-	/*	
-		for(int i = 0; i < posList.size(); i++) {
+		
+		Map map = new HashMap();
+		Map posMem = new HashMap(); 
+		
+		for(int i = 0; i < posList.size(); i++) { 
 			if(posList.get(i) == -1) {   //포지션에 번호가 -1 이면
-				nomalCnt = nomalCnt + 1 ;   // +1추가
+				int nomalCnt = travelService.posCount(gNo,posList.get(i));
+				System.out.println("일반 :" + nomalCnt + "명");
+				posMem.put("일반",nomalCnt);
 			}else { //그게아니면
-			ListtravelService.getPosInfo(posList.get(i));
+				SmallPosDTO dto = travelService.getPosInfo(posList.get(i));
+				System.out.println(i + "번째 dto : " + dto.getPosName());
+				int posCnt = travelService.posCount(gNo,posList.get(i));
+				System.out.println( posList.get(i) + "번 "+ dto.getPosName() + "포지션 :" + posCnt + "명");
+				posMem.put(dto.getPosName(),posCnt);
 			}
 		}
-	*/	
 		//jbr여기까지...
 		
+		//시작일, 종료일, 마감일 DATE 타입으로 변환해서 보내주기
+		DateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		Date sDate = sdf.parse(grpSpace.getStartDate());
+		Date eDate = sdf.parse(grpSpace.getEndDate());
+		Date cDate = sdf.parse(grpSpace.getClosingDate());
+		Date today = new Date();
+		long endStartGap = Math.abs((eDate.getTime()-sDate.getTime())/(24*60*60*1000));		//시작일과 종료일 사이의 갭
+		long closeTodayGap = Math.abs((cDate.getTime()-today.getTime())/(24*60*60*1000));	//오늘 날짜와 마감일 사이의 갭
+		model.addAttribute("esGap",endStartGap);
+		model.addAttribute("ctGap",closeTodayGap);
 		
+		//시작일과 종료일 사이의 날짜들을 배열에 담아 보내주기
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(sDate);
+		cal.add(Calendar.DATE, -1);	//시작일부터
+		List dateList = new ArrayList();
+		for(long i=0 ; i<=endStartGap ; i++) {
+			cal.add(Calendar.DATE, 1);
+			dateList.add(sdf.format(cal.getTime()));
+		}
+		model.addAttribute("dateList",dateList);
 		
+		//일정
+		List scheList = travelService.getSchedule(gNo);
 		
 		//갤러리
 		List gList = travelService.getGroupImgs(gNo);
 		model.addAttribute("gList",gList);
 		
-		//일정 채팅 아직
+		//채팅
+		List chatList = travelService.getChats(gNo);
+		model.addAttribute("chatList",chatList);
+		
+		model.addAttribute("scheList",scheList);
+		model.addAttribute("posMem",posMem);
 		model.addAttribute("gNo",gNo);
 		model.addAttribute("awaiters",awaiters);
 		model.addAttribute("id",id);
@@ -234,7 +318,6 @@ public class TravelController {
 		model.addAttribute("grpReq",grpReq);
 		return "/client/travel/groupSpace";
 	}
-	
 	
 	@ResponseBody
 	@RequestMapping("accepted.tm")
@@ -261,6 +344,28 @@ public class TravelController {
 		travelService.acceptOrReject(requestId, gNo, 2);
 		ObjectMapper mapper = new ObjectMapper();
 		String json = mapper.writeValueAsString(requestId);
+		return json;
+	}
+	
+	@ResponseBody
+	@RequestMapping("sendChat.tm")
+	public String sendChat(@RequestBody Map<Object, Object> map) throws Exception {
+		String writer = (String)map.get("writer");
+		int gNo = Integer.parseInt((String)map.get("gNo"));
+		String cont = (String)map.get("cont");
+		travelService.sendChat(gNo, writer, cont);
+		ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.writeValueAsString(map);
+		return json;
+	}
+
+	@ResponseBody
+	@RequestMapping("showChat.tm")
+	public String showChat(@RequestBody int gNo) throws Exception {
+		List chatList = travelService.getChats(gNo);
+		ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.writeValueAsString(chatList);
+		System.out.println();
 		return json;
 	}
 	
@@ -349,6 +454,32 @@ public class TravelController {
 		return json;
 	}
 	
+	@RequestMapping("schedulePro.tm")
+	public String schedulePro(int gNo, String sDate, String sCont) throws Exception {
+		travelService.insertSchedule(gNo, sDate, sCont);
+		return "redirect:groupSpace.tm?gNo="+gNo;
+	}
 	
+	@RequestMapping("scheduleModi.tm")
+	public String scheduleModi(ScheduleDTO dto) throws Exception {
+		travelService.updateSchedule(dto);
+		return "redirect:groupSpace.tm?gNo="+dto.getgNo();
+	}
+	
+	@RequestMapping("scheduleDel.tm")
+	public String scheduleDel(int gNo, int sNo) throws Exception {
+		travelService.deleteSchedule(sNo);
+		return "redirect:groupSpace.tm?gNo="+gNo;
+	}
+	
+	@ResponseBody
+	@RequestMapping("recruitEnd.tm")
+	public String recruitEnd(@RequestBody int gNo) throws Exception {
+		//모집 마감 처리
+		travelService.changeGrpStatus(gNo,1);
+		ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.writeValueAsString("");
+		return json;
+	}
 	
 }

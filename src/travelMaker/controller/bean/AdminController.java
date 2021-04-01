@@ -30,6 +30,7 @@ import travelMaker.model.dto.TmUserDTO;
 import travelMaker.model.dto.UserRkDTO;
 import travelMaker.service.bean.MemberService;
 import travelMaker.service.bean.QnaReportServiceImpl;
+import travelMaker.service.bean.TravelService;
 
 @Controller
 @RequestMapping("/admin/")
@@ -40,6 +41,10 @@ public class AdminController {
 	
 	@Autowired
 	private MemberService memService = null;
+	
+	@Autowired
+	private TravelService travelService = null;
+	
 	
 	//관리자 홈
 	@RequestMapping("index.tm")
@@ -95,6 +100,20 @@ public class AdminController {
 	}	
 	
 	//그룹관리
+	@RequestMapping("adminGroup")
+	public String adminGroup(Model model) {
+		List groupAllList = travelService.groupAllList();
+		
+		model.addAttribute("groupAllList", groupAllList);
+		
+		return "admin/travel/adminGroup";
+	}
+	
+	
+	
+	
+	
+	
 	
 	//문의관리
 	@RequestMapping("qna.tm")
