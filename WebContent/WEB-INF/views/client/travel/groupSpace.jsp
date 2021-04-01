@@ -78,6 +78,7 @@
 					$('#viewChatWrap').load(currentLocation + ' #viewChatWrap');			
 				}
 				$(".viewChatWrap").scrollTop($(".viewChatWrap")[0].scrollHeight);
+				
 			/*	https://songjihyeon.tistory.com/21	
 				0.3초 간격으로 현재 시간과 DB에 저장된 채팅 글을 체크하는 함수 호출. 새로운 채팅 글이 입력될 때만 readAjax함수를 호출.
 				var gn = $('#gNo').val();
@@ -124,7 +125,20 @@
 					});
 				}					*/
 				
-			});
+				
+			});		//document.ready end
+			
+			//여행 상태 변경 함수
+			function changeStatus(gNo, status){
+				event.preventDefault();
+				var data = {};
+				$.each($(this).serializeArray(), function(index, i){
+					data[i.name] = i.value;
+				});
+				$.ajax({
+					// gNo랑 status 넘어왔으니까 이거 url: "/travelMaker/travel/changeStatus.tm"으로 보내서 상태 변경 처리하고 오기
+				});
+			}	//changeStatus end
 			</script>
 			<!-- //accept logic end -->		
 			
@@ -189,12 +203,12 @@
 						<c:if test="${grpSpace.status==0}">
 							멤버를 모집 중입니다. 멤버가 충분히 모였다면 모집 마감을 할 수 있습니다.
 							<!-- status==1로 바꾸어 모집 완료 처리 -->
-							<input type="button" value="모집마감" onclick=""/>
+							<input type="button" value="모집마감" onclick="changeStatus(${gNo},1)"/>
 						</c:if>
 						<c:if test="${grpSpace.status==1}">
 							<!-- status==2로 바꾸어 여행 시작 처리 -->
 							모집이 완료되어 여행을 떠나기 전입니다. 여행을 시작할까요?							
-							<input type="button" value="여행시작" onclick=""/>
+							<input type="button" value="여행시작" onclick="changeStatus(${gNo},2)"/>
 						</c:if>
 						<c:if test="${grpSpace.status==2}">
 							<!-- 종료일과 현재 시간 비교해서 status==3으로 바꾸어 여행 끝 처리 -->
