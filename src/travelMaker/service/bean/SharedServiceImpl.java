@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import travelMaker.model.dao.SharedDAO;
+import travelMaker.model.dto.GroupSpaceDTO;
 
 @Service
 public class SharedServiceImpl implements SharedService {
@@ -44,6 +45,15 @@ public class SharedServiceImpl implements SharedService {
 		result.put("pageNum", pageNum);
 		
 		return result;
+	}
+	
+	@Override
+	public GroupSpaceDTO getArticle(int num) throws Exception {
+		
+		// 글 가져오기 
+		GroupSpaceDTO shared = sharedDAO.getArticle(num);
+		
+		return shared;
 	}
 	
 	

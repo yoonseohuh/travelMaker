@@ -11,7 +11,7 @@
 		</selectKey>
 		insert into groupSpace values(#{gNo},#{id},#{subject},#{concept},#{maxNum},#{actualNum},#{closingDate},#{startDate},#{endDate},#{loc},#{dongsung},#{courseExpl},#{addExpl},#{po1},#{po2},#{po3},#{cost},#{status},#{likedCnt},#{readCnt},#{shared},#{genReview},sysdate)
 	</insert>
-	
+		
 	<select id="getArticleCount" resultType="int">
 		select count(*) from groupSpace where status=0
 	</select>
@@ -66,5 +66,8 @@
 	 	select * from groupspace where #{sel} like '%'||#{search}||'%';
 	</select>
 	
+	<update id="changeGrpStatus" parameterType="hashmap">
+		update groupSpace set status=#{status} where gNo=#{gNo}
+	</update>
 	
 </mapper>

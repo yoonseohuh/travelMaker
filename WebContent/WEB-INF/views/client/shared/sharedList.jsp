@@ -8,18 +8,19 @@
 <div class="wrapAll">
 
 	<h1>sharedList</h1>
+	<c:if test="${sessionScope.memId != null}"></c:if>
 	<c:if test="${count > 0}">
 		<table>
-			<c:forEach var="shared" items="${sharedList}" varStatus = "status">
+			<c:forEach var="sharedList" items="${sharedList}" varStatus="status">
 				<li>
-					<a></a>
+					<a href="completeCont.tm?gNo=${shared.gNo}&pageNum=${pageNum}"></a>
+					<p class="number">${number}</p><c:set var="number" value="${number-1}"></c:set>
+					<p class=""></p>
 				</li>
 			</c:forEach>
 		</table>
 	</c:if>
-	<table>
-		
-	</table>
+
 
 
 

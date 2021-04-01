@@ -23,6 +23,8 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import travelMaker.model.dto.ChattingDTO;
 import travelMaker.model.dto.GalleryDTO;
 import travelMaker.model.dto.GroupMemberDTO;
 import travelMaker.model.dto.GroupRequestDTO;
@@ -226,7 +228,6 @@ public class TravelController {
 			}
 		}
 		
-		
 		//jbr여기부터...
 		//status = 1 인 멤버들의 그룹리퀘스트dto
 		List<GroupRequestDTO> joinMem = new ArrayList<GroupRequestDTO>();
@@ -301,7 +302,10 @@ public class TravelController {
 		List gList = travelService.getGroupImgs(gNo);
 		model.addAttribute("gList",gList);
 		
-		//채팅 아직
+		//채팅
+		List chatList = travelService.getChats(gNo);
+		model.addAttribute("chatList",chatList);
+		
 		model.addAttribute("scheList",scheList);
 		model.addAttribute("posMem",posMem);
 		model.addAttribute("gNo",gNo);
@@ -314,7 +318,6 @@ public class TravelController {
 		model.addAttribute("grpReq",grpReq);
 		return "/client/travel/groupSpace";
 	}
-	
 	
 	@ResponseBody
 	@RequestMapping("accepted.tm")
@@ -341,6 +344,28 @@ public class TravelController {
 		travelService.acceptOrReject(requestId, gNo, 2);
 		ObjectMapper mapper = new ObjectMapper();
 		String json = mapper.writeValueAsString(requestId);
+		return json;
+	}
+	
+	@ResponseBody
+	@RequestMapping("sendChat.tm")
+	public String sendChat(@RequestBody Map<Object, Object> map) throws Exception {
+		String writer = (String)map.get("writer");
+		int gNo = Integer.parseInt((String)map.get("gNo"));
+		String cont = (String)map.get("cont");
+		travelService.sendChat(gNo, writer, cont);
+		ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.writeValueAsString(map);
+		return json;
+	}
+
+	@ResponseBody
+	@RequestMapping("showChat.tm")
+	public String showChat(@RequestBody int gNo) throws Exception {
+		List chatList = travelService.getChats(gNo);
+		ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.writeValueAsString(chatList);
+		System.out.println();
 		return json;
 	}
 	
@@ -445,6 +470,16 @@ public class TravelController {
 	public String scheduleDel(int gNo, int sNo) throws Exception {
 		travelService.deleteSchedule(sNo);
 		return "redirect:groupSpace.tm?gNo="+gNo;
-	} 
+	}
+	
+	@ResponseBody
+	@RequestMapping("recruitEnd.tm")
+	public String recruitEnd(@RequestBody int gNo) throws Exception {
+		//모집 마감 처리
+		travelService.changeGrpStatus(gNo,1);
+		ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.writeValueAsString("");
+		return json;
+	}
 	
 }

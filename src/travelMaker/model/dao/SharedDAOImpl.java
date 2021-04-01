@@ -8,6 +8,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import travelMaker.model.dto.GroupSpaceDTO;
+
 @Repository
 public class SharedDAOImpl  implements SharedDAO{
 
@@ -32,6 +34,11 @@ public class SharedDAOImpl  implements SharedDAO{
 		return count;
 	}
 	
+	@Override
+	public GroupSpaceDTO getArticle(int num) throws Exception {
+		GroupSpaceDTO shared = sqlSession.selectOne("shared.selectArticle", num);
+		return shared;
+	}
 	
 	
 

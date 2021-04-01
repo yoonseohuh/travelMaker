@@ -19,6 +19,7 @@ import travelMaker.model.dao.ScheduleDAO;
 import travelMaker.model.dao.SmallPosDAO;
 import travelMaker.model.dao.TmUserDAO;
 import travelMaker.model.dao.UserRkDAO;
+import travelMaker.model.dto.ChattingDTO;
 import travelMaker.model.dto.GalleryDTO;
 import travelMaker.model.dto.GroupMemberDTO;
 import travelMaker.model.dto.GroupRequestDTO;
@@ -49,10 +50,9 @@ public class TravelServiceImpl implements TravelService{
 	private GalleryLikedDAO galleryLikedDAO = null;
 	@Autowired
 	private ScheduleDAO scheduleDAO = null;
-	/*
 	@Autowired
-	private ChattingDAO chattingDAO = null;	
-	*/
+	private ChattingDAO chattingDAO = null;
+	
 	//개설글 작성
 	@Override
 	public void insertMaking(GroupSpaceDTO dto) throws Exception {
@@ -374,7 +374,13 @@ public class TravelServiceImpl implements TravelService{
 		return groupAllList;
 	}
 	
+	//채팅 입력
+	@Override
+	public void sendChat(int gNo, String writer, String cont) throws Exception {
+		chattingDAO.sendChat(gNo, writer, cont);
+	}
 	
+
 	// jbr 그룹관리 : 그룹 개수 가져오기
 	@Override
 	public int groupCnt() {
@@ -382,6 +388,25 @@ public class TravelServiceImpl implements TravelService{
 		return groupCnt;
 	}
 	
+
+	//채팅 리스트 출력
+	@Override
+	public List getChats(int gNo) throws Exception {
+		List chatList = chattingDAO.getChats(gNo);
+		return chatList;
+	}
 	
+	//마지막 채팅 메시지 출력
+	@Override
+	public ChattingDTO getLastChat(int gNo) throws Exception {
+		ChattingDTO last = chattingDAO.getLastChat(gNo);
+		return last;
+	}
+	
+	//그룹 여행 상태 변경
+	@Override
+	public void changeGrpStatus(int gNo, int status) throws Exception {
+		groupSpaceDAO.changeGrpStatus(gNo, status);
+	}
 	
 }
