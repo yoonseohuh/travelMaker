@@ -8,7 +8,15 @@
 <div class="wrapAll">
 
 	<h1>sharedList</h1>
-	<c:if test=""></c:if>
+	<c:if test="${count > 0}">
+		<table>
+			<c:forEach var="shared" items="${sharedList}" varStatus = "status">
+				<li>
+					<a></a>
+				</li>
+			</c:forEach>
+		</table>
+	</c:if>
 	<table>
 		
 	</table>
