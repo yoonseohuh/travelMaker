@@ -184,6 +184,28 @@
 						</table>
 					</c:if>
 					
+					<p class="tit2">개설자 권한(임시 위치)</p>
+					<div>
+						<c:if test="${grpSpace.status==0}">
+							멤버를 모집 중입니다. 멤버가 충분히 모였다면 모집 마감을 할 수 있습니다.
+							<!-- status==1로 바꾸어 모집 완료 처리 -->
+							<input type="button" value="모집마감" onclick=""/>
+						</c:if>
+						<c:if test="${grpSpace.status==1}">
+							<!-- status==2로 바꾸어 여행 시작 처리 -->
+							모집이 완료되어 여행을 떠나기 전입니다. 여행을 시작할까요?							
+							<input type="button" value="여행시작" onclick=""/>
+						</c:if>
+						<c:if test="${grpSpace.status==2}">
+							<!-- 종료일과 현재 시간 비교해서 status==3으로 바꾸어 여행 끝 처리 -->
+						</c:if>
+						<c:if test="${grpSpace.status==3}">
+							여행이 끝났습니다! 총평을 작성하고, 여행의 공개 여부를 지정해보세요.
+							<!-- 총평 작성하고 여행 공개여부 다 처리하면 status==4로 바꾸기 -->
+						</c:if>
+					</div>
+					
+					
 					
 				</c:if>
 				<!-- if: leader end -->

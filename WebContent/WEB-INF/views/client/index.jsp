@@ -74,6 +74,7 @@
     </div>
     <script type="text/javascript">
         var myFullpage = new fullpage('#fullpage', {
+        	v2compatible: true,
             sectionsColor: ['#eee', '#4BBFC3', '#7BAABE', 'whitesmoke', '#ccddff'],
             anchors: ['firstPage', 'secondPage', '3rdPage', '4thpage', 'lastPage'],            
             navigation:true,
@@ -82,7 +83,11 @@
             slidesNavigation: true,
 			scrollOverflow: true,
 			afterLoad: function(index){
-	            console.log(index);
+	           if(index == "firstPage"){
+	        	   $("#fp-nav").fadeOut(100);
+	           }else{
+	        	   $("#fp-nav").fadeIn(300);
+	           }
 	        }
         });
         
