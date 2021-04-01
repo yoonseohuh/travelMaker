@@ -472,4 +472,14 @@ public class TravelController {
 		return "redirect:groupSpace.tm?gNo="+gNo;
 	}
 	
+	@ResponseBody
+	@RequestMapping("recruitEnd.tm")
+	public String recruitEnd(@RequestBody int gNo) throws Exception {
+		//모집 마감 처리
+		travelService.changeGrpStatus(gNo,1);
+		ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.writeValueAsString("");
+		return json;
+	}
+	
 }
