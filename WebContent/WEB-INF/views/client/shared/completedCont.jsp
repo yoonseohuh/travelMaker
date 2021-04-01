@@ -6,6 +6,23 @@
 	
 	<div class="wrapAll">
 		<h1>completeCont</h1>
+		<table>
+			<tr>
+				<td>${shared.subject}</td>
+			</tr>
+			<tr>
+				<td>${shared.concept}</td>
+			</tr>
+			<tr>
+				<td>${shared}</td>
+			</tr>
+			
+		</table>
+		
+		
+		
+		
+		
 		
 	</div>
 	<!-- //wrapAll end -->

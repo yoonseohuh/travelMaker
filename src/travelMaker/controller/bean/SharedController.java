@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import travelMaker.model.dto.GroupSpaceDTO;
 import travelMaker.service.bean.SharedService;
 
 @Controller
@@ -29,7 +30,13 @@ public class SharedController {
 		model.addAttribute("number", result.get("number"));
 		model.addAttribute("articleList", result.get("articleList"));
 		
-		
 		return "shared/sharedList";
+	}
+	
+	public String completedCont(int num, String pageNum, Model model) throws Exception{
+		GroupSpaceDTO shared = sharedService.getArticle(num);
+		model.addAttribute("shared", shared);
+		model.addAttribute("pageNum", pageNum);
+		return "shared/completedCont";
 	}
 }
