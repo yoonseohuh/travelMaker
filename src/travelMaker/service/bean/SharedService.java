@@ -1,6 +1,13 @@
 package travelMaker.service.bean;
 
+import java.util.Map;
+
 public interface SharedService {
 
-	public int getshared(int gNo) throws Exception;
+	public Map getArtilces(String pageNum) throws Exception;
+
+	
+
+
+
 }
