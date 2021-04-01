@@ -368,6 +368,7 @@ public class TravelServiceImpl implements TravelService{
 	//jbr 그룹관리 : 전체 그룹목록 가져오기
 	@Override
 	public List<GroupSpaceDTO> groupAllList() {
+		
 		List groupAllList = groupSpaceDAO.groupAllList();
 		
 		return groupAllList;
@@ -379,6 +380,15 @@ public class TravelServiceImpl implements TravelService{
 		chattingDAO.sendChat(gNo, writer, cont);
 	}
 	
+
+	// jbr 그룹관리 : 그룹 개수 가져오기
+	@Override
+	public int groupCnt() {
+		int groupCnt = groupSpaceDAO.groupCnt();
+		return groupCnt;
+	}
+	
+
 	//채팅 리스트 출력
 	@Override
 	public List getChats(int gNo) throws Exception {

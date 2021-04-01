@@ -99,11 +99,19 @@ public class AdminController {
 		return "redirect:member.tm";
 	}	
 	
+	
 	//그룹관리
-	@RequestMapping("adminGroup")
-	public String adminGroup(Model model) {
+	@RequestMapping("adminGroup.tm")
+	public String adminGroup(String sel, String search, Model model) {
+		System.out.println("sel입니당" + sel);
+		System.out.println("search입니당" +search);
+			
+	
 		List groupAllList = travelService.groupAllList();
 		
+		
+		model.addAttribute("sel", sel);
+		model.addAttribute("search", search);
 		model.addAttribute("groupAllList", groupAllList);
 		
 		return "admin/travel/adminGroup";

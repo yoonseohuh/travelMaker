@@ -11,7 +11,7 @@
 		</selectKey>
 		insert into groupSpace values(#{gNo},#{id},#{subject},#{concept},#{maxNum},#{actualNum},#{closingDate},#{startDate},#{endDate},#{loc},#{dongsung},#{courseExpl},#{addExpl},#{po1},#{po2},#{po3},#{cost},#{status},#{likedCnt},#{readCnt},#{shared},#{genReview},sysdate)
 	</insert>
-	
+		
 	<select id="getArticleCount" resultType="int">
 		select count(*) from groupSpace where status=0
 	</select>
@@ -49,6 +49,21 @@
 	<!-- jbr 그룹관리 : 전체 그룹 가져오기 -->
 	<select id="groupAllList" resultType="GroupSpaceDTO">
 		select * from groupspace order by gNo DESC
+	</select>
+	
+	<!-- jbr 그룹관리 : 전체 그룹 개수 -->
+	<select id="groupCnt" resultType="int">
+		select count(*) from groupspace
+	</select>
+	 
+	<!-- jbr 그룹관리 : 검색 결과 카운트  -->
+	<select id="searchGroupCtn" parameterType="Hashmap" resultType="int">
+		select count(*) from groupspace where #{sel} like '%'||#{search}||'%';
+	</select>
+	 
+	<!-- jbr 그룹관리 : 검색 결과 가져오기  -->
+	<select id="searchGroupList" parameterType="Hashmap" resultType="GroupSpaceDTO">
+	 	select * from groupspace where #{sel} like '%'||#{search}||'%';
 	</select>
 	
 	<update id="changeGrpStatus" parameterType="hashmap">

@@ -89,6 +89,40 @@ public class GroupSpaceDAOImpl implements GroupSpaceDAO{
 		return groupAllList;
 	}
 	
+
+	// jbr 그룹관리 : 그룹 개수 가져오기
+	@Override
+	public int groupCnt() {
+		int groupCnt = sqlSession.selectOne("groupSpace.groupCnt");
+		
+		return groupCnt;
+	}
+
+	
+	// jbr 검색결과 개수 카운트
+	@Override
+	public int searchGroupCtn(String sel, String search) {
+		Map map = new HashMap();
+		map.put("sel", sel);
+		map.put("search",search);
+		
+		int count = sqlSession.selectOne("groupSpace.searchGroupCtn", map);
+		
+		return count;
+	}
+	
+	//jbr 검색결과 리스트 가져오기
+	public List searchGroupList(String sel, String search) {
+		Map map = new HashMap();
+		map.put("sel", sel);
+		map.put("search",search);
+		
+		List searchGroupList = sqlSession.selectOne("groupSpace.searchGroupList", map);
+		
+		return searchGroupList;
+	}
+	
+
 	//그룹 상태 변경
 	@Override
 	public void changeGrpStatus(int gNo, int status) throws Exception {

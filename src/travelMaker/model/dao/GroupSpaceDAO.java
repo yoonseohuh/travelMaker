@@ -26,6 +26,13 @@ public interface GroupSpaceDAO {
 	
 	//jbr 그룹관리 : 전체 그룹목록 가져오기
 	public List<GroupSpaceDTO> groupAllList();
+	// jbr 그룹관리 : 그룹 개수 가져오기
+	public int groupCnt();
+	//jbr 검색결과 개수 카운트
+	public int searchGroupCtn(String sel, String search);
+	//jbr 검색결과 리스트 가져오기
+	public List searchGroupList(String sel, String search);
+
 	//그룹 상태 변경
 	public void changeGrpStatus(int gNo, int status) throws Exception;
 	
