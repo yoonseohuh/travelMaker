@@ -6,6 +6,38 @@
 	<jsp:include page="/WEB-INF/views/include/adminMenu.jsp" />
 	<!-- //adminMenu end -->
 	<script>
+		$(document).ready(function(){
+			$('#posCate').change(function(event){
+				event.preventDefault();
+				var data = {};
+				$.each($('#inputForm').serializeArray(), function(index, i){
+					data[i.name] = i.value;
+				});
+				console.log(data);
+				$.ajax({
+					url: "/travelMaker/admin/posSel.tm",
+					type: "POST",
+					dataType: "json",
+					contentType: "application/json",
+					data: JSON.stringify(data),
+					success: function(res){
+						var posSel = JSON.parse(res);
+						$('#searchTable').remove();
+						$('#list').append("<table id=\"searchTable\"><tr><th>No.</th><th>포지션 대분류</th><th>이모</th><th>포지션 이름</th><th>설명</th><th>버튼</th></tr><tr>");
+						for(var i=0 ; i<posSel.sPosList.length ; i++ ){
+							$('#list').append("<td>"+i+"</td>");
+							$('#list').append("<td>"+posSel.sPosList[i].posCate+"</td>");
+							$('#list').append("<td>"+posSel.sPosList[i].posName+"</td>");
+							$('#list').append("<td>"+posSel.sPosList[i].posName+"</td>");
+							$('#list').append("<td>"+posSel.sPosList[i].posExpl+"</td>");
+							$('#list').append("<td><input type='button' value='수정' onclick=\"window.location='/travelMaker/admin/modifyFormPos.tm?posNo="+posSel.sPosList[i].posNo+"'\"/></td>");
+						}
+						$('#list').append("</tr></table>");
+					}					
+				});
+			});
+		});
+		
    		function dee(index){
    			var check = confirm("삭제하시겠습니까?");
    			if(check){
@@ -16,6 +48,9 @@
    		}
    	</script>
 	<div class="wrapAll admin">
+		<div id="list">
+			
+		</div>
 		<c:if test="${count==0 || count==null}">
 			<table>
 				<tr>
@@ -23,7 +58,7 @@
 				</tr>
 			</table>
 		</c:if>
-		
+		<!-- 검색  -->
 		<form action="/travelMaker/admin/addSPosPro.tm" method="post" enctype="multipart/form-data">
 			<table>
 	    		<tr>
@@ -41,6 +76,25 @@
 					<td><input type="submit" value="추가"/></td>
 				</tr>
 	  		  </table>
+		</form>
+		<!-- 포지션 분류 선택  -->
+		<form id="inputForm">
+			<input type="hidden" name="pageNum" value="${pageNum}"/>
+			<table>
+				<tr>
+					<td>
+						<select name="posCate" id="posCate">
+							<option value="0">전체</option>
+							<option value="1">맛집</option>
+							<option value="2">숙박</option>
+							<option value="3">관광지</option>
+							<option value="4">교통</option>
+							<option value="5">사진</option>
+							<option value="6">히든</option>
+						</select>
+					</td>
+				</tr>
+			</table>
 		</form>
 		<br/><br/>
 		

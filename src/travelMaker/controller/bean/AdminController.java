@@ -13,12 +13,17 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import travelMaker.model.dao.TmUserDAO;
+import travelMaker.model.dto.GalleryDTO;
 import travelMaker.model.dto.ReportReasonDTO;
 import travelMaker.model.dto.SmallPosDTO;
 import travelMaker.model.dto.TmUserDTO;
@@ -216,23 +221,7 @@ public class AdminController {
 		 
 		return "redirect:rkPos.tm";
 	}
-	//포지션 리스트 
-	@RequestMapping("posList.tm")
-	public String smallPos(String pageNum,Model model) {
-		//포지션 대분류 리스트
-		//포지션 소분류 리스트
-		//Map으로  list, request, pageNum등을 받아오는 메서드 작성 
-		Map every = memService.getPositions(pageNum);
-		model.addAttribute("pageNum", every.get("pageNum"));
-		model.addAttribute("pageSize", every.get("pageSize"));
-		model.addAttribute("currPage", every.get("currPage"));
-		model.addAttribute("startRow", every.get("startRow"));
-		model.addAttribute("endRow", every.get("endRow"));
-		model.addAttribute("number", every.get("number"));
-		model.addAttribute("count", every.get("count"));
-		model.addAttribute("sPosList", every.get("sPosList"));
-		return "admin/rankPosition/posList";
-	}
+
 
 	//포지션 추가 Pro
 	@RequestMapping("addSPosPro.tm")
@@ -368,5 +357,55 @@ public class AdminController {
 		return "redirect:posList.tm";
 	}
 	
+	//pos 대분류 선택
+	@ResponseBody
+	@RequestMapping("posSel.tm")
+	public String posSel(@RequestBody Map<Object,Object> map,Model model) throws Exception {
+		String posCate = (String)map.get("posCate");
+		String pageNum = (String)map.get("pageNum");
+		//posList 로 List 당마오는 메서드 작성 
+		System.out.println(pageNum);
+		System.out.println(posCate);
+		Map mmap = new HashMap();
+		List sPosList = memService.selPosList(posCate);
+		mmap.put("sPosList", sPosList);
+		//전체 눌렀을 때 
+		if(posCate=="0") {
+			mmap = memService.getPositions(pageNum);
+			model.addAttribute("pageNum", mmap.get("pageNum"));
+			model.addAttribute("pageSize", mmap.get("pageSize"));
+			model.addAttribute("currPage", mmap.get("currPage"));
+			model.addAttribute("startRow", mmap.get("startRow"));
+			model.addAttribute("endRow", mmap.get("endRow"));
+			model.addAttribute("number", mmap.get("number"));
+			model.addAttribute("count", mmap.get("count"));
+			model.addAttribute("sPosList", mmap.get("sPosList"));
+		}
+		
+		System.out.println(sPosList);
+		ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.writeValueAsString(mmap);
+		
+		return  json;
+	}
+	//포지션 리스트 ajax 데이터 받는 페이지 
 	
+	
+	//포지션 리스트 
+	@RequestMapping("posList.tm")
+	public String smallPos(String pageNum,HttpServletRequest request, Model model) {
+		//포지션 대분류 리스트
+		//포지션 소분류 리스트
+		//Map으로  list, request, pageNum등을 받아오는 메서드 작성 
+		Map every = memService.getPositions(pageNum);
+		model.addAttribute("pageNum", every.get("pageNum"));
+		model.addAttribute("pageSize", every.get("pageSize"));
+		model.addAttribute("currPage", every.get("currPage"));
+		model.addAttribute("startRow", every.get("startRow"));
+		model.addAttribute("endRow", every.get("endRow"));
+		model.addAttribute("number", every.get("number"));
+		model.addAttribute("count", every.get("count"));
+		model.addAttribute("sPosList", every.get("sPosList"));
+		return "admin/rankPosition/posList";
+	}
 }

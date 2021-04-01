@@ -374,6 +374,12 @@ public class MemberServiceImpl implements MemberService {
 		int check = tmuserDAO.idCheck(id);
 		return check;
 	}
+
+	@Override
+	public List selPosList(String posCate) {
+		List sPosList = tmuserDAO.selPosList(posCate);
+		return sPosList;
+	}
 	
 	
 	

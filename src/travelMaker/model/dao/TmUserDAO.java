@@ -69,4 +69,6 @@ public interface TmUserDAO {
 	public void deletePos(String posNo); 
 	//id 중복 체크 
 	public int idCheck(String id);
+	//posCate로 리스트 가져오기 
+	public List selPosList(String posCate);
 }
