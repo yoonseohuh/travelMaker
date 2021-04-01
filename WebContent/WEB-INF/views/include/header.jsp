@@ -9,6 +9,7 @@
   	<!-- FONTS -->
   	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
   	
 	<!-- CSS -->
 	<link href="<c:url value="/resources/css/reset.css" />" rel="stylesheet">

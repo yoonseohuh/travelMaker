@@ -1,11 +1,14 @@
 /*contents.css*/
 
 /*clientIndex*/
-.bgWrap {width: 100%; position: absolute;bottom:0;left:0;}
-.bgWrap .bg {width: 100%; position: absolute;bottom:-350px;left:0;}
-.bgWrap .bg1 {z-index:3;}
-.bgWrap .bg2 {z-index:2;}
-.bgWrap .bg3 {z-index:1;}
+.mainSwiper {width: 100%; height: 100%; background: #000;}
+.mainSwiper .bg1 {background: url(../images/bg1.jpg)no-repeat top center; background-size: 100% auto;}
+.mainSwiper .bg2 {background: url(../images/bg2.jpg)no-repeat bottom center; background-size: 100% auto;}
+.mainSwiper .titWrap {position:absolute;top:20%;left:50%; transform:translateX(-50%);}
+.mainSwiper .titWrap .tit1 {display:none; text-align:center; color:#fff; font-size:70px; font-weight:bold;}
+.mainSwiper .titWrap .tit2 {display:none; line-height:25px; text-align:center; color:#fff; font-size:18px; font-weight:100; margin-top:20px;}
+
+.mainSwiper-pagination.swiper-pagination-bullets {bottom:auto;top:calc(20% + 250px);left:0;}
 
 .quick {height: 400px; transition:.3s; position: absolute;bottom:-200px;}
 .quick:hover {bottom:0;}

@@ -17,11 +17,12 @@
 		<a href="/travelMaker/mem/logout.tm">로그아웃</a>
 	</c:if>
 </div>
-<script>
+<script>	
 	$("#ham").click(function(){
 	    $(this).toggleClass("active");
 	    $('#logo').fadeToggle();
 	    $('#sign').fadeToggle();
+	    $('.searchBar').fadeToggle();
 	    $('#clientMenuWrap').fadeToggle();
 	    $('#mCover').fadeToggle();
 	});

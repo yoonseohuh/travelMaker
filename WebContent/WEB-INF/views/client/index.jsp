@@ -4,34 +4,43 @@
 
 	<jsp:include page="/WEB-INF/views/include/top_index.jsp" />
 	<!-- //top end -->
-	
-	<ul id="menu">
-        <li data-menuanchor="firstPage" class="active"><a href="#firstPage">1st slide</a></li>
-        <li data-menuanchor="secondPage"><a href="#secondPage">2nd slide</a></li>
-        <li data-menuanchor="3rdPage"><a href="#3rdPage">3rd slide</a></li>
-        <li data-menuanchor="4thpage"><a href="#4thpage">4th slide</a></li>
-        <li data-menuanchor="lastPage"><a href="#lastPage">5th slide</a></li>
-    </ul>
+
     <div id="fullpage">
-        <div class="section active" id="section0">
-            <h1>Section 1</h1>
-            <div class="bgWrap">
-	           	<img alt="" src="<c:url value="/resources/images/bg1.png" />" class="bg bg1">
-	           	<img alt="" src="<c:url value="/resources/images/bg2.png" />" class="bg bg2">
-	           	<img alt="" src="<c:url value="/resources/images/bg3.png" />" class="bg bg3">
+    	<div class="section active" id="section0">    		
+        	<div class="swiper-container mainSwiper">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide bg1">
+						<div class="titWrap">
+							<p class="tit1">Let's Go Together!</p>
+							<p class="tit1">Travel Maker</p>
+							<p class="tit2">당신도 가이드가 될 수 있습니다!<br/>함께 만들어가는 여행 플랫폼</p>
+						</div>
+					</div>
+					<div class="swiper-slide bg2">
+						<div class="titWrap">
+							<p class="tit1">Let's Go Together!</p>
+							<p class="tit1">Travel Maker</p>
+							<p class="tit2">당신도 가이드가 될 수 있습니다!<br/>함께 만들어가는 여행 플랫폼</p>
+						</div>
+					</div>
+					<div class="swiper-slide bg3">
+						<div class="titWrap">
+							<p class="tit1">Let's Go Together!</p>
+							<p class="tit1">Travel Maker</p>
+							<p class="tit2">당신도 가이드가 될 수 있습니다!<br/>함께 만들어가는 여행 플랫폼</p>
+						</div>
+					</div>
+				</div>
+				<!-- Add Pagination -->
+				<div class="mainSwiper-pagination swiper-pagination"></div>
+				<!-- Add Arrows -->
+			    <div class="swiper-button-next"></div>
+			    <div class="swiper-button-prev"></div>
 			</div>
-			<script>
-				$('.bg1').animate({
-					bottom: 0
-				},500);
-				$('.bg2').animate({
-					bottom: 0
-				},1100);
-				$('.bg3').animate({
-					bottom: 0
-				},1600);
-			</script>
-        </div>
+			<div class="searchBar">
+				<p class="open"></p>
+			</div>		
+        </div>        
         <div class="section" id="section1">
             <div class="slide active" id="slide1" data-anchor="slide1">
                  <h1>2-1section</h1>
@@ -66,13 +75,51 @@
     <script type="text/javascript">
         var myFullpage = new fullpage('#fullpage', {
             sectionsColor: ['#eee', '#4BBFC3', '#7BAABE', 'whitesmoke', '#ccddff'],
-            anchors: ['firstPage', 'secondPage', '3rdPage', '4thpage', 'lastPage'],
-            menu: '#menu',
+            anchors: ['firstPage', 'secondPage', '3rdPage', '4thpage', 'lastPage'],            
             navigation:true,
             navigationTooltips: ['Page 1', 'Page 2', 'Page 3', 'Page 4', 'Page 5'],
             showActiveTooltip: true,
             slidesNavigation: true,
 			scrollOverflow: true,
-            // lazyLoad: true
+			afterLoad: function(index){
+	            console.log(index);
+	        }
         });
+        
+        $(".searchBar").click(function(){
+		    $(this).toggleClass("on");
+		});
+		$(document).ready(function() {
+			$('.tit1').fadeIn(1000);
+        	$('.tit2').delay(200).fadeIn(1000);
+		});
+	    var myPlugin = {
+	      name: 'debugger',
+	      params: {
+	        debugger: false,
+	      },
+	      on: {
+	        slideChange: function() {
+	          if (!this.params.debugger) return;
+	          console.log('slideChange', this.previousIndex, '->', this.activeIndex);
+	          $('.tit1').hide();
+    	  	  $('.tit2').hide();
+    	  	  $('.tit1').fadeIn(1000);
+    	  	  $('.tit2').delay(200).fadeIn(1000);
+	        },
+	      }
+	    };
+	    
+	    Swiper.use(myPlugin);
+		var swiper = new Swiper('.mainSwiper', {
+			pagination: {
+		        el: '.mainSwiper-pagination',
+		    },
+		    navigation: {
+		        nextEl: '.swiper-button-next',
+		        prevEl: '.swiper-button-prev',
+		    },
+			slidesPerView: 1,
+			debugger: true,
+		});
     </script>
