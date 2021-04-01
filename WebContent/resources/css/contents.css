@@ -7,6 +7,11 @@
 .bgWrap .bg2 {z-index:2;}
 .bgWrap .bg3 {z-index:1;}
 
+.quick {height: 400px; transition:.3s; position: absolute;bottom:-200px;}
+.quick:hover {bottom:0;}
+.quick1 {width: 500px; background: #333; left: 168px;}
+.quick2 {width: 700px; background: #333; left: 668px;}
+
 /*making*/
 .makingList {overflow: hidden;}
 .makingList li {float: left; width: 24.25%; height: 300px; border: 0; background: #777; transition: .3s; padding: 45px; margin: 0 1% 1% 0; position: relative;}
