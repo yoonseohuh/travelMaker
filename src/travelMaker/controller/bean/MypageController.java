@@ -8,9 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 
+import travelMaker.model.dto.GroupSpaceDTO;
 import travelMaker.model.dto.QnaBoardDTO;
 import travelMaker.service.bean.QnaReportServiceImpl;
+import travelMaker.service.bean.TravelService;
 
 @Controller
 @RequestMapping("/my/")
@@ -19,6 +23,9 @@ public class MypageController {
 	@Autowired
 	private QnaReportServiceImpl qnaReportService = null;
 	
+	@Autowired
+	private TravelService travelService = null;
+	
 	//마이페이지 홈
 	@RequestMapping("myPage.tm")
 	public String index() {		
@@ -26,6 +33,22 @@ public class MypageController {
 	}
 	
 	//여행이력
+	@RequestMapping("myHistory.tm")
+	public String myHistory(Model model)throws Exception {
+		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
+		int status = 1;
+		
+		//참여중인 여행 다 가져오기
+		List travelAll = travelService.getMyGroups(id, status);
+		
+		model.addAttribute("travelAll", travelAll);
+		
+		
+		
+		
+		return "client/mypage/myHistory";
+	}
+	
 	
 	//코멘트 관리
 	
