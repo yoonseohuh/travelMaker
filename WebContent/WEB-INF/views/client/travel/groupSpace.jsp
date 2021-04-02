@@ -26,7 +26,10 @@
 						contentType: "application/json",
 						data: JSON.stringify(data),
 						success: function(res){
-							$('#ingMem').append(res);
+							var currentLocation = window.location;
+							alert("수락이 완료되었습니다");
+							$('#applicants').load(currentLocation + ' #applicants');	//신청자 목록 load
+							$('#ingMem').load(currentLocation + ' #ingMem');			//참여 중인 멤버 목록 load
 						}
 					});
 				});
@@ -43,7 +46,9 @@
 						contentType: "application/json",
 						data: JSON.stringify(data),
 						success: function(res){
-							console.log(res);
+							var currentLocation = window.location;
+							alert("거절이 완료되었습니다");
+							$('#applicants').load(currentLocation + ' #applicants');	//신청자 목록 load
 						}
 					});
 				});
@@ -70,10 +75,9 @@
 				var gn = $('#gNo').val();
 				console.log(gn);
 				
-				setInterval(getChatLists, 1000);
+				setInterval(getChatLists, 10000);
 				
 				function getChatLists(){
-					console.log("실행");
 					var currentLocation = window.location;
 					$('#viewChatWrap').load(currentLocation + ' #viewChatWrap');			
 				}
@@ -131,14 +135,25 @@
 			//여행 상태 변경 함수
 			function changeStatus(gNo, status){
 				event.preventDefault();
-				var data = {};
-				$.each($(this).serializeArray(), function(index, i){
-					data[i.name] = i.value;
-				});
+				var data = {
+					"gNo":gNo,
+					"status":status
+				};
 				$.ajax({
-					// gNo랑 status 넘어왔으니까 이거 url: "/travelMaker/travel/changeStatus.tm"으로 보내서 상태 변경 처리하고 오기
+					url: "/travelMaker/travel/changeStatus.tm",
+					type: "POST",
+					dataType: "json",
+					contentType: "application/json",
+					data: JSON.stringify(data),
+					success: function(res){
+						console.log(res);	//{"gNo":50,"status":1}과 같이 들어옴
+						var currentLocation = window.location;
+						alert("여행 상태가 성공적으로 변경되었습니다!");
+						$('#statusForLeader').load(currentLocation + ' #statusForLeader');	//여행상태 부분 load
+					}
 				});
 			}	//changeStatus end
+			
 			</script>
 			<!-- //accept logic end -->		
 			
@@ -199,7 +214,7 @@
 					</c:if>
 					
 					<p class="tit2">개설자 권한(임시 위치)</p>
-					<div>
+					<div id="statusForLeader">
 						<c:if test="${grpSpace.status==0}">
 							멤버를 모집 중입니다. 멤버가 충분히 모였다면 모집 마감을 할 수 있습니다.
 							<!-- status==1로 바꾸어 모집 완료 처리 -->

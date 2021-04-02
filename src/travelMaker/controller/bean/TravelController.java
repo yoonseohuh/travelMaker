@@ -245,29 +245,25 @@ public class TravelController {
 			posList.add(((GroupRequestDTO)joinMem.get(i)).getPosNo());
 		}
 		
-		 System.out.println("포스넘 출력되니?" + posList);
 		//중복제거..
 		HashSet posListFin = new HashSet();
 		posListFin.addAll(posList);
 		posList.clear();
 		posList.addAll(posListFin);
 
-		System.out.println("포지션리스트" + posListFin);
-		
-		
 		Map map = new HashMap();
 		Map posMem = new HashMap(); 
 		
 		for(int i = 0; i < posList.size(); i++) { 
 			if(posList.get(i) == -1) {   //포지션에 번호가 -1 이면
 				int nomalCnt = travelService.posCount(gNo,posList.get(i));
-				System.out.println("일반 :" + nomalCnt + "명");
+			//	System.out.println("일반 :" + nomalCnt + "명");
 				posMem.put("일반",nomalCnt);
 			}else { //그게아니면
 				SmallPosDTO dto = travelService.getPosInfo(posList.get(i));
-				System.out.println(i + "번째 dto : " + dto.getPosName());
+			//	System.out.println(i + "번째 dto : " + dto.getPosName());
 				int posCnt = travelService.posCount(gNo,posList.get(i));
-				System.out.println( posList.get(i) + "번 "+ dto.getPosName() + "포지션 :" + posCnt + "명");
+			//	System.out.println( posList.get(i) + "번 "+ dto.getPosName() + "포지션 :" + posCnt + "명");
 				posMem.put(dto.getPosName(),posCnt);
 			}
 		}
@@ -474,11 +470,13 @@ public class TravelController {
 	
 	@ResponseBody
 	@RequestMapping("changeStatus.tm")
-	public String recruitEnd(@RequestBody int gNo, @RequestBody int status) throws Exception {
+	public String changeStatus(@RequestBody Map<String, Integer> map) throws Exception {
 		//넘어오는 status 값으로 변경
+		int gNo = map.get("gNo");
+		int status = map.get("status");
 		travelService.changeGrpStatus(gNo,status);
 		ObjectMapper mapper = new ObjectMapper();
-		String json = mapper.writeValueAsString("");
+		String json = mapper.writeValueAsString(map);
 		return json;
 	}
 	
