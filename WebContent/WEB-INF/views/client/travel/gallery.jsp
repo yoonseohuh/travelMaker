@@ -24,11 +24,11 @@
 						data: JSON.stringify(data),
 						success: function(res){
 							console.log(res);
-							console.log("//");
 							console.log(data);
 							console.log(data.pNo);
-						//	console.log($("'#"+data.pNoCNT+"CNT'").val());	실행 안됨
-						//	화면에 좋아요 카운트 1 되게 바꿔줘야 함
+						//	console.log(res.pNo);
+							var currentLocation = window.location;
+							$('.gallery').load(currentLocation + ' .gallery');
 						}
 					});
 				});
