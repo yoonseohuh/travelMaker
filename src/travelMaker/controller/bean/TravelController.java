@@ -469,9 +469,21 @@ public class TravelController {
 				res = dto;
 			}
 		}
-
 		ObjectMapper mapper = new ObjectMapper();
 		String json = mapper.writeValueAsString(res);
+		return json;
+	}
+
+	@ResponseBody
+	@RequestMapping("galleryLikedCancel.tm")
+	public String galleryLikedCancel(@RequestBody Map<Object, Object> map) throws Exception {
+		String id = (String)map.get("id");
+		int gNo = Integer.parseInt((String)map.get("gNo"));
+		int pNo = Integer.parseInt((String)map.get("pNo"));
+		//좋아요 취소 처리
+		travelService.imgLikedCancel(id,gNo,pNo);
+		ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.writeValueAsString("좋아요 취소");
 		return json;
 	}
 	

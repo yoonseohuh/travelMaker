@@ -316,13 +316,20 @@ public class TravelServiceImpl implements TravelService{
 		return list;
 	}
 	
-	//사진 좋아요(다시 못 누르게 할 것인지 다시 누르면 좋아요 취소할 것인지..)
+	//사진 좋아요
 	@Override
 	public void imgLiked(String id, int gNo, int pNo) throws Exception {
 		//Gallery 테이블에 해당 사진 likedCnt 1 추가
 		galleryDAO.updateLikedCnt(pNo,1);
 		//GallertLiked 테이블에 레코드 추가
 		galleryLikedDAO.imgLiked(id, gNo, pNo);
+	}
+	
+	//사진 좋아요 취소
+	@Override
+	public void imgLikedCancel(String id, int gNo, int pNo) throws Exception {
+		galleryDAO.updateLikedCnt(pNo, -1);
+		galleryLikedDAO.imgLikedCancel(id, gNo, pNo);
 	}
 	
 	//회원이 특정 사진에 좋아요 했는지 여부 체크
