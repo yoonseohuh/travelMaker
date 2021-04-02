@@ -51,6 +51,8 @@ public interface TravelService {
 	public List getGroupImgs(int gNo) throws Exception;
 	//사진 좋아요
 	public void imgLiked(String id, int gNo, int pNo) throws Exception;
+	//회원이 특정 사진에 좋아요 했는지 여부 체크
+	public int likedCount(String id, int pNo) throws Exception;
 	
 	// jbr : 그룹리퀘스트 pos 신청자수 세기
 	public int posCount(int gNo, int posNo);

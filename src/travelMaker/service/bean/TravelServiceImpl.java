@@ -320,9 +320,16 @@ public class TravelServiceImpl implements TravelService{
 	@Override
 	public void imgLiked(String id, int gNo, int pNo) throws Exception {
 		//Gallery 테이블에 해당 사진 likedCnt 1 추가
-		galleryDAO.updateLikedCnt(pNo);
+		galleryDAO.updateLikedCnt(pNo,1);
 		//GallertLiked 테이블에 레코드 추가
 		galleryLikedDAO.imgLiked(id, gNo, pNo);
+	}
+	
+	//회원이 특정 사진에 좋아요 했는지 여부 체크
+	@Override
+	public int likedCount(String id, int pNo) throws Exception {
+		int count = galleryLikedDAO.likedCount(id, pNo);
+		return count;
 	}
 	
 	
