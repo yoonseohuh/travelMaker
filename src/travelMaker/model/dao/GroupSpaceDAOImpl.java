@@ -1,5 +1,6 @@
 package travelMaker.model.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -88,37 +89,35 @@ public class GroupSpaceDAOImpl implements GroupSpaceDAO{
 		
 		return groupAllList;
 	}
-	
 
 	// jbr 그룹관리 : 그룹 개수 가져오기
 	@Override
-	public int groupCnt() {
-		int groupCnt = sqlSession.selectOne("groupSpace.groupCnt");
+	public int groupAllCnt() {
+		int groupAllCnt = sqlSession.selectOne("groupSpace.groupAllCnt");
 		
-		return groupCnt;
+		return groupAllCnt;
 	}
 
-	
-	// jbr 검색결과 개수 카운트
+	// jbr 검색결과 개수
 	@Override
 	public int searchGroupCtn(String sel, String search) {
 		Map map = new HashMap();
 		map.put("sel", sel);
-		map.put("search",search);
+		map.put("search", search);
+		int searchGroupCtn = sqlSession.selectOne("groupSpace.searchGroupCtn", map);
 		
-		int count = sqlSession.selectOne("groupSpace.searchGroupCtn", map);
-		
-		return count;
+		return searchGroupCtn;
 	}
 	
 	//jbr 검색결과 리스트 가져오기
 	public List searchGroupList(String sel, String search) {
+		System.out.println("그룹스페이스dao탄다" + sel + "/" + search);
 		Map map = new HashMap();
 		map.put("sel", sel);
-		map.put("search",search);
-		
-		List searchGroupList = sqlSession.selectOne("groupSpace.searchGroupList", map);
-		
+		map.put("search", search);
+	
+		List searchGroupList = sqlSession.selectList("groupSpace.searchGroupList", map);
+		System.out.println("검색결과리스트:" + searchGroupList);
 		return searchGroupList;
 	}
 	

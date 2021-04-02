@@ -68,19 +68,19 @@ public interface TravelService {
 	
 	//jbr 그룹관리 : 전체 그룹목록 가져오기
 	public List<GroupSpaceDTO> groupAllList();
-
+	// jbr 그룹관리 : 검색 결과 그룹목록 가져오기
+	public List searchGroupList(String sel, String search);
+	// jbr 그룹관리 : 그룹 개수 가져오기
+	public int groupAllCnt();
+	// jbr 그룹관리 : 검색 결과 개수
+	public int searchGroupCtn(String sel, String search);
+	
 	//채팅 입력
 	public void sendChat(int gNo, String writer, String cont) throws Exception;
 	//채팅 리스트 출력
 	public List getChats(int gNo) throws Exception;
 	//마지막 채팅 메시지 출력
 	public ChattingDTO getLastChat(int gNo) throws Exception;
-	
-
-	// jbr 그룹관리 : 그룹 개수 가져오기
-	public int groupCnt();
-	
-	
 	//그룹 여행 상태 변경
 	public void changeGrpStatus(int gNo, int status) throws Exception;
 
