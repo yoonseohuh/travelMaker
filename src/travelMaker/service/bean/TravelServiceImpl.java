@@ -374,20 +374,41 @@ public class TravelServiceImpl implements TravelService{
 		return groupAllList;
 	}
 	
+	
+	// jbr 그룹관리 : 전체그룹 개수 가져오기
+	@Override
+	public int groupAllCnt() {
+		int groupAllCnt = groupSpaceDAO.groupAllCnt();
+		return groupAllCnt;
+	}
+	
+	
+	// jbr 그룹관리 : 검색 결과 그룹목록 가져오기
+	public List searchGroupList(String sel, String search) {
+		List searchGroupList = groupSpaceDAO.searchGroupList(sel, search);
+		
+		
+		return searchGroupList;
+	}
+	
+	
+	// jbr 그룹관리 : 검색 결과 개수
+	public int searchGroupCtn(String sel, String search) {
+		int searchGroupCtn = groupSpaceDAO.searchGroupCtn(sel, search);
+		
+		return searchGroupCtn;
+	}
+	
+	
+	
+	
+	
 	//채팅 입력
 	@Override
 	public void sendChat(int gNo, String writer, String cont) throws Exception {
 		chattingDAO.sendChat(gNo, writer, cont);
 	}
-	
-
-	// jbr 그룹관리 : 그룹 개수 가져오기
-	@Override
-	public int groupCnt() {
-		int groupCnt = groupSpaceDAO.groupCnt();
-		return groupCnt;
-	}
-	
+		
 
 	//채팅 리스트 출력
 	@Override

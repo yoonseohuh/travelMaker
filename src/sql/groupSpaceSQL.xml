@@ -52,18 +52,18 @@
 	</select>
 	
 	<!-- jbr 그룹관리 : 전체 그룹 개수 -->
-	<select id="groupCnt" resultType="int">
+	<select id="groupAllCnt" resultType="int">
 		select count(*) from groupspace
 	</select>
 	 
 	<!-- jbr 그룹관리 : 검색 결과 카운트  -->
-	<select id="searchGroupCtn" parameterType="Hashmap" resultType="int">
-		select count(*) from groupspace where #{sel} like '%'||#{search}||'%';
+	<select id="searchGroupCtn" parameterType="hashmap" resultType="int">
+		select count(*) from groupspace where ${sel} like '%'||#{search}||'%'
 	</select>
 	 
 	<!-- jbr 그룹관리 : 검색 결과 가져오기  -->
-	<select id="searchGroupList" parameterType="Hashmap" resultType="GroupSpaceDTO">
-	 	select * from groupspace where #{sel} like '%'||#{search}||'%';
+	<select id="searchGroupList" parameterType="hashmap" resultType="GroupSpaceDTO">
+		select * from groupspace where ${sel} like '%'||#{search}||'%'
 	</select>
 	
 	<update id="changeGrpStatus" parameterType="hashmap">

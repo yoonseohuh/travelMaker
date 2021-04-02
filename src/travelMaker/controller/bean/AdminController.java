@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -100,14 +101,67 @@ public class AdminController {
 	public String adminGroup(String sel, String search, Model model) {
 		System.out.println("sel입니당" + sel);
 		System.out.println("search입니당" +search);
-			
-	
-		List groupAllList = travelService.groupAllList();
 		
+		
+		List searchGroupList = new ArrayList();
+		List groupAllList = new ArrayList();
+		int groupAllCnt = 0;
+		int searchGroupCtn = 0;
+		
+		if(sel != null & search != null) {
+			
+			if(sel.equals("loc")) {		
+				if(search.equals("서울")) {
+					search = "seoul";
+				}else if(search.equals("인천")) {
+					search = "incheon";
+				}else if(search.equals("경기도")) {
+					search = "gyunggi";
+				}else if(search.equals("강원도")) {
+					search = "gangwon";
+				}else if(search.equals("세종")) {
+					search = "sejong";
+				}else if(search.equals("대전")) {
+					search = "daejeon";
+				}else if(search.equals("충청남도")) {
+					search = "chungnam";
+				}else if(search.equals("충청북도")) {
+					search = "chungbuk";
+				}else if(search.equals("광주")) {
+					search = "gwangju";
+				}else if(search.equals("전라남도")) {
+					search = "jeonnam";
+				}else if(search.equals("전라북도")) {
+					search = "jeonbuk";
+				}else if(search.equals("부산")) {
+					search = "busan";
+				}else if(search.equals("울산")) {
+					search = "ulsan";
+				}else if(search.equals("대구")) {
+					search = "daegu";
+				}else if(search.equals("경상남도")) {
+					search = "gyungnam";
+				}else if(search.equals("경상북도")) {
+					search = "gyungbuk";
+				}else if(search.equals("제주도")) {
+					search = "jeju";
+				}
+			}
+			//검색결과 리스트 담기
+			searchGroupList = travelService.searchGroupList(sel, search);
+			searchGroupCtn = travelService.searchGroupCtn(sel, search);
+				
+			}else {
+				groupAllList = travelService.groupAllList();
+				groupAllCnt = travelService.groupAllCnt();
+		}
 		
 		model.addAttribute("sel", sel);
 		model.addAttribute("search", search);
 		model.addAttribute("groupAllList", groupAllList);
+		model.addAttribute("searchGroupList", searchGroupList);
+		model.addAttribute("searchGroupCtn", searchGroupCtn);
+		model.addAttribute("groupAllCnt", groupAllCnt);
 		
 		return "admin/travel/adminGroup";
 	}
