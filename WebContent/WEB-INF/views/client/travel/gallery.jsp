@@ -32,6 +32,39 @@
 						}
 					});
 				});
+				
+				$("#favorite").click(function(){
+					$.post(
+							"/favorite"
+							, {"articleId" : "${article.articleId}"}	
+							, function(data){
+								var jsonData3 = {};
+								try {
+									jsonData3 = JSON.parse(data);
+								}catch(e) {
+									jsonData3.result = false;
+								}
+								console.log(jsonData3);
+								
+								if ( jsonData3.result ){
+									var text = $("#favorite").text();
+									if (jsonData3.isFavorite){
+										$("#favorite").text("♥");
+									}
+									else if (text == "♥"){
+											$("#favorite").text("♡");
+									} 
+								}
+								else {
+									/* alert("세션이 만료되었습니다. 다시 로그인해주세요.");
+									location.href = "/"; */
+								}
+							}
+					);
+				});
+				
+				
+				
 			});
 		</script>
 		
@@ -45,7 +78,7 @@
 		<h1>${grp.subject} 그룹 갤러리</h1>
 		
 		<ul class="gallery">
-			<c:forEach items="${list}" var="list">
+			<c:forEach items="${finList}" var="list">
 				<li>
 					<form action="#" class="liked" method="post">
 						<input type="hidden" value="${sessionScope.memId}" name="id"/>
@@ -54,10 +87,16 @@
 						${list.writer}님의 사진
 						<img src="/travelMaker/save/${list.pRoot}" width="500"/>
 						<br/>
-						좋아요 <b id="${list.pNo}CNT">${list.likedCnt}</b> 개
+						좋아요 <b>${list.likedCnt}</b> 개
 						<input type="submit" value="좋아요"/>
 					</form>
-				</li>	
+					<c:if test="${list.isLiked==1}">
+						<span id="favorite" style="color:red;">♥</span>
+					</c:if>
+					<c:if test="${list.isLiked==0}">
+						<span id="favorite" style="color:red;">♡</span>
+					</c:if>
+				</li>
 			</c:forEach>
 		</ul>
 	

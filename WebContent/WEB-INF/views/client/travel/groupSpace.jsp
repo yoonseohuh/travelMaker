@@ -30,6 +30,7 @@
 							alert("수락이 완료되었습니다");
 							$('#applicants').load(currentLocation + ' #applicants');	//신청자 목록 load
 							$('#ingMem').load(currentLocation + ' #ingMem');			//참여 중인 멤버 목록 load
+							$('#ingPos').load(currentLocation + ' #ingPos');			//참여 중인 포지션 목록 load
 						}
 					});
 				});
@@ -291,9 +292,10 @@
 								<input type="hidden" name="sNo" value="${list.sNo}"/>
 								날짜 <input type="text" name="sDate" value="${list.sDate}"/>
 								일정 <input type="text" name="sCont" value="${list.sCont}"/>
-								<input type="submit" name="수정" />
+								<c:if test="${id==leader}">
+								<input type="submit" value="수정"/>
 								<input type="button" value="삭제" onclick="window.location='/travelMaker/travel/scheduleDel.tm?gNo=${gNo}&sNo=${list.sNo}'" />
-								
+								</c:if>
 								<br/>
 							</form>
 							</c:forEach>

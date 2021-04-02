@@ -9,6 +9,6 @@ public interface GalleryDAO {
 	public void uploadImage(GalleryDTO dto) throws Exception;
 	//그룹 갤러리 이미지들 가져오기
 	public List getGroupImgs(int gNo) throws Exception;
-	//사진 좋아요 수 1 추가
-	public void updateLikedCnt(int pNo) throws Exception;
+	//사진 좋아요 수 1 증감
+	public void updateLikedCnt(int pNo, int yn) throws Exception;
 }

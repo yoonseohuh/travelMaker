@@ -13,8 +13,8 @@
 		select * from gallery where gNo=${value}
 	</select>
 	
-	<update id="updateLikedCnt" parameterType="int">
-		update gallery set likedCnt=likedCnt+1 where pNo=#{value}
+	<update id="updateLikedCnt" parameterType="hashmap">
+		update gallery set likedCnt=likedCnt+#{yn} where pNo=#{pNo}
 	</update>
 
 </mapper>

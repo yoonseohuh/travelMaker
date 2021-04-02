@@ -421,6 +421,31 @@ public class TravelController {
 		GroupSpaceDTO grp = travelService.getContent(gNo);
 		List list = travelService.getGroupImgs(gNo);
 		
+	/*	Gallery테이블									| GalleryLiked테이블
+		gNo | pNo | writer | pRoot | likedCnt | reg | +id가 좋아요 했는지 여부
+		각 레코드를 하나의 Map으로 담아서 그 전체를 List로 묶기							*/
+		GalleryDTO dto = new GalleryDTO();
+		List<Map> finList = new ArrayList<Map>();
+		for(int i=0 ; i<list.size() ; i++) {
+			Map gMap = new HashMap();
+			dto = (GalleryDTO)list.get(i);
+			gMap.put("gNo",dto.getgNo());
+			gMap.put("pNo",dto.getpNo());
+			gMap.put("writer",dto.getWriter());
+			gMap.put("pRoot",dto.getpRoot());
+			gMap.put("likedCnt",dto.getLikedCnt());
+			gMap.put("reg",dto.getReg());
+			int count = travelService.likedCount(id, dto.getpNo());
+			gMap.put("isLiked",count);
+			finList.add(gMap);
+		}
+	/*	잘 담긴 걸 확인할 수 있다
+		for(int i=0 ; i<finList.size() ; i++) {
+			Map mm = finList.get(i);
+			System.out.println(mm.get("gNo")+" | "+mm.get("pNo")+" | "+mm.get("writer")+" | "+mm.get("pRoot")+" | "+mm.get("likedCnt")+" | "+mm.get("reg")+" | "+mm.get("isLiked"));
+		}
+	*/
+		model.addAttribute("finList",finList);
 		model.addAttribute("idStatus",idStatus);
 		model.addAttribute("grp",grp);
 		model.addAttribute("list",list);

@@ -33,4 +33,14 @@ public class GalleryLikedDAOImpl implements GalleryLikedDAO {
 		return count;
 	}
 	
+	//사진 좋아요 취소
+	@Override
+	public void imgLikedCancel(String id, int gNo, int pNo) throws Exception {
+		Map map = new HashMap();
+		map.put("id", id);
+		map.put("gNo", gNo);
+		map.put("pNo", pNo);		
+		sqlSession.insert("galleryLiked.imgLikedCancel",map);
+	}
+	
 }

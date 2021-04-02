@@ -13,7 +13,8 @@
 		select count(*) from galleryLiked where id=#{id} and pNo=#{pNo}
 	</select>
 	
-	
-	
+	<delete id="imgLikedCancel" parameterType="hashmap">
+		delete from galleryLiked where gNo=#{gNo} and id=#{id} and pNo=#{pNo}
+	</delete>
 	
 </mapper>
