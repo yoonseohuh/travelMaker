@@ -14,7 +14,7 @@
 	</select>
 	
 	<update id="updateLikedCnt" parameterType="hashmap">
-		update gallery set likedCnt=likedCnt+#{yn} where pNo=#{pNo}
+		update gallery set likedCnt=likedCnt + #{yn} where pNo=#{pNo}
 	</update>
 
 </mapper>
