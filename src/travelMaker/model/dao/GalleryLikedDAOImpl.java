@@ -1,6 +1,7 @@
 package travelMaker.model.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -41,6 +42,16 @@ public class GalleryLikedDAOImpl implements GalleryLikedDAO {
 		map.put("gNo", gNo);
 		map.put("pNo", pNo);		
 		sqlSession.insert("galleryLiked.imgLikedCancel",map);
+	}
+	
+	//특정 그룹 갤러리에서 id가 좋아요 한 모든 사진 리스트
+	@Override
+	public List likedImgList(int gNo, String id) throws Exception {
+		Map map = new HashMap();
+		map.put("id", id);
+		map.put("gNo", gNo);
+		List list = sqlSession.selectList("galleryLiked.likedImgList",map);
+		return list;
 	}
 	
 }

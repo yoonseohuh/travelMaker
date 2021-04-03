@@ -10,6 +10,9 @@
 	
 		<script>
 			$(document).ready(function(){
+			/*	재호출을 위한 cache false
+				$.ajaxSetup({cache:false});
+			*/
 				$('.liked').submit(function(event){
 					event.preventDefault();
 					var data = {};
@@ -19,6 +22,7 @@
 					console.log("좋아요호출");
 					$.ajax({
 						url: "/travelMaker/travel/galleryLiked.tm",
+						cache: false,	//재호출을 위함
 						type: "POST",
 						dataType: "json",
 						contentType: "application/json",
@@ -42,51 +46,17 @@
 					console.log("취소호출");
 					$.ajax({
 						url: "/travelMaker/travel/galleryLikedCancel.tm",
+						cache: false,	//재호출을 위함
 						type: "POST",
 						dataType: "json",
 						contentType: "application/json",
 						data: JSON.stringify(data),
 						success: function(res){
-							console.log(res);
-							console.log(data);
-							console.log(data.pNo);
 							var currentLocation = window.location;
 							$('.gallery').load(currentLocation + ' .gallery');
 						}
 					});
 				});
-				
-				$("#favorite").click(function(){
-					$.post(
-							"/favorite"
-							, {"articleId" : "${article.articleId}"}	
-							, function(data){
-								var jsonData3 = {};
-								try {
-									jsonData3 = JSON.parse(data);
-								}catch(e) {
-									jsonData3.result = false;
-								}
-								console.log(jsonData3);
-								
-								if ( jsonData3.result ){
-									var text = $("#favorite").text();
-									if (jsonData3.isFavorite){
-										$("#favorite").text("♥");
-									}
-									else if (text == "♥"){
-											$("#favorite").text("♡");
-									} 
-								}
-								else {
-									/* alert("세션이 만료되었습니다. 다시 로그인해주세요.");
-									location.href = "/"; */
-								}
-							}
-					);
-				});
-				
-				
 				
 			});
 		</script>
@@ -112,9 +82,8 @@
 							<img src="/travelMaker/save/${list.pRoot}" width="500"/>
 							<br/>
 							좋아요 <b>${list.likedCnt}</b> 개
-							<input type="submit" value="좋아요 취소"/>
+							<input type="image" src="../resources/images/heart-colored.png" width="12" alt="좋아요취소"/>
 						</form>
-						<span id="favorite" style="color:red;">♥</span>
 					</c:if>					
 					<c:if test="${list.isLiked==0}">
 						<form class="liked" method="post">
@@ -125,9 +94,8 @@
 							<img src="/travelMaker/save/${list.pRoot}" width="500"/>
 							<br/>
 							좋아요 <b>${list.likedCnt}</b> 개
-							<input type="submit" value="좋아요"/>
+							<input type="image" src="../resources/images/heart-empty.png" width="12" alt="좋아요"/>
 						</form>
-						<span id="favorite" style="color:red;">♡</span>
 					</c:if>
 				</li>
 			</c:forEach>
