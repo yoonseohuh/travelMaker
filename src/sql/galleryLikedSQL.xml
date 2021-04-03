@@ -17,4 +17,8 @@
 		delete from galleryLiked where gNo=#{gNo} and id=#{id} and pNo=#{pNo}
 	</delete>
 	
+	<select id="likedImgList" parameterType="string" resultType="GalleryLikedDTO">
+		select * from galleryLiked where id=#{id} and gNo=#{gNo}
+	</select>
+	
 </mapper>
