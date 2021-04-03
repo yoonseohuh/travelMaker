@@ -6,6 +6,12 @@
 	<!-- //top end -->
 	
 	<div class="wrapAll client">
+		<c:if test="${sessionScope.memId != null}">
+			<script>
+				alert('이미 로그인 상태입니다.')
+				history.go(-1)
+			</script>
+		</c:if>
 	    <form action="/travelMaker/mem/loginPro.tm" method="post">
 			<table>
 				<tr>

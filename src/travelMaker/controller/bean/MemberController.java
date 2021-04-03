@@ -1,5 +1,7 @@
 package travelMaker.controller.bean;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -10,7 +12,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import travelMaker.model.dto.TmUserDTO;
 import travelMaker.service.bean.MemberService;
@@ -110,6 +118,29 @@ public class MemberController {
 		return "client/member/findPw";
 	}
 	
+	
+	//pos 대분류 선택
+	@ResponseBody
+	@RequestMapping("ajaxModiPw.tm")
+	public String ajaxModiPw(@RequestBody Map<Object,Object> map) throws Exception {
+		String result = "";
+		String id = (String)map.get("id");
+		String newPw = (String)map.get("pw");
+		System.out.println(id);
+		//System.out.println(newPw);
+		//id와 newPw 넘겨주면 pw랑 맞는지 확인 !
+		int check = memService.exPwCheck(id, newPw);	//1이면 이미 존재, 0이면 존재 X
+		System.out.println(check);
+		if(check == 1) {
+			result = "이전 비밀번호와 동일합니다";
+		}else {
+			result = "사용가능";
+		}
+		ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.writeValueAsString(result);
+		
+		return  json;
+	}
 	//비밀번호 찾기 Pro
 	//아이디,비밀번호 맞는지 확인
 	//맞다면 비밀번호 변경 가능

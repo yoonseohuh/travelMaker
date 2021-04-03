@@ -42,7 +42,48 @@
 			</div>		
         </div>        
         <div class="section" id="section1">
-            
+	        <div class="rankPos">
+	        	<div class="titWrap">
+					<p class="tit1">Rank/Position System</p>
+					<p class="tit2">여행 횟수에 따라 랭크를 올려보세요</p>
+				</div>
+				<div class="rankFlow">
+					<div class="step start">
+						<div class="contWrap">
+							<p class="rkCount">0회</p>
+							<div class=".클래스">
+								<img src="/travelMaker/resources/images/rico1.png" width="50px"/>
+								스타터
+							</div>
+							<p class="rkCont">1인여행 개설 가능</p>
+							<p class="rkCont">생성된 모험에 참여 가능</p>
+						</div>
+						<div class="rico">1</div>
+					</div>
+					<div class="step travel">
+						<div class="contWrap">
+							<p class="rkCount">10회</p>
+							<p class="rkCont">포지션 설정 가능</p>
+						</div>
+						<div class="rico"></div>
+					</div>
+					<div class="step advise">
+						<div class="contWrap">
+							<p class="rkCount">25회</p>
+							<p class="rkCont">여행 개설 가능</p>
+							<p class="rkCont">포지션 변경 가능</p>
+						</div>
+						<div class="rico"></div>
+					</div>
+					<div class="step master">
+						<div class="contWrap">
+							<p class="rkCount">50회</p>
+							<p class="rkCont">포지션 추가 가능</p>
+						</div>
+						<div class="rico"></div>
+					</div>
+				</div>
+	        </div>
         </div>
         <div class="section" id="section2">
             <h1>3section</h1>
@@ -65,7 +106,7 @@
     <script type="text/javascript">
         var myFullpage = new fullpage('#fullpage', {
         	v2compatible: true,
-            sectionsColor: ['#eee', '#4BBFC3', '#7BAABE', 'whitesmoke', '#ccddff'],
+            sectionsColor: ['#eee', 'ffffff', '#7BAABE', 'whitesmoke', '#ccddff'],
             anchors: ['firstPage', 'secondPage', '3rdPage', '4thpage', 'lastPage'],            
             navigation:true,
             navigationTooltips: ['Page 1', 'Page 2', 'Page 3', 'Page 4', 'Page 5'],

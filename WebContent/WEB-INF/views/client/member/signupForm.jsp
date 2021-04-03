@@ -50,7 +50,7 @@
 			}else if(!inputs.gender.value){
 				alert("성별을 선택해주세요");
 				return false;
-			}else if(inputs.idChRes.value){
+			}else if(inputs.idChRes.value!="사용가능"){
 				alert("아이디가 중복됩니다");
 				return false;
 			}

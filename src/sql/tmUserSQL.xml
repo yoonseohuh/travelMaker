@@ -138,4 +138,8 @@
 	<select id="selPosList" parameterType="string" resultType="SmallPosDTO">
 		select * from smallpos where posCate=#{posCate}
 	</select>
+	
+	<select id="exPwCheck" parameterType="string" resultType="string">
+		select pw from tmUser where id=#{id}
+	</select>
 </mapper>

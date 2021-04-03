@@ -181,9 +181,9 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public String idStar(String id)throws Exception {
 		int num = id.length()-3;
-		System.out.println("num "+ num );
+		//System.out.println("num "+ num );
 		String cutId = id.substring(0, num);
-		System.out.println("cut Id: "+cutId);
+		//System.out.println("cut Id: "+cutId);
 		String comId = cutId + "***";
 		return comId;
 	}
@@ -379,6 +379,21 @@ public class MemberServiceImpl implements MemberService {
 	public List selPosList(String posCate) {
 		List sPosList = tmuserDAO.selPosList(posCate);
 		return sPosList;
+	}
+
+	@Override
+	public int exPwCheck(String id,String newPw) {
+		int check = 0;
+		String exPw = tmuserDAO.exPwCheck(id);
+		System.out.println("ser exPw"+exPw);
+		System.out.println("ser newPw"+newPw);
+		System.out.println(exPw.equals(newPw));
+		if(exPw.equals(newPw)) {
+			check = 1;
+		}else {
+			check=0;
+		}
+		return check;
 	}
 	
 	

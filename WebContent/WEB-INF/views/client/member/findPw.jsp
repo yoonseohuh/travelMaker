@@ -5,7 +5,7 @@
 	
 	<div class="wrapAll client">
 	    <h1>비밀번호 재설정</h1>
-		<form action="/travelMaker/mem/modiPwForm.tm">
+		<form action="/travelMaker/mem/modiPwForm.tm" method="post">
 			<input type="text" name="id" placeholder="아이디"/>	<br />
 			<input type="text" name="email" placeholder="등록된 이메일"/>	<br />
 			<input type="submit" value="비밀번호 재설정" />

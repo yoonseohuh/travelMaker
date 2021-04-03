@@ -10,6 +10,14 @@
 
 .mainSwiper-pagination.swiper-pagination-bullets {bottom:auto;top:calc(20% + 250px);left:0;}
 
+.rankPos .titWrap {position:absolute;top:100px;left:310px;}
+.rankPos .titWrap .tit1 {display:none;  color:#ff000b; font-size:70px; font-weight:bold;}
+.rankPos .titWrap .tit2 {display:none; line-height:25px;  color:000000; font-size:18px; font-weight:100; margin-top:20px;}
+.rankPos .rankFlow {overflow:hidden;  margin: 0 310px; position:absolute; top:450px; }
+.rankPos .step {float: left;}
+.rankPos .step travel {float: left; margin:0 216.6666px; }
+.rankPos .rankFlow .start .rico {background: url(../images/rico1.png)no-repeat top center; background-size:200px auto; }
+.
 /*making*/
 .makingList {overflow: hidden;}
 .makingList li {float: left; width: 24.25%; height: 300px; border: 0; background: #777; transition: .3s; padding: 45px; margin: 0 1% 1% 0; position: relative;}

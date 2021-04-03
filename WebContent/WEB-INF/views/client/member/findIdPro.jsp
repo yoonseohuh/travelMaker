@@ -9,7 +9,7 @@
 		<c:if test="${mem != null}">
 			<h2>해당 아이디는 : ${comId}입니다</h2>
 			<input type="button" value="로그인" onclick="window.location='/travelMaker/mem/loginForm.tm'"/>
-			<input type="button" value="비밀번호 수정" onclick="window.location='/travelMaker/mem/myModiNick.tm'"/>
+			<input type="button" value="비밀번호 수정" onclick="window.location='/travelMaker/mem/findPw.tm'"/>
 		</c:if>
 	
 		<c:if test="${mem == null}">
