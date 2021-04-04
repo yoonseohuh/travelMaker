@@ -12,6 +12,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -61,7 +64,7 @@ public class TravelController {
 	}
 	
 	@RequestMapping("makingList.tm")
-	public String makingList(String pageNum, Model model) throws Exception {
+	public String makingList(String pageNum, HttpServletRequest request, Model model) throws Exception {
 		//유저 정보
 		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
 		model.addAttribute("id",id);
@@ -90,6 +93,8 @@ public class TravelController {
 		model.addAttribute("count",map.get("count"));
 		model.addAttribute("number",map.get("number"));
 		model.addAttribute("articleList",map.get("articleList"));
+		model.addAttribute("startD",map.get("startD"));
+		model.addAttribute("endD",map.get("endD"));
 		return "/client/travel/makingList";
 	}
 	
@@ -107,8 +112,8 @@ public class TravelController {
 		Map listMap = new HashMap();
 		listMap = travelService.getSearchArticles(pageNum, startD, endD);
 		ObjectMapper mapper = new ObjectMapper();
-		String json = mapper.writeValueAsString(listMap);
-
+	//	String json = mapper.writeValueAsString(listMap);
+		String json = mapper.writeValueAsString("startD="+startD+"&endD="+endD);
 		return json;
 	}
 	

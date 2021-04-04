@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import travelMaker.model.dao.ChattingDAO;
 import travelMaker.model.dao.GalleryDAO;
@@ -91,9 +95,26 @@ public class TravelServiceImpl implements TravelService{
 		int end = currPage*pageSize;
 		List articleList = null;
 		
-		int count = groupSpaceDAO.getArticleCount();
-		if(count>0) {
-			articleList = groupSpaceDAO.getArticles(start, end);			
+	//	검색을 위해
+		ServletRequestAttributes sra = (ServletRequestAttributes)RequestContextHolder.getRequestAttributes();
+		HttpServletRequest request = sra.getRequest();
+		String startD = request.getParameter("startD");
+		String endD = request.getParameter("endD");
+		System.out.println("Service_startD: "+startD);
+		System.out.println("Service_endD: "+endD);
+		
+		int count = 0;
+		
+		if(startD!=null && endD!=null) {
+			count = groupSpaceDAO.getSearchArticleCount(startD, endD);
+			if(count>0) {
+				articleList = groupSpaceDAO.getSearchArticles(start, end, startD, endD);
+			}
+		}else {
+			count = groupSpaceDAO.getArticleCount();
+			if(count>0) {
+				articleList = groupSpaceDAO.getArticles(start, end);			
+			}			
 		}
 		int number = count-(currPage-1)*pageSize;
 		
@@ -106,6 +127,8 @@ public class TravelServiceImpl implements TravelService{
 		map.put("count",count);
 		map.put("number",number);
 		map.put("articleList",articleList);
+		map.put("startD",startD);
+		map.put("endD",endD);
 		
 		return map;
 	}
