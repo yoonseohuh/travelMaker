@@ -25,7 +25,7 @@
 					dateFormat: "yymmdd",
 					changeMonth: true
 				});
-				
+				/*
 				$('#searchForm').submit(function(event){
 					event.preventDefault();
 					var data = {};
@@ -41,22 +41,28 @@
 						data: JSON.stringify(data),
 						success: function(res){
 							var searchValues = JSON.parse(res);
-							console.log(searchValues);
-							console.log(searchValues.articleList[0].subject);
+							console.log(res);
+							console.log(res.startD);
+							console.log(res.endD);
+						//	console.log(searchValues.articleList[0].subject);
+							var currentLocation = window.location;
+							$('.list').load(currentLocation + ' .list');
+							
 							$('#articleTable').remove();
 							$('.pageNumbers').remove();
 							$('#searchTable').remove();
-							$('#list').append("<table id=\"searchTable\"><thead><tr><th>개설자</th><th>동성필터</th><th>여행제목</th></tr></thead><tbody>");
+							$('#list').append("<div id=\"searchTable\"><ul class=\"makingList\">");
 							for(var i=0 ; i<searchValues.articleList.length ; i++ ){
-								$('#list').append("<tr><td>"+searchValues.articleList[i].id+"</td>");
-								$('#list').append("<td>"+searchValues.articleList[i].dongsung+"</td>");
+								$('#list').append("<li><a href=\"makingCont.tm?gNo="+searchValues.articleList[i].gNo+"\">");
+								$('#list').append("<p class=\"no\">"+searchValues.articleList[i].dongsung+"</td>");
 								$('#list').append("<td><a href=\"makingCont.tm?gNo="+searchValues.articleList[i].gNo+"\">"+searchValues.articleList[i].subject+"</a></td></tr>");
 							}
-							$('#list').append("</tbody></table>");
-							
+							$('#list').append("</ul></div>");
+						
 						}
 					});
 				});
+				*/
 			});
 		</script>
 		<!-- search script end -->
@@ -103,13 +109,12 @@
 		</c:if>
 		
 		<!-- 검색창 -->
-		<form id="searchForm" method="post">
+		<form id="searchForm" method="post" action="makingList.tm">
 			IN <input type="text" id="startD" name="startD"/>
 			OUT <input type="text" id="endD" name="endD"/>
 			<input type="submit" value="검색"/>
 		</form>
 
-		
 		<c:if test="${count>0}">
 			<div id="list">
 				<div id="articleTable">				
@@ -145,17 +150,38 @@
 				</c:if>
 				
 				<!-- 앞으로 가는 기호 -->
-				<c:if test="${startPage>pageBlock}">
-					<a href="makingList.tm?pageNum=${startPage-pageBlock}"> &lt; </a>
-				</c:if>
-				<!-- 페이지번호 리스트 -->
-				<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
-					<a href="makingList.tm?pageNum=${i}">&nbsp; ${i} &nbsp;</a>
-				</c:forEach>
-				<!-- 뒤로 가는 기호 -->
-				<c:if test="${endPage<pageCount}">
-					<a href="makingList.tm?pageNum=${startPage+pageBlock}"> &gt; </a>
+				<c:if test="${startD!=null && endD!=null}">
+					<c:if test="${startPage>pageBlock}">
+						<a href="makingList.tm?pageNum=${startPage-pageBlock}&startD=${startD}&endD=${endD}"> &lt; </a>
+					</c:if>				
 				</c:if>				
+				<c:if test="${startD==null || endD==null}">
+					<c:if test="${startPage>pageBlock}">
+						<a href="makingList.tm?pageNum=${startPage-pageBlock}"> &lt; </a>
+					</c:if>
+				</c:if>
+				<!-- 페이지번호 리스트 -->				
+				<c:if test="${startD!=null && endD!=null}">
+					<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
+						<a href="makingList.tm?pageNum=${i}&startD=${startD}&endD=${endD}">&nbsp; ${i} &nbsp;</a>
+					</c:forEach>
+				</c:if>
+				<c:if test="${startD==null || endD==null}">
+					<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
+						<a href="makingList.tm?pageNum=${i}">&nbsp; ${i} &nbsp;</a>
+					</c:forEach>
+				</c:if>
+				<!-- 뒤로 가는 기호 -->				
+				<c:if test="${startD!=null && endD!=null}">
+					<c:if test="${endPage<pageCount}">
+						<a href="makingList.tm?pageNum=${startPage+pageBlock}&startD=${startD}&endD=${endD}"> &gt; </a>
+					</c:if>
+				</c:if>
+				<c:if test="${startD==null || endD==null}">
+					<c:if test="${endPage<pageCount}">
+						<a href="makingList.tm?pageNum=${startPage+pageBlock}"> &gt; </a>
+					</c:if>
+				</c:if>
 			</div>
 			<!-- pageNumbers end -->
 		</c:if>
