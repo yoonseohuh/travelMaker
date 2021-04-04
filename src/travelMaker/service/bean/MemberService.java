@@ -31,6 +31,8 @@ public interface MemberService {
 	public TmUserDTO getMemInfo(String email);
 	//비밀번호 변경
 	public void pwChange(TmUserDTO mem);
+	//아이디 받아서 현재 비밀번호 확인 
+	public int exPwCheck(String id, String newPw);
 	//아이디 ***변환
 	public String idStar(String id) throws Exception;
 	//회원 정보 가져오기 
@@ -73,4 +75,8 @@ public interface MemberService {
 	public int idCheck(String id);
 	//posCate로 리스트 가져오기 
 	public List selPosList(String posCate);
+	//email 중복 체크 
+	public int eCheck(String email);
+	//nickname 중복 체크 
+	public int nickCheck(String nickname);
 }

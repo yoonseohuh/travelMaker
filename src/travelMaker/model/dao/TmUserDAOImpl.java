@@ -216,5 +216,26 @@ public class TmUserDAOImpl implements TmUserDAO {
 		List sPosList = sqlSession.selectList("tmUser.selPosList", posCate);
 		return sPosList;
 	}
+
+	@Override
+	public String exPwCheck(String id) {
+		String exPw = sqlSession.selectOne("tmUser.exPwCheck", id);
+		System.out.println("dao Pw" + exPw);
+		
+		return exPw;
+		
+	}
+
+	@Override
+	public int eCheck(String email) {
+		int check = sqlSession.selectOne("tmUser.eCheck",email);
+		return check;
+	}
+
+	@Override
+	public int nickCheck(String nickname) {
+		int check = sqlSession.selectOne("tmUser.nickCheck",nickname);
+		return check;
+	}
 		
 }

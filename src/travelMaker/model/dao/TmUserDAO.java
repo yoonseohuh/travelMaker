@@ -21,6 +21,8 @@ public interface TmUserDAO {
 	public TmUserDTO getMemInfo(String email);
 	//비밀번호 수정 
 	public void pwChange(TmUserDTO mem);
+	//아이디 받아서 현재 비밀번호 확인 
+	public String exPwCheck(String id);
 	//member 정보가져오기(id)
 	public TmUserDTO getMember(String id);
 	//id 주고 성별 가져오기
@@ -71,4 +73,8 @@ public interface TmUserDAO {
 	public int idCheck(String id);
 	//posCate로 리스트 가져오기 
 	public List selPosList(String posCate);
+	//email 중복 체크 
+	public int eCheck(String email);
+	//nickname 중복 체크 
+	public int nickCheck(String nickname);
 }
