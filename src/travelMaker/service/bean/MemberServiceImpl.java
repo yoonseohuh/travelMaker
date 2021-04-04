@@ -395,6 +395,18 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return check;
 	}
+
+	@Override
+	public int eCheck(String email) {
+		int check = tmuserDAO.eCheck(email);
+		return check;
+	}
+
+	@Override
+	public int nickCheck(String nickname) {
+		int check = tmuserDAO.nickCheck(nickname);
+		return check;
+	}
 	
 	
 	

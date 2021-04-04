@@ -1,20 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
 	<!-- //top end -->
 	<script>
 		//ajax
 		$(document).ready(function(){
-			$("#id").change(function(){
-				var idval = $("#id").val();
-				console.log(id);
+			$(".change").change(function(event){
+				event.preventDefault();
+				var data = {};
+				$.each($('#signupForm').serializeArray(), function(index, i){
+					data[i.name] = i.value;
+				});
+				console.log(data);
 				$.ajax({
 					type:"post",
 					url: "/travelMaker/mem/ajaxIdCheck.tm",
-					data:{id:idval},
+					dataType: "json",
+					contentType: "application/json",
+					data: JSON.stringify(data),
 					success : function(result){
-						console.log(result);
-						$("#idChRes").val(result);
+						var check = JSON.parse(result);
+						console.log(check.idResult);
+						console.log(check.nickResult);
+						console.log(check.emailResult);
+						$("#idChRes").val(check.idResult);
+						$("#nickChRes").val(check.nickResult);
+						$("#emailChRes").val(check.emailResult);
 					}
 				});
 			});			
@@ -53,14 +65,26 @@
 			}else if(inputs.idChRes.value!="사용가능"){
 				alert("아이디가 중복됩니다");
 				return false;
+			}else if(inputs.nickChRes.value!="사용가능"){
+				alert("닉네임이 중복됩니다");
+				return false;
+			}else if(inputs.emailChRes.value!="사용가능"){
+				alert("email이 중복됩니다");
+				return false;
 			}
 		}
 		
 	</script>
 	
 	<div class="wrapAll client">
+		<c:if test="${sessionScope.memId != null}">
+			<script>
+				alert('로그아웃 후 이용해주십시오.')
+				history.go(-1)
+			</script>
+		</c:if>
 	   	<h2>회원 가입</h2>
-		<form action="/travelMaker/mem/signupPro.tm" name="signupForm" onsubmit="return check()" method="post">
+		<form action="/travelMaker/mem/signupPro.tm" id="signupForm" name="signupForm" onsubmit="return check()" method="post">
 			<table>
 				<tr>
 					<td>이름</td>
@@ -69,8 +93,8 @@
 				<tr>
 					<td>아이디</td>
 					<td>
-						<input type="text" name="id" id="id" />
-						<input type="text" name="idChRes" id="idChRes" disabled/>
+						<input type="text" class="change" name="id" id="id" />
+						<input type="text"  id="idChRes" disabled/>
 					</td>
 				</tr>
 				<tr>
@@ -83,7 +107,11 @@
 				</tr>
 				<tr>
 					<td>닉네임</td>
-					<td><input type="text" name="nickname" /></td>
+					<td>
+						<input type="text" name="nickname" class="change"/>
+						<input type="text"id="nickChRes" disabled/>
+					</td>
+					
 				</tr>
 				<tr>
 					<td>생년월일</td>
@@ -91,7 +119,10 @@
 				</tr>
 				<tr>
 					<td>email</td>
-					<td><input type="text" name="email"/></td>
+					<td>
+						<input type="text" name="email" class="change"/>
+						<input type="text"  id="emailChRes" disabled/>
+					</td>
 				</tr>
 				<tr>
 					<td>성별</td>

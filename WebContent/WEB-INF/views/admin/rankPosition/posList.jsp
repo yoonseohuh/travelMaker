@@ -6,6 +6,7 @@
 	<jsp:include page="/WEB-INF/views/include/adminMenu.jsp" />
 	<!-- //adminMenu end -->
 	<script>
+		<%--
 		$(document).ready(function(){
 			$('#posCate').change(function(event){
 				event.preventDefault();
@@ -37,7 +38,8 @@
 				});
 			});
 		});
-		
+		 --%>
+		 
    		function dee(index){
    			var check = confirm("삭제하시겠습니까?");
    			if(check){
@@ -58,7 +60,7 @@
 				</tr>
 			</table>
 		</c:if>
-		<!-- 검색  -->
+		<!-- 포지션 추가  -->
 		<form action="/travelMaker/admin/addSPosPro.tm" method="post" enctype="multipart/form-data">
 			<table>
 	    		<tr>
@@ -77,7 +79,30 @@
 				</tr>
 	  		  </table>
 		</form>
-		<!-- 포지션 분류 선택  -->
+		<br/>
+		<!-- 포지션 대분류 보여주기 -->
+		<table>
+			<tr>
+				<td>포지션 대분류 번호</td>
+				<td>1</td>
+				<td>2</td>
+				<td>3</td>
+				<td>4</td>
+				<td>5</td>
+				<td>6</td>
+			</tr>
+			<tr>
+				<td>포지션 대분류 이름</td>
+				<td>맛집</td>
+				<td>숙박</td>
+				<td>관광지</td>
+				<td>교통</td>
+				<td>사진</td>
+				<td>히든</td>
+			</tr>
+		</table>
+		<br/>
+		<!-- 포지션 분류 선택  
 		<form id="inputForm">
 			<input type="hidden" name="pageNum" value="${pageNum}"/>
 			<table>
@@ -97,6 +122,7 @@
 			</table>
 		</form>
 		<br/><br/>
+		-->
 		
 		<c:if test="${count>0}">
 			<table>
@@ -106,6 +132,7 @@
 					<th>이모티콘</th>
 					<th>포지션 이름</th>
 					<th>설명</th>
+					<th>수정/삭제</th>
 				</tr>
 			<c:forEach var="spo" items="${sPosList}">
 	    		<tr>
@@ -119,7 +146,7 @@
 	    			<td>${spo.posExpl}</td>
 	    			<td >
 	    				<input type="button" value="수정" onclick="window.location='/travelMaker/admin/modifyFormPos.tm?posNo=${spo.posNo}'"/>
-	    				<input type="button" value="삭제 ${spo.posNo}" onclick="dee(${spo.posNo})"/>
+	    				<input type="button" value="삭제 " onclick="dee(${spo.posNo})"/>
 	    			</td>
 	    		</tr>
 	    	</c:forEach>

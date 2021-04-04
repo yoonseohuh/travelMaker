@@ -225,5 +225,17 @@ public class TmUserDAOImpl implements TmUserDAO {
 		return exPw;
 		
 	}
+
+	@Override
+	public int eCheck(String email) {
+		int check = sqlSession.selectOne("tmUser.eCheck",email);
+		return check;
+	}
+
+	@Override
+	public int nickCheck(String nickname) {
+		int check = sqlSession.selectOne("tmUser.nickCheck",nickname);
+		return check;
+	}
 		
 }

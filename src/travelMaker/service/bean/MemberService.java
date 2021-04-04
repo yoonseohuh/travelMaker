@@ -75,4 +75,8 @@ public interface MemberService {
 	public int idCheck(String id);
 	//posCate로 리스트 가져오기 
 	public List selPosList(String posCate);
+	//email 중복 체크 
+	public int eCheck(String email);
+	//nickname 중복 체크 
+	public int nickCheck(String nickname);
 }

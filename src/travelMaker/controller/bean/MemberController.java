@@ -53,9 +53,8 @@ public class MemberController {
 	//회원가입 처리
 	@RequestMapping("signupPro.tm")
 	public String signupPro(TmUserDTO dto) {
-		
 		memService.addMember(dto);
-		return "redirect:index.tm";
+		return "client/member/signupPro";
 	}
 	
 	//로그인 폼
@@ -220,19 +219,49 @@ public class MemberController {
 		return "client/mypage/myDelete";
 	}
 	
+	@ResponseBody
 	@RequestMapping("ajaxIdCheck.tm")
-	public ResponseEntity<String> ajaxIdAvail(String id) throws Exception {
-	String result = "";
+	public String ajaxIdAvail(@RequestBody Map<Object,Object> map) throws Exception {
+	String id = (String)map.get("id"); 
+	//System.out.println("id :" +id);
+	String nickname = (String)map.get("nickname"); 
+	String email = (String)map.get("email"); 
+	String idResult = "";
+	String nickResult = "";
+	String emailResult = "";
 	//매개변수로 전달 받은 id가 DB에 존재하는지 확인
-	int check = memService.idCheck(id);	//1이면 이미 존재, 0이면 존재 X
-	if(check == 1) {
-		result = "이미 사용중입니다";
+	int idCheck = memService.idCheck(id);	//1이면 이미 존재, 0이면 존재 X
+	System.out.println("idcheck: " + idCheck);
+	//닉네임이 중복 존재하는지 확인
+	int nickCheck = memService.nickCheck(nickname);
+	//email 중복 존재하는지 확인 
+	int emailCheck =memService.eCheck(email);
+	//id
+	if(idCheck == 1) {
+		idResult = "이미 사용중입니다";
 	}else {
-		result = "사용가능";
+		idResult = "사용가능";
 	}
-	HttpHeaders responseHeaders = new HttpHeaders();
-	responseHeaders.add("Content-Type", "text/html;charset=utf-8");
+	//nickname
+	if(nickCheck == 1) {
+		nickResult = "이미 사용중입니다";
+	}else {
+		nickResult = "사용가능";
+	}
+	//email
+	if(emailCheck == 1) {
+		emailResult = "이미 사용중입니다";
+	}else {
+		emailResult = "사용가능";
+	}
+	Map mmap = new HashMap();
+	mmap.put("idResult", idResult);
+	mmap.put("nickResult", nickResult);
+	mmap.put("emailResult", emailResult);
 	
-	return new ResponseEntity<String>(result, responseHeaders, HttpStatus.CREATED);
+	ObjectMapper mapper = new ObjectMapper();
+	String json = mapper.writeValueAsString(mmap);
+	
+	return  json;
 	}
 }
