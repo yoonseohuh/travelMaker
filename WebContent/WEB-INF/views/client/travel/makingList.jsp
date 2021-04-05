@@ -25,7 +25,8 @@
 					dateFormat: "yymmdd",
 					changeMonth: true
 				});
-				/*
+
+			/*
 				$('#searchForm').submit(function(event){
 					event.preventDefault();
 					var data = {};
@@ -47,7 +48,6 @@
 						//	console.log(searchValues.articleList[0].subject);
 							var currentLocation = window.location;
 							$('.list').load(currentLocation + ' .list');
-							
 							$('#articleTable').remove();
 							$('.pageNumbers').remove();
 							$('#searchTable').remove();
@@ -58,11 +58,10 @@
 								$('#list').append("<td><a href=\"makingCont.tm?gNo="+searchValues.articleList[i].gNo+"\">"+searchValues.articleList[i].subject+"</a></td></tr>");
 							}
 							$('#list').append("</ul></div>");
-						
 						}
 					});
 				});
-				*/
+			*/
 			});
 		</script>
 		<!-- search script end -->

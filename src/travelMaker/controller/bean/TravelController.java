@@ -107,10 +107,9 @@ public class TravelController {
 	//	검색(시작일,종료일)값을 각각 변수에 담아 매개변수로 보내줌
 		String startD = (String)map.get("startD");
 		String endD = (String)map.get("endD");
-		System.out.println(startD);
-		System.out.println(endD);
 		Map listMap = new HashMap();
-		listMap = travelService.getSearchArticles(pageNum, startD, endD);
+	//	listMap = travelService.getSearchArticles(pageNum, startD, endD);
+		listMap = travelService.getArticles(pageNum);
 		ObjectMapper mapper = new ObjectMapper();
 	//	String json = mapper.writeValueAsString(listMap);
 		String json = mapper.writeValueAsString("startD="+startD+"&endD="+endD);
