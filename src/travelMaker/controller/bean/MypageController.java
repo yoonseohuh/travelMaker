@@ -1,6 +1,9 @@
 package travelMaker.controller.bean;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -11,8 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
+import travelMaker.model.dao.ScheduleDAO;
+import travelMaker.model.dto.GroupRequestDTO;
 import travelMaker.model.dto.GroupSpaceDTO;
 import travelMaker.model.dto.QnaBoardDTO;
+import travelMaker.model.dto.ScheduleDTO;
+import travelMaker.model.dto.SmallPosDTO;
 import travelMaker.service.bean.QnaReportServiceImpl;
 import travelMaker.service.bean.TravelService;
 
@@ -44,9 +51,77 @@ public class MypageController {
 		model.addAttribute("travelAll", travelAll);
 		
 		
-		
-		
 		return "client/mypage/myHistory";
+	}
+	
+	
+	//여행이력Cont
+	@RequestMapping("myHistoryCont.tm")
+	public String myHistoryCont(String gNo, Model model)throws Exception {
+		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
+		
+		
+		
+		GroupSpaceDTO getGroup = travelService.getGroup(Integer.parseInt(gNo));
+		List scheList = travelService.getSchedule(Integer.parseInt(gNo));
+		List grpReq = travelService.getRequests(Integer.parseInt(gNo));
+		List gMem = travelService.getMembers(Integer.parseInt(gNo));
+				
+		
+		
+		
+		//status = 1 인 멤버들의 그룹리퀘스트dto
+		List<GroupRequestDTO> joinMem = new ArrayList<GroupRequestDTO>();
+		for(int i=0;i<grpReq.size();i++) {
+			GroupRequestDTO req = (GroupRequestDTO)grpReq.get(i);
+			int status = travelService.getMemStatus(Integer.parseInt(gNo), req.getId());
+			if(status==1) {
+				joinMem.add(req);
+			}
+		}
+		
+		//joinMem의 posNo를 리스트에 담는다
+		List<Integer> posList = new ArrayList<Integer>();
+		for(int i = 0; i < joinMem.size(); i++) {
+			posList.add(((GroupRequestDTO)joinMem.get(i)).getPosNo());
+		}
+		
+		//중복제거..
+		HashSet posListFin = new HashSet();
+		posListFin.addAll(posList);
+		posList.clear();
+		posList.addAll(posListFin);
+
+		Map map = new HashMap();
+		Map posMem = new HashMap(); 
+		
+		for(int i = 0; i < posList.size(); i++) { 
+			if(posList.get(i) == -1) {   //포지션에 번호가 -1 이면
+				int nomalCnt = travelService.posCount(Integer.parseInt(gNo),posList.get(i));
+				posMem.put("일반",nomalCnt);
+				model.addAttribute("nomalCnt",nomalCnt);
+			}else { //그게아니면
+				SmallPosDTO dto = travelService.getPosInfo(posList.get(i));
+				int posCnt = travelService.posCount(Integer.parseInt(gNo),posList.get(i));
+				posMem.put(dto.getPosName(),posCnt);
+			}
+		}
+
+		
+		//갤러리
+		List gList = travelService.getGroupImgs(Integer.parseInt(gNo));
+
+		
+		
+		model.addAttribute("gList",gList);
+		model.addAttribute("getGroup", getGroup);
+		model.addAttribute("scheList", scheList);
+		model.addAttribute("posMem", posMem);
+		model.addAttribute("gMem", gMem);
+		
+		
+		
+		return "client/mypage/myHistoryCont";
 	}
 	
 	

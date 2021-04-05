@@ -121,6 +121,13 @@ public class GroupSpaceDAOImpl implements GroupSpaceDAO{
 		return searchGroupList;
 	}
 	
+	//jbr gNo에 해당하는 그룹스페이스 가져오기
+	public GroupSpaceDTO getGroup(int gNo) {
+		GroupSpaceDTO getGroup = sqlSession.selectOne("groupSpace.getGroup", gNo);
+		return getGroup;
+	}
+	
+	
 
 	//그룹 상태 변경
 	@Override

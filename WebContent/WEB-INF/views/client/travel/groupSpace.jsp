@@ -264,7 +264,12 @@
 						<p class="tit2">모집 현황</p>
 						<div id="ingPos">
 						<c:forEach var="posMem" items="${posMem}">
+						<c:if test="${posMem != null}">
 							<p>${posMem.key} : ${posMem.value}명</p>
+						</c:if>
+						<c:if test="${posMem == null}">
+							<p>냉무</p>
+						</c:if>
 						</c:forEach>
 						</div>
 						<!-- //ingPos end -->

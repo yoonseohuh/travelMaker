@@ -66,6 +66,12 @@
 		select * from groupspace where ${sel} like '%'||#{search}||'%'
 	</select>
 	
+	<!-- jbr gNo에 해당하는 그룹스페이스 가져오기 -->
+	<select id="getGroup" parameterType="int" resultType="GroupSpaceDTO">
+		select * from groupspace where gNo=#{gNo}
+	</select>
+	
+	
 	<update id="changeGrpStatus" parameterType="hashmap">
 		update groupSpace set status=#{status} where gNo=#{gNo}
 	</update>
