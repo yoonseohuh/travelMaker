@@ -16,6 +16,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,6 +48,12 @@ public class TravelController {
 	private TravelService travelService = null;
 	@Autowired
 	private MemberService memberService = null;
+	
+	//스케줄러
+	@Scheduled(cron = "10 * * * * *")
+	public void cronTest1() {
+		System.out.println("10초마다 호출");
+	}
 	
 	@RequestMapping("makingWrite.tm")
 	public String makingWrite(String pageNum, Model model) {
