@@ -465,4 +465,10 @@ public class TravelServiceImpl implements TravelService{
 		groupSpaceDAO.changeGrpStatus(gNo, status);
 	}
 	
+	//모든 그룹 글 가져오기
+	@Override
+	public List getAllGroups() throws Exception {
+		List list = groupSpaceDAO.getAllGroups();
+		return list;
+	}
 }

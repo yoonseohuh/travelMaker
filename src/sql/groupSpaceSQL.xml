@@ -72,4 +72,8 @@
 		update groupSpace set status=#{status} where gNo=#{gNo}
 	</update>
 	
+	<select id="getAllGroups" resultType="GroupSpaceDTO">
+		select * from groupSpace
+	</select>
+	
 </mapper>

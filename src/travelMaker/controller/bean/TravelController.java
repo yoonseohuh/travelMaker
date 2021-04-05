@@ -50,9 +50,30 @@ public class TravelController {
 	private MemberService memberService = null;
 	
 	//스케줄러
-	@Scheduled(cron = "10 * * * * *")
-	public void cronTest1() {
-		System.out.println("10초마다 호출");
+	@Scheduled(cron = "0 1 0 1/1 * ? *")
+	public void groupStatusCheck() throws Exception {
+		System.out.println("매일 오전 12:01에 호출");
+		List list = travelService.getAllGroups();
+		DateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		Date today = new Date();
+		for(int i=0 ; i<list.size() ; i++) {
+			GroupSpaceDTO dto = (GroupSpaceDTO)list.get(i);
+		//	1)모든 그룹에 대해 마감일이 되는 시점(closingDate==sysdate)에 해당 그룹의 status==1로 update
+			Date cDate = sdf.parse(dto.getClosingDate());
+			if(cDate.getTime()<=today.getTime()) {
+				travelService.changeGrpStatus(dto.getgNo(), 1);
+			}
+		//	2)모든 그룹에 대해 여행 시작일이 되는 시점(startDate==sysdate)에 해당 그룹의 status==2로 update
+			Date sDate = sdf.parse(dto.getStartDate());
+			if(sDate.getTime()<=today.getTime()) {
+				travelService.changeGrpStatus(dto.getgNo(), 2);
+			}			
+		//	3)모든 그룹에 대해 여행 종료일이 되는 시점(endDate==sysdate)에 해당 그룹의 status==3으로 update
+			Date eDate = sdf.parse(dto.getEndDate());
+			if(eDate.getTime()<=today.getTime()) {
+				travelService.changeGrpStatus(dto.getgNo(), 3);
+			}
+		}
 	}
 	
 	@RequestMapping("makingWrite.tm")
@@ -152,8 +173,8 @@ public class TravelController {
 		Date eDate = sdf.parse(content.getEndDate());
 		Date cDate = sdf.parse(content.getClosingDate());
 		Date today = new Date();
-		long endStartGap = Math.abs((eDate.getTime()-sDate.getTime())/(24*60*60*1000));
-		long closeTodayGap = Math.abs((cDate.getTime()-today.getTime())/(24*60*60*1000));
+		long endStartGap = (eDate.getTime()-sDate.getTime())/(24*60*60*1000);
+		long closeTodayGap = (cDate.getTime()-today.getTime())/(24*60*60*1000);
 		
 		model.addAttribute("esGap",endStartGap);
 		model.addAttribute("ctGap",closeTodayGap);
@@ -286,8 +307,8 @@ public class TravelController {
 		Date eDate = sdf.parse(grpSpace.getEndDate());
 		Date cDate = sdf.parse(grpSpace.getClosingDate());
 		Date today = new Date();
-		long endStartGap = Math.abs((eDate.getTime()-sDate.getTime())/(24*60*60*1000));		//시작일과 종료일 사이의 갭
-		long closeTodayGap = Math.abs((cDate.getTime()-today.getTime())/(24*60*60*1000));	//오늘 날짜와 마감일 사이의 갭
+		long endStartGap = (eDate.getTime()-sDate.getTime())/(24*60*60*1000);		//시작일과 종료일 사이의 갭
+		long closeTodayGap = (cDate.getTime()-today.getTime())/(24*60*60*1000);		//오늘 날짜와 마감일 사이의 갭
 		model.addAttribute("esGap",endStartGap);
 		model.addAttribute("ctGap",closeTodayGap);
 		

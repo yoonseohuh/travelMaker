@@ -87,6 +87,7 @@ public interface TravelService {
 	public ChattingDTO getLastChat(int gNo) throws Exception;
 	//그룹 여행 상태 변경
 	public void changeGrpStatus(int gNo, int status) throws Exception;
-
+	//모든 그룹 글 가져오기
+	public List getAllGroups() throws Exception;
 	
 }

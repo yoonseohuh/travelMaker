@@ -131,4 +131,11 @@ public class GroupSpaceDAOImpl implements GroupSpaceDAO{
 		sqlSession.update("groupSpace.changeGrpStatus",map);
 	}
 	
+	//모든 그룹 글 가져오기
+	@Override
+	public List getAllGroups() throws Exception {
+		List list = sqlSession.selectList("groupSpace.getAllGroups");
+		return list;
+	}
+	
 }
