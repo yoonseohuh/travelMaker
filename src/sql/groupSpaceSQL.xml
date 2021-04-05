@@ -18,19 +18,21 @@
 	
 	<select id="getSearchArticleCount" parameterType="hashmap" resultType="int">
 		<![CDATA[
-		select count(*) from groupSpace where status=0 and startDate>#{startD} and endDate<#{endD}
+		select count(*) from groupSpace where status=0 and startDate>=#{startD} and endDate<=#{endD}
 		]]>
 	</select>
 	
 	<select id="getArticles" parameterType="hashmap" resultType="GroupSpaceDTO">
 		<![CDATA[
-		(select a.*, r FROM (select groupSpace.*, rownum r from groupSpace where status=0 order by reg desc) a where r>=#{start} and r<=${end})
+		(select a.*, r FROM (select groupSpace.*, rownum r from groupSpace where status=0 order by reg desc) a where r>=#{start} and r<=#{end})
 		]]>
 	</select>
 	
 	<select id="getSearchArticles" parameterType="hashmap" resultType="GroupSpaceDTO">
 		<![CDATA[
-		(select a.*, r FROM (select groupSpace.*, rownum r from groupSpace where status=0 order by reg desc) a where r>=#{start} and r<=${end} and startDate>#{startD} and endDate<#{endD})
+		select b.*, r from (select a.*, rownum r from 
+		(select * from groupSpace where startDate>=#{startD} and endDate<=#{endD} order by reg desc) a order by reg desc) b 
+		where r>=#{start} and r<=#{end} and startDate>=#{startD} and endDate<=#{endD} and status=0
 		]]>
 	</select>
 	

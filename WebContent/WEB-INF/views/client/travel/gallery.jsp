@@ -81,7 +81,7 @@
 							${list.writer}님의 사진
 							<img src="/travelMaker/save/${list.pRoot}" width="500"/>
 							<br/>
-							좋아요 <b>${list.likedCnt}</b> 개
+							좋아요 <b class="cnt">${list.likedCnt}</b> 개
 							<input type="image" src="../resources/images/heart-colored.png" width="12" alt="좋아요취소"/>
 						</form>
 					</c:if>					
@@ -93,7 +93,7 @@
 							${list.writer}님의 사진
 							<img src="/travelMaker/save/${list.pRoot}" width="500"/>
 							<br/>
-							좋아요 <b>${list.likedCnt}</b> 개
+							좋아요 <b class="cnt">${list.likedCnt}</b> 개
 							<input type="image" src="../resources/images/heart-empty.png" width="12" alt="좋아요"/>
 						</form>
 					</c:if>

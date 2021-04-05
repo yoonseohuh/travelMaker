@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
-	
+	<!-- 
+	<link href="/resources/jqueryui/jquery-ui.theme.min.css" rel="stylesheet">
+	<link href="/resources/jqueryui/jquery-ui.theme.css" rel="stylesheet">
+	<script src="/resources/jqeryui/jquery-ui.js"></script>
+	-->
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
 	<!-- //top end -->

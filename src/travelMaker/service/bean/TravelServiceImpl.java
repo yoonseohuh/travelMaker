@@ -100,8 +100,6 @@ public class TravelServiceImpl implements TravelService{
 		HttpServletRequest request = sra.getRequest();
 		String startD = request.getParameter("startD");
 		String endD = request.getParameter("endD");
-		System.out.println("Service_startD: "+startD);
-		System.out.println("Service_endD: "+endD);
 		
 		int count = 0;
 		
