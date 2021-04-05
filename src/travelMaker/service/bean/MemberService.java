@@ -79,4 +79,6 @@ public interface MemberService {
 	public int eCheck(String email);
 	//nickname 중복 체크 
 	public int nickCheck(String nickname);
+	//모든 회원 정보 가져오기
+	public List getAllMembers();
 }

@@ -31,8 +31,13 @@
 			<input type="hidden" name="gNo" value="${content.gNo}"/>
 			<h2>참여유형</h2>
 			<div class="joinType">
+				<c:if test="${pos1==0 && pos2==0}">
+					${id}님은 일반으로만 지원 가능합니다.
+				</c:if>			
 				<input type="radio" name="reqType" value="0" id="joinTypeN" onclick="posSlide(this.value)"/>일반
+				<c:if test="${pos1!=0 || pos2!=0}">
 				<input type="radio" name="reqType" value="1" id="joinTypeG" onclick="posSlide(this.value)"/>가이드
+				</c:if>
 			</div>
 			<div class="pstn">
 				<h2>모집 포지션</h2>
@@ -40,9 +45,6 @@
 					${i} /
 				</c:forEach>
 				<h2>지원 포지션</h2>
-				<c:if test="${pos1==0 && pos2==0}">
-					${id}님은 아직 지원 가능한 포지션이 없습니다.
-				</c:if>
 				<c:if test="${pos1!=0}">
 					<input type="radio" name="posNo" value="${pos1}"/>${posInfo1.posName}
 				</c:if>

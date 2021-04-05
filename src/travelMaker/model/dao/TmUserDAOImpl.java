@@ -237,5 +237,13 @@ public class TmUserDAOImpl implements TmUserDAO {
 		int check = sqlSession.selectOne("tmUser.nickCheck",nickname);
 		return check;
 	}
-		
+	
+	//모든 회원 정보 가져오기
+	@Override
+	public List getAllMembers() {
+		List list = sqlSession.selectList("tmUser.getAllMembers");
+		return list;
+	}
+	
+	
 }
