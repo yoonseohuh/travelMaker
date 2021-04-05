@@ -435,7 +435,12 @@ public class TravelServiceImpl implements TravelService{
 	}
 	
 	
-	
+	//jbr gNo에 해당하는 그룹스페이스 가져오기
+	public GroupSpaceDTO getGroup(int gNo) {
+		GroupSpaceDTO getGroup = groupSpaceDAO.getGroup(gNo);
+		
+		return getGroup;
+	}
 	
 	
 	//채팅 입력

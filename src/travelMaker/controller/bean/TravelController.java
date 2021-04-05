@@ -273,7 +273,9 @@ public class TravelController {
 		
 		//joinMem의 posNo를 리스트에 담는다
 		List<Integer> posList = new ArrayList<Integer>();
+		System.out.println("조인멤 for 밖" + joinMem);
 		for(int i = 0; i < joinMem.size(); i++) {
+			System.out.println("조인멤 for 안" + joinMem);
 			posList.add(((GroupRequestDTO)joinMem.get(i)).getPosNo());
 		}
 		
@@ -282,23 +284,29 @@ public class TravelController {
 		posListFin.addAll(posList);
 		posList.clear();
 		posList.addAll(posListFin);
-
 		Map map = new HashMap();
 		Map posMem = new HashMap(); 
 		
-		for(int i = 0; i < posList.size(); i++) { 
-			if(posList.get(i) == -1) {   //포지션에 번호가 -1 이면
-				int nomalCnt = travelService.posCount(gNo,posList.get(i));
-			//	System.out.println("일반 :" + nomalCnt + "명");
-				posMem.put("일반",nomalCnt);
-			}else { //그게아니면
-				SmallPosDTO dto = travelService.getPosInfo(posList.get(i));
-			//	System.out.println(i + "번째 dto : " + dto.getPosName());
-				int posCnt = travelService.posCount(gNo,posList.get(i));
-			//	System.out.println( posList.get(i) + "번 "+ dto.getPosName() + "포지션 :" + posCnt + "명");
-				posMem.put(dto.getPosName(),posCnt);
+		System.out.println("포스리스트" +posList);
+		
+			for(int i = 0; i < posList.size(); i++) { 
+				if(posList.get(i) != null) {
+					if(posList.get(i) == -1) {   //포지션에 번호가 -1 이면
+						int nomalCnt = travelService.posCount(gNo,posList.get(i));
+					//	System.out.println("일반 :" + nomalCnt + "명");
+						posMem.put("일반",nomalCnt);
+					}else { //그게아니면
+						SmallPosDTO dto = travelService.getPosInfo(posList.get(i));
+					//	System.out.println(i + "번째 dto : " + dto.getPosName());
+						int posCnt = travelService.posCount(gNo,posList.get(i));
+					//	System.out.println( posList.get(i) + "번 "+ dto.getPosName() + "포지션 :" + posCnt + "명");
+						posMem.put(dto.getPosName(),posCnt);
+					}
+				}
 			}
-		}
+		
+		
+		
 		//jbr여기까지...
 		
 		//시작일, 종료일, 마감일 DATE 타입으로 변환해서 보내주기

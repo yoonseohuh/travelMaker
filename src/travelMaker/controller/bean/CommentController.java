@@ -26,6 +26,16 @@ public class CommentController {
 	@Autowired
 	private CommentService commentService = null;
 	
+	//에이작스테스트
+	@RequestMapping("testComment.tm")
+	public String testComment() {
+		
+		
+		return "client/mypage/testComment";
+	}
+	
+	
+	
 	//코멘트 조회 페이지
 	@RequestMapping("comment.tm")
 	public String comment(Model model)throws SQLException {

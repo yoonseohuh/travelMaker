@@ -78,6 +78,8 @@ public interface TravelService {
 	public int groupAllCnt();
 	// jbr 그룹관리 : 검색 결과 개수
 	public int searchGroupCtn(String sel, String search);
+	//jbr gNo에 해당하는 그룹스페이스 가져오기
+	public GroupSpaceDTO getGroup(int gNo);
 	
 	//채팅 입력
 	public void sendChat(int gNo, String writer, String cont) throws Exception;

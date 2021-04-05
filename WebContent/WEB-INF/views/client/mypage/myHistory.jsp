@@ -11,14 +11,16 @@
 	
 		<jsp:include page="/WEB-INF/views/include/myMenu.jsp" />
 		<!-- myMenu end -->
-		
-		<c:forEach var="travelAll" items="${travelAll}">
-			${travelAll.subject}
-		</c:forEach>
-	
-	
-	
-	  			
+		<h1>여행이력</h1>
+		<c:if test="${empty travelAll}">
+			<h2>참여한 여행이 없습니다. <br/>여행을 떠나보세요!</h2>
+				<button onclick="window.location='/travelMaker/travel/makingList.tm'">여행떠나기</button>
+		</c:if>
+		<c:if test="${!empty travelAll}">
+			<c:forEach var="travelAll" items="${travelAll}" varStatus="status">
+				${status.count}번째 여행 : <a href="/travelMaker/my/myHistoryCont.tm?gNo=${travelAll.gNo}&status=${travelAll.status}">${travelAll.subject}</a><br/>
+			</c:forEach>
+		</c:if>
 	</div>
 	<!-- //wrapAll end -->
 	
