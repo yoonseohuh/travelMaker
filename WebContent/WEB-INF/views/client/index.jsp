@@ -87,7 +87,6 @@
         </div>
         <div class="section" id="section2">
             <h1>3section</h1>
-            <h2>test3</h2>
             <div class="quick quick1"></div>
             <div class="quick quick2"></div>
         </div>

@@ -11,6 +11,7 @@
 				history.go(-1)
 			</script>
 		</c:if>
+		
 		<section class="loginCover">
 			<section class="loginForm">
 				<h1>TravelMaker</h1>
