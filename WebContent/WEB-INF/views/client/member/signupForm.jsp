@@ -76,70 +76,49 @@
 		
 	</script>
 	
-	<div class="wrapAll client">
 		<c:if test="${sessionScope.memId != null}">
 			<script>
 				alert('로그아웃 후 이용해주십시오.')
 				history.go(-1)
 			</script>
 		</c:if>
-	   	<h2>회원 가입</h2>
-		<form action="/travelMaker/mem/signupPro.tm" id="signupForm" name="signupForm" onsubmit="return check()" method="post">
-			<table>
-				<tr>
-					<td>이름</td>
-					<td><input type="text" name="name" /></td>
-				</tr>
-				<tr>
-					<td>아이디</td>
-					<td>
-						<input type="text" class="change" name="id" id="id" />
-						<input type="text"  id="idChRes" disabled/>
-					</td>
-				</tr>
-				<tr>
-					<td>비밀번호</td>
-					<td><input type="password" name="pw" /></td>
-				</tr>
-				<tr>
-					<td>비밀번호 확인</td>
-					<td><input type="password" name="pwch" /></td>
-				</tr>
-				<tr>
-					<td>닉네임</td>
-					<td>
-						<input type="text" name="nickname" class="change"/>
-						<input type="text"id="nickChRes" disabled/>
-					</td>
-					
-				</tr>
-				<tr>
-					<td>생년월일</td>
-					<td><input type="text" name="birth" /></td>
-				</tr>
-				<tr>
-					<td>email</td>
-					<td>
-						<input type="text" name="email" class="change"/>
-						<input type="text"  id="emailChRes" disabled/>
-					</td>
-				</tr>
-				<tr>
-					<td>성별</td>
-					<td>
-						<input type="radio" name="gender" value=0 />남
-						<input type="radio" name="gender" value=1 />여
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2" align="center">
-						<input type="submit" value="회원가입" />
-					</td>
-				</tr>
-			</table>
-		</form>
-	</div>
-	<!-- //wrapAll end -->
+		
+		<div id="signupWrap">
+			<div id="signup-head">
+				<h1 id="signup-title">TravelMaker</h1>
+			</div>
+			<div id="signup-article"> 
+				<form action="/travelMaker/mem/signupPro.tm" id="signupForm" name="signupForm" onsubmit="return check()" method="post">
+					<strong class="tf_required">이름</strong>
+						<input type="text" name="name" />
+					<strong class="tf_required">아이디</strong>
+						<div><input type="text" class="change" name="id" id="id"  placeholder="아이디"/></div>
+						<div><input type="text"  id="idChRes" placeholder="아이디 사용 가능 여부" disabled/></div>
+					<strong class="tf_required">비밀번호</strong>
+						<input type="password" name="pw" placeholder="비밀번호" />
+						<input type="password" name="pwch" placeholder="비밀번호 확인"  />
+					<strong class="tf_required">닉네임</strong>
+						<input type="text" name="nickname" class="change" placeholder="닉네임"/>
+						<input type="text"id="nickChRes" placeholder="닉네임 사용 가능 여부" disabled/>
+					<strong class="tf_required">생년월일</strong>
+						<input type="text" name="birth" />
+					<strong class="tf_required">email</strong>
+						<input type="text" name="email" class="change" placeholder="email"/>
+						<input type="text"  id="emailChRes" placeholder="email 사용 가능 여부" disabled/>
+					<strong class="tf_required">성별</strong>
+						<div id="signup-radio">	
+							<div class="radioDetail">
+								<input type="radio"  name="gender" value=0 /><span class="gen">남</span>
+							</div>
+							<div class="radioDetail">
+								<input type="radio" name="gender" value=1 /><span class="gen">여</span>
+							</div>		
+						</div>
+					<button type="submit" id="sign-btn">회원가입</button>					
+				</form>
+			</div>
+		</div>
+	<!-- //signupWrap end -->	
 	
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	<!-- //footer end -->
