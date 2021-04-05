@@ -150,4 +150,9 @@
 	<select id="nickCheck" parameterType="string" resultType="int">
 		select count(*) from tmUser where nickname=#{nickname}
 	</select>
+	
+	<select id="getAllMembers" resultType="TmUserDTO">
+		select * from tmUser
+	</select>
+	
 </mapper>

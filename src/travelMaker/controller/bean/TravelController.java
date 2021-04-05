@@ -49,8 +49,8 @@ public class TravelController {
 	@Autowired
 	private MemberService memberService = null;
 	
-	//스케줄러
-	@Scheduled(cron = "0 1 0 1/1 * ? *")
+	//스케줄러: 날짜(마감일/시작일/종료일)에 따른 여행 상태 변경
+	@Scheduled(cron = "0 1 12 * * *")
 	public void groupStatusCheck() throws Exception {
 		System.out.println("매일 오전 12:01에 호출");
 		List list = travelService.getAllGroups();
@@ -67,11 +67,33 @@ public class TravelController {
 			Date sDate = sdf.parse(dto.getStartDate());
 			if(sDate.getTime()<=today.getTime()) {
 				travelService.changeGrpStatus(dto.getgNo(), 2);
-			}			
+			}
 		//	3)모든 그룹에 대해 여행 종료일이 되는 시점(endDate==sysdate)에 해당 그룹의 status==3으로 update
 			Date eDate = sdf.parse(dto.getEndDate());
 			if(eDate.getTime()<=today.getTime()) {
 				travelService.changeGrpStatus(dto.getgNo(), 3);
+			}
+		}
+	}
+	
+	//스케줄러: 여행 횟수에 따른 회원 레벨 변경
+	@Scheduled(fixedDelay = 60000)
+	public void memberRankCheck() throws Exception {
+	//	System.out.println("1분마다 호출");
+		List<TmUserDTO> list = memberService.getAllMembers();
+		for(int i=0 ; i<list.size() ; i++) {
+			TmUserDTO dto = list.get(i);
+			if(dto.getTravelCnt()>=10 && dto.getTravelCnt()<25) {
+				dto.setRk(2);	//트래블러로
+				memberService.updateMember(dto);
+			}
+			if(dto.getTravelCnt()>=25 && dto.getTravelCnt()<50) {
+				dto.setRk(3);	//어드바이저로
+				memberService.updateMember(dto);
+			}
+			if(dto.getTravelCnt()>=50) {
+				dto.setRk(4);	//마스터로
+				memberService.updateMember(dto);				
 			}
 		}
 	}
