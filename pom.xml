@@ -113,7 +113,33 @@
 	<dependency>
 	    <groupId>org.quartz-scheduler</groupId>
 	    <artifactId>quartz</artifactId>
-	    <version>2.3.2</version>
+	    <version>2.2.0</version>
+	</dependency>
+	<dependency>
+		<groupId>org.quartz-scheduler</groupId>
+		<artifactId>quartz-jobs</artifactId>
+		<version>2.2.0</version>
+	</dependency>
+	<!-- commons-collections: Quartz 쓸 때 필요함 -->
+	<dependency>
+	    <groupId>commons-collections</groupId>
+	    <artifactId>commons-collections</artifactId>
+	    <version>3.2.1</version>
+	    <scope>runtime</scope>
+	</dependency>	
+	<!-- Quartz framework and dependencies 
+	<dependency>
+	    <groupId>opensymphony</groupId>
+	    <artifactId>quartz</artifactId>
+	    <version>1.6.3</version>
+	    <scope>compile</scope>
+	</dependency>-->
+	<!-- Quartz 1.6.0 requires JTA in non J2EE environments -->
+	<dependency>
+	    <groupId>javax.transaction</groupId>
+	    <artifactId>jta</artifactId>
+	    <version>1.1</version>
+	    <scope>runtime</scope>
 	</dependency>
 	
   </dependencies>
