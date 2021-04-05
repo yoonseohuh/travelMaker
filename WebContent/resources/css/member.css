@@ -15,3 +15,16 @@ input::placeholder {position:absolute; top: 5px; left: 0; width: 100%; height: 4
 .caption .list_user {float:right; }
 .caption .list_user li {float:left; margin-left:5px; }
 .caption a{color:rgba(0,0,0,0.7);}
+
+/*signupForm*/
+
+#signupWrap {position:relative; height:100%; vertical-align:middle; padding:150px 0;}
+#signup-head {text-align:center; margin:0 auto; }
+#signup-title{font-weight:400; font-size:32px;}
+#signup-article {overflow:hidden; position: relative; width:580px; margin:40px auto; padding: 58px 69px 139px; border: 1px solid #e5e5e5; border-radius: 2px; box-sizing: border-box;}
+#signup-article input {width:80%; left:0; height:28px; padding: 11px 70px 8px 0; border:none; border-bottom:1px solid #cccccc; outline:none; font-size:16px; }
+.tf_required {display: block; font-size: 12px; color: #000; font-weight: normal; margin-top: 40px;}
+#signup-radio {margin-top:20px;}
+#signup-radio .radioDetail {float:left; width:20px; margin:0 40px 0 0;}
+.radioDetail .gen {position:relative; left:7px; font-size:13px;}
+#sign-btn {width:100%; margin-top:60px; height: 50px; padding: 0; border: 0; border-radius: 4px; font-size: 15px; color: #ffffff; cursor:pointer; background-color:#ff0000;}
