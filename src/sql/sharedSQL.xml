@@ -18,8 +18,12 @@
 		
 	</select>
 	
-	<select id="selectArticle">
+	<select id="selectArticles">
 		select * from groupSpace where num=#{value} and gNo=#{gNo} and shared=1
+	</select>
+	
+	<select id="selectArticle" parameterType="int">
+		select * from groupSpace where num = #{value}
 	</select>
   		
 </mapper>

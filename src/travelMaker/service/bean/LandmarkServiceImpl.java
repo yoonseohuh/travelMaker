@@ -83,12 +83,8 @@ public class LandmarkServiceImpl implements LandmarkService{
 
 	@Override
 	public List myLandLiked(String id, int lNo) throws Exception {
-		
-		return null;
+		List myLandLiked = landmarkLikedDAO.myLandLiked(id, lNo);
+		return myLandLiked;
 	}
 
-	
-
-
-	
 }

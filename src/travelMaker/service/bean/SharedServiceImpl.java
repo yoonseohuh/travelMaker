@@ -18,6 +18,7 @@ public class SharedServiceImpl implements SharedService {
 
 	@Override
 	public Map getArtilces(String pageNum) throws Exception {
+		
 		int pageSize=8;
 		if(pageNum==null || pageNum.equals("")) {
 			pageNum = "1";
