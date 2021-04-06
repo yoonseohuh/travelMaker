@@ -216,7 +216,6 @@ public class TravelController {
 	@RequestMapping("makingDel.tm")
 	public String makingDel(int gNo) throws Exception {
 		travelService.deleteContent(gNo);
-		System.out.println("deldel");
 		return "redirect:makingList.tm";
 	}
 	

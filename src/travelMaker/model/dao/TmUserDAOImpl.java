@@ -245,5 +245,9 @@ public class TmUserDAOImpl implements TmUserDAO {
 		return list;
 	}
 	
-	
+	//전체 회원 중에서 해당 회원 랭킹 가져오기
+	public int getUserRanking(String id) {
+		int ranking = sqlSession.selectOne("tmUser.getUserRanking",id);
+		return ranking;
+	}
 }

@@ -20,7 +20,8 @@ import travelMaker.model.dto.GroupSpaceDTO;
 import travelMaker.model.dto.QnaBoardDTO;
 import travelMaker.model.dto.ScheduleDTO;
 import travelMaker.model.dto.SmallPosDTO;
-import travelMaker.service.bean.QnaReportServiceImpl;
+import travelMaker.service.bean.MemberService;
+import travelMaker.service.bean.QnaReportService;
 import travelMaker.service.bean.TravelService;
 
 @Controller
@@ -28,14 +29,20 @@ import travelMaker.service.bean.TravelService;
 public class MypageController {
 	
 	@Autowired
-	private QnaReportServiceImpl qnaReportService = null;
-	
+	private QnaReportService qnaReportService = null;
 	@Autowired
 	private TravelService travelService = null;
-	
+	@Autowired
+	private MemberService memberService = null;
+		
 	//마이페이지 홈
 	@RequestMapping("myPage.tm")
-	public String index() {		
+	public String index(Model model) {
+		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
+		int ranking = memberService.getUserRanking(id);
+		model.addAttribute("id",id);
+		model.addAttribute("ranking",ranking);
+		
 		return "client/mypage/myPage";
 	}
 	
