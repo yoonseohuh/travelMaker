@@ -44,7 +44,7 @@ public interface TravelService {
 	//그룹에 들어온 신청 목록들 가져오기
 	public List getRequests(int gNo) throws Exception;
 	//신청 수락 및 거절 처리
-	public void acceptOrReject(String id, int gNo, int status) throws Exception;
+	public boolean acceptOrReject(String id, int gNo, int status) throws Exception;
 	//갤러리 이미지 업로드
 	public void uploadImage(GalleryDTO dto) throws Exception;
 	//그룹 갤러리 이미지들 가져오기
