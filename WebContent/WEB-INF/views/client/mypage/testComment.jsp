@@ -1,47 +1,77 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-	<script>
-		$(document).ready(function(){
-			var ko=['비빔밥','불고기'];
-			var ja=['초밥','소바'];
-			$('.s0').change(function(){
-				var sel = $(this).val();
-				if(sel == 1){
-					$.each(ko,function(i,item){
-						$('.s1').append('<option class="op">'+item+'</option>');
-					});
-				}else{
-					$.each(ja,function(i,item){
-						
-						$('.s1').append('<option class="op">'+item+'</option>');
-					});
-				}
-			});			
-			
-		});	
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<jsp:include page="/WEB-INF/views/include/header.jsp" />
+   
+	<jsp:include page="/WEB-INF/views/include/top.jsp" />
+	<!-- //top end -->
 	
-	</script>
 
+ <script>
+            
+            // onchange에서 호출하는 함수. 
+            function testChange(obj){
+                // 'obj'는 this를 지칭하는 것입니다.
+                alert($(obj).val());
+                
+                // 값 비교로 테스트 가능.
+               	var currentLocation = window.location;
+                if($(obj).val() == ""){
+                    alert("값이 없습니다.");
+                } else if($(obj).val() == "학생"){
+                    alert("저는 학생입니다.");
+                    $('.test').append("<h1>학생을 선택하셨습니다</h1>");
+                } else if($(obj).val() == "회사원"){
+                    alert("저는 회사원입니다.");
+                } else if($(obj).val() == "4"){
+                	 alert("4번 눌렀니?.");
+					$('.joinMembers').load(currentLocation + ' .joinMembers');
+                }
+            }
+            
+            
+            
+            $(document).ready(function() {
+            	  $('#selectBox').change(function() {
+            	    var result = $('#selectBox option:selected').val();
+            	    if (result == '4') {
+            	      $('.div1').show();
+            	    } else {
+            	      $('.div1').hide();
+            	    }
+            	  }); 
+            	}); 
+            
+        </script>
+	<div class="wrapAll">
+=<br/><br/><br/><br/><br/><br/>
 
-
-<body>
-음식대분류
-<select class="s0">
-	<option> 선택하세요 </option>
-	<option value="1">한식</option>
-	<option value="2">일식</option>
-</select>
-음식소분류
-<select class="s1">
-	<option>선택해주세요</option>
-</select>
-
-
-</body>
-</html>
+	
+        <select id="selectBox" name="selectBox">
+		  <option value="" selected="selected">전체</option>
+		   <c:forEach var="dto" items="${dtoList}"> 
+			  <option value="${dto.gNo}">${dto.gNo} / ${dto.subject}</option>
+			  </c:forEach>
+		</select>
+		
+		
+		
+		<div class="div1"> 
+			
+				 <select>
+				 <c:forEach var="fin" items="${fin}"> 
+				  <option value="${fin.id}">${fin.gNo} / ${fin.id} / ${fin.nickname}</option>
+				  </c:forEach>
+				</select>
+			
+		</div>
+        
+        
+       
+        
+        
+        
+	</div>
+	<!-- //wrapAll end -->
+	
+<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+<!-- //footer end -->
