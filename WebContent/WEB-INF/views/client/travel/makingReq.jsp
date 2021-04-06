@@ -39,7 +39,7 @@
 				<input type="radio" name="reqType" value="1" id="joinTypeG" onclick="posSlide(this.value)"/>가이드
 				</c:if>
 			</div>
-			<div class="pstn">
+			<div class="pstn">	
 				<h2>모집 포지션</h2>
 				<c:forEach var="i" items="${posList}">
 					${i} /
