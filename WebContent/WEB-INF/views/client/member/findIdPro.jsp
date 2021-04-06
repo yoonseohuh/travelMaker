@@ -11,9 +11,10 @@
 				</div>
 				<div class="tArticle">
 					<h2 class="titMain">입력한 정보에 해당하는 아이디입니다.</h2>
-					<p class="descMain">개인정보 보호를 위해 정보 일부를 *로 표시하였습니다.
+					<p class="descMain">
+						개인정보 보호를 위해 정보 일부를 *로 표시하였습니다.
 					<br/>
-					트레블메이커에 로그인 할 수 있는 아이디가 표시됩니다.
+						트레블메이커에 로그인 할 수 있는 아이디가 표시됩니다.
 					</p>
 					<div class="wrapFind">
 						<div class="boxFind">
