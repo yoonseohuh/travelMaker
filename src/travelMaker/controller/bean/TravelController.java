@@ -55,7 +55,7 @@ public class TravelController {
 		System.out.println("매일 오전 12:01에 호출");
 		List list = travelService.getAllGroups();
 		DateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		Date today = new Date();
+		Date today = sdf.parse(sdf.format(new Date()));
 		for(int i=0 ; i<list.size() ; i++) {
 			GroupSpaceDTO dto = (GroupSpaceDTO)list.get(i);
 		//	1)모든 그룹에 대해 마감일이 되는 시점(closingDate==sysdate)에 해당 그룹의 status==1로 update
@@ -77,9 +77,10 @@ public class TravelController {
 	}
 	
 	//스케줄러: 여행 횟수에 따른 회원 레벨 변경
-	@Scheduled(fixedDelay = 60000)
+	@Scheduled(fixedDelay = 1800000)
 	public void memberRankCheck() throws Exception {
-	//	System.out.println("1분마다 호출");
+		Date date = new Date();
+		System.out.println("30분마다 호출"+date);
 		List<TmUserDTO> list = memberService.getAllMembers();
 		for(int i=0 ; i<list.size() ; i++) {
 			TmUserDTO dto = list.get(i);
@@ -194,7 +195,8 @@ public class TravelController {
 		Date sDate = sdf.parse(content.getStartDate());
 		Date eDate = sdf.parse(content.getEndDate());
 		Date cDate = sdf.parse(content.getClosingDate());
-		Date today = new Date();
+		Date today = sdf.parse(sdf.format(new Date()));
+
 		long endStartGap = (eDate.getTime()-sDate.getTime())/(24*60*60*1000);
 		long closeTodayGap = (cDate.getTime()-today.getTime())/(24*60*60*1000);
 		
@@ -336,7 +338,7 @@ public class TravelController {
 		Date sDate = sdf.parse(grpSpace.getStartDate());
 		Date eDate = sdf.parse(grpSpace.getEndDate());
 		Date cDate = sdf.parse(grpSpace.getClosingDate());
-		Date today = new Date();
+		Date today = sdf.parse(sdf.format(new Date()));
 		long endStartGap = (eDate.getTime()-sDate.getTime())/(24*60*60*1000);		//시작일과 종료일 사이의 갭
 		long closeTodayGap = (cDate.getTime()-today.getTime())/(24*60*60*1000);		//오늘 날짜와 마감일 사이의 갭
 		model.addAttribute("esGap",endStartGap);
@@ -385,9 +387,9 @@ public class TravelController {
 		System.out.println(requestId);
 		System.out.println(gNo);
 		//gNo에 신청한 ID를 그룹에 참여 처리 && groupSpace테이블에 actualNum +1 처리
-		travelService.acceptOrReject(requestId, gNo, 1);
+		boolean result = travelService.acceptOrReject(requestId, gNo, 1);
 		ObjectMapper mapper = new ObjectMapper();
-		String json = mapper.writeValueAsString(requestId);
+		String json = mapper.writeValueAsString(result);
 		return json;
 	}
 	
