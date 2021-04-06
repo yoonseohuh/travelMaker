@@ -107,6 +107,10 @@ public class LandmarkController {
 		int lNo = Integer.parseInt((String)map.get("lNo"));
 		
 		landmarkService.landmarkLiked(id, lNo);
+		
+		LandmarkBoardDTO dto = new LandmarkBoardDTO();
+		
+				
 		return null;
 	}
 	

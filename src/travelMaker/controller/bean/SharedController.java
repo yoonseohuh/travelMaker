@@ -1,6 +1,6 @@
 package travelMaker.controller.bean;
 
-import java.util.Map;
+import java.util.Map;	
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,6 +37,9 @@ public class SharedController {
 		GroupSpaceDTO shared = sharedService.getArticle(num);
 		model.addAttribute("shared", shared);
 		model.addAttribute("pageNum", pageNum);
+		
 		return "shared/completedCont";
 	}
+	
+	
 }

@@ -11,53 +11,47 @@
 <div class="wrapAll">
 
 	<h1>sharedList</h1>
-	
-	<c:if test="${count > 0}">
-		<div id="list">
-			<div class="boardTable">
-				<ul class="sharedList">
-					<c:forEach var="board" items="${sharedList}" varStatus="status">
-						<li><a
-							href="completedCont.tm?gNo=${shared.gNo}&pageNum=${pageNum}"></a>
-							<p class="num">${number}</p>
-							<c:set var="number" value=${number}-1></c:set>
-							<p class="title">${shared.subject}</p>
-							<p class="date">${article.startDate}~${article.endDate}</p>
-							<p class="maker">${shared.id}</p></li>
-					</c:forEach>
-				</ul>
-			</div>
-		</div>
-		현재 페이지 : ${pageNum}
-		<div class="pageNumbers">
-			<c:set var="pageBlock" value="5" />
-			<fmt:parseNumber var="res" value="${count/pageSize}"
-				integerOnly="true" />
-			<c:set var="pageCount" value="${res+(count%pageSize==0 ? 0 : 1)}" />
-			<fmt:parseNumber var="result" value="${(currPage-1)/pageBlock}"
-				integerOnly="true" />
-			<c:set var="startPage" value="${result*pageBlock+1}" />
-			<c:set var="endPage" value="${startPage+pageBlock-1}" />
-			<c:if test="${endPage>pageCount}">
-				<c:set var="endPage" value="${pageCount}" />
-			</c:if>
-
-			<!-- 앞으로 가는 기호 -->
-			<c:if test="${startPage>pageBlock}">
-				<a href="makingList.tm?pageNum=${startPage-pageBlock}"> &lt; </a>
-			</c:if>
-			<!-- 페이지번호 리스트 -->
-			<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
-				<a href="makingList.tm?pageNum=${i}">&nbsp; ${i} &nbsp;</a>
-			</c:forEach>
-			<!-- 뒤로 가는 기호 -->
-			<c:if test="${endPage<pageCount}">
-				<a href="makingList.tm?pageNum=${startPage+pageBlock}"> &gt; </a>
-			</c:if>
-		</div>
-
+	<c:if test="${count == 0}">
+		<table>
+			<tr><td> 게시글이 없습니다. </td></tr>
+		</table>
 	</c:if>
-
+	<c:if test="${count !=0 }">
+		<table>
+			<tr>
+				<td>No.</td>
+				<td>작성자</td>
+				<td>시간</td>
+			</tr>
+			<c:forEach var="shared" items="${articleList}">
+				<tr>
+					<td>${number}
+					<c:set var="number" value="${number-1}" />
+					</td>
+				</tr>
+			</c:forEach>
+		</table>
+		<h4> 현재 페이지 </h4>
+		<c:set var="pageBlock" value="8" />
+		<fmt:parseNumber var="res" value="${count / pageSize}" integerOnly="true" />
+		<c:set var="pageCout" value="${rest + (count % pageSize == 0 ? 0 :1)}" />
+		<fmt:parseNumber var="result" value="${(currPage -1)/pageBlock}" integerOnly="true" />
+		<fmt:parseNumber var="startPage" value="${result * pageBlock + 1}" />
+		<fmt:parseNumber var="endPage" value="${startPage + pageBlock - 1}" />
+		<c:if test="${endPage > pageCount}">
+			<c:set var="endPage" value="${pageCount}" />
+		</c:if>
+		
+		<c:if test="${startPage > pageBlock}">
+			<a href="/travelMaker/shared/sharedList.tm?pageNum=${startPage-pageBlock}" class="pageNums"> &lt; </a>
+		</c:if>
+		<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1"  >
+			<a href="/travelMaker/shared/sharedList.tm?pageNum=${i}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
+		</c:forEach>
+		
+		
+	</c:if>
+	
 
 
 

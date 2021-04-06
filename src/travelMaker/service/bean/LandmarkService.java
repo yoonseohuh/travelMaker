@@ -26,7 +26,7 @@ public interface LandmarkService {
 	// 랜드마크 좋아요 취소
 	public void landmarkLikedCancel(String id, int lNo) throws Exception;
 	// 내가 좋아요 한 랜드마크 
-	public List myLandLiked(String id, int lNo) throws Exception;	
+	public List myLandLiked(String id, int lNo) throws Exception;
 	
 
 
