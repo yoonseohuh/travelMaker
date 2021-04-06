@@ -28,7 +28,7 @@ public class SharedController {
 		model.addAttribute("startRow", result.get("startRow"));
 		model.addAttribute("endRow", result.get("endRow"));
 		model.addAttribute("number", result.get("number"));
-		model.addAttribute("articleList", result.get("articleList"));
+		model.addAttribute("sharedList", result.get("sharedList"));
 		
 		return "shared/sharedList";
 	}
