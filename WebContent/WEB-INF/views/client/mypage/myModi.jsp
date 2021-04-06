@@ -8,50 +8,41 @@
 	<div class="wrapAll client">
 		<jsp:include page="/WEB-INF/views/include/myMenu.jsp" />
 		<!-- myMenu end -->
-		<h2>회원 정보 수정</h2>
-		<form action="/travelMaker/mem/signupPro.tm" method="post">
-			<table>
-				<tr>
-					<td>이름</td>
-					<td>${mem.name}</td>
-				</tr>
-				<tr>
-					<td>아이디</td>
-					<td>${mem.id}</td>
-				</tr>
-				<tr>
-					<td>닉네임</td>
-					<td>${mem.nickname}</td>
-				</tr>
-				<tr>
-					<td>생년월일</td>
-					<td>${mem.birth}</td>
-				</tr>
-				<tr>
-					<td>email</td>
-					<td>${mem.email}</td>
-				</tr>
-				<tr>
-					<td>성별</td>
-					<c:if test="${mem.gender==0}">
-						<td>남자</td>
-					</c:if>
-					<c:if test="${mem.gender==1}">
-						<td>여자</td>
-					</c:if>
-				</tr>
-				<tr>
-					<td>
+		
+		<div class="travelContent">
+			<div class="mArticle">
+				<h3 class="titModi">내정보 관리</h3>
+				<div class="wrapModi">
+					<div class="boxManage">
+						<strong class="titMain">기본정보</strong>
+						<p class="descComm">트레블메이커에 등록된 회원님의 기본정보입니다.</p>
+						<div class="boxSet">
+							<strong class="titSet">이름</strong>
+							<span class="txtSet">${mem.name}</span>
+						</div>
+						생년월일${mem.birth}
+						성별
+						<c:if test="${mem.gender==0}">
+							남자
+						</c:if>
+						<c:if test="${mem.gender==1}">
+							여자
+						</c:if>
+					</div>
+					<div class="boxManage">
+						아이디 ${mem.id}
+						닉네임${mem.nickname}
+						email${mem.email}
 						<input type="button" value="닉네임 수정" onclick="window.location='/travelMaker/mem/myModiNick.tm?id=${mem.id}&nickname=${mem.nickname}'"/>
 						<input type="button" value="비밀번호 수정" onclick="window.location='/travelMaker/mem/myModiPwForm.tm?id=${mem.id}&pw=${mem.pw}'"/>
-					</td>
-				</tr>
-			</table>
-		</form>
-		<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-		<h2>회원 탈퇴</h2>
-		<h3>회원 탈퇴 시 바보이며 일주일간 바보입니다.</h3>
-		<input type="button" value="회원 탈퇴" onclick="window.location='/travelMaker/mem/myDelete.tm?id=${mem.id}'"/>
+					</div>
+					<div class="boxManage">
+						<input type="button" value="회원 탈퇴" onclick="window.location='/travelMaker/mem/myDelete.tm?id=${mem.id}'"/>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- //travelContent end -->
 	</div>
 	<!-- //wrapAll end -->
 	

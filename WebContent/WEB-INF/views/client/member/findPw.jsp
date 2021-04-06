@@ -9,9 +9,9 @@
 			</div>
 			<div class="tArticle">
 				<h2 class="titMain">비밀번호를 재설정합니다.</h2>
-				<p class="descMain">비밀번호를 재설정할 아이디
+				<p class="descMain">비밀번호를 재설정할 아이디와 
 				<br/>
-				와 이메일을 입력해 주세요.
+				이메일을 입력해 주세요.
 				</p>
 					<div class="formArea">
 						<form action="/travelMaker/mem/modiPwForm.tm" method="post">
