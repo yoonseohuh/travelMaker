@@ -12,6 +12,46 @@
 	
 	<div class="wrapAll">
 		<script>
+			function validation(){
+				var inputs = document.inputForm;
+				if(!inputs.subject.value){
+					alert("여행 제목을 입력해주세요");
+					return false;
+				}
+				if(!inputs.concept.value){
+					alert("여행 콘셉트를 정해주세요");
+					return false;
+				}
+				if(!inputs.maxNum.value){
+					alert("최대 인원수를 입력해주세요");
+					return false;
+				}
+				if(!inputs.startDate.value){
+					alert("여행 시작일을 정해주세요");
+					return false;
+				}
+				if(!inputs.endDate.value){
+					alert("여행 종료일을 정해주세요");
+					return false;
+				}
+				if(!inputs.closingDate.value){
+					alert("모집 마감일을 정해주세요");
+					return false;
+				}
+				if(!inputs.loc.value){
+					alert("여행 지역을 정해주세요");
+					return false;
+				}
+				if(!inputs.courseExpl.value){
+					alert("코스 설명을 작성해주세요");
+					return false;
+				}
+				if(!inputs.cost.value){
+					alert("예산을 입력해주세요");
+					return false;
+				}
+			}
+		
 			$(document).ready(function(){
 				//포지션 관련 스크립트
 				$("input:checkbox[name=chk]").on("click",function(){
@@ -116,7 +156,7 @@
 		</c:if>
 		
 		<h1>여행 개설하기</h1>
-		<form action="/travelMaker/travel/makingWritePro.tm" method="post">
+		<form action="/travelMaker/travel/makingWritePro.tm" name="inputForm" onsubmit="return validation()" method="post">
 			<input type="hidden" name="po1" id="po1"/>
 			<input type="hidden" name="po2" id="po2"/>
 			<input type="hidden" name="po3" id="po3"/>

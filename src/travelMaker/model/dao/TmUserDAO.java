@@ -79,4 +79,6 @@ public interface TmUserDAO {
 	public int nickCheck(String nickname);
 	//모든 회원 정보 가져오기
 	public List getAllMembers();
+	//전체 회원 중에서 해당 회원 랭킹 가져오기
+	public int getUserRanking(String id);
 }

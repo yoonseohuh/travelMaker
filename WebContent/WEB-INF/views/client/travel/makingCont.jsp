@@ -96,13 +96,13 @@
 			<tr>
 				<td>코스 설명: </td>
 				<td>
-					<textarea rows="5" cols="90" style="resize:none;" readonly>${content.courseExpl}</textarea>
+					${content.courseExpl}
 				</td>
 			</tr>
 			<tr>
 				<td>부가 설명: </td>
 				<td>
-					<textarea rows="5" cols="90" style="resize:none;" readonly>${content.addExpl}</textarea>
+					${content.addExpl}
 				</td>
 			</tr>
 			<tr>
