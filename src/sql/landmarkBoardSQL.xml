@@ -6,7 +6,7 @@
 <mapper namespace="landmarkBoard">
 	<!-- 시퀀스는 대문자로 써야 들어가진다 -->
 	<insert id="insertLand" parameterType="LandmarkBoardDTO">
-		insert into LANDMARKBOARD(lNo,writer,lName,lType,addr,xLoc,yLoc,lCont,lOpen,reg) values(LANDMARKBOARD_SEQ.nextVal,#{writer},#{lName},#{lType},#{addr},#{xLoc},#{yLoc},#{lCont},#{lOpen},sysdate)
+		insert into LANDMARKBOARD values(LANDMARKBOARD_SEQ.nextVal,#{writer},#{lName},#{lType},#{addr},#{xLoc},#{yLoc},#{lCont},#{lOpen},0,sysdate)
 	</insert>
 	
 	<select id="getLands" resultType="LandmarkBoardDTO">
@@ -24,4 +24,8 @@
 	<delete id="deletemyLand" parameterType="string" >
 		delete from LANDMARKBOARD where id=#{id}
 	</delete>
+	
+	<update id="landmarkLikedCnt" parameterType="int">
+		update LANDMARKBOARD set likedCnt=likedCnt+ #{ud} where lNo=#{lNo}
+	</update>
 </mapper>

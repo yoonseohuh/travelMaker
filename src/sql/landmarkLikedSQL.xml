@@ -5,6 +5,16 @@
   
 <mapper namespace="landmarkLiked">
 	
+	<insert id="insertLandmarkLiked" parameterType="hashmap">
+		insert into landmarkLiked values(#{id},#{lNo})
+	</insert>
 
+	<delete id="landmarkLikedCancel" parameterType="hashmap">
+		delete from landmarkLiked where id=#{id} and lNo=#{lNo}
+	</delete>
+	
+	<select id="likedCnt" parameterType="hashmap" resultType="int">
+		select count(*) from landmarkLiked where id=#{id} and lNo=#{lNo}
+	</select>
 
 </mapper>

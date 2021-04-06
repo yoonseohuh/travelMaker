@@ -1,6 +1,9 @@
 package travelMaker.model.dao;
 
-import java.sql.SQLException;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,21 +17,43 @@ public class LandmarkLikedDAOImpl implements LandmarkLikedDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession = null;
 
+	@Override
+	public void landmarkLiked(String id, int lNo) throws Exception {
+		Map map = new HashMap();
+		map.put("id", id);
+		map.put("lNo", lNo);
+		sqlSession.insert("landmarkLiked.insertLandmarkLiked", map);
+		
+	}
 
 	@Override
-	public void insertLandLiked() throws Exception {
-		sqlSession.insert("landmarkLiked");
+	public int likedCheck(String id, int lNo) throws Exception {
+		Map map = new HashMap();
+		map.put("id", id);
+		map.put("lNo", lNo);
+		int count = sqlSession.selectOne("landmarkLiked.likedCnt", map);
+		return count;
+	}
+
+	@Override
+	public void landmarkLikedCancel(String id, int lNo) throws Exception {
+		Map map = new HashMap();
+		map.put("id", id);
+		map.put("lNo", lNo);
+		sqlSession.insert("landmarkLiked.landmarkLikedCancel", map);
 		
 	}
+
 	@Override
-	public void myLandLiked(String id) throws SQLException{
-		sqlSession.selectList("landmarkLiked", id);
+	public List myLandLiked(String id, int lNo) throws Exception {
+		
+		return null;
 	}
+
 	
-	@Override
-	public void addLikedCnt() throws SQLException {
-		// TODO Auto-generated method stub
-		
-	}
+
+	
+
+
 
 }
