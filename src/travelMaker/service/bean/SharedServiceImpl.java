@@ -27,11 +27,11 @@ public class SharedServiceImpl implements SharedService {
 		int startRow = (currPage - 1) * pageSize + 1;
 		int endRow = currPage * pageSize;
 		
-		List articleList = null;
+		List sharedList = null;
 		
 		int count = sharedDAO.getArticleCount();
 		if(count > 0) {
-			articleList = sharedDAO.getArticles(startRow, endRow);
+			sharedList = sharedDAO.getArticles(startRow, endRow);
 		}
 		int number = count - (currPage -1) * pageSize;
 		Map result = new HashMap();
@@ -42,7 +42,7 @@ public class SharedServiceImpl implements SharedService {
 		result.put("endRow", endRow);
 		result.put("number", number);
 		result.put("count", count);
-		result.put("articleList", articleList);
+		result.put("articleList", sharedList);
 		result.put("pageNum", pageNum);
 		
 		return result;
@@ -56,6 +56,8 @@ public class SharedServiceImpl implements SharedService {
 		
 		return shared;
 	}
+	
+	
 	
 	
 
