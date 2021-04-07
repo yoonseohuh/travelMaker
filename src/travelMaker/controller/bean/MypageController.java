@@ -39,7 +39,7 @@ public class MypageController {
 	@RequestMapping("myPage.tm")
 	public String index(Model model) {
 		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
-		int ranking = memberService.getUserRanking(id);
+		int ranking = memberService.getUserRanking(id)-1;
 		model.addAttribute("id",id);
 		model.addAttribute("ranking",ranking);
 		
