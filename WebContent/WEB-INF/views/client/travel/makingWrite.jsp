@@ -50,6 +50,10 @@
 					alert("예산을 입력해주세요");
 					return false;
 				}
+				if(isNaN(inputs.cost.value)){
+					alert("예산에 문자가 포함되어 있습니다");
+					return false;
+				}
 			}
 		
 			$(document).ready(function(){
