@@ -9,23 +9,30 @@
 <div class="wrapAll">
 
 	<h1>completeCont</h1>
-	<c:if test="${status==1}">
+	
+	<c:if test="${sessionScope.memId==null}">
+			<script>
+				alert("로그인 후에 이용 가능합니다");
+				history.go(-1);
+			</script>
+		</c:if>
+	<c:if test="${sessionScope.memId!=null}">
 		<table>
 			<tr>
-				<td>${getGroup.startDate}~${getGroup.endDate} <br /> 
-					개설자 :${getGroup.id}
-					<h1>${getGroup.subject}</h1>
+				<td>${article.startDate}~${article.endDate} <br /> 
+					개설자 :${article.id}
+					<h1>${article.subject}</h1>
 				</td>
 			</tr>
 			<tr>
 				<td>
 					<h2>Info</h2>
 					<h4>코스설명</h4> 
-						${getGroup.courseExpl}<br />
+						${article.courseExpl}<br />
 					<h4>부가설명</h4> 
-						${getGroup.addExpl} <br />
+						${article.addExpl} <br />
 					<h4>일 정</h4> <c:forEach var="scheList" items="${scheList}">
-						${scheList.sDate} : ${scheList.sCont} <br />
+						${article.sDate} : ${article.sCont} <br />
 					</c:forEach>
 				</td>
 			</tr>

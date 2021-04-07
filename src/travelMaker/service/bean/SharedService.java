@@ -8,7 +8,7 @@ public interface SharedService {
 
 	public Map getArtilces(String pageNum) throws Exception;
 
-	public GroupSpaceDTO getArticle(int num) throws Exception;
+	public GroupSpaceDTO getArticle(int gNo) throws Exception;
 
 
 

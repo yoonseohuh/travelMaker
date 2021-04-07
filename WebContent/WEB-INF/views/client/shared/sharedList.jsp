@@ -11,7 +11,7 @@
 <div class="wrapAll">
 
 	<h1>sharedList</h1>
-	<form action="">
+	
 	<c:if test="${count == 0}">
 		<table>
 			<tr><td> 게시글이 없습니다. </td></tr>
@@ -19,14 +19,14 @@
 	</c:if>
 	<c:if test="${count >0 }">
 		<div id="sList">
-			<div id="sharedTable">
-				<ul class="shList">
+			<div id="articleTable">
+				<ul class="makingList">
 					<c:forEach var="article" items="${sharedList}" >
 						<li>
-							<a href="completedCont.tm?gNo=${shared.gNo}&pageNum=${pageNum}"></a>
-							<p class="num">${number}</p>
-							<p class="title">${shared.subject}</p>
-							<p class="maker">${shared.id}</p>
+							<a href="completedCont.tm?gNo=${article.gNo}&pageNum=${pageNum}"></a>
+							<p class="gNo">${gNo}</p>
+							<p class="title">${article.subject}</p>
+							<p class="maker">${article.id}</p>
 						</li>
 					</c:forEach>
 				</ul>
@@ -80,7 +80,7 @@
 			</div>
 		
 	</c:if>
-	</form>
+
 
 
 

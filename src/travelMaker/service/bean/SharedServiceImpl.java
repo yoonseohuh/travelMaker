@@ -31,9 +31,17 @@ public class SharedServiceImpl implements SharedService {
 		int endRow = currPage*pageSize;
 		List sharedList = null;
 		int count = sharedDAO.getArticleCount();
+		//System.out.println(count);
 		if(count>0) {
 			sharedList = sharedDAO.getArticles(startRow, endRow);
 		}
+		
+		for(int i=0 ; i<sharedList.size() ; i++) {
+			GroupSpaceDTO dto = (GroupSpaceDTO)sharedList.get(i);
+			//System.out.print(dto.getSubject()+"/");
+		}
+		
+		
 		int number = count - (currPage -1) * pageSize;
 		
 		Map result = new HashMap();
@@ -45,15 +53,18 @@ public class SharedServiceImpl implements SharedService {
 		result.put("count", count);
 		result.put("sharedList", sharedList);
 		result.put("pageNum", pageNum);
+		//System.out.println("dao 왔는데 서비스는 어딨니");
 		
 		
 		return result;
 	}
 	
 	@Override
-	public GroupSpaceDTO getArticle(int num) throws Exception {
-		GroupSpaceDTO article = sharedDAO.getArticle(num);
-		
+	public GroupSpaceDTO getArticle(int gNo) throws Exception {
+		GroupSpaceDTO article = sharedDAO.getArticle(gNo);
+		//System.out.println("서비스"+gNo);
+		//System.out.println("서비스"+ article);
+		//System.out.println("dao 왔으니까 서비스는 왔니?");
 		
 		return article;
 	}
