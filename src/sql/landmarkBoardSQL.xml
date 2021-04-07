@@ -9,7 +9,7 @@
 		insert into LANDMARKBOARD values(LANDMARKBOARD_SEQ.nextVal,#{writer},#{lName},#{lType},#{addr},#{xLoc},#{yLoc},#{lCont},#{lOpen},0,sysdate)
 	</insert>
 	
-	<select id="getLands" resultType="LandmarkBoardDTO">
+	<select id="getLands" parameterType="int" resultType="LandmarkBoardDTO">
 		select * from LANDMARKBOARD
 	</select>
 	

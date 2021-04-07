@@ -53,6 +53,7 @@
 		<mapper resource="/sql/tmUserSQL.xml"/>
 		<mapper resource="/sql/userCmtSQL.xml"/>
 		<mapper resource="/sql/userRkSQL.xml"/>
+		
 	</mappers>
 
 </configuration>

@@ -67,17 +67,29 @@
 			        position: positions[i].latlng, // 마커를 표시할 위치
 			        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
 			        image : markerImage, // 마커 이미지 
+			        clickable: true
 			    }); 
-			   
+			    
+			    var iwContent = '<div style="padding:5px;">Hello World!</div>';
+			    var	iwRemoveable = true;
+			    
+			    // 인포 윈도우 생성하기
+			    var infowindow = new kakao.maps.infoWindow({
+			    	content : iwContent,
+			    	removable : iwRemoveable
+			    });
+			 // 마커에 클릭이벤트를 등록합니다
+			    kakao.maps.event.addListener(marker, 'click', function() {
+			          // 마커 위에 인포윈도우를 표시합니다
+			          infowindow.open(map, marker);  
+			    });
+			    
 		
-			  
 			}// for
 			
 			
 		}//markers
-		
-		
-		
+	
 		});//ready
 		
 		</script>
@@ -85,7 +97,8 @@
 
 	<table>
 		<c:forEach var="land" items="${land}">
-		<input type="hidden" name="lNo" value="${land.lNo}"/>
+		<input type="hidden" name="lNo" value="${land.lNo}" />
+		<input type="hidden" name="lOpen" value="${land.lOpen}" />
 			<tr>	
 				<td>${land.writer}님의 랜드마크 입니다.</td>
 			</tr>
