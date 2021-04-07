@@ -22,20 +22,22 @@ public class SharedDAOImpl  implements SharedDAO{
 		map.put("start", start);
 		map.put("end", end);
 		List sharedList = sqlSession.selectList("shared.selectArticles", map);
-		
+		//System.out.println("DAO 넘어오니?");
 		return sharedList;
 	}
 	
 	@Override
 	public int getArticleCount() {
+		int count =sqlSession.selectOne("shared.getAllCount");
 		
-
-		return 0;
+		return count;
 	}
 	
 	@Override
-	public GroupSpaceDTO getArticle(int num) throws Exception {
-		GroupSpaceDTO article = sqlSession.selectOne("shared.selectOne", num);
+	public GroupSpaceDTO getArticle(int gNo) throws Exception {
+		GroupSpaceDTO article = sqlSession.selectOne("shared.selectArticle", gNo);
+		//System.out.println("dao"+article);
+		//System.out.println("dao 넘어왔니?");
 		return article;
 	}
 	

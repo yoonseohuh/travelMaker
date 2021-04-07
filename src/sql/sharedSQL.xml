@@ -6,15 +6,18 @@
 
 	<select id="selectArticles" parameterType="hashmap" resultType="groupSpaceDTO">
 		<![CDATA[
-		SELECT B.*, r FROM
-		(SELECT A.*, rownum r FROM 
-		(SELECT * FROM board ORDER BY ref DESC, re_step ASC) A 
-		ORDER BY ref DESC, re_step ASC) B WHERE r >= #{start} AND r <= #{end}
+		(select a.*, r FROM (select groupSpace.*, rownum r from groupSpace where shared=1 order by reg desc) a where r>=#{start} and r<=#{end})
 		]]>
 	</select>
 	
-	<select id="selectOne" parameterType="int" resultType="GalleryDTO">
-		select * from groupSpace where num = #{value}
+	<select id="getAllCount" resultType="int">
+		select count(*) from groupSpace
 	</select>
+	
+	<select id="selectArticle" parameterType="int" resultType="groupSpaceDTO">
+		select * from groupSpace where gNo=#{gNo} 
+	</select>
+	
+	
   		
 </mapper>

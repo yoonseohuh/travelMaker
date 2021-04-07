@@ -10,7 +10,7 @@ public interface SharedDAO {
 
 	public int getArticleCount();
 
-	public GroupSpaceDTO getArticle(int num) throws Exception;
+	public GroupSpaceDTO getArticle(int gNo) throws Exception;
 
 	
 
