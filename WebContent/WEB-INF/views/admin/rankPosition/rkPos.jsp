@@ -13,13 +13,32 @@
    				location.href="/travelMaker/admin/rkPos.tm";
    			}
    		}
+   		
+   		//유효성 검사
+   		function check(){
+			var inputs = document.addRankForm;
+			console.log(inputs);
+			if(!inputs.rkName.value){
+				alert("등급 이름을 입력하세요");
+				return false;
+			}else if(!inputs.rkNeed.value){
+				alert("요구횟수를 입력하세요");
+				return false;
+			}else if(!inputs.rkExpl.value){
+				alert("주요설명을 입력하세요");
+				return false;
+			}else if(!inputs.rkAddExpl.value){
+				alert("부가설명을 입력하세요");
+				return false;
+			}
+		}
    	</script>
    	
 	<div class="wrapAll admin">
 		<c:if test="${fn:length(rkList)==0}">
 			<h3>랭크를 추가해주세요</h3>
 		</c:if>
-		<form action="/travelMaker/admin/addRkPro.tm" method="post">
+		<form action="/travelMaker/admin/addRkPro.tm" name="addRankForm" onsubmit="return check()" method="post">
 			<table>
 	    		<tr>
 					<th>등급이름</th>
@@ -30,7 +49,7 @@
 				</tr>
 				<tr>
 					<td><input type="text" name="rkName"/></td>
-					<td><input type="text" name="rkNeed"/></td>
+					<td><input type="number"  min="1" name="rkNeed" placeholder="숫자를 입력하세요"/></td>
 					<td><input type="text" name="rkExpl"/></td>
 					<td><input type="text" name="rkAddExpl"/></td>
 					<td><input type="submit" value="추가"/></td>

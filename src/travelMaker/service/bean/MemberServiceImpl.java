@@ -217,7 +217,7 @@ public class MemberServiceImpl implements MemberService {
 		ServletRequestAttributes sra = (ServletRequestAttributes)ra;
 		HttpServletRequest request = sra.getRequest();
 		
-		int pageSize=3;
+		int pageSize=10;
 		if(pageNum==null || pageNum.equals("pageNum") || pageNum.equals("")) {pageNum="1";}
 		int currPage = Integer.parseInt(pageNum);
 		int startRow = (currPage-1)*pageSize+1;

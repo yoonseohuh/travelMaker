@@ -39,7 +39,7 @@
 			});
 		});
 		 --%>
-		 
+		//삭제 함수
    		function dee(index){
    			var check = confirm("삭제하시겠습니까?");
    			if(check){
@@ -48,6 +48,24 @@
    				location.href="/travelMaker/admin/posList.tm";
    			}
    		}
+	   	//유효성 검사
+	   		function check(){
+				var inputs = document.addPosForm;
+				console.log(inputs);
+				if(!inputs.posCate.value){
+					alert("포지션 분류를 입력하세요");
+					return false;
+				}else if(!inputs.img.value){
+					alert("파일을 선택해주세요");
+					return false;
+				}else if(!inputs.posName.value){
+					alert("포지션 이름을 입력하세요");
+					return false;
+				}else if(!inputs.posExpl.value){
+					alert("포지션 설명을 입력하세요");
+					return false;
+				}
+			}
    	</script>
 	<div class="wrapAll admin">
 		<div id="list">
@@ -61,17 +79,17 @@
 			</table>
 		</c:if>
 		<!-- 포지션 추가  -->
-		<form action="/travelMaker/admin/addSPosPro.tm" method="post" enctype="multipart/form-data">
+		<form action="/travelMaker/admin/addSPosPro.tm" name="addPosForm" onsubmit="return check()" method="post" enctype="multipart/form-data">
 			<table>
 	    		<tr>
-					<th>포지션 분류</th>
+					<th>포지션 대분류</th>
 					<th>이모티콘</th>
 					<th>포지션 이름</th>
 					<th>포지션 설명</th>
 					<th>버튼</th>
 				</tr>
 				<tr>
-					<td><input type="text" name="posCate"/></td>
+					<td><input type="number" min="1" max="6" name="posCate" placeholder="숫자 입력"/></td>
 					<td><input type="file" name="img"/></td>
 					<td><input type="text" name="posName"/></td>
 					<td><input type="text" name="posExpl"/></td>

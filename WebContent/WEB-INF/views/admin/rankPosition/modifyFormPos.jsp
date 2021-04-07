@@ -6,9 +6,25 @@
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 	<jsp:include page="/WEB-INF/views/include/adminMenu.jsp" />
 	<!-- //adminMenu end -->
-	
+	<script>
+		//유효성 검사
+			function check(){
+			var inputs = document.modiPosForm;
+			console.log(inputs);
+			if(!inputs.posCate.value){
+				alert("포지션 분류를 입력하세요");
+				return false;
+			}else if(!inputs.posName.value){
+				alert("포지션 이름을 입력하세요");
+				return false;
+			}else if(!inputs.posExpl.value){
+				alert("포지션 설명을 입력하세요");
+				return false;
+			}
+		}
+	</script>
 	<div class="wrapAll admin">
-		<form action="/travelMaker/admin/modifyProPos.tm" method="post" enctype="multipart/form-data">
+		<form action="/travelMaker/admin/modifyProPos.tm" name="modiPosForm" onsubmit="return check()" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="posNo" value="${spdto.posNo}" />
 			<table>
 				<tr>
@@ -19,7 +35,7 @@
 					<th>포지션 설명</th>
 				</tr>
 				<tr>
-					<td><input type="text" name="posCate" value="${spdto.posCate}"/></td>
+					<td><input type="number" min="1" max="6" name="posCate" value="${spdto.posCate}"/></td>
 					<td><input type="file" name="img"/></td>
 					<td><img src="<c:url value="/resources/upload/${spdto.posRoot}"/>" width="100" height="100"></td>
 					<td><input type="text" name="posName" value="${spdto.posName}"/></td>

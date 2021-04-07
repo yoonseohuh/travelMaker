@@ -39,16 +39,30 @@
 		}
 	}
 	</script>
-	<div class="wrapAll client">
-		
-		<form action="/travelMaker/mem/myModiNickPro.tm" id="nickForm" name="nickForm" onsubmit="return check()" method="post">
-			<input type="hidden" name="id" value="${mem.id}"/>
-			<input type="text" name="crNick" value="현재닉네임: ${mem.nickname}" readonly/> <br/>
-			<input type="text" name="nickname" id="nickname"  placeholder="새로운 닉네임" /> <br/>
-			<input type="text" id="nickChRes" name="nickChRes" placeholder="닉네임 사용가능 여부" /> <br/>
-			<input type="submit" value="닉네임 수정" />
-		</form>
-	</div>
+		<div class="travelPWrap">
+			<div class="travelWrap">
+				<div class="travelHead">
+					<h1>TravelMaker</h1>
+				</div>
+				<div class="tArticle">
+					<h2 class="titMain">새로 설정할 닉네임을 입력하세요</h2>
+					<p class="descMain">중복 확인 후 닉네임을 정해보세요 </p>
+						<div class="formArea">	
+							<form action="/travelMaker/mem/myModiNickPro.tm" id="nickForm" name="nickForm" onsubmit="return check()" method="post">
+									<input type="hidden" name="id" value="${mem.id}"/>
+								<div class="itemTf">
+									<strong class="tf_required">현재 닉네임</strong>
+									<input type="text" name="crNick" value="${mem.nickname}" readonly/> <br/>
+									<strong class="tf_required">새로운 닉네임</strong>
+									<input type="text" name="nickname" id="nickname"  placeholder="새로운 닉네임" /> <br/>
+									<input type="text" id="nickChRes" name="nickChRes" placeholder="닉네임 사용가능 여부" /> <br/>
+								</div>	
+								<button type="submit" class="subBtn">닉네임 수정</button>
+							</form>
+							</div>	
+				</div>			
+			</div>
+		</div>
 	<!-- //wrapAll end -->
 	
 <jsp:include page="/WEB-INF/views/include/footer.jsp" />

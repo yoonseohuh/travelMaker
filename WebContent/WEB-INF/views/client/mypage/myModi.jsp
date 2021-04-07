@@ -9,7 +9,7 @@
 				alert('로그인 후 이용해주세요.')
 				history.go(-1)
 			</script>
-		</c:if>
+	</c:if>
 	<div class="wrapAll client">
 		<jsp:include page="/WEB-INF/views/include/myMenu.jsp" />
 		<!-- myMenu end -->
