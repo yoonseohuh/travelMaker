@@ -129,6 +129,7 @@ public class LandmarkController {
 		System.out.println(lNo);
 		return "redirect:/myLand.tm";
 	}
+	
 	@ResponseBody
 	@RequestMapping("landmarkLiked.tm")
 	public String landmarkLiked(@RequestBody Map<Object, Object> map) throws Exception {
@@ -137,16 +138,8 @@ public class LandmarkController {
 		
 		landmarkService.landmarkLiked(id, lNo);
 		
-		LandmarkBoardDTO result = new LandmarkBoardDTO();
-		List landList = landmarkService.getLands();
-		for(int i = 0; i< landList.size(); i++) {
-			LandmarkBoardDTO dto = (LandmarkBoardDTO)landList.get(i);
-			if(lNo==dto.getlNo()) {
-				result = dto;
-			}
-		}
 		ObjectMapper mapper = new ObjectMapper();
-		String json = mapper.writeValueAsString(result);		
+		String json = mapper.writeValueAsString("좋아요 완료");
 		return json;
 	}
 	
