@@ -379,51 +379,70 @@ public class AdminController {
 		String newName = null;
 		FileInputStream fis = null;
 		FileOutputStream fos = null;
+		SmallPosDTO spdtoEx = memService.getSPosInfo(spdto.getPosNo());
+		//만약에 넘어오는 파일경로가 없으면 이전 경로로 넣어줌.
+		System.out.println("변경된 경로 : "+spdto.getPosRoot());
+		System.out.println("이전경로: "+spdtoEx.getPosRoot());
+		mf = request.getFile("img");
+		String orgName = mf.getOriginalFilename();
+		if(orgName==null||orgName==""||orgName.equals(null)) {
+			spdto.setPosRoot(spdtoEx.getPosRoot());
+		}else {
+			try {
+				
+				//파일 정보 담기.
+				mf = request.getFile("img");
+				System.out.println("mf:" +mf);
+				long size = mf.getSize();
+				System.out.println(size);
+				
+				//이름 중복처리하여 저장시키는 버전.
+				// 오리지널 파일명 가져오기 
+				 orgName = mf.getOriginalFilename();
+					
+						System.out.println("orgName:" + orgName);
+						//이름 나누기 확장자 빼기
+						String imgName = orgName.substring(0, orgName.lastIndexOf('.'));
+						System.out.println("imgName: "+imgName);
+						// 확장자 가져오기
+						String ext = orgName.substring(orgName.lastIndexOf('.'));
+						System.out.println("ext : " + ext);
+						// 시간 추가한 새이름 저장될 이름!
+						long date= System.currentTimeMillis();
+						newName= imgName + date + ext;
+						System.out.println("newName:" + newName);
+						//파일 저장
+						String path = request.getRealPath("/resources/upload"); 
+						System.out.println("path:" + path);
+						String imgPath = path + "\\" + newName;
+						System.out.println("imgPath :" +imgPath);
+						File copyFile = new File(imgPath);
+						mf.transferTo(copyFile);
+						spdto.setPosRoot(newName);
+						
+						//서버 폴더에 저장된 이미지 복사해서 github에 공유하는 workspace에도 넣기
+						fis = new FileInputStream(copyFile);
+						fos = new FileOutputStream(new File("D:\\hun2\\project2\\travelMaker\\tmGallery\\posIcon\\"+newName));
+						int readBuffer = 0;			
+			            byte [] buffer = new byte[(int)copyFile.length()];
+			            System.out.println(copyFile.length());
+			            while((readBuffer = fis.read(buffer))!=-1) {
+			                fos.write(buffer, 0, readBuffer);
+			            }
+			            fis.close();
+			            fos.close();
+					//else
+			}catch(Exception e) {
+				e.printStackTrace();
+			}//try
+		}//else
+			/*
+			 * if(orgName==null || orgName=="" || orgName.equals(null)) {
+						spdto.setPosRoot(spdtoEx.getPosRoot());
+						System.out.println("root: "+spdto.getPosRoot());
+					}else {
+			 */
 		
-		try {
-			
-			//파일 정보 담기.
-			mf = request.getFile("img");
-			long size = mf.getSize();
-			System.out.println(size);
-			
-			//이름 중복처리하여 저장시키는 버전.
-			// 오리지널 파일명 가져오기 
-			String orgName = mf.getOriginalFilename();
-			System.out.println("orgName:" + orgName);
-			//이름 나누기 확장자 빼기
-			String imgName = orgName.substring(0, orgName.lastIndexOf('.'));
-			System.out.println("imgName: "+imgName);
-			// 확장자 가져오기
-			String ext = orgName.substring(orgName.lastIndexOf('.'));
-			System.out.println("ext : " + ext);
-			// 시간 추가한 새이름 저장될 이름!
-			long date= System.currentTimeMillis();
-			newName= imgName + date + ext;
-			System.out.println("newName:" + newName);
-			//파일 저장
-			String path = request.getRealPath("/resources/upload"); 
-			System.out.println("path:" + path);
-			String imgPath = path + "\\" + newName;
-			System.out.println("imgPath :" +imgPath);
-			File copyFile = new File(imgPath);
-			mf.transferTo(copyFile);
-			spdto.setPosRoot(newName);
-			
-			//서버 폴더에 저장된 이미지 복사해서 github에 공유하는 workspace에도 넣기
-			fis = new FileInputStream(copyFile);
-			fos = new FileOutputStream(new File("D:\\hun2\\project2\\travelMaker\\tmGallery\\posIcon\\"+newName));
-			int readBuffer = 0;			
-            byte [] buffer = new byte[(int)copyFile.length()];
-            System.out.println(copyFile.length());
-            while((readBuffer = fis.read(buffer))!=-1) {
-                fos.write(buffer, 0, readBuffer);
-            }
-            fis.close();
-            fos.close();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
 		//포지션 update 하는 메서드 
 		memService.updatePos(spdto);
 		return "redirect:posList.tm";

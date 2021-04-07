@@ -3,11 +3,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
 
-	<jsp:include page="/WEB-INF/views/include/top.jsp" />
-	<!-- //top end -->
+	<jsp:include page="/WEB-INF/views/include/adminMenu.jsp" />
+	<!-- //adminMenu end -->
 	
-	<div class="wrapAll">
+	<div class="wrapAll admin">
 		<h1>회원 관리</h1>
+		<br/><br/>
 		<!-- 가입된 회원이 없을 때  -->
 		<c:if test="${count==0 || count==null}">
 			<table>
@@ -56,7 +57,7 @@
 			</c:forEach>
 			</table>
 			<!-- 페이지 설정 -->
-			<c:set var="pageBlock" value="2"/>
+			<c:set var="pageBlock" value="5"/>
 			<!-- 총 몇페이지인지 계산 -->
 			<fmt:parseNumber var="res" value="${count/pageSize}" integerOnly="true" />
 			<c:set var="pageCount" value="${res+(count%pageSize==0 ? 0 : 1)}"/>

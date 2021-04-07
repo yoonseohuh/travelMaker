@@ -2,10 +2,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
-	<jsp:include page="/WEB-INF/views/include/top.jsp" />
-	<!-- //top end -->
+
+	<jsp:include page="/WEB-INF/views/include/adminMenu.jsp" />
+	<!-- //adminMenu end -->
 	
-	<div class="wrapAll">
+	<div class="wrapAll admin">
 		<form action="/travelMaker/admin/modifyProRk.tm" method="post">
 			<input type="hidden" name="rkNo" value="${rdto.rkNo}" />
 			<table>
@@ -17,7 +18,7 @@
 				</tr>
 				<tr>
 					<td><input type="text" name="rkName" value="${rdto.rkName}"/></td>
-					<td><input type="text" name="rkNeed" value="${rdto.rkNeed}"/></td>
+					<td><input type="number" name="rkNeed" value="${rdto.rkNeed}" min="1" /></td>
 					<td><input type="text" name="rkExpl" value="${rdto.rkExpl}"/></td>
 					<td><input type="text" name="rkAddExpl" value="${rdto.rkAddExpl}"/></td>
 				</tr>
@@ -27,7 +28,6 @@
 			</div>
 		</form>
 	</div>
-	<!-- //wrapAll end -->
+	<!-- //wrapAll admin end -->
 	
-	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
-	<!-- //footer end -->
+
