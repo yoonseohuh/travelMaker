@@ -14,6 +14,9 @@
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dbb3c6ebdae00379cc812a1240d45848&libraries=services,clusterer,drawing"></script>
 	<script>
 		$(document).ready(function(){
+			//첫 페이지에서 좋아요 버튼 숨겨놓기
+			$('.like').hide();
+			
 			// *** ajax로 랜드마크 DB에서 가져오기 *** 
 			var positions = [];
 			$.ajax({
@@ -86,8 +89,10 @@
 							data: JSON.stringify(data),
 							success: function(res){
 								console.log(res);
+								$('.like').show();
+								$('#lNo').val(res.lNo);
 								$('.content1').html("<h1>"+res.lName+"</h1><h2>"+res.writer+"님의 랜드마크</h2></br></br>");
-								$('.content2').html("<h3>"+res.lType+"&nbsp;"+res.addr+"</h3></br></br>");
+								$('.content2').html("<h3>"+res.lType+"&nbsp;&nbsp;&nbsp;&nbsp;"+res.addr+"</h3></br></br>");
 								$('.content3').html("<h3>"+res.lCont+"</h3>");
 							}
 						});
@@ -108,6 +113,28 @@
 					});		*/
 				}//for
 			}//markers
+			
+			$('likeBtn').submit(function(event){
+				event.preventDefault();
+				var data = {};
+				$.each($(this).serializeArray(), function(index, i){
+					data[i.name] = i.value;
+				});
+				$.ajax({
+					url: "/travelMaker/land/landmarkLiked.tm",
+					type: "POST",
+					dataType: "json",
+					cache: false,
+					contentType: "application/json",
+					data: JSON.stringify(data),
+					success: function(res){
+						var currentLocation = window.location;
+						alert("좋아요 완료");
+					//	$('#applicants').load(currentLocation + ' #applicants');	//신청자 목록 load
+					}
+				});
+			});//like
+			
 		});//ready
 		
 		</script>
@@ -116,8 +143,13 @@
 	<div class="content1"></div>
 	<div class="content2"></div>
 	<div class="content3"></div>
-	
-	
+	<div class="like">
+		<form class="likeBtn">
+			<input type="hidden" name="lNo"/>
+			<input type="hidden" name="id" value="${sessionScope.memId}"/>
+			<input type="submit" value="좋아요"/>
+		</form>
+	</div>
 </div>
 <!-- //wrapAll end -->
 

@@ -4,7 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="landmarkBoard">
-	<!-- 시퀀스는 대문자로 써야 들어가진다 -->
 	<insert id="insertLand" parameterType="LandmarkBoardDTO">
 		insert into LANDMARKBOARD values(LANDMARKBOARD_SEQ.nextVal,#{writer},#{lName},#{lType},#{addr},#{xLoc},#{yLoc},#{lCont},#{lOpen},0,sysdate)
 	</insert>
