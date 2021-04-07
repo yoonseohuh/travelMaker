@@ -34,7 +34,7 @@ public class MypageController {
 	private TravelService travelService = null;
 	@Autowired
 	private MemberService memberService = null;
-		
+	
 	//마이페이지 홈
 	@RequestMapping("myPage.tm")
 	public String index(Model model) {

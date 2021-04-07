@@ -1,6 +1,7 @@
 package travelMaker.controller.bean;
 
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -49,12 +50,33 @@ public class LandmarkController {
 	}
 	
 	// 랜드마크 클릭 시 랜드마크 가져오기
+	@ResponseBody
 	@RequestMapping("landmarkCont.tm")
-	public String landmarkCont(int lNo, Model model) throws Exception {
-		 LandmarkBoardDTO land =  landmarkService.getLand(lNo);
-		 System.out.println(land);
-		 model.addAttribute("land", land);
-		return "client/landmark/landmarkCont";
+	public Map landmarkCont(@RequestBody Map<Object, Object> map) throws Exception {
+		String lName = (String)map.get("lName");
+		List land = landmarkService.getLands();
+		int lNo = -1;
+		for(int i=0 ; i<land.size() ; i++) {
+			LandmarkBoardDTO lm = (LandmarkBoardDTO)land.get(i);
+			if(lName.equals(lm.getlName())) {
+				lNo = lm.getlNo();
+			}
+		}
+		System.out.println(lNo);
+		LandmarkBoardDTO cont = landmarkService.getLand(lNo);
+		Map resMap = new HashMap();
+		resMap.put("lNo",cont.getlNo());
+		resMap.put("writer",cont.getWriter());
+		resMap.put("lName",cont.getlName());
+		resMap.put("lType",cont.getlType());
+		resMap.put("addr",cont.getAddr());
+		resMap.put("xLoc",cont.getxLoc());
+		resMap.put("yLoc",cont.getyLoc());
+		resMap.put("lCont",cont.getlCont());
+		resMap.put("lOpen",cont.getlOpen());
+		resMap.put("likedCnt",cont.getLikedCnt());		
+		resMap.put("reg",cont.getReg());
+		return resMap;
 	}
 
 	
