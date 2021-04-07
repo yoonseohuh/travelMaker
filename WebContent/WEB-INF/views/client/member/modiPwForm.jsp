@@ -5,7 +5,7 @@
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
 	<!-- //top end -->
 	<script>
-		//ajax
+		/* //ajax
 		$(document).ready(function(){
 			$("#pw").change(function(){
 				event.preventDefault();
@@ -27,14 +27,12 @@
 					}
 				});
 			});			
-		});
+		}); */
 		//유효성 검사 
 		function check(){
 			var inputs = document.modiPwForm;
-			if(inputs.pwExRes.value != "사용가능" ){
-				alert("이전과 다른 비밀번호를 입력해주세요");
-				return false;
-			}else if(!inputs.pw.value){
+			console.log(inputs);
+			if(!inputs.pw.value){
 				alert("새 비밀번호를 입력하세요");
 				return false;
 			}else if(!inputs.pwch.value){
@@ -47,26 +45,37 @@
 		}
 	</script>
 	
-	<div class="wrapAll client">
 		<c:if test="${result!=1}">
 			<script>
 				alert('아이디 혹은 email이 틀렸습니다');
 				history.go(-1);
 			</script>
 		</c:if> 
-		<h1>비밀번호 재설정</h1>
 		<c:if test="${result==1}">
-			<form action="/travelMaker/mem/modiPwPro.tm" name="modiPwForm" id="modiPwForm" onsubmit="return check()" method="post">
-				<input type="hidden" name="id" value="${mem.id}"/>
-				<input type="password" name="pw" id="pw" placeholder="새 비밀번호" /><br/>
-				<input type="text" name="pwExRes" id="pwExRes" disabled/><br/>
-				<input type="password" name="pwch" placeholder="새 비밀번호 확인" /><br/>
-				<input type="submit" value="비밀번호 수정"/>
-				<input type="button" value="뒤로가기" onclick="history.go(-1)"/>
-			</form>
+			<div class="travelPWrap">
+				<div class="travelWrap">
+					<div class="travelHead">
+						<h1>TravelMaker</h1>
+					</div>
+					<div class="tArticle">
+						<h2 class="titMain">비밀번호를 재설정합니다.</h2>
+						<p class="descMain">새로운 비밀번호를 입력해주세요</p>
+							<div class="formArea">
+								<form action="/travelMaker/mem/modiPwPro.tm" name="modiPwForm" id="modiPwForm" onsubmit="return check()" method="post">
+									<div class="itemTf">
+										<strong class="tf_required">비밀번호</strong>
+											<input type="hidden" name="id" value="${mem.id}"/>
+											<input type="password" name="pw" id="pw" placeholder="비밀번호" /><br/>
+										<strong class="tf_required">비밀번호 확인</strong>	
+											<input type="password" name="pwch" placeholder="비밀번호 확인" /><br/>
+									</div>		
+									<button type="submit" class="subBtn">비밀번호 재설정</button>
+									<!-- <input type="button" value="뒤로가기" onclick="history.go(-1)"/> -->
+								</form>
+							</div>	
+				</div>
+			</div>
+		</div>
 		</c:if>
-	</div>
-	<!-- //wrapAll end -->
-	
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	<!-- //footer end -->

@@ -27,7 +27,7 @@ public class SharedServiceImpl implements SharedService {
 		int endRow = currPage * pageSize;
 		
 		List articleList = null;
-		
+		System.out.println(1);
 		int count = sharedDAO.getArticleCount();
 		if(count > 0) {
 			articleList = sharedDAO.getArticles(startRow, endRow);

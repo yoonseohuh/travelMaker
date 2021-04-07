@@ -8,7 +8,7 @@
 				<h1>TravelMaker</h1>
 			</div>
 			<div class="tArticle">
-				<h2 class="titMain">비밀번호를 재설정합니다.</h2>
+				<h2 class="titMain">비밀번호를 재설정에 필요한 정보 입력</h2>
 				<p class="descMain">비밀번호를 재설정할 아이디와 
 				<br/>
 				이메일을 입력해 주세요.
@@ -21,7 +21,7 @@
 								<strong class="tf_required">이메일</strong>	
 								<input type="text" name="email" placeholder="등록된 이메일"/>	
 							</div>	
-							<button type="submit" class="subBtn">비밀번호 재설정</button>
+							<button type="submit" class="subBtn">비밀번호 재설정 이동</button>
 						</form>	 
 					</div>	
 			</div>

@@ -4,7 +4,12 @@
 
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
 	<!-- //top end -->
-	
+	<c:if test="${sessionScope.memId == null}">
+			<script>
+				alert('로그인 후 이용해주세요.')
+				history.go(-1)
+			</script>
+		</c:if>
 	<div class="wrapAll client">
 		<jsp:include page="/WEB-INF/views/include/myMenu.jsp" />
 		<!-- myMenu end -->
@@ -14,30 +19,49 @@
 				<h3 class="titModi">내정보 관리</h3>
 				<div class="wrapModi">
 					<div class="boxManage">
-						<strong class="titMain">기본정보</strong>
+						<strong class="titManage">기본정보</strong>
 						<p class="descComm">트레블메이커에 등록된 회원님의 기본정보입니다.</p>
 						<div class="boxSet">
 							<strong class="titSet">이름</strong>
 							<span class="txtSet">${mem.name}</span>
 						</div>
-						생년월일${mem.birth}
-						성별
-						<c:if test="${mem.gender==0}">
-							남자
-						</c:if>
-						<c:if test="${mem.gender==1}">
-							여자
-						</c:if>
+						<div class="boxSet">
+							<strong class="titSet">생년월일</strong>
+							<span class="txtSet">${mem.birth}</span>
+						</div>
+						<div class="boxSet">
+							<strong class="titSet">성별</strong>
+							<c:if test="${mem.gender==0}">
+								<span class="txtSet">남자</span>
+							</c:if>
+							<c:if test="${mem.gender==1}">
+								<span class="txtSet">여자</span>
+							</c:if>
+						</div>
 					</div>
 					<div class="boxManage">
-						아이디 ${mem.id}
-						닉네임${mem.nickname}
-						email${mem.email}
-						<input type="button" value="닉네임 수정" onclick="window.location='/travelMaker/mem/myModiNick.tm?id=${mem.id}&nickname=${mem.nickname}'"/>
-						<input type="button" value="비밀번호 수정" onclick="window.location='/travelMaker/mem/myModiPwForm.tm?id=${mem.id}&pw=${mem.pw}'"/>
+						<strong class="titManage">로그인정보</strong>
+						<p class="descComm">트레블메이커에 로그인에 사용되는 아이디,닉네임,email입니다.</p>
+						<div class="boxSet">
+							<strong class="titSet">아이디</strong>
+							<span class="txtSet">${mem.id}</span>
+						</div>
+						<div class="boxSet">
+							<strong class="titSet">email</strong>
+							<span class="txtSet">${mem.email}</span>
+						</div>
+						<a href="myModiNick.tm?id=${mem.id}&nickname=${mem.nickname}" class="linkSet">
+							<strong class="titSet">닉네임</strong>
+							<span class="txtSet">${mem.nickname} ></span>
+						</a>
+						<a href="myModiPwForm.tm?id=${mem.id}&pw=${mem.pw}" class="linkSet">
+							<strong class="titSet">비밀번호</strong>
+							<span class="txtSet">비밀번호 수정 ></span>
+						</a>
+						 
 					</div>
 					<div class="boxManage">
-						<input type="button" value="회원 탈퇴" onclick="window.location='/travelMaker/mem/myDelete.tm?id=${mem.id}'"/>
+						<input type="button" class="deleBtn" value="회원 탈퇴" onclick="window.location='/travelMaker/mem/myDelete.tm?id=${mem.id}'"/>
 					</div>
 				</div>
 			</div>

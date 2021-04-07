@@ -174,6 +174,27 @@ public class MemberController {
 		return "client/mypage/myModiNickForm";
 	}
 	
+	//닉네임 수정 시 중복 확인 
+	@ResponseBody
+	@RequestMapping("ajaxModiNick.tm")
+	public String ajaxModiNick(@RequestBody Map<Object,Object> map) throws Exception {
+		String result = "";
+		String nickname = (String)map.get("nickname");
+		System.out.println(nickname);
+		//id와 newPw 넘겨주면 pw랑 맞는지 확인 !
+		int check = memService.nickCheck(nickname);	//1이면 이미 존재, 0이면 존재 X
+		System.out.println(check);
+		if(check == 1) {
+			result = "이미 존재하는 닉네임 입니다.";
+		}else {
+			result = "사용가능";
+		}
+		ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.writeValueAsString(result);
+		
+		return  json;
+	}
+	
 	//닉네임 수정 Pro
 	//nickname 받아서 db에서 update하는 작업
 	@RequestMapping("myModiNickPro")
