@@ -23,8 +23,8 @@ public class LandmarkBoardDAOImpl implements LandmarkBoardDAO{
 	
 	@Override
 	public List getLands() throws Exception {
-		List land =  sqlSession.selectList("landmarkBoard.getLands");
-		return land;
+		List landList =  sqlSession.selectList("landmarkBoard.getLands");
+		return landList;
 	}
 
 	@Override

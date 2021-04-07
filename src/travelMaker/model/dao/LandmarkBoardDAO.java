@@ -21,7 +21,7 @@ public interface LandmarkBoardDAO {
 	public void deletemyLand(String id) throws Exception;
 	// 랜드마크 좋아요 하나 올려주기
 	public void landmarkLikedCnt(int lNo, int ud) throws Exception;
-
+	
 
 
 }

@@ -31,8 +31,8 @@ public class LandmarkServiceImpl implements LandmarkService{
 	
 	@Override	
 	public List getLands() throws Exception{
-		List land = landmarkBoardDAO.getLands();
-		return land;
+		List landList = landmarkBoardDAO.getLands();
+		return landList;
 	}
 	
 	@Override
@@ -54,6 +54,7 @@ public class LandmarkServiceImpl implements LandmarkService{
 		
 	}
 	
+	// 내 마이랜드 삭제
 	@Override
 	public void deleteMyLand(String id) throws Exception{
 		landmarkBoardDAO.deletemyLand(id);

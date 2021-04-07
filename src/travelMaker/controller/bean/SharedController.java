@@ -34,9 +34,10 @@ public class SharedController {
 	}
 	
 	public String completedCont(int num, String pageNum, Model model) throws Exception{
-		GroupSpaceDTO shared = sharedService.getArticle(num);
-		model.addAttribute("shared", shared);
+		GroupSpaceDTO article = sharedService.getArticle(num);
+		model.addAttribute("article", article);
 		model.addAttribute("pageNum", pageNum);
+		
 		
 		return "shared/completedCont";
 	}

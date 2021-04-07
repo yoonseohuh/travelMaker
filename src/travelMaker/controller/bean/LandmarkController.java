@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import travelMaker.model.dto.LandmarkBoardDTO;
 import travelMaker.service.bean.LandmarkService;
 
@@ -58,7 +60,7 @@ public class LandmarkController {
 	
 	// 랜드마크 작성 페이지
 	@RequestMapping("landWrite.tm")
-	public String landWriteForm(LandmarkBoardDTO dto) {
+	public String landWriteForm(LandmarkBoardDTO dto) throws Exception{
 		
 		return "client/landmark/landWriteForm";
 	}
@@ -73,14 +75,19 @@ public class LandmarkController {
 	
 	//나의 랜드마크
 	@RequestMapping("myLand.tm")
-	public String myLand(HttpSession session, Model model) throws Exception {
+	public String myLand(HttpSession session, int lNo, Model model) throws Exception {
 		// 구면인데 초면 같으신 분
 		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
 		//내가 작성한 랜마
 		List myLand = landmarkService.myLand(id);
 		model.addAttribute("memId", id);
 		model.addAttribute("myLand", myLand);
+		
 		//내가 좋아요한 랜드마크
+		List myLandLiked = landmarkService.myLandLiked(id, lNo);
+		model.addAttribute("memId", id);
+		model.addAttribute("lNo", lNo);
+		model.addAttribute("myLandLiked", myLandLiked);
 		
 		return "client/mypage/myLand";
 	}
@@ -108,10 +115,17 @@ public class LandmarkController {
 		
 		landmarkService.landmarkLiked(id, lNo);
 		
-		LandmarkBoardDTO dto = new LandmarkBoardDTO();
-		
-				
-		return null;
+		LandmarkBoardDTO result = new LandmarkBoardDTO();
+		List landList = landmarkService.getLands();
+		for(int i = 0; i< landList.size(); i++) {
+			LandmarkBoardDTO dto = (LandmarkBoardDTO)landList.get(i);
+			if(lNo==dto.getlNo()) {
+				result = dto;
+			}
+		}
+		ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.writeValueAsString(result);		
+		return json;
 	}
 	
 	
