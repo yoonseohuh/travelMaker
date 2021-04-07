@@ -59,7 +59,7 @@
 								</tr>
 							</c:if>
 							<c:if test="${empty gList.pRoot}">
-								<h1>게시된 사진이 없습니다.</h1>
+								<h1>게시된 사진이 없습니다.</h1> 
 							</c:if>
 						</c:forEach>
 					</table>
