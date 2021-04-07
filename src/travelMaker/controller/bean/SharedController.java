@@ -1,5 +1,7 @@
 package travelMaker.controller.bean;
 
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;	
 
@@ -8,8 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import travelMaker.model.dto.GroupRequestDTO;
 import travelMaker.model.dto.GroupSpaceDTO;
-import travelMaker.service.bean.MemberService;
 import travelMaker.service.bean.SharedService;
 import travelMaker.service.bean.TravelService;
 
@@ -19,8 +21,9 @@ public class SharedController {
 	
 	@Autowired
 	private SharedService sharedService = null;
+	@Autowired
+	private TravelService travelService = null;
 	
-
 	@RequestMapping("sharedList.tm")
 	public String sharedList(String pageNum, Model model) throws Exception {
 		Map result = sharedService.getArtilces(pageNum);
@@ -41,13 +44,25 @@ public class SharedController {
 	@RequestMapping("completedCont.tm")
 	public String completedCont(int gNo, String pageNum, Model model) throws Exception{
 		GroupSpaceDTO article =sharedService.getArticle(gNo);
+		List scheList = travelService.getSchedule(gNo);
+		List grpReq = travelService.getRequests(gNo);
+		List gMem = travelService.getMembers(gNo);
+		List gList = travelService.getGroupImgs(gNo);
+		
+		
 		
 		model.addAttribute("gNo", gNo);
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("article", article);
-		
+		model.addAttribute("schedules", scheList);
+		model.addAttribute("grpReq", grpReq);
+		model.addAttribute("gMem", gMem);
+		model.addAttribute("gList", gList);
+		//System.out.println(scheList);
 		//System.out.println(article);
 		//System.out.println("컨트롤러도왔니?");
+		
+		
 		
 		return "client/shared/completedCont";
 	}
