@@ -1,18 +1,18 @@
 package travelMaker.model.dao;
 
-import java.sql.SQLException;	
-import travelMaker.model.dto.LandmarkBoardDTO;
+import java.util.List;
 
 public interface LandmarkLikedDAO {
 
-	// 랜드마크 좋아요 
-	public void insertLandLiked() throws Exception;
-	// 랜드마크 좋아요 수 올려주기
-	public void addLikedCnt() throws SQLException;
-	// 내가 좋아요 한 랜드마크
-	public void myLandLiked(String id) throws SQLException;
+	// 랜드마크 좋아요
+	public void landmarkLiked(String id, int lNo) throws Exception;
+	// 랜드마크 좋아요 1번만 할 수 있게
+	public int likedCheck(String id, int lNo) throws Exception;
+	// 랜드마크 좋아요 취소
+	public void landmarkLikedCancel(String id, int lNo) throws Exception;
+	// 내가 좋아요 한 랜드마크 
+	public List myLandLiked(String id, int lNo) throws Exception;	
 
-	
 	
 	
 }

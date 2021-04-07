@@ -44,7 +44,7 @@ public interface TravelService {
 	//그룹에 들어온 신청 목록들 가져오기
 	public List getRequests(int gNo) throws Exception;
 	//신청 수락 및 거절 처리
-	public void acceptOrReject(String id, int gNo, int status) throws Exception;
+	public boolean acceptOrReject(String id, int gNo, int status) throws Exception;
 	//갤러리 이미지 업로드
 	public void uploadImage(GalleryDTO dto) throws Exception;
 	//그룹 갤러리 이미지들 가져오기
@@ -78,6 +78,8 @@ public interface TravelService {
 	public int groupAllCnt();
 	// jbr 그룹관리 : 검색 결과 개수
 	public int searchGroupCtn(String sel, String search);
+	//jbr gNo에 해당하는 그룹스페이스 가져오기
+	public GroupSpaceDTO getGroup(int gNo);
 	
 	//채팅 입력
 	public void sendChat(int gNo, String writer, String cont) throws Exception;
@@ -87,6 +89,7 @@ public interface TravelService {
 	public ChattingDTO getLastChat(int gNo) throws Exception;
 	//그룹 여행 상태 변경
 	public void changeGrpStatus(int gNo, int status) throws Exception;
-
+	//모든 그룹 글 가져오기
+	public List getAllGroups() throws Exception;
 	
 }

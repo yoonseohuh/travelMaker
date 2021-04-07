@@ -150,4 +150,14 @@
 	<select id="nickCheck" parameterType="string" resultType="int">
 		select count(*) from tmUser where nickname=#{nickname}
 	</select>
+	
+	<select id="getAllMembers" resultType="TmUserDTO">
+		select * from tmUser
+	</select>
+	
+	<select id="getUserRanking" parameterType="string" resultType="int">
+		select a from (select id, rank() over (order by travelCnt desc) a from tmUser) where id=#{value}
+	</select>
+	
+	
 </mapper>

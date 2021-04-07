@@ -26,13 +26,12 @@ public class SharedDAOImpl  implements SharedDAO{
 		
 		return sharedList;
 	}
-
+	
 	@Override
 	public int getArticleCount() {
 		System.out.println(2);
 		int count = sqlSession.selectOne("shared.getAllCount");
-		System.out.println(3);
-		
+
 		return count;
 	}
 	

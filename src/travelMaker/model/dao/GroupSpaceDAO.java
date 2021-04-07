@@ -32,8 +32,13 @@ public interface GroupSpaceDAO {
 	public int searchGroupCtn(String sel, String search);
 	//jbr 검색결과 리스트 가져오기
 	public List searchGroupList(String sel, String search);
+	//jbr gNo에 해당하는 그룹스페이스 가져오기
+	public GroupSpaceDTO getGroup(int gNo);
+	
+	
 
 	//그룹 상태 변경
 	public void changeGrpStatus(int gNo, int status) throws Exception;
-	
+	//모든 그룹 글 가져오기
+	public List getAllGroups() throws Exception;
 }

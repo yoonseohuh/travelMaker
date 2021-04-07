@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
 	
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
@@ -71,35 +72,42 @@
 		<h1>${grp.subject} 그룹 갤러리</h1>
 		
 		<ul class="gallery">
-			<c:forEach items="${finList}" var="list">
-				<li>
-					<c:if test="${list.isLiked==1}">
-						<form class="likedCancel" method="post">
-							<input type="hidden" value="${sessionScope.memId}" name="id"/>
-							<input type="hidden" value="${list.gNo}" name="gNo"/>
-							<input type="hidden" value="${list.pNo}" name="pNo"/>
-							${list.writer}님의 사진
-							<img src="/travelMaker/save/${list.pRoot}" width="500"/>
-							<br/>
-							좋아요 <b class="cnt">${list.likedCnt}</b> 개
-							<input type="image" src="../resources/images/heart-colored.png" width="12" alt="좋아요취소"/>
-						</form>
-					</c:if>					
-					<c:if test="${list.isLiked==0}">
-						<form class="liked" method="post">
-							<input type="hidden" value="${sessionScope.memId}" name="id"/>
-							<input type="hidden" value="${list.gNo}" name="gNo"/>
-							<input type="hidden" value="${list.pNo}" name="pNo"/>
-							${list.writer}님의 사진
-							<img src="/travelMaker/save/${list.pRoot}" width="500"/>
-							<br/>
-							좋아요 <b class="cnt">${list.likedCnt}</b> 개
-							<input type="image" src="../resources/images/heart-empty.png" width="12" alt="좋아요"/>
-						</form>
-					</c:if>
-				</li>
-			</c:forEach>
+			<c:if test="${fn:length(finList)==0}">
+				<br/>
+				<h2>아직 등록된 사진이 없습니다.</h2>
+			</c:if>
+			<c:if test="${fn:length(finList)>0}">
+				<c:forEach items="${finList}" var="list">
+					<li>
+						<c:if test="${list.isLiked==1}">
+							<form class="likedCancel" method="post">
+								<input type="hidden" value="${sessionScope.memId}" name="id"/>
+								<input type="hidden" value="${list.gNo}" name="gNo"/>
+								<input type="hidden" value="${list.pNo}" name="pNo"/>
+								${list.writer}님의 사진
+								<img src="/travelMaker/save/${list.pRoot}" width="500"/>
+								<br/>
+								좋아요 <b class="cnt">${list.likedCnt}</b> 개
+								<input type="image" src="../resources/images/heart-colored.png" width="12" alt="좋아요취소"/>
+							</form>
+						</c:if>					
+						<c:if test="${list.isLiked==0}">
+							<form class="liked" method="post">
+								<input type="hidden" value="${sessionScope.memId}" name="id"/>
+								<input type="hidden" value="${list.gNo}" name="gNo"/>
+								<input type="hidden" value="${list.pNo}" name="pNo"/>
+								${list.writer}님의 사진
+								<img src="/travelMaker/save/${list.pRoot}" width="500"/>
+								<br/>
+								좋아요 <b class="cnt">${list.likedCnt}</b> 개
+								<input type="image" src="../resources/images/heart-empty.png" width="12" alt="좋아요"/>
+							</form>
+						</c:if>
+					</li>
+				</c:forEach>
+			</c:if>
 		</ul>
+		<button onclick="window.location='/travelMaker/travel/groupSpace.tm?gNo=${grp.gNo}'">그룹 방으로 이동</button>
 		
 	</div>
 	<!-- //wrapAll end -->

@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
+import travelMaker.model.dto.GroupMemberDTO;
 import travelMaker.model.dto.GroupSpaceDTO;
 import travelMaker.model.dto.TmUserDTO;
 import travelMaker.model.dto.UserCmtDTO;
 import travelMaker.service.bean.CommentService;
+import travelMaker.service.bean.TravelService;
 
 @Controller
 @RequestMapping("/cmt/")
@@ -25,6 +27,35 @@ public class CommentController {
 	
 	@Autowired
 	private CommentService commentService = null;
+	@Autowired
+	private TravelService travelService = null;
+	
+	
+	//에이작스테스트
+	@RequestMapping("testComment.tm")
+	public String testComment(Model model) throws SQLException {
+		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
+		List<GroupSpaceDTO> gList = commentService.getMyGroup(id);
+		for(int i=0 ; i<gList.size() ; i++) {
+			System.out.print(gList.get(i).getSubject()+"/");
+		}
+		
+		//여행목록 가져옴
+				List dtoList = commentService.getMyGroup(id);
+				
+				//그룹멤버들dto로 가져옴
+				List fin = commentService.groupUser(id);
+		System.out.println("디티오 리스트" + dtoList);
+		System.out.println("fin 리스트" + fin);
+		
+		//travelService.getMembers(gNo)
+		model.addAttribute("dtoList", dtoList);
+		model.addAttribute("fin", fin);
+		model.addAttribute("gList",gList);
+		return "client/mypage/testComment";
+	}
+	
+	
 	
 	//코멘트 조회 페이지
 	@RequestMapping("comment.tm")

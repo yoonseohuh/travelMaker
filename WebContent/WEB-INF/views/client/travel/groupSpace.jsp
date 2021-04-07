@@ -13,7 +13,7 @@
 		<div class="gsLeft">
 			<script>
 			$(document).ready(function(){	
-				$('#accepted').submit(function(event){
+				$('.accepted').submit(function(event){
 					event.preventDefault();
 					var data = {};
 					$.each($(this).serializeArray(), function(index, i){
@@ -23,18 +23,26 @@
 						url: "/travelMaker/travel/accepted.tm",
 						type: "POST",
 						dataType: "json",
+						cache: false,
 						contentType: "application/json",
 						data: JSON.stringify(data),
 						success: function(res){
 							var currentLocation = window.location;
-							alert("수락이 완료되었습니다");
-							$('#applicants').load(currentLocation + ' #applicants');	//신청자 목록 load
-							$('#ingMem').load(currentLocation + ' #ingMem');			//참여 중인 멤버 목록 load
-							$('#ingPos').load(currentLocation + ' #ingPos');			//참여 중인 포지션 목록 load
+							var result = JSON.parse(res);
+							if(result==true){
+								alert("수락이 완료되었습니다");
+								$('#applicants').load(currentLocation + ' #applicants');	//신청자 목록 load
+								$('#ingMem').load(currentLocation + ' #ingMem');			//참여 중인 멤버 목록 load
+								$('#ingPos').load(currentLocation + ' #ingPos');			//참여 중인 포지션 목록 load								
+							}
+							if(result==false){
+								alert("모집 마감! 더 이상 멤버를 받을 수 없습니다");								
+								$('#applicants').load(currentLocation + ' #applicants');
+							}
 						}
 					});
 				});
-				$('#rejected').submit(function(event){
+				$('.rejected').submit(function(event){
 					event.preventDefault();
 					var data = {};
 					$.each($(this).serializeArray(), function(index, i){
@@ -44,6 +52,7 @@
 						url: "/travelMaker/travel/rejected.tm",
 						type: "POST",
 						dataType: "json",
+						cache: false,
 						contentType: "application/json",
 						data: JSON.stringify(data),
 						success: function(res){
@@ -198,12 +207,12 @@
 										${req.reqTxt}
 									</td>
 									<td>
-										<form action="#" id="accepted" method="post">
+										<form class="accepted" method="post">
 											<input type="hidden" name="requestId" value="${req.id}"/>
 											<input type="hidden" name="gNo" value="${req.gNo}"/>
 											<input type="submit" value="수락"/>
 										</form>
-										<form action="#" id="rejected" method="post">
+										<form class="rejected" method="post">
 											<input type="hidden" name="requestId" value="${req.id}"/>
 											<input type="hidden" name="gNo" value="${req.gNo}"/>
 											<input type="submit" value="거절"/>
@@ -264,7 +273,12 @@
 						<p class="tit2">모집 현황</p>
 						<div id="ingPos">
 						<c:forEach var="posMem" items="${posMem}">
+						<c:if test="${posMem != null}">
 							<p>${posMem.key} : ${posMem.value}명</p>
+						</c:if>
+						<c:if test="${posMem == null}">
+							<p>냉무</p>
+						</c:if>
 						</c:forEach>
 						</div>
 						<!-- //ingPos end -->

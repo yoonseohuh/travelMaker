@@ -22,6 +22,9 @@
 				<input type="text" name="search" />
 				<input type="submit" value="검색" />
 			</form>
+			<c:if test="${sel != null && search != null }">
+				<button onclick="window.location='/travelMaker/admin/adminGroup.tm'">전체목록</button>
+			</c:if>
 		</div>
 		<!-- //searchBar end -->
 		

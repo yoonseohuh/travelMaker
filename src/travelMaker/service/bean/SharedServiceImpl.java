@@ -18,6 +18,7 @@ public class SharedServiceImpl implements SharedService {
 
 	@Override
 	public Map getArtilces(String pageNum) throws Exception {
+		
 		int pageSize=8;
 		if(pageNum==null || pageNum.equals("")) {
 			pageNum = "1";
@@ -26,11 +27,13 @@ public class SharedServiceImpl implements SharedService {
 		int startRow = (currPage - 1) * pageSize + 1;
 		int endRow = currPage * pageSize;
 		
-		List articleList = null;
-		System.out.println(1);
+
+		List sharedList = null;
+		
+
 		int count = sharedDAO.getArticleCount();
 		if(count > 0) {
-			articleList = sharedDAO.getArticles(startRow, endRow);
+			sharedList = sharedDAO.getArticles(startRow, endRow);
 		}
 		int number = count - (currPage -1) * pageSize;
 		Map result = new HashMap();
@@ -41,7 +44,7 @@ public class SharedServiceImpl implements SharedService {
 		result.put("endRow", endRow);
 		result.put("number", number);
 		result.put("count", count);
-		result.put("articleList", articleList);
+		result.put("articleList", sharedList);
 		result.put("pageNum", pageNum);
 		
 		return result;
@@ -55,6 +58,8 @@ public class SharedServiceImpl implements SharedService {
 		
 		return shared;
 	}
+	
+	
 	
 	
 

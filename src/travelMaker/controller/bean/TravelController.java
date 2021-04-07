@@ -16,6 +16,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,6 +48,56 @@ public class TravelController {
 	private TravelService travelService = null;
 	@Autowired
 	private MemberService memberService = null;
+	
+	//스케줄러: 날짜(마감일/시작일/종료일)에 따른 여행 상태 변경
+	@Scheduled(cron = "0 1 12 * * *")
+	public void groupStatusCheck() throws Exception {
+		System.out.println("매일 오전 12:01에 호출");
+		List list = travelService.getAllGroups();
+		DateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		Date today = sdf.parse(sdf.format(new Date()));
+		for(int i=0 ; i<list.size() ; i++) {
+			GroupSpaceDTO dto = (GroupSpaceDTO)list.get(i);
+		//	1)모든 그룹에 대해 마감일이 되는 시점(closingDate==sysdate)에 해당 그룹의 status==1로 update
+			Date cDate = sdf.parse(dto.getClosingDate());
+			if(cDate.getTime()<=today.getTime()) {
+				travelService.changeGrpStatus(dto.getgNo(), 1);
+			}
+		//	2)모든 그룹에 대해 여행 시작일이 되는 시점(startDate==sysdate)에 해당 그룹의 status==2로 update
+			Date sDate = sdf.parse(dto.getStartDate());
+			if(sDate.getTime()<=today.getTime()) {
+				travelService.changeGrpStatus(dto.getgNo(), 2);
+			}
+		//	3)모든 그룹에 대해 여행 종료일이 되는 시점(endDate==sysdate)에 해당 그룹의 status==3으로 update
+			Date eDate = sdf.parse(dto.getEndDate());
+			if(eDate.getTime()<=today.getTime()) {
+				travelService.changeGrpStatus(dto.getgNo(), 3);
+			}
+		}
+	}
+	
+	//스케줄러: 여행 횟수에 따른 회원 레벨 변경
+	@Scheduled(fixedDelay = 1800000)
+	public void memberRankCheck() throws Exception {
+		Date date = new Date();
+		System.out.println("30분마다 호출"+date);
+		List<TmUserDTO> list = memberService.getAllMembers();
+		for(int i=0 ; i<list.size() ; i++) {
+			TmUserDTO dto = list.get(i);
+			if(dto.getTravelCnt()>=10 && dto.getTravelCnt()<25) {
+				dto.setRk(2);	//트래블러로
+				memberService.updateMember(dto);
+			}
+			if(dto.getTravelCnt()>=25 && dto.getTravelCnt()<50) {
+				dto.setRk(3);	//어드바이저로
+				memberService.updateMember(dto);
+			}
+			if(dto.getTravelCnt()>=50) {
+				dto.setRk(4);	//마스터로
+				memberService.updateMember(dto);				
+			}
+		}
+	}
 	
 	@RequestMapping("makingWrite.tm")
 	public String makingWrite(String pageNum, Model model) {
@@ -144,9 +195,10 @@ public class TravelController {
 		Date sDate = sdf.parse(content.getStartDate());
 		Date eDate = sdf.parse(content.getEndDate());
 		Date cDate = sdf.parse(content.getClosingDate());
-		Date today = new Date();
-		long endStartGap = Math.abs((eDate.getTime()-sDate.getTime())/(24*60*60*1000));
-		long closeTodayGap = Math.abs((cDate.getTime()-today.getTime())/(24*60*60*1000));
+		Date today = sdf.parse(sdf.format(new Date()));
+
+		long endStartGap = (eDate.getTime()-sDate.getTime())/(24*60*60*1000);
+		long closeTodayGap = (cDate.getTime()-today.getTime())/(24*60*60*1000);
 		
 		model.addAttribute("esGap",endStartGap);
 		model.addAttribute("ctGap",closeTodayGap);
@@ -164,7 +216,6 @@ public class TravelController {
 	@RequestMapping("makingDel.tm")
 	public String makingDel(int gNo) throws Exception {
 		travelService.deleteContent(gNo);
-		System.out.println("deldel");
 		return "redirect:makingList.tm";
 	}
 	
@@ -245,7 +296,9 @@ public class TravelController {
 		
 		//joinMem의 posNo를 리스트에 담는다
 		List<Integer> posList = new ArrayList<Integer>();
+		System.out.println("조인멤 for 밖" + joinMem);
 		for(int i = 0; i < joinMem.size(); i++) {
+			System.out.println("조인멤 for 안" + joinMem);
 			posList.add(((GroupRequestDTO)joinMem.get(i)).getPosNo());
 		}
 		
@@ -254,23 +307,29 @@ public class TravelController {
 		posListFin.addAll(posList);
 		posList.clear();
 		posList.addAll(posListFin);
-
 		Map map = new HashMap();
 		Map posMem = new HashMap(); 
 		
-		for(int i = 0; i < posList.size(); i++) { 
-			if(posList.get(i) == -1) {   //포지션에 번호가 -1 이면
-				int nomalCnt = travelService.posCount(gNo,posList.get(i));
-			//	System.out.println("일반 :" + nomalCnt + "명");
-				posMem.put("일반",nomalCnt);
-			}else { //그게아니면
-				SmallPosDTO dto = travelService.getPosInfo(posList.get(i));
-			//	System.out.println(i + "번째 dto : " + dto.getPosName());
-				int posCnt = travelService.posCount(gNo,posList.get(i));
-			//	System.out.println( posList.get(i) + "번 "+ dto.getPosName() + "포지션 :" + posCnt + "명");
-				posMem.put(dto.getPosName(),posCnt);
+		System.out.println("포스리스트" +posList);
+		
+			for(int i = 0; i < posList.size(); i++) { 
+				if(posList.get(i) != null) {
+					if(posList.get(i) == -1) {   //포지션에 번호가 -1 이면
+						int nomalCnt = travelService.posCount(gNo,posList.get(i));
+					//	System.out.println("일반 :" + nomalCnt + "명");
+						posMem.put("일반",nomalCnt);
+					}else { //그게아니면
+						SmallPosDTO dto = travelService.getPosInfo(posList.get(i));
+					//	System.out.println(i + "번째 dto : " + dto.getPosName());
+						int posCnt = travelService.posCount(gNo,posList.get(i));
+					//	System.out.println( posList.get(i) + "번 "+ dto.getPosName() + "포지션 :" + posCnt + "명");
+						posMem.put(dto.getPosName(),posCnt);
+					}
+				}
 			}
-		}
+		
+		
+		
 		//jbr여기까지...
 		
 		//시작일, 종료일, 마감일 DATE 타입으로 변환해서 보내주기
@@ -278,9 +337,9 @@ public class TravelController {
 		Date sDate = sdf.parse(grpSpace.getStartDate());
 		Date eDate = sdf.parse(grpSpace.getEndDate());
 		Date cDate = sdf.parse(grpSpace.getClosingDate());
-		Date today = new Date();
-		long endStartGap = Math.abs((eDate.getTime()-sDate.getTime())/(24*60*60*1000));		//시작일과 종료일 사이의 갭
-		long closeTodayGap = Math.abs((cDate.getTime()-today.getTime())/(24*60*60*1000));	//오늘 날짜와 마감일 사이의 갭
+		Date today = sdf.parse(sdf.format(new Date()));
+		long endStartGap = (eDate.getTime()-sDate.getTime())/(24*60*60*1000);		//시작일과 종료일 사이의 갭
+		long closeTodayGap = (cDate.getTime()-today.getTime())/(24*60*60*1000);		//오늘 날짜와 마감일 사이의 갭
 		model.addAttribute("esGap",endStartGap);
 		model.addAttribute("ctGap",closeTodayGap);
 		
@@ -327,9 +386,9 @@ public class TravelController {
 		System.out.println(requestId);
 		System.out.println(gNo);
 		//gNo에 신청한 ID를 그룹에 참여 처리 && groupSpace테이블에 actualNum +1 처리
-		travelService.acceptOrReject(requestId, gNo, 1);
+		boolean result = travelService.acceptOrReject(requestId, gNo, 1);
 		ObjectMapper mapper = new ObjectMapper();
-		String json = mapper.writeValueAsString(requestId);
+		String json = mapper.writeValueAsString(result);
 		return json;
 	}
 	

@@ -307,20 +307,30 @@ public class TravelServiceImpl implements TravelService{
 	
 	//신청 수락 및 거절 처리
 	@Override
-	public void acceptOrReject(String id, int gNo, int status) throws Exception {
+	public boolean acceptOrReject(String id, int gNo, int status) throws Exception {
+		boolean result = false;
 		//1(수락)이 넘어오면 groupSpace의 actualNum +1 / 2(거절)가 넘어오면 변화 없음 / 3(강퇴)이 넘어오면  actualNum -1
 		if(status==1) {
 			GroupSpaceDTO article = groupSpaceDAO.getContent(gNo);
 			if(article.getActualNum()<article.getMaxNum()) {
 				groupSpaceDAO.updateActNum(gNo,1);
+				groupMemberDAO.changeMemStatus(id,gNo,status);
+				result = true;
+			}else {
+				result = false;
 			}
 		}else if(status==3) {
 			groupSpaceDAO.updateActNum(gNo,-1);
+			groupMemberDAO.changeMemStatus(id,gNo,status);
+			result = true;
+		}else if(status==2) {			
+			groupMemberDAO.changeMemStatus(id,gNo,status);
+			result = true;
 		}
-		groupMemberDAO.changeMemStatus(id,gNo,status);
 		System.out.println(id);
 		System.out.println(gNo);
 		System.out.println(status);
+		return result;
 	}
 	
 	//갤러리 이미지 업로드
@@ -435,7 +445,12 @@ public class TravelServiceImpl implements TravelService{
 	}
 	
 	
-	
+	//jbr gNo에 해당하는 그룹스페이스 가져오기
+	public GroupSpaceDTO getGroup(int gNo) {
+		GroupSpaceDTO getGroup = groupSpaceDAO.getGroup(gNo);
+		
+		return getGroup;
+	}
 	
 	
 	//채팅 입력
@@ -465,4 +480,10 @@ public class TravelServiceImpl implements TravelService{
 		groupSpaceDAO.changeGrpStatus(gNo, status);
 	}
 	
+	//모든 그룹 글 가져오기
+	@Override
+	public List getAllGroups() throws Exception {
+		List list = groupSpaceDAO.getAllGroups();
+		return list;
+	}
 }

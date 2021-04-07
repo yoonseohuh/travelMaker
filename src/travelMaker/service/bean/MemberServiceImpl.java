@@ -408,6 +408,18 @@ public class MemberServiceImpl implements MemberService {
 		return check;
 	}
 	
+	//모든 회원 정보 가져오기
+	@Override
+	public List getAllMembers() {
+		List list = tmuserDAO.getAllMembers();
+		return list;
+	}
 	
+	//전체 회원 중에서 해당 회원 랭킹 가져오기
+	@Override
+	public int getUserRanking(String id) {
+		int ranking = tmuserDAO.getUserRanking(id);
+		return ranking;
+	}
 	
 }
