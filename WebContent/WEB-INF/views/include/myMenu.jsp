@@ -3,7 +3,7 @@
 	<li><a href="/travelMaker/my/myPage.tm">마이홈</a></li>
 	<li><a href="/travelMaker/my/myHistory.tm">여행이력</a></li>
 	<li><a href="/travelMaker/cmt/comment.tm">코멘트 관리</a></li>
-	<li><a href="#">나의 랜드마크</a></li>
+	<li><a href="/travelMaker/my/myLand.tm">나의 랜드마크</a></li>
 	<li><a href="/travelMaker/mem/myModi.tm">내정보 관리</a></li>
 	<li><a href="/travelMaker/my/myQnaReportList.tm">문의 및 신고</a></li>
 </ul>
@@ -14,6 +14,8 @@
 		$('#myMenuWrap').children('li').eq(1).addClass('on');
 	}else if(nowUrl == "/travelMaker/cmt/comment.tm"){
 		$('#myMenuWrap').children('li').eq(2).addClass('on');
+	}else if(nowUrl == "/travelMaker/my/myLand.tm"){
+		$('#myMenuWrap').children('li').eq(3).addClass('on');
 	}else if(nowUrl == "/travelMaker/mem/myModi.tm"){
 		$('#myMenuWrap').children('li').eq(4).addClass('on');
 	}else if(nowUrl == "/travelMaker/my/myQnaReportList.tm" || "/travelMaker/my/myQnaReportWrite.tm"){
