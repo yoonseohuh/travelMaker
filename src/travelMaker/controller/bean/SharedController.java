@@ -50,7 +50,7 @@ public class SharedController {
 		List grpReq = travelService.getRequests(gNo);
 		List gMem = travelService.getMembers(gNo);
 		List gList = travelService.getGroupImgs(gNo);
-
+		
 		
 
 		model.addAttribute("gNo", gNo);
