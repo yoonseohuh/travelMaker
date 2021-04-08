@@ -31,8 +31,9 @@
 						${article.courseExpl}<br />
 					<h4>부가설명</h4> 
 						${article.addExpl} <br />
-					<h4>일 정</h4> <c:forEach var="schedules" items="${schedules}">
-						${schedules.sDate} : ${schedules.sCont} <br />
+					<h4>일 정</h4> 
+					<c:forEach var="schedules" items="${scheList}">
+						${scheList.sDate} : ${scheList.sCont} <br />
 					</c:forEach>
 				</td>
 			</tr>

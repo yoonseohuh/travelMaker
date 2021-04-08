@@ -40,6 +40,25 @@ public class SharedDAOImpl  implements SharedDAO{
 		//System.out.println("dao 넘어왔니?");
 		return article;
 	}
+	// 조회수 메서드
+	@Override
+	public void updateReadCnt(int gNo) {
+		sqlSession.update("shared.updateReadcount", gNo);
+		//System.out.println("조회수 dao 왔니?");
+		
+	}
+
+	@Override
+	public void sharedLiked(int gNo, String id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void sharedlikedCnt(int gNo, int i) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	

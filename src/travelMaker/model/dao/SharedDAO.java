@@ -12,6 +12,14 @@ public interface SharedDAO {
 
 	public GroupSpaceDTO getArticle(int gNo) throws Exception;
 
+	public void updateReadCnt(int gNo);
+
+	public void sharedLiked(int gNo, String id);
+
+	public void sharedlikedCnt(int gNo, int i);
+
+
+
 	
 
 }
