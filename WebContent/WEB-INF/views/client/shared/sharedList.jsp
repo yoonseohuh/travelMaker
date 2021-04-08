@@ -21,12 +21,14 @@
 		<div id="sList">
 			<div id="articleTable">
 				<ul class="makingList">
-					<c:forEach var="article" items="${sharedList}" >
+					<c:forEach var="article" items="${sharedList}" varStatus="status" >
 						<li>
 							<a href="completedCont.tm?gNo=${article.gNo}&pageNum=${pageNum}"></a>
-							<p class="gNo">${gNo}</p>
+							<p class="no">${number}</p>
+							<c:set var="number" value="${number-1}"/>
 							<p class="title">${article.subject}</p>
 							<p class="maker">${article.id}</p>
+							<p class="date">${article.startDate}~${article.endDate}</p>
 						</li>
 					</c:forEach>
 				</ul>
