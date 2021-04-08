@@ -33,10 +33,23 @@ public class LandmarkController {
 	// 랜드마크 페이지
 	@RequestMapping("landmark.tm")
 	public String landmark(Model model) throws Exception{
-		// 고유번호, 작성자, 장소명, 유형, 주소, 소개, 공개범위, x,y값
+		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
+		List<LandmarkLikedDTO> list = landmarkService.myLandLiked(id);
+		List<LandmarkBoardDTO> likedLand = new ArrayList();
+		for(int i=0;i<list.size();i++) {
+			int lNo = list.get(i).getlNo();
+			System.out.println(lNo);
+			LandmarkBoardDTO dto = landmarkService.getLand(lNo);
+			likedLand.add(dto);
+		}
 		
-		List land = landmarkService.getLands();
-		model.addAttribute("land", land);		
+		//좋아요한 랜드마크의 lNo만 int[]에 담아 보내준다
+		int [] arr = new int[list.size()];
+		for(int i=0; i<list.size(); i++) {
+			arr[i]=list.get(i).getlNo();
+		}
+		model.addAttribute("lLand",likedLand);
+		model.addAttribute("lNoArr",arr);
 		
 		return "client/landmark/landmark";
 	}

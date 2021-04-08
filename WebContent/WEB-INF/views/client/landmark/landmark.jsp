@@ -113,29 +113,66 @@
 					data: JSON.stringify(data),
 					success: function(res){
 						$('.likeBtn').html("좋아요 한 랜드마크입니다&nbsp;"
-								+"<input type=\"image\" src=\"../resources/images/heart-colored.png\" width=\"14\"/>"
+								+"<img src=\"../resources/images/heart-colored.png\" width=\"14\"/>"
 								+"<br/><input type=\"button\" onclick=\"window.location='/travelMaker/my/myLand.tm'\" value=\"나의 랜드마크\"/>"
 						);
 					}
 				});
-			});//like
+			});//likeBtn
 			
+			/* 무시됨
+			var arr = new Array();
+			<c:forEach var="list" items="${lList}">
+				arr.push("${lList}");
+			</c:forEach>
+			for(var i=0 ; i<arr.length ; i++){
+				alert(arr[i]);
+			}
+			*/
+			/* 주소 값 한글자씩 나오고 난리...
+			var arr = new Array();
+			arr = "${lNoArr}";
+			for(var i=0; i<arr.length ; i++){
+				alert(arr[i]);
+			}
+			
+			var lNoArr = "${lNoArr}";	//[I@151cf797
+			var lLand = new Array();
+			lLand = "${lLand}";		//[travelMaker.model.dto.LandmarkBoardDTO@294351b9, travelMaker.model.dto.LandmarkBoardDTO@2af9c3a7, travelMaker.model.dto.LandmarkBoardDTO@4dfcbdc0, travelMaker.model.dto.LandmarkBoardDTO@3f2e4ba7]
+			
+			for(var i=0 ; i<lLand.length() ; i++){
+				alert(i);
+			}
+			*/
 		});//ready
 		
-		</script>
+	</script>
 		
-		<a href="/travelMaker/land/landWrite.tm"><button>랜드마크 작성</button></a>
-		
-		<div class="content1"></div>
-		<div class="content2"></div>
-		<div class="content3"></div>
-		<div class="like">
-			<form class="likeBtn">
-				<input type="hidden" id="lNo" name="lNo"/>
-				<input type="hidden" name="id" value="${sessionScope.memId}"/>
-				<input type="image" id="heartIcon" src="../resources/images/heart-empty.png" width="14" alt="좋아요"/>
-			</form>
-		</div>
+	<a href="/travelMaker/land/landWrite.tm"><button>랜드마크 작성</button></a>
+	
+	<div class="content1"></div>
+	<div class="content2"></div>
+	<div class="content3"></div>
+	
+	
+	<!-- 클릭한 랜드마크가 이미 좋아요한 랜드마크이면 좋아요 버튼 안보이게
+	<c:forEach var="land" items="${lLand}">
+		<c:if test="${land.lNo==lNo}">
+			웅
+		</c:if>
+		<c:if test="${land.lNo!=lNo}">
+			아니
+		</c:if>
+	</c:forEach>
+	-->
+	
+	<div class="like">
+		<form class="likeBtn">
+			<input type="hidden" id="lNo" name="lNo"/>
+			<input type="hidden" name="id" value="${sessionScope.memId}"/>
+			<input type="image" id="heartIcon" src="../resources/images/heart-empty.png" width="14" alt="좋아요"/>
+		</form>
+	</div>
 </div>
 <!-- //wrapAll end -->
 
