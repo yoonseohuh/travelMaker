@@ -36,20 +36,18 @@ public class LandmarkController {
 		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
 		List<LandmarkLikedDTO> list = landmarkService.myLandLiked(id);
 		List<LandmarkBoardDTO> likedLand = new ArrayList();
+		List<Integer> lNoList = new ArrayList();
 		for(int i=0;i<list.size();i++) {
 			int lNo = list.get(i).getlNo();
 			System.out.println(lNo);
 			LandmarkBoardDTO dto = landmarkService.getLand(lNo);
 			likedLand.add(dto);
+			lNoList.add(dto.getlNo());
 		}
 		
-		//좋아요한 랜드마크의 lNo만 int[]에 담아 보내준다
-		int [] arr = new int[list.size()];
-		for(int i=0; i<list.size(); i++) {
-			arr[i]=list.get(i).getlNo();
-		}
+		
+		model.addAttribute("lNos",lNoList);
 		model.addAttribute("lLand",likedLand);
-		model.addAttribute("lNoArr",arr);
 		
 		return "client/landmark/landmark";
 	}
@@ -155,6 +153,7 @@ public class LandmarkController {
 	public String landmarkLiked(@RequestBody Map<Object, Object> map) throws Exception {
 		String id = (String)map.get("id");
 		int lNo = Integer.parseInt((String)map.get("lNo"));
+		
 		landmarkService.landmarkLiked(id, lNo);
 		
 		ObjectMapper mapper = new ObjectMapper();
