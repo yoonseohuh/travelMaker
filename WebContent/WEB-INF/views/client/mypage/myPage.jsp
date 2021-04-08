@@ -15,7 +15,7 @@
 		
 		<c:if test="${sessionScope.memId==null}">
 			<script>
-				alert("로그인 후에 작성 가능합니다");
+				alert("로그인 후에 접근 가능합니다");
 				history.go(-1);
 			</script>
 		</c:if>
