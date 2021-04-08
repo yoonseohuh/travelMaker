@@ -14,4 +14,8 @@ public interface GroupRequestDAO {
 	// jbr :  신청자들 pos 카운트
 	public int posCount(int gNo, int posNo);
 	
+	//그룹삭제할때 그룹리퀘스트 삭제
+	public void deleteGroupReq(int gNo);
+
+	
 }

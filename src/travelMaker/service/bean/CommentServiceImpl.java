@@ -46,9 +46,12 @@ public class CommentServiceImpl implements CommentService {
 			System.out.println(i + "번쨰 : " + ((GroupMemberDTO)myGroup.get(i)).getgNo());
 			  GroupSpaceDTO gInfo = getGroupInfo(((GroupMemberDTO)myGroup.get(i)).getgNo());
 			  if(gInfo.getStatus() >=0 ) { //GroupSpace 여행상태가 4인것들만 담는다
+			
 				  dtoList.add(gInfo);
-			  }						
+				  
+			  }	
 		}
+		System.out.println("디티오리스트" + dtoList);
 		return dtoList;
 	}
 	

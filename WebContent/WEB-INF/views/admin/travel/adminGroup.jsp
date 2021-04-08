@@ -33,6 +33,7 @@
 			<c:if test="${sel == null && search == null }">
 			<c:forEach var="groupAllList" items="${groupAllList}" varStatus="status">
 			<li>
+				<button onclick="window.location='/travelMaker/admin/adminGroupDel.tm?gNo=${groupAllList.gNo}'">그룹삭제</button>
 				<a href="/travelMaker/travel/makingCont.tm?gNo=${groupAllList.gNo}">
 				<p>No.${status.count}</p>
 				<p>그룹번호 : ${groupAllList.gNo}</p>

@@ -20,7 +20,7 @@ public interface MessageService {
 	public List getRecMsg(String id);
 	
 	// 메세지 삭제
-	public int deleteMsg(int mNo);
+	public int deleteMsg(String[] msgNo);
 	
 	// 사용자가 받은 쪽지 카운트
 	public int recMsgCnt(String id) ;

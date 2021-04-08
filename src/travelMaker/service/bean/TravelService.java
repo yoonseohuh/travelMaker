@@ -92,4 +92,20 @@ public interface TravelService {
 	//모든 그룹 글 가져오기
 	public List getAllGroups() throws Exception;
 	
+	//그룹삭제할때 그룹리퀘스트 삭제
+	public void deleteGroupReq(int gNo);
+	//그룹삭제할때 그룹멤버 삭제
+	public void deleteGroupMem(int gNo);
+
+	//개설자 총평작성
+	public void genReview(String id, int gNo, String genReview);
+	//그룹멤버 총평댓
+	public void genReply(String id, int gNo, String genReply);
+	//총평가져오기
+	public List getReview(int gNo)throws Exception;
+	// 본인이 총평 썼는지 확인
+	public int chReview(int gNo, String id);
+	//공개여부 업데이트
+	public void updateShared(int gNo, int shared);
+	
 }

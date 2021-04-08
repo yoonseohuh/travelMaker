@@ -164,6 +164,36 @@
 				});
 			}	//changeStatus end
 			
+			//총평버튼
+			$(document).ready(function(){
+		        $('#cont2').hide();
+		        $('#cancel').hide();
+		        $('#tab1').click(function(){
+		    		$('#cont2').show();
+		    		$('#cancel').show();
+		    		$('#tab1').hide();
+		    	});    
+		        $('#cancel').click(function(){
+		    		$('#cont2').hide();
+		    		 $('#cancel').hide();
+		    		$('#tab1').show();
+		    	});    
+		    });
+			//총평유효성 검사 
+			function check(){
+				var inputs = document.reply;
+				if(!inputs.genReview.value){
+					alert("내용을 입력해주세요.");
+					return false;
+				}else if(!input.genReply.value){
+					alert("내용을 입력해주세요.");
+					return false;
+					}
+				}
+			
+			
+			
+			
 			</script>
 			<!-- //accept logic end -->		
 			
@@ -225,6 +255,7 @@
 					
 					<p class="tit2">개설자 권한(임시 위치)</p>
 					<div id="statusForLeader">
+					
 						<c:if test="${grpSpace.status==0}">
 							멤버를 모집 중입니다. 멤버가 충분히 모였다면 모집 마감을 할 수 있습니다.
 							<!-- status==1로 바꾸어 모집 완료 처리 -->
@@ -239,8 +270,43 @@
 							<!-- 종료일과 현재 시간 비교해서 status==3으로 바꾸어 여행 끝 처리 -->
 						</c:if>
 						<c:if test="${grpSpace.status==3}">
-							여행이 끝났습니다! 총평을 작성하고, 여행의 공개 여부를 지정해보세요.
 							<!-- 총평 작성하고 여행 공개여부 다 처리하면 status==4로 바꾸기 -->
+							<div>
+								<c:if test="${grpSpace.status==3}">
+									<c:if test="${memId == grpSpace.id}">
+										<c:if test="${empty grpSpace.genReview}">
+											 ${grpSpace.id}님 ! 여행이 끝났습니다! 총평을 작성하고, 여행의 공개 여부를 지정해보세요.
+										 	<button id="tab1">총평작성</button>
+										 	<form action="/travelMaker/travel/genReviewPro.tm" id="cont2" name="reply" onsubmit="return check()" method="get">
+										 		<input type="hidden" name="id" value="${grpSpace.id}" />
+										 		<input type="hidden" name="gNo" value="${grpSpace.gNo}" />
+										 		<input type="hidden" name="from" value="groupspace" />
+										 		
+												<textarea cols="100" rows="10" name="genReview" placeholder="개설자 ${grpSpace.id}님의 여행총평을 남겨주세요!" ></textarea>
+												<input type="submit" value="작성" />
+											</form>
+											<input type="button" value="취소" id="cancel" />
+										</c:if>
+										<c:if test="${!empty grpSpace.genReview}">
+											개설자의 총평 : ${grpSpace.genReview}   -> 세션아이디랑 개설자랑 아이디 똑같을때 
+											
+											<c:if test="${grpSpace.shared == 0}">   <!-- 그룹스페이스 쉐어드가 0이면 공개여부 보여줌 -->
+												<form action="/travelMaker/travel/groupSpace.tm" name="openOrbOpen" method="get">
+													<input type="hidden" name="gNo" value="${grpSpace.gNo}" />
+													
+													</br> 공개여부 :
+													<input type="radio" name="shared" value="1" />공개
+													<input type="radio" name="shared" value="2" />비공개
+													<input type="submit" value="확인">
+												</form>
+											</c:if>
+											
+											
+										</c:if>
+									</c:if>	
+								</c:if>
+							</div>
+							
 						</c:if>
 					</div>
 					
@@ -269,6 +335,7 @@
 						</div>
 						<!-- //ingMem end -->
 					</li>
+									
 					<li>
 						<p class="tit2">모집 현황</p>
 						<div id="ingPos">
@@ -377,6 +444,39 @@
 					<!-- //chat end -->
 				</div>
 				<!-- //groupCont3 end -->
+				
+				
+				<!-- 어디에다 놓아야할지.... -->
+				
+				
+				<div>
+					<c:if test="${memId != grpSpace.id}">
+						<c:if test="${empty grpSpace.genReview}">
+							개설자의 총평이 아직 작성되지 않았습니다ㅠ_ㅠ  -> 세션아이디랑 개설자랑 다를떄
+						</c:if>
+						<c:if test="${!empty grpSpace.genReview}">
+							 ${grpSpace.genReview} 
+							<c:forEach var="reviewList" items="${reviewList}">
+										<br/>└ ${reviewList.nickname}님 :  ${reviewList.genReply}
+							</c:forEach>
+							<c:if test="${result == 1 }">
+								<br/><button id="tab1">답글달기</button>
+							</c:if>
+						</c:if>	
+						
+							 
+						 	<form action="/travelMaker/travel/genReplyPro.tm" id="cont2" name="reply" method="get">
+						 		<input type="hidden" name="id" value="${memId}" />
+						 		<input type="hidden" name="gNo" value="${grpSpace.gNo}" />
+						 		<input type="hidden" name="from" value="groupspace" />
+						 		
+								<textarea cols="100" rows="10" name="genReply" onsubmit="return check()" placeholder="총평에 댓글로 소감을 남겨주세요!" ></textarea>
+								<input type="submit" value="답글작성" />
+							</form>
+							<input type="button" value="취소" id="cancel" />
+					</c:if>					
+				</div>
+				
 				
 			</c:if>
 		</div>

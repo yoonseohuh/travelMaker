@@ -272,13 +272,12 @@ public class TravelServiceImpl implements TravelService{
 
 		List list = new ArrayList();		//GroupMemberDTO가 담기는 리스트
 		List gNoList = new ArrayList();		//gNo만 담을 리스트
-
 		list = groupMemberDAO.getMyGroups(id,status);
-		
 		for(int i=0 ; i<list.size() ; i++) {
 			GroupMemberDTO dto = (GroupMemberDTO)list.get(i);
 			gNoList.add(dto.getgNo());
 		}
+		System.out.println("gNoList" + gNoList);
 		
 		GroupSpaceDTO article = new GroupSpaceDTO();
 		List articleList = new ArrayList();		//실제 그룹방들을 담을 리스트
@@ -286,6 +285,7 @@ public class TravelServiceImpl implements TravelService{
 			article = groupSpaceDAO.getContent((Integer)gNoList.get(i));
 			articleList.add(article);
 		}
+		
 		return articleList;
 	}
 	
@@ -485,5 +485,68 @@ public class TravelServiceImpl implements TravelService{
 	public List getAllGroups() throws Exception {
 		List list = groupSpaceDAO.getAllGroups();
 		return list;
+	}
+	
+	//그룹삭제할때 그룹리퀘스트 삭제
+	@Override
+	public void deleteGroupReq(int gNo) {
+		System.out.println("그룹리퀘삭제1");
+		groupRequestDAO.deleteGroupReq(gNo);
+		System.out.println("그룹리퀘삭제2");
+	}
+	
+	//그룹삭제할때 그룹멤버 삭제
+	@Override
+	public void deleteGroupMem(int gNo) {
+		System.out.println("그룹멤삭제1");
+		groupMemberDAO.deleteGroupMem(gNo);
+		System.out.println("그룹멤삭제2");
+	}
+	
+	//개설자 총평작성
+	@Override
+	public void genReview(String id, int gNo, String genReview) {
+		groupSpaceDAO.genReview(id,gNo,genReview);
+	}
+	
+	//그룹멤버 총평댓
+	@Override
+	public void genReply(String id, int gNo, String genReply) {
+		groupSpaceDAO.genReply(id,gNo,genReply);
+	}
+	//총평가져오기
+	@Override
+	public List getReview(int gNo)throws Exception {
+		List reviewList = new ArrayList();
+		List<GroupMemberDTO> review = groupMemberDAO.getMembers(gNo);
+		for(int i=0; i<review.size(); i++) {
+			if(review.get(i).getGenReply() != null) {
+				reviewList.add(review.get(i));
+			}
+			
+		}
+		System.out.println("리뷰리스트" + reviewList);
+		
+		return reviewList;
+	}
+	
+	// 본인이 총평 썼는지 확인
+	@Override
+	public int chReview(int gNo, String id) {
+		int result = 0;
+		GroupMemberDTO dto = groupMemberDAO.chReview(gNo, id);
+		if(dto.getGenReply() == null) {
+			result = 1;
+		}
+		
+		return result;
+	}
+	
+	//공개여부 업데이트
+	@Override
+	public void updateShared(int gNo, int shared) {
+		System.out.println("서비스 들어감 ");
+		groupSpaceDAO.updateShared(gNo,shared);
+		System.out.println("서비스 나옴 ");
 	}
 }

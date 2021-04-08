@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -25,6 +27,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import travelMaker.model.dao.TmUserDAO;
 import travelMaker.model.dto.GalleryDTO;
+import travelMaker.model.dto.GroupSpaceDTO;
 import travelMaker.model.dto.ReportReasonDTO;
 import travelMaker.model.dto.SmallPosDTO;
 import travelMaker.model.dto.TmUserDTO;
@@ -103,10 +106,9 @@ public class AdminController {
 	
 	//그룹관리
 	@RequestMapping("adminGroup.tm")
-	public String adminGroup(String sel, String search, Model model) {
+	public String adminGroup(String sel, String search, Model model)throws Exception{
 		System.out.println("sel입니당" + sel);
 		System.out.println("search입니당" +search);
-		
 		
 		List searchGroupList = new ArrayList();
 		List groupAllList = new ArrayList();
@@ -171,11 +173,22 @@ public class AdminController {
 		return "admin/travel/adminGroup";
 	}
 	
+	//그룹해제
+	@RequestMapping("adminGroupDel.tm")
+	public String groupDel(String gNo)throws Exception {
+		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
+		if(id.equals("admin")) {
+			//그룹삭제시 그룹멤버,그룹리퀘스트에서도 삭제
+			travelService.deleteContent(Integer.parseInt(gNo));
+			travelService.deleteGroupReq(Integer.parseInt(gNo));
+			travelService.deleteGroupMem(Integer.parseInt(gNo));
+		}
+		
+		
+		return  "admin/travel/adminGroupDel";
+	}
 	
-	
-	
-	
-	
+
 	
 	//문의관리
 	@RequestMapping("qna.tm")

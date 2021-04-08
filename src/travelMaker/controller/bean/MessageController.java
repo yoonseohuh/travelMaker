@@ -67,9 +67,10 @@ public class MessageController {
 	@RequestMapping("messageWritePro.tm")
 	public String messageWritePro(MessageDTO msgDto, Model model) {
 		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
+		System.out.println("resiver" + msgDto.getReceiver());
 		msgDto.setSender(id);
 		int result = messageService.insertMsg(msgDto);
-		
+		System.out.println("result" + result);
 		model.addAttribute("result", result);
 		return "client/message/messageWritePro";
 	}
@@ -77,9 +78,14 @@ public class MessageController {
 	
 	//메세지 삭제
 	@RequestMapping("messageDel.tm")
-	public String messageDel(String msgNo, Model model) {
-		int mNo = Integer.parseInt(msgNo);
-		int result = messageService.deleteMsg(mNo);
+	public String messageDel(String[] msgNo, Model model) {
+	//	System.out.println("뭘로 뽑히나" + msgNo);
+	//	System.out.println("한개일때도?" + msgNo[0]);
+		
+		
+	//	int mNo = Integer.parseInt(msgNo);
+		
+		int result = messageService.deleteMsg(msgNo);
 		//result 1이면 삭제 완료
 		model.addAttribute("result", result);
 		return "client/message/messageDel";
