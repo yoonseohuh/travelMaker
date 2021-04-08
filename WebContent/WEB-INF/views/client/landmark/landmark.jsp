@@ -101,12 +101,14 @@
 								
 								for(var i=0;i<arr.length;i++){
 									if(arr[i]==res.lNo){
-										$('.likeBtn').html("좋아요 한 랜드마크입니다&nbsp;"
+										$('.like').html("좋아요 한 랜드마크입니다&nbsp;"
 												+"<img src=\"../resources/images/heart-colored.png\" width=\"14\"/>"
 												+"<br/><input type=\"button\" onclick=\"window.location='/travelMaker/my/myLand.tm'\" value=\"나의 랜드마크\"/>"
 										);
+										$('.likeBtn').hide();
 									}else{
-										$('.like').show();
+										$('.like').html("");
+										$('.likeBtn').show();
 									}
 								}
 							}
@@ -134,7 +136,7 @@
 						$('.likeBtn').html("좋아요 한 랜드마크입니다&nbsp;"
 								+"<img src=\"../resources/images/heart-colored.png\" width=\"14\"/>"
 								+"<br/><input type=\"button\" onclick=\"window.location='/travelMaker/my/myLand.tm'\" value=\"나의 랜드마크\"/>"
-						);	
+						);
 					}
 				});
 			});//likeBtn
@@ -149,8 +151,8 @@
 	<div class="content2"></div>
 	<div class="content3"></div>
 	
-	<div class="like">
-	</div>
+	<div class="like"></div>
+	
 	<form class="likeBtn">
 		<input type="hidden" id="lNo" name="lNo"/>
 		<input type="hidden" name="id" value="${sessionScope.memId}"/>
