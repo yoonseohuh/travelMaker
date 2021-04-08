@@ -17,9 +17,12 @@ import org.springframework.web.context.request.RequestContextHolder;
 import travelMaker.model.dao.ScheduleDAO;
 import travelMaker.model.dto.GroupRequestDTO;
 import travelMaker.model.dto.GroupSpaceDTO;
+import travelMaker.model.dto.LandmarkBoardDTO;
+import travelMaker.model.dto.LandmarkLikedDTO;
 import travelMaker.model.dto.QnaBoardDTO;
 import travelMaker.model.dto.ScheduleDTO;
 import travelMaker.model.dto.SmallPosDTO;
+import travelMaker.service.bean.LandmarkService;
 import travelMaker.service.bean.MemberService;
 import travelMaker.service.bean.QnaReportService;
 import travelMaker.service.bean.TravelService;
@@ -34,6 +37,9 @@ public class MypageController {
 	private TravelService travelService = null;
 	@Autowired
 	private MemberService memberService = null;
+	@Autowired
+	private LandmarkService landmarkService = null;
+	
 	
 	//마이페이지 홈
 	@RequestMapping("myPage.tm")
@@ -135,7 +141,22 @@ public class MypageController {
 	//코멘트 관리
 	
 	//나의 랜드마크
-	
+	@RequestMapping("myLand.tm")
+	public String myLand(Model model) throws Exception {
+		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
+		List<LandmarkLikedDTO> list = landmarkService.myLandLiked(id);
+		List<LandmarkBoardDTO> likedLand = new ArrayList();
+		for(int i=0;i<list.size();i++) {
+			int lNo = list.get(i).getlNo();
+			System.out.println(lNo);
+			LandmarkBoardDTO dto = landmarkService.getLand(lNo);
+			likedLand.add(dto);
+		}
+		List writtenLand = landmarkService.myLand(id);
+		model.addAttribute("wLand",writtenLand);
+		model.addAttribute("lLand",likedLand);
+		return "client/mypage/myLand";
+	}
 	//내정보 관리
 	
 	//문의게시판

@@ -45,11 +45,9 @@ public class LandmarkLikedDAOImpl implements LandmarkLikedDAO {
 	}
 
 	@Override
-	public List myLandLiked(String id, int lNo) throws Exception {
-		Map map = new HashMap();
-		map.put("id", id);
-		map.put("lNo", lNo);
-		List myLandLiked = sqlSession.selectList("landmarkLiked.myLandLiked", map);
+	public List myLandLiked(String id) throws Exception {
+		
+		List myLandLiked = sqlSession.selectList("landmarkLiked.myLandLiked", id);
 		return myLandLiked;
 	}
 

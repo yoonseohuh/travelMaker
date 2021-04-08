@@ -14,7 +14,7 @@ public interface LandmarkService {
 	// 하나의 랜드마크 가져오기
 	public LandmarkBoardDTO getLand(int lNo) throws Exception;
 	// 랜드마크 공개범위 전체공개 0, 회원공개 1
-	public void getLandOpen() throws Exception;
+	// public void getLandOpen() throws Exception;
 	// 내가 작성한 랜드마크
 	public 	List myLand(String id) throws Exception;
 	// 내가 작성한 랜드마크 삭제
@@ -26,7 +26,7 @@ public interface LandmarkService {
 	// 랜드마크 좋아요 취소
 	public void landmarkLikedCancel(String id, int lNo) throws Exception;
 	// 내가 좋아요 한 랜드마크 
-	public List myLandLiked(String id, int lNo) throws Exception;
+	public List myLandLiked(String id) throws Exception;
 
 	
 

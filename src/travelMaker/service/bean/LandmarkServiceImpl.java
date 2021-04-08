@@ -25,7 +25,6 @@ public class LandmarkServiceImpl implements LandmarkService{
 	
 	@Override
 	public void insertLand(LandmarkBoardDTO dto) throws Exception {
-		// 오토와이어드 해놓은 landmarkBoardDAO를 불러서 고놈이 가지고 있는 insertLand를 한다.
 		landmarkBoardDAO.insertLand(dto);
 	}
 	
@@ -48,12 +47,6 @@ public class LandmarkServiceImpl implements LandmarkService{
 		return land;
 	}
 
-	@Override
-	public void getLandOpen() throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-	
 	// 내 마이랜드 삭제
 	@Override
 	public void deleteMyLand(String id) throws Exception{
@@ -62,7 +55,7 @@ public class LandmarkServiceImpl implements LandmarkService{
 
 	@Override
 	public void landmarkLiked(String id, int lNo) throws Exception {
-		// 좋아요 누를떄 +1 카운트
+		// 좋아요 누를 때 +1 카운트
 		landmarkBoardDAO.landmarkLikedCnt(lNo, 1);
 		landmarkLikedDAO.landmarkLiked(id, lNo);
 		
@@ -83,8 +76,8 @@ public class LandmarkServiceImpl implements LandmarkService{
 	}
 
 	@Override
-	public List myLandLiked(String id, int lNo) throws Exception {
-		List myLandLiked = landmarkLikedDAO.myLandLiked(id, lNo);
+	public List myLandLiked(String id) throws Exception {
+		List myLandLiked = landmarkLikedDAO.myLandLiked(id);
 		return myLandLiked;
 	}
 
