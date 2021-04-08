@@ -74,7 +74,7 @@
 						<a href="sharedList.tm?pageNum=${startPage+pageBlock}&start=${start}&endD=${end}"> &gt; </a>
 					</c:if>
 				</c:if>
-				<c:if test="${startD==null || endD==null}">
+				<c:if test="${start==null || end==null}">
 					<c:if test="${endPage<pageCount}">
 						<a href="sharedList.tm?pageNum=${startPage+pageBlock}"> &gt; </a>
 					</c:if>
