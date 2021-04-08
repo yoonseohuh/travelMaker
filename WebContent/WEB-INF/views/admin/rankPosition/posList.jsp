@@ -99,7 +99,7 @@
 		</form>
 		<br/>
 		<!-- 포지션 대분류 보여주기 -->
-		<table>
+		<table style="margin:50px 0;">
 			<tr>
 				<td>포지션 대분류 번호</td>
 				<td>1</td>

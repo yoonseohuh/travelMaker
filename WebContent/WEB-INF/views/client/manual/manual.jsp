@@ -50,7 +50,7 @@
 				<div class="txtArea">
 					<div class="txtLoc">
 						<div class="txtTitle">
-							<p>여행할 수록 올라가는 모험등급</p>
+							<p>여행할 수록 올라가는 모험랭크</p>
 						</div>
 						<div class="txtCont">
 							<p>여수 밤바다 이 조명에 담긴아름다운 얘기가 있어네게 들려주고파전활 걸어뭐 하고
@@ -81,13 +81,20 @@
 							 너와 함께 걷고 싶어이 거리를너와 함께 걷고 싶다이 바다를너와 함께 걷고 싶어여수
 							 밤바다여수 밤바다이 바람에 걸린알 수 없는 향기가 있어네게 전해 주고파전활 걸어
 							 뭐 하고 있냐고나는 지금 여수 밤바다여수 밤바다아 아 아 아 아 아 </p>
+							 <a href="rkDetail.tm" class="posA">랭크 더 알아보기 ></a>
 						</div>
 					</div>
 				</div>
 			</div>
 			<!-- ManualMix  end -->
+			<div class="posTxt">
+				<div class="manualTitle">관심있는 분야의 포지션을 선택하세요</div>
+				<div class="manualSubTit">10회 여행 후 첫 번째 포지션을 선택할 수 있습니다. </div>
+			</div>
+			<div class="posPic"></div>
+			<a href="positionDetail.tm" class="posA">포지션 더 알아보기 ></a>
 		</div>
-		<!--manualBody end -->
+		<!-- manualBody end -->
 	</div>
 	<!-- //wrapAll end -->
 	
