@@ -287,10 +287,24 @@ public class MemberController {
 	}
 	
 	//manual페이지
-	@RequestMapping("manual")
+	@RequestMapping("manual.tm")
 	public String manual() {
 		
 		return "client/manual/manual";
+	}
+	
+	//rk페이지
+	@RequestMapping("rkDetail.tm")
+	public String rank() {
+		
+		return "client/manual/rkDetail";
+	}
+	
+	//rk페이지
+	@RequestMapping("positionDetail.tm")
+	public String position() {
+		
+		return "client/manual/positionDetail";
 	}
 	
 }

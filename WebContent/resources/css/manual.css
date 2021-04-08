@@ -14,7 +14,10 @@
 .manualPic {position:relative; float:left; width:49%; height:490px; border:solid 1px;}
 .sec {margin-left:2%;}
 .picTxt { position:absolute; left:20px; bottom:20px;}
-.manualMix {overflow:hidden; margin-top:200px; }
-.txtArea {padding: 0 30px;  float:left; width:49%; height:490px; border:solid 1px;}
-.txtTitle {font-size:40px; font-weight:bold; margin-bottom:20px;}
-.txtCont {font-size:30px; font-weight:lighter; line-height:40px;}
+.manualMix {overflow:hidden; margin-top:150px; }
+.txtArea {padding: 0 30px;  float:left; width:49%; height:490px; }
+.txtTitle {font-size:38px; font-weight:bold; margin-bottom:20px;}
+.txtCont {font-size:30px; font-weight:lighter; line-height:40px; margin: 35px 0;}
+.posTxt {margin-top:150px;}
+.posPic {width:100%; height:490px; border:solid 1px; margin:25px 0;}
+.posA {color:#5066aa; font-size:20px; float:right;}
