@@ -29,6 +29,8 @@
 							<p class="title">${article.subject}</p>
 							<p class="maker">${article.id}</p>
 							<p class="date">${article.startDate}~${article.endDate}</p>
+							<p class="readCnt"> 조회수 : ${article.readCnt}</p>
+							<p class="likedCnt"> 좋아요 : </p>
 						</li>
 					</c:forEach>
 				</ul>
@@ -71,7 +73,7 @@
 				<!-- 뒤로 가는 기호 -->				
 				<c:if test="${start!=null && end!=null}">
 					<c:if test="${endPage<pageCount}">
-						<a href="sharedList.tm?pageNum=${startPage+pageBlock}&start=${start}&endD=${end}"> &gt; </a>
+						<a href="sharedList.tm?pageNum=${startPage+pageBlock}&start=${start}&end=${end}"> &gt; </a>
 					</c:if>
 				</c:if>
 				<c:if test="${start==null || end==null}">

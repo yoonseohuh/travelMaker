@@ -18,6 +18,10 @@
 		select * from groupSpace where gNo=#{gNo} 
 	</select>
 	
+	<update id="updateReadcount">
+		update groupSpace set readCnt = readCnt+1 where gNo=#{gNo}
+	</update>
+	
 	
   		
 </mapper>

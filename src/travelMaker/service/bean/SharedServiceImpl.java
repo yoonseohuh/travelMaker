@@ -27,13 +27,13 @@ public class SharedServiceImpl implements SharedService {
 			pageNum="1";
 		}
 		int currPage = Integer.parseInt(pageNum);
-		int startRow = (currPage-1)*pageSize+1;
-		int endRow = currPage*pageSize;
+		int start = (currPage-1)*pageSize+1;
+		int end = currPage*pageSize;
 		List sharedList = null;
 		int count = sharedDAO.getArticleCount();
 		//System.out.println(count);
 		if(count>0) {
-			sharedList = sharedDAO.getArticles(startRow, endRow);
+			sharedList = sharedDAO.getArticles(start, end);
 		}
 		
 		for(int i=0 ; i<sharedList.size() ; i++) {
@@ -47,8 +47,8 @@ public class SharedServiceImpl implements SharedService {
 		Map result = new HashMap();
 		result.put("pageSize", pageSize);
 		result.put("currPage", currPage);
-		result.put("startRow", startRow);
-		result.put("endRow", endRow);
+		result.put("start", start);
+		result.put("end", end);
 		result.put("number", number);
 		result.put("count", count);
 		result.put("sharedList", sharedList);
@@ -61,6 +61,9 @@ public class SharedServiceImpl implements SharedService {
 	
 	@Override
 	public GroupSpaceDTO getArticle(int gNo) throws Exception {
+		// readCnt 추가
+		sharedDAO.updateReadCnt(gNo);
+		//System.out.println("조회수 서비스도 왔니?");
 		GroupSpaceDTO article = sharedDAO.getArticle(gNo);
 		//System.out.println("서비스"+gNo);
 		//System.out.println("서비스"+ article);
@@ -68,6 +71,12 @@ public class SharedServiceImpl implements SharedService {
 		
 		return article;
 	}
+	// shared 페이지 좋아요 
+	public void sharedLiked(int gNo, String id) throws Exception {
+		sharedDAO.sharedLiked(gNo, id);
+		sharedDAO.sharedlikedCnt(gNo, 1);
+	}
+	
 	
 	
 	
