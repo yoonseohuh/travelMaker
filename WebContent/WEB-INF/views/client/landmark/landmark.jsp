@@ -22,7 +22,7 @@
 	<script>
 		$(document).ready(function(){
 			//첫 페이지에서 좋아요 버튼 숨겨놓기
-			$('.like').hide();
+			$('.likeBtn').hide();
 			
 			// *** ajax로 랜드마크 DB에서 가져오기 *** 
 			var positions = [];
@@ -41,6 +41,13 @@
 					markers();	//지도 뿌려라!
 				}
 			});
+			
+			//좋아요 표시에 필요
+			//memId가 좋아요한 랜드마크 게시글 번호들을 가져옴
+			var lNos = "${lNos}";	//Controller에서는 List<Integer> 타입으로 넘어온 변수가 문자열이 되므로 substring과 split 해줌
+			var newLNos = lNos.substring(1,lNos.length-1);
+			var arr = newLNos.split(", ");
+			
 			function markers() {
 				// *** 지도 생성 *** 
 				var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
@@ -69,7 +76,7 @@
 						clickable: true
 					});
 					
-					console.log(positions[i].latlng);
+				//	console.log(positions[i].latlng);
 					
 					// 마커 클릭 시 정보를 뿌려주기 위함
 					kakao.maps.event.addListener(marker, 'click', function(mouseEvent) {
@@ -86,11 +93,22 @@
 							data: JSON.stringify(data),
 							success: function(res){
 								console.log(res);
-								$('.like').show();
 								$('#lNo').val(res.lNo);
+								
 								$('.content1').html("<br/><h1>"+res.lName+"</h1><br/><h2>"+res.writer+"님의 랜드마크</h2></br></br>");
 								$('.content2').html("<h3>"+res.lType+"&nbsp;&nbsp;|&nbsp;&nbsp;"+res.addr+"</h3></br></br>");
 								$('.content3').html("<h3>"+res.lCont+"</h3>");
+								
+								for(var i=0;i<arr.length;i++){
+									if(arr[i]==res.lNo){
+										$('.likeBtn').html("좋아요 한 랜드마크입니다&nbsp;"
+												+"<img src=\"../resources/images/heart-colored.png\" width=\"14\"/>"
+												+"<br/><input type=\"button\" onclick=\"window.location='/travelMaker/my/myLand.tm'\" value=\"나의 랜드마크\"/>"
+										);
+									}else{
+										$('.like').show();
+									}
+								}
 							}
 						});
 						
@@ -104,6 +122,7 @@
 				$.each($(this).serializeArray(), function(index, i){
 					data[i.name] = i.value;
 				});
+				console.log(data);
 				$.ajax({
 					url: "/travelMaker/land/landmarkLiked.tm",
 					type: "POST",
@@ -115,35 +134,11 @@
 						$('.likeBtn').html("좋아요 한 랜드마크입니다&nbsp;"
 								+"<img src=\"../resources/images/heart-colored.png\" width=\"14\"/>"
 								+"<br/><input type=\"button\" onclick=\"window.location='/travelMaker/my/myLand.tm'\" value=\"나의 랜드마크\"/>"
-						);
+						);	
 					}
 				});
 			});//likeBtn
 			
-			/* 무시됨
-			var arr = new Array();
-			<c:forEach var="list" items="${lList}">
-				arr.push("${lList}");
-			</c:forEach>
-			for(var i=0 ; i<arr.length ; i++){
-				alert(arr[i]);
-			}
-			*/
-			/* 주소 값 한글자씩 나오고 난리...
-			var arr = new Array();
-			arr = "${lNoArr}";
-			for(var i=0; i<arr.length ; i++){
-				alert(arr[i]);
-			}
-			
-			var lNoArr = "${lNoArr}";	//[I@151cf797
-			var lLand = new Array();
-			lLand = "${lLand}";		//[travelMaker.model.dto.LandmarkBoardDTO@294351b9, travelMaker.model.dto.LandmarkBoardDTO@2af9c3a7, travelMaker.model.dto.LandmarkBoardDTO@4dfcbdc0, travelMaker.model.dto.LandmarkBoardDTO@3f2e4ba7]
-			
-			for(var i=0 ; i<lLand.length() ; i++){
-				alert(i);
-			}
-			*/
 		});//ready
 		
 	</script>
@@ -154,25 +149,13 @@
 	<div class="content2"></div>
 	<div class="content3"></div>
 	
-	
-	<!-- 클릭한 랜드마크가 이미 좋아요한 랜드마크이면 좋아요 버튼 안보이게
-	<c:forEach var="land" items="${lLand}">
-		<c:if test="${land.lNo==lNo}">
-			웅
-		</c:if>
-		<c:if test="${land.lNo!=lNo}">
-			아니
-		</c:if>
-	</c:forEach>
-	-->
-	
 	<div class="like">
-		<form class="likeBtn">
-			<input type="hidden" id="lNo" name="lNo"/>
-			<input type="hidden" name="id" value="${sessionScope.memId}"/>
-			<input type="image" id="heartIcon" src="../resources/images/heart-empty.png" width="14" alt="좋아요"/>
-		</form>
 	</div>
+	<form class="likeBtn">
+		<input type="hidden" id="lNo" name="lNo"/>
+		<input type="hidden" name="id" value="${sessionScope.memId}"/>
+		<input type="image" id="heartIcon" src="../resources/images/heart-empty.png" width="14" alt="좋아요"/>
+	</form>
 </div>
 <!-- //wrapAll end -->
 

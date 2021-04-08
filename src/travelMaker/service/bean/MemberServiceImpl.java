@@ -418,7 +418,12 @@ public class MemberServiceImpl implements MemberService {
 	//전체 회원 중에서 해당 회원 랭킹 가져오기
 	@Override
 	public int getUserRanking(String id) {
-		int ranking = tmuserDAO.getUserRanking(id);
+		int ranking = 0;
+		if(id==null) {
+			ranking = 0;
+		}else {			
+			ranking = tmuserDAO.getUserRanking(id);
+		}
 		return ranking;
 	}
 	
