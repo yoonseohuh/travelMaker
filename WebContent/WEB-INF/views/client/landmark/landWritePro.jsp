@@ -5,16 +5,10 @@
 	<!-- //top end -->
 	
 	<div class="wrapAll">
-		<h1>landWritePro</h1>
-		<h4>lNo : ${land.lNo}</h4>
-		<h4>writer : ${land.writer}</h4>
-		<h4>lName : ${land.lName}</h4>
-		<h4>lType : ${land.lType}</h4>
-		<h4>addr : ${land.addr}</h4>
-		<h4>xLoc : ${land.xLoc}</h4>
-		<h4>yLoc : ${land.yLoc}</h4>
-		<h4>lCont : ${land.lCont}</h4>
-		<h4>lOpen : ${land.lOpen}</h4>
+		<script>
+			alert("랜드마크 작성이 완료되었습니다");
+			location.href='/travelMaker/land/landmark.tm';
+		</script>
 	</div>
 	<!-- //wrapAll end -->
 	

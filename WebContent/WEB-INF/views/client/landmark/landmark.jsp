@@ -5,8 +5,15 @@
 <jsp:include page="/WEB-INF/views/include/top.jsp" />
 <!-- //top end -->
 
-<div class="wrapAll">
+<div class="wrapAll client">
 
+	<c:if test="${sessionScope.memId==null}">
+		<script>
+			alert("로그인 후에 이용 가능합니다");
+			location.href='/travelMaker/mem/index.tm';
+		</script>
+	</c:if>
+	
 	<!-- 지도 -->
 	<div id="map" style="width: 1000px; height: 400px;"></div>
 
@@ -66,17 +73,7 @@
 					
 					// 마커 클릭 시 정보를 뿌려주기 위함
 					kakao.maps.event.addListener(marker, 'click', function(mouseEvent) {
-						//console.log(mouseEvent); undefined
-						//var latlng = mouseEvent.latLag;
-						//console.log("경도:"+latlng.getLng());
-						//console.log(positions);
-						console.log("--marker--");
-						console.log(marker);
-						//console.log(marker.position); undefined
-						console.log("--this--");
 						console.log(this);
-						//console.log(this.n.La); 나오는데 찾는 값 아님
-						$('.title').val(this.Fb);
 						
 						event.preventDefault();
 						var lName = this.Fb;
@@ -91,30 +88,17 @@
 								console.log(res);
 								$('.like').show();
 								$('#lNo').val(res.lNo);
-								$('.content1').html("<h1>"+res.lName+"</h1><h2>"+res.writer+"님의 랜드마크</h2></br></br>");
-								$('.content2').html("<h3>"+res.lType+"&nbsp;&nbsp;&nbsp;&nbsp;"+res.addr+"</h3></br></br>");
+								$('.content1').html("<br/><h1>"+res.lName+"</h1><br/><h2>"+res.writer+"님의 랜드마크</h2></br></br>");
+								$('.content2').html("<h3>"+res.lType+"&nbsp;&nbsp;|&nbsp;&nbsp;"+res.addr+"</h3></br></br>");
 								$('.content3').html("<h3>"+res.lCont+"</h3>");
 							}
 						});
 						
-					});
-				/*	var iwContent = '<div style="padding:5px;">Hello World!</div>';
-					var	iwRemoveable = true;
-					
-					// 인포 윈도우 생성
-					var infowindow = new kakao.maps.infoWindow({
-						content : iwContent,
-						removable : iwRemoveable
-					});
-					// 마커에 클릭이벤트를 등록
-					kakao.maps.event.addListener(marker, 'click', function() {
-						// 마커 위에 인포윈도우를 표시
-						infowindow.open(map, marker);
-					});		*/
+					});//addListener
 				}//for
 			}//markers
 			
-			$('likeBtn').submit(function(event){
+			$('.likeBtn').submit(function(event){
 				event.preventDefault();
 				var data = {};
 				$.each($(this).serializeArray(), function(index, i){
@@ -128,9 +112,10 @@
 					contentType: "application/json",
 					data: JSON.stringify(data),
 					success: function(res){
-						var currentLocation = window.location;
-						alert("좋아요 완료");
-					//	$('#applicants').load(currentLocation + ' #applicants');	//신청자 목록 load
+						$('.likeBtn').html("좋아요 한 랜드마크입니다&nbsp;"
+								+"<input type=\"image\" src=\"../resources/images/heart-colored.png\" width=\"14\"/>"
+								+"<br/><input type=\"button\" onclick=\"window.location='/travelMaker/my/myLand.tm'\" value=\"나의 랜드마크\"/>"
+						);
 					}
 				});
 			});//like
@@ -138,18 +123,19 @@
 		});//ready
 		
 		</script>
-	<a href="/travelMaker/land/landWrite.tm"><button>랜드마크 작성</button></a>
-	
-	<div class="content1"></div>
-	<div class="content2"></div>
-	<div class="content3"></div>
-	<div class="like">
-		<form class="likeBtn">
-			<input type="hidden" name="lNo"/>
-			<input type="hidden" name="id" value="${sessionScope.memId}"/>
-			<input type="submit" value="좋아요"/>
-		</form>
-	</div>
+		
+		<a href="/travelMaker/land/landWrite.tm"><button>랜드마크 작성</button></a>
+		
+		<div class="content1"></div>
+		<div class="content2"></div>
+		<div class="content3"></div>
+		<div class="like">
+			<form class="likeBtn">
+				<input type="hidden" id="lNo" name="lNo"/>
+				<input type="hidden" name="id" value="${sessionScope.memId}"/>
+				<input type="image" id="heartIcon" src="../resources/images/heart-empty.png" width="14" alt="좋아요"/>
+			</form>
+		</div>
 </div>
 <!-- //wrapAll end -->
 

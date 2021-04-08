@@ -1,6 +1,7 @@
 package travelMaker.controller.bean;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import travelMaker.model.dto.LandmarkBoardDTO;
+import travelMaker.model.dto.LandmarkLikedDTO;
 import travelMaker.service.bean.LandmarkService;
 
 @Controller
@@ -49,7 +51,7 @@ public class LandmarkController {
 		return land;
 	}
 	
-	// 랜드마크 클릭 시 랜드마크 가져오기
+	//랜드마크 클릭 시 랜드마크 가져오기
 	@ResponseBody
 	@RequestMapping("landmarkCont.tm")
 	public Map landmarkCont(@RequestBody Map<Object, Object> map) throws Exception {
@@ -62,7 +64,6 @@ public class LandmarkController {
 				lNo = lm.getlNo();
 			}
 		}
-		System.out.println(lNo);
 		LandmarkBoardDTO cont = landmarkService.getLand(lNo);
 		Map resMap = new HashMap();
 		resMap.put("lNo",cont.getlNo());
@@ -95,24 +96,30 @@ public class LandmarkController {
 		return "client/landmark/landWritePro";
 	}
 	
-	//나의 랜드마크
-	@RequestMapping("myLand.tm")
-	public String myLand(HttpSession session, int lNo, Model model) throws Exception {
-		// 구면인데 초면 같으신 분
+	//내가 작성한 랜드마크
+	@ResponseBody
+	@RequestMapping("myWrittenLand.tm")
+	public List myWrittenLand() throws Exception {
 		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
-		//내가 작성한 랜마
 		List myLand = landmarkService.myLand(id);
-		model.addAttribute("memId", id);
-		model.addAttribute("myLand", myLand);
 		
-		//내가 좋아요한 랜드마크
-		List myLandLiked = landmarkService.myLandLiked(id, lNo);
-		model.addAttribute("memId", id);
-		model.addAttribute("lNo", lNo);
-		model.addAttribute("myLandLiked", myLandLiked);
-		
-		return "client/mypage/myLand";
+		return myLand;
 	}
+	
+	//내가 좋아요한 랜드마크
+	@ResponseBody
+	@RequestMapping("myLikedLand.tm")
+	public List myLikedLand() throws Exception {
+		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
+		List<LandmarkLikedDTO> list = landmarkService.myLandLiked(id);
+		List<LandmarkBoardDTO> likedLand = new ArrayList();
+		for(int i=0;i<list.size();i++) {
+			landmarkService.getLand(list.get(i).getlNo());
+			likedLand.add(landmarkService.getLand(list.get(i).getlNo()));
+		}
+		return likedLand;
+	}
+	
 	
 	@RequestMapping("myLandDelete.tm")
 	public String myLandDelete(int lNo) {
@@ -123,7 +130,7 @@ public class LandmarkController {
 	@RequestMapping("myLandDeletePro.tm")
 	public String myLandDeletePro(HttpSession session, String pw, String lNo) throws Exception{
 		//아이디, 비밀번호 일치하는지 확인하는 메서드 
-		// 맞으면 삭제해주는 메서드
+		//맞으면 삭제해주는 메서드
 		//landmarkService.deleteMyLand(pw);
 		System.out.println(pw);
 		System.out.println(lNo);
@@ -135,20 +142,11 @@ public class LandmarkController {
 	public String landmarkLiked(@RequestBody Map<Object, Object> map) throws Exception {
 		String id = (String)map.get("id");
 		int lNo = Integer.parseInt((String)map.get("lNo"));
-		
 		landmarkService.landmarkLiked(id, lNo);
 		
 		ObjectMapper mapper = new ObjectMapper();
 		String json = mapper.writeValueAsString("좋아요 완료");
 		return json;
 	}
-	
-	
-	
-	
-	
-	// 
-
-	
 	
 }
