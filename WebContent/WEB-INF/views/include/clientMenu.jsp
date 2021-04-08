@@ -7,7 +7,7 @@
 
         <li><a href="/travelMaker/travel/makingList.tm">여행떠나기</a></li>
 
-        <li><a href="#">여행공유</a></li>
+        <li><a href="/travelMaker/shared/sharedList.tm">여행공유</a></li>
         <li><a href="/travelMaker/land/landmark.tm">랜드마크</a></li>
         <li><a href="#">랭크/포지션 안내</a></li>
         <li><a href="/travelMaker/msg/message.tm">쪽지함</a></li>
