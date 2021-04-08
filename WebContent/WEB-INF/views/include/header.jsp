@@ -20,6 +20,7 @@
 	<link href="<c:url value="/resources/css/contents.css" />" rel="stylesheet">
 	<link href="<c:url value="/resources/css/admin.css" />" rel="stylesheet">
 	<link href="<c:url value="/resources/css/member.css" />" rel="stylesheet">
+	<link href="<c:url value="/resources/css/manual.css" />" rel="stylesheet">
 	
 	<!-- JS -->
 	<script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js" />"></script>	

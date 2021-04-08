@@ -243,46 +243,54 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping("ajaxIdCheck.tm")
 	public String ajaxIdAvail(@RequestBody Map<Object,Object> map) throws Exception {
-	String id = (String)map.get("id"); 
-	//System.out.println("id :" +id);
-	String nickname = (String)map.get("nickname"); 
-	String email = (String)map.get("email"); 
-	String idResult = "";
-	String nickResult = "";
-	String emailResult = "";
-	//매개변수로 전달 받은 id가 DB에 존재하는지 확인
-	int idCheck = memService.idCheck(id);	//1이면 이미 존재, 0이면 존재 X
-	System.out.println("idcheck: " + idCheck);
-	//닉네임이 중복 존재하는지 확인
-	int nickCheck = memService.nickCheck(nickname);
-	//email 중복 존재하는지 확인 
-	int emailCheck =memService.eCheck(email);
-	//id
-	if(idCheck == 1) {
-		idResult = "이미 사용중입니다";
-	}else {
-		idResult = "사용가능";
+		String id = (String)map.get("id"); 
+		//System.out.println("id :" +id);
+		String nickname = (String)map.get("nickname"); 
+		String email = (String)map.get("email"); 
+		String idResult = "";
+		String nickResult = "";
+		String emailResult = "";
+		//매개변수로 전달 받은 id가 DB에 존재하는지 확인
+		int idCheck = memService.idCheck(id);	//1이면 이미 존재, 0이면 존재 X
+		System.out.println("idcheck: " + idCheck);
+		//닉네임이 중복 존재하는지 확인
+		int nickCheck = memService.nickCheck(nickname);
+		//email 중복 존재하는지 확인 
+		int emailCheck =memService.eCheck(email);
+		//id
+		if(idCheck == 1) {
+			idResult = "이미 사용중입니다";
+		}else {
+			idResult = "사용가능";
+		}
+		//nickname
+		if(nickCheck == 1) {
+			nickResult = "이미 사용중입니다";
+		}else {
+			nickResult = "사용가능";
+		}
+		//email
+		if(emailCheck == 1) {
+			emailResult = "이미 사용중입니다";
+		}else {
+			emailResult = "사용가능";
+		}
+		Map mmap = new HashMap();
+		mmap.put("idResult", idResult);
+		mmap.put("nickResult", nickResult);
+		mmap.put("emailResult", emailResult);
+		
+		ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.writeValueAsString(mmap);
+		
+		return  json;
 	}
-	//nickname
-	if(nickCheck == 1) {
-		nickResult = "이미 사용중입니다";
-	}else {
-		nickResult = "사용가능";
-	}
-	//email
-	if(emailCheck == 1) {
-		emailResult = "이미 사용중입니다";
-	}else {
-		emailResult = "사용가능";
-	}
-	Map mmap = new HashMap();
-	mmap.put("idResult", idResult);
-	mmap.put("nickResult", nickResult);
-	mmap.put("emailResult", emailResult);
 	
-	ObjectMapper mapper = new ObjectMapper();
-	String json = mapper.writeValueAsString(mmap);
-	
-	return  json;
+	//manual페이지
+	@RequestMapping("manual")
+	public String manual() {
+		
+		return "client/manual/manual";
 	}
+	
 }
