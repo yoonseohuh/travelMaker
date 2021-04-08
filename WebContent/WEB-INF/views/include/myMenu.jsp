@@ -14,6 +14,8 @@
 		$('#myMenuWrap').children('li').eq(1).addClass('on');
 	}else if(nowUrl == "/travelMaker/cmt/comment.tm"){
 		$('#myMenuWrap').children('li').eq(2).addClass('on');
+	}else if(nowUrl == "/travelMaker/my/myLand.tm"){
+		$('#myMenuWrap').children('li').eq(3).addClass('on');
 	}else if(nowUrl == "/travelMaker/mem/myModi.tm"){
 		$('#myMenuWrap').children('li').eq(4).addClass('on');
 	}else if(nowUrl == "/travelMaker/my/myQnaReportList.tm" || "/travelMaker/my/myQnaReportWrite.tm"){

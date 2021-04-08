@@ -86,17 +86,21 @@
 	        </div>
         </div>
         <div class="section" id="section2">
+        	<br/><br/><br/><br/>
             <h1>3section</h1>
+            <h1>여행 전체 리스트 박스박스</h1>
             <div class="quick quick1"></div>
             <div class="quick quick2"></div>
         </div>
         <div class="section" id="section3">
+       		<br/><br/><br/><br/>
             <h1>4section</h1>
-            <h2>test4</h2>
+            <h1>코스공유 박스박스</h1>
         </div>
         <div class="section" id="section4">
+        	<br/><br/><br/><br/>
             <h1>5section</h1>
-            <h2>test5</h2>
+           <h1>랜드마크</h1>
             <div style="height: 100vh;"></div>
             <jsp:include page="/WEB-INF/views/include/footer.jsp" />
 			<!-- //footer end -->
