@@ -6,21 +6,21 @@
 <jsp:include page="/WEB-INF/views/include/top.jsp" />
 <!-- //top end -->
 
-<div class="wrapAll">
+<div class="wrapAll client">
 
 	<h1>completeCont</h1>
-	
+
 	<c:if test="${sessionScope.memId==null}">
-			<script>
-				alert("로그인 후에 이용 가능합니다");
+		<script>
+				alert("자세한 정보를 보시려면 로그인을 해주세요.");
 				history.go(-1);
 			</script>
-		</c:if>
+	</c:if>
 	<c:if test="${sessionScope.memId!=null}">
 		<table>
 			<tr>
-				<td>${article.startDate}~${article.endDate} <br /> 
-					개설자 :${article.id}
+				<td>${article.startDate}~${article.endDate}<br /> 
+					개설자: ${article.id}
 					<h1>${article.subject}</h1>
 				</td>
 			</tr>
@@ -38,12 +38,12 @@
 			</tr>
 			<tr>
 				<td>
-					<h2>Member</h2> 
-						가이드 ${fn:length(gMem) - fn:length(posMem)} <br />
+					<h2>Member</h2> 가이드 ${fn:length(gMem) - fn:length(posMem)} <br />
 					<c:forEach var="posMem" items="${posMem}">
 						${posMem.key} :${posMem.value}명 
-					</c:forEach> <br /> 참여 ${fn:length(gMem)}<br /> <c:forEach var="gMem" items="${gMem}">
-						${gMem.nickname}     
+					</c:forEach> <br /> 참여 ${fn:length(gMem)}<br /> 
+					<c:forEach var="gMem" items="${gMem}">
+						${gMem.nickname}
 					</c:forEach>
 				</td>
 			</tr>
@@ -59,20 +59,36 @@
 								</tr>
 							</c:if>
 							<c:if test="${empty gList.pRoot}">
-								<h1>게시된 사진이 없습니다.</h1> 
+								<h1>게시된 사진이 없습니다.</h1>
 							</c:if>
 						</c:forEach>
 					</table>
 				</td>
 			</tr>
-
+			<tr>
+				<td>
+					<h2>General Review</h2> 
+					개설자의 여행총평 : 
+					<c:if test="${memId == getGroup.id}">
+							<c:if test="${empty getGroup.genReview}">
+								총평을 작성 합시다.
+							</c:if>
+							<c:if test="${!empty getGroup.genReview}">
+								 ${getGroup.genReview}
+							</c:if>
+						</c:if>
+						<c:if test="${memId != getGroup.id}">
+							<c:if test="${empty getGroup.genReview}">
+								개설자의 총평이 작성되지 않았습니다.
+							</c:if>
+							<c:if test="${!empty getGroup.genReview}">
+								 ${getGroup.genReview}
+							</c:if>
+						</c:if>
+				</td>
+			</tr>	
 		</table>
 	</c:if>
-
-
-
-
-
 </div>
 <!-- //wrapAll end -->
 
