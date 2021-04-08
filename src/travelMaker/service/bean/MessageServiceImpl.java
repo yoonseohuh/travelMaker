@@ -17,6 +17,7 @@ public class MessageServiceImpl implements MessageService {
 	
 	//쪽지 insert
 	public int insertMsg(MessageDTO msgDto) {
+		System.out.println("받는사람아이디" + msgDto.getReceiver());
 		int result = idCh(msgDto.getReceiver());
 		
 		if(result == 1) {
@@ -48,8 +49,16 @@ public class MessageServiceImpl implements MessageService {
 	}
 	
 	// 메세지 삭제
-	public int deleteMsg(int mNo) {
-		int result = messageDAO.deleteMsg(mNo);
+	public int deleteMsg(String[] msgNo) {
+		
+		
+		for(int i=0; i < msgNo.length; i++) {
+			System.out.println("서비스" + Integer.parseInt(msgNo[i]) );
+			 messageDAO.deleteMsg(Integer.parseInt(msgNo[i]));
+		}
+	
+		int result = 1;
+		//int result = messageDAO.deleteMsg(msgNo);
 		
 		return result;
 	}

@@ -41,4 +41,10 @@ public class GroupRequestDAOImpl implements GroupRequestDAO {
 		return posCnt;
 	}
 	
+	//그룹삭제할때 그룹리퀘스트 삭제
+	@Override
+	public void deleteGroupReq(int gNo) {
+		sqlSession.delete("groupRequest.deleteGroupReq",gNo);
+	}
+	
 }

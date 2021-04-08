@@ -265,7 +265,7 @@ public class TravelController {
 	}
 	
 	@RequestMapping("groupSpace.tm")
-	public String groupSpace(int gNo, Model model) throws Exception {
+	public String groupSpace(int gNo, String shared, Model model) throws Exception {
 		//그룹 방에 필요한 것: ①개설자가 볼 신청자 목록 ②현재 멤버 리스트 ③채팅 ④일정 ⑤갤러리 ⑥그룹 상태
 		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
 		int idStatus = travelService.getMemStatus(gNo, id);
@@ -366,6 +366,36 @@ public class TravelController {
 		List chatList = travelService.getChats(gNo);
 		model.addAttribute("chatList",chatList);
 		
+		//총평
+		List<GroupMemberDTO> reviewList = travelService.getReview(gNo);
+	
+		//본인이 평 입력했는지 확인
+		int result = travelService.chReview(gNo, id);		
+		GroupSpaceDTO getGroup = travelService.getGroup(gNo);
+		
+		//공개여부 업데이트
+	
+		System.out.println("shared값 :" + shared);
+		/*if(shared == null) {
+			System.out.println("쉐어드 너 설마 여기타니?");
+			shared = "";
+		}
+		*/
+		System.out.println("여기도안오나?");
+		
+		if("1".equals(shared) || "2".equals(shared)) {
+			
+			System.out.println("shared전" + shared);
+			travelService.updateShared(gNo, Integer.parseInt(shared));
+			System.out.println("shared후" + shared);
+			int sharedResult = grpSpace.getShared();
+			model.addAttribute("sharedResult",sharedResult);
+		}
+		
+		
+		model.addAttribute("getGroup",getGroup);
+		model.addAttribute("reviewList",reviewList);
+		model.addAttribute("result",result);
 		model.addAttribute("scheList",scheList);
 		model.addAttribute("posMem",posMem);
 		model.addAttribute("gNo",gNo);
@@ -579,6 +609,27 @@ public class TravelController {
 		ObjectMapper mapper = new ObjectMapper();
 		String json = mapper.writeValueAsString(map);
 		return json;
+	}
+	
+	
+	//개설자 총평작성
+	@RequestMapping("genReviewPro.tm")
+	public String genReviewPro(String id, String gNo, String genReview, Model model) {
+		travelService.genReview(id, Integer.parseInt(gNo), genReview);
+		
+		model.addAttribute("gNo", Integer.parseInt(gNo));
+		return "/client/travel/genReviewPro";
+	}
+	
+	
+	//그룹멤버 총평댓입력
+	@RequestMapping("genReplyPro.tm")
+	public String genReplyPro(String id, String gNo, String genReply, Model model) {
+		travelService.genReply(id, Integer.parseInt(gNo), genReply);
+		
+		
+		model.addAttribute("gNo", Integer.parseInt(gNo));
+		return "/client/travel/genReplyPro";
 	}
 	
 }

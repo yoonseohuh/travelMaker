@@ -82,4 +82,14 @@
 		select * from groupSpace
 	</select>
 	
+	<!-- 개설자 여행총평 -->
+	<update id="genReview" parameterType="Hashmap">
+		update groupspace set genReview=#{genReview} where gNo=#{gNo}
+	</update>
+	
+	<!-- 공개여부 업데이트 -->
+	<update id="updateShared" parameterType="Hashmap">
+		update groupspace set shared=${shared} where gNo=#{gNo}
+	</update>
+	
 </mapper>

@@ -64,22 +64,23 @@ public class CommentController {
 		System.out.println("나와라id" + id);
 		//id = "test4"; //임시 아이디 테스트
 		//여행목록 가져옴
+		System.out.println("여행목록위 들어오니?....");
 		List dtoList = commentService.getMyGroup(id);
-		
+		System.out.println("디티오리스트아래 들어오니?....");
 		//그룹멤버들dto로 가져옴
 		List fin = commentService.groupUser(id);
 		
-		
+		System.out.println("핀아래 들어오니?....");
 		// 여행 갯수 가져옴
 		int count = commentService.countGroup(id);
 		System.out.println("여행목록 카운트" + count);
 		
 		//받는사람이 사용자인 userCmtDTO가져오기
 		List comRecUser = commentService.comRecUser(id);
-		
+		System.out.println("컴리시브 들어오니?....");
 		// 보낸사람이 사용자인 userCmtDTO가져오기
 		List comSenUser = commentService.comSenUser(id);
-		
+		System.out.println("컴샌 들어오니?....");
 		
 		
 		System.out.println("갔다");
@@ -88,6 +89,8 @@ public class CommentController {
 		model.addAttribute("count", count);
 		model.addAttribute("comRecUser", comRecUser);
 		model.addAttribute("comSenUser", comSenUser);
+		
+		System.out.println("코멘트끝!!!!!!!!!!!");
 		
 		return "client/mypage/comment";
 	}

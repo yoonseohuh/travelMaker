@@ -30,5 +30,21 @@
 		update groupMember set status=#{status} where gNo=#{gNo} and id=#{id}
 	</update>
 	
+	<!-- 그룹삭제시 그룹멤버 삭제 -->
+	<delete id="deleteGroupMem" parameterType="int">
+		delete from groupMember where gNo=#{gNo}	
+	</delete>
+	
+	
+	<!-- 개설자 여행총평 -->
+	<update id="genReply" parameterType="Hashmap">
+		update groupMember set genReply=#{genReply} where gNo=#{gNo} and id=#{id}
+	</update>
+	
+	<!-- 총평 쓴거있는지 체크 -->
+	<select id="chReview" parameterType="Hashmap" resultType="GroupMemberDTO">
+		select * from groupMember where id=#{id} and gNo=#{gNo} 
+	</select>
+	
 	
 </mapper>

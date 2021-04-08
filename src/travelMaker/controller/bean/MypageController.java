@@ -15,6 +15,7 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
 import travelMaker.model.dao.ScheduleDAO;
+import travelMaker.model.dto.GroupMemberDTO;
 import travelMaker.model.dto.GroupRequestDTO;
 import travelMaker.model.dto.GroupSpaceDTO;
 import travelMaker.model.dto.QnaBoardDTO;
@@ -48,8 +49,8 @@ public class MypageController {
 		//참여중인 여행 다 가져오기
 		List travelAll = travelService.getMyGroups(id, status);
 		
-		model.addAttribute("travelAll", travelAll);
 		
+		model.addAttribute("travelAll", travelAll);
 		
 		return "client/mypage/myHistory";
 	}
@@ -60,7 +61,19 @@ public class MypageController {
 	public String myHistoryCont(String gNo, Model model)throws Exception {
 		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
 		
+		//총평
+		List<GroupMemberDTO> reviewList = travelService.getReview(Integer.parseInt(gNo));
 		
+		/*
+		if(reviewList==null) {
+			GroupMemberDTO dto = new GroupMemberDTO();
+			dto.setgNo(Integer.parseInt(gNo));
+			reviewList.add(dto);
+		}
+		*/
+		
+		//본인 입력했는지 확인
+		int result = travelService.chReview(Integer.parseInt(gNo), id);
 		
 		GroupSpaceDTO getGroup = travelService.getGroup(Integer.parseInt(gNo));
 		List scheList = travelService.getSchedule(Integer.parseInt(gNo));
@@ -96,11 +109,14 @@ public class MypageController {
 		Map posMem = new HashMap(); 
 		
 		for(int i = 0; i < posList.size(); i++) { 
+			System.out.println("이프문위");
 			if(posList.get(i) == -1) {   //포지션에 번호가 -1 이면
+				System.out.println("이프문아래");
 				int nomalCnt = travelService.posCount(Integer.parseInt(gNo),posList.get(i));
 				posMem.put("일반",nomalCnt);
 				model.addAttribute("nomalCnt",nomalCnt);
 			}else { //그게아니면
+				System.out.println("else안");
 				SmallPosDTO dto = travelService.getPosInfo(posList.get(i));
 				int posCnt = travelService.posCount(Integer.parseInt(gNo),posList.get(i));
 				posMem.put(dto.getPosName(),posCnt);
@@ -113,11 +129,13 @@ public class MypageController {
 
 		
 		
+		model.addAttribute("reviewList",reviewList);
 		model.addAttribute("gList",gList);
 		model.addAttribute("getGroup", getGroup);
 		model.addAttribute("scheList", scheList);
 		model.addAttribute("posMem", posMem);
 		model.addAttribute("gMem", gMem);
+		model.addAttribute("result", result);
 		
 		
 		

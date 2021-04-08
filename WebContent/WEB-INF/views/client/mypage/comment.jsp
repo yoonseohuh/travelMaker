@@ -8,6 +8,12 @@
 	<!-- //top end -->
 	
 	<div class="wrapAll client">
+		<c:if test="${sessionScope.memId==null}">
+			<script>
+				alert("로그인 후에 이용 가능합니다");
+				history.go(-1);
+			</script>
+		</c:if>
 	
 		<jsp:include page="/WEB-INF/views/include/myMenu.jsp" />
 		<!-- myMenu end -->
@@ -33,11 +39,25 @@
 	    		$('#cont2').fadeIn();
 	    	});
 	    });
+		
+		
+		//유효성 검사 
+		function check(){
+			var inputs = document.commentWrite;
+			if(!inputs.comment.value){
+				alert("코멘트를 작성해주세요!");
+				return false;
+			}else if(!inputs.mCont.value){
+				alert("내용을 입력해주세요!");
+				return false;
+			}
+		}
+		
 		</script>
 		
 		
 		<h1>comment</h1>
-		<a id="tab1">조회</a> | <a id="tab2">작성</a>
+		<a style="cursor:pointer" id="tab1">조회</a> | <a style="cursor:pointer" id="tab2">작성</a>
 		
 		
 		
@@ -51,7 +71,7 @@
 		    <ul>
 		    	<c:forEach var="dtoList" items="${dtoList}">
 		        <li class="menu">
-		            <a>${dtoList.subject} ${dtoList.startDate} ~ ${dtoList.endDate}</a>
+		            <a style="cursor:pointer">${dtoList.subject} ${dtoList.startDate} ~ ${dtoList.endDate}</a>
 		            <ul style="display: none;">
 		            <c:forEach var="comRecUser" items="${comRecUser}">
 		            	<c:if test="${dtoList.gNo == comRecUser.gNo}">
@@ -73,7 +93,7 @@
 		    <ul>
 		    	<c:forEach var="dtoList" items="${dtoList}">
 		        <li class="menu">
-		            <a>${dtoList.subject} ${dtoList.startDate} ~ ${dtoList.endDate}</a>
+		            <a style="cursor:pointer">${dtoList.subject} ${dtoList.startDate} ~ ${dtoList.endDate}</a>
 		            <ul style="display: none;">
 		            <c:forEach var="comSenUser" items="${comSenUser}">
 		            	<c:if test="${dtoList.gNo == comSenUser.gNo}">
@@ -90,7 +110,7 @@
 		<!-- //cont1 end  -->	
 		
 		<div id="cont2">
-			<form action="/travelMaker/cmt/commentWritePro.tm" method="get">
+			<form action="/travelMaker/cmt/commentWritePro.tm" name="commentWrite" onsubmit="return check()" method="get">
 			<input type="hidden" name="id" value="${sessionScope.memId}" />
 			<input type="hidden" name="result" value="1" />
 		     	여행목록 : ${sessionScope.memId}
@@ -111,7 +131,7 @@
 		   				</c:if>
 		   		</c:forEach>
 		   		</select> <br/>
-		   		<textarea rows="10" cols="72" name="comment" required></textarea>
+		   		<textarea rows="10" cols="72" name="comment" ></textarea>
 		   		<input type="submit" value="버튼" />
 		   	</form>
 		</div>

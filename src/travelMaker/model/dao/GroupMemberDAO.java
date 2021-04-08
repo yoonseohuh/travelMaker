@@ -17,4 +17,8 @@ public interface GroupMemberDAO {
 	//그룹 참여 수락 및 거절 처리
 	public void changeMemStatus(String id, int gNo, int status) throws Exception;
 	
+	//그룹삭제할때 그룹멤버 삭제
+	public void deleteGroupMem(int gNo);
+	// 본인이 총평 썼는지 확인
+	public GroupMemberDTO chReview(int gNo, String memId);
 }

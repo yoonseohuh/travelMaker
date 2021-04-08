@@ -9,6 +9,34 @@
 	<!-- //top end -->
 	
 	<div class="wrapAll client">
+		<script>
+		$(document).ready(function(){
+	        $('#cont2').hide();
+	        $('#cancel').hide();
+	        $('#tab1').click(function(){
+	    		$('#cont2').show();
+	    		$('#cancel').show();
+	    		$('#tab1').hide();
+	    	});    
+	        $('#cancel').click(function(){
+	    		$('#cont2').hide();
+	    		 $('#cancel').hide();
+	    		$('#tab1').show();
+	    	});    
+	    });
+		//유효성 검사 
+		function check(){
+			var inputs = document.reply;
+			if(!inputs.genReview.value){
+				alert("내용을 입력해주세요.");
+				return false;
+			}else if(!input.genReply.value){
+				alert("내용을 입력해주세요.");
+				return false;
+				}
+			}
+		</script>
+		
 	
 		<jsp:include page="/WEB-INF/views/include/myMenu.jsp" />
 		<!-- myMenu end -->
@@ -70,25 +98,52 @@
 				<tr>
 					<td>
 						<h2>General Review</h2>	
-						개설자의 여행총평 :  
+						개설자의 여행총평 : 
 						
 						<c:if test="${memId == getGroup.id}">
 							<c:if test="${empty getGroup.genReview}">
 								 ${getGroup.id}님 ! 동행자들이 개설자의 후기를 기다리고있어요!
-								 <button onclick="#">총평작성</button>
+							 	<button id="tab1">총평작성</button>
+							 	<form action="/travelMaker/travel/genReviewPro.tm" id="cont2" name="reply" onsubmit="return check()" method="get">
+							 		<input type="hidden" name="id" value="${getGroup.id}" />
+							 		<input type="hidden" name="gNo" value="${getGroup.gNo}" />
+							 		<input type="hidden" name="from" value="myHistory" />
+							 		
+									<textarea cols="100" rows="10" name="genReview" placeholder="개설자 ${getGroup.id}님의 여행총평을 남겨주세요!" ></textarea>
+									<input type="submit" value="작성" />
+								</form>
+								<input type="button" value="취소" id="cancel" />
 							</c:if>
 							<c:if test="${!empty getGroup.genReview}">
-								 ${getGroup.genReview} 뜨나??
+								 ${getGroup.genReview}   -> 세션아이디랑 개설자랑 아이디 똑같을때
 							</c:if>
 						</c:if>
+						
 						<c:if test="${memId != getGroup.id}">
 							<c:if test="${empty getGroup.genReview}">
-								개설자의 총평이 아직 작성되지 않았습니다ㅠ_ㅠ 
+								개설자의 총평이 아직 작성되지 않았습니다ㅠ_ㅠ  -> 세션아이디랑 개설자랑 다를떄
 							</c:if>
 							<c:if test="${!empty getGroup.genReview}">
-								 ${getGroup.genReview} 뜨나??   
-								 <br/><button onclick="window.location='/travelMaker/my/myHistory.tm'">답글달기</button>
-							</c:if>
+								 ${getGroup.genReview} 
+								<c:forEach var="reviewList" items="${reviewList}">
+											<br/>└ ${reviewList.nickname}님 :  ${reviewList.genReply}
+								</c:forEach>
+								<c:if test="${result == 1 }">
+									<br/><button id="tab1">답글달기</button>
+								</c:if>
+							</c:if>	
+							
+								 
+							 	<form action="/travelMaker/travel/genReplyPro.tm" id="cont2" name="reply" method="get">
+							 		<input type="hidden" name="id" value="${memId}" />
+							 		<input type="hidden" name="gNo" value="${getGroup.gNo}" />
+							 		<input type="hidden" name="from" value="myHistory" />
+							 		
+									<textarea cols="100" rows="10" name="genReply" onsubmit="return check()" placeholder="총평에 댓글로 소감을 남겨주세요!" ></textarea>
+									<input type="submit" value="답글작성" />
+								</form>
+								<input type="button" value="취소" id="cancel" />
+								 
 						</c:if>
 						<br/><button onclick="window.location='/travelMaker/my/myHistory.tm'">뒤로</button>
 					</td>

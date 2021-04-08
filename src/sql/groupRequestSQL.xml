@@ -18,4 +18,8 @@
 		select count(*) from grouprequest where gNo=#{gNo} and posNo=#{posNo}
 	</select>
 	
+	<!-- 그룹삭제시 그룹리퀘스트 삭제 -->
+	<delete id="deleteGroupReq" parameterType="int">
+		delete from grouprequest where gNo=#{gNo}	
+	</delete>
 </mapper>

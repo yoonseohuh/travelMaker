@@ -28,6 +28,9 @@
 		<input type="hidden" id="sDate" value="${content.startDate}"/>
 		<input type="hidden" id="eDate" value="${content.endDate}"/>
 		<input type="hidden" id="cDate" value="${content.closingDate}"/>
+		<c:if test="${sessionScope.memId eq 'admin'}">
+			<button onclick="window.location='/travelMaker/admin/adminGroupDel.tm?gNo=${content.gNo}'">그룹삭제</button>
+		</c:if>
 		<h1>${content.subject}</h1>
 		<table>
 			<tr>

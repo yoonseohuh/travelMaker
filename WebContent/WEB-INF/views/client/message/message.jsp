@@ -5,10 +5,31 @@
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
 	<!-- //top end -->
 	
-	<div class="wrapAll">
+	<div class="wrapAll client">
+		<c:if test="${sessionScope.memId==null}">
+			<script>
+				alert("로그인 후에 이용 가능합니다");
+				history.go(-1);
+			</script>
+		</c:if>
+		
+	
 		
 		<script>
 		$(document).ready(function(){
+			
+			$("input:checkbox[name=msg]").on("click",function(){
+				
+				var arr = new Array();
+				$("input:checkbox[name=msg]:checked").each(function(){
+					var checkVal = $(this).val();
+					arr.push(checkVal);
+				});
+				$("#msgNo").val(arr);
+				console.log($('#msgNo').val());
+				
+			});
+			
 	        $(".menu>a").click(function(){      //클래스가 menu의 아랫놈인 a를 클릭하면
 	            var submenu = $(this).next("ul");      //a 다음에있는 "ul을 submenu에 담고 
 	 
@@ -28,18 +49,18 @@
 	    		$('#cont2').fadeIn();
 	    	});
 	    });	
-		
-		
 		</script>
 		
+		
+		
 		<br/><br/><br/><br/>
-		<h1>이곳은 쪽지함이다</h1>
-		<a id="tab1">받은쪽지함</a> | <a id="tab2">보낸쪽지함</a>
+		<h1>쪽지함</h1>
+		<a style="cursor:pointer" id="tab1">받은쪽지함</a> | <a style="cursor:pointer" id="tab2">보낸쪽지함</a>
 		
 		
 		
 		<div id="cont1">
-		<h1>받은쪽지함</h1>
+		<h2>받은쪽지함</h2>
 		<button onclick="window.location='messageWrite.tm'">쪽지쓰기</button>
 		<c:if test="${recMsgCnt == 0}">
 		저런 ! 받은 쪽지가 없네요^^ 
@@ -47,11 +68,12 @@
 		<c:if test="${recMsgCnt > 0}">
 		<form action="messageDel.tm" method="get">
 			<input type="submit" value="삭제" />
+			<input type="hidden" id="msgNo" name="msgNo">
 			<div>
 			<ul>
 			<c:forEach var="recMsgList" items="${recMsgList}"> 
 				<li class="menu">
-				<input type="checkbox" name="msgNo" value="${recMsgList.mNo}" /><a>${recMsgList.mNo} /받는사람: ${recMsgList.receiver}/ 보낸사람: ${recMsgList.sender}  / ${recMsgList.mStatus} / ${recMsgList.reg}  ▼ </a>
+				<input type="checkbox" name="msg" value="${recMsgList.mNo}" /><a>${recMsgList.mNo} /받는사람: ${recMsgList.receiver}/ 보낸사람: ${recMsgList.sender}  / ${recMsgList.mStatus} / ${recMsgList.reg}  ▼ </a>
 					<ul style="display:none;">
 						<li><textarea rows="10" cols="50" readonly style="resize: none;">내용 : ${recMsgList.mCont}</textarea></li><br/>
 						<input type="button" name="dap" value="답장" onclick="window.location='messageWrite.tm?reply=${recMsgList.sender}'" />
@@ -67,7 +89,7 @@
 		
 		
 		<div id="cont2">
-		<h1>보낸쪽지함</h1>
+		<h2>보낸쪽지함</h2>
 		<button onclick="window.location='messageWrite.tm'">쪽지쓰기</button>
 		<c:if test="${senMsgCnt == 0}">
 		보낸쪽지가 없습니다.

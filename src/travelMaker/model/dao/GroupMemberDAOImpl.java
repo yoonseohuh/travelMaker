@@ -61,4 +61,22 @@ public class GroupMemberDAOImpl implements GroupMemberDAO {
 		sqlSession.update("groupMember.changeMemStatus",map);
 	}
 	
+	//그룹삭제할때 그룹멤버 삭제
+	@Override
+	public void deleteGroupMem(int gNo) {
+		sqlSession.delete("groupMember.deleteGroupMem", gNo);
+	}
+	
+	
+	// 본인이 총평 썼는지 확인
+	public GroupMemberDTO chReview(int gNo, String id) {
+		Map map = new HashMap();
+		map.put("gNo", gNo);
+		map.put("id", id);
+		System.out.println("여기들옴???");
+		GroupMemberDTO dto  = sqlSession.selectOne("groupMember.chReview", map);
+		System.out.println("오냐");
+		return dto;
+	}
+		
 }

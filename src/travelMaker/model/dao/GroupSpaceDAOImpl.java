@@ -144,5 +144,40 @@ public class GroupSpaceDAOImpl implements GroupSpaceDAO{
 		List list = sqlSession.selectList("groupSpace.getAllGroups");
 		return list;
 	}
+
+	//개설자 총평작성
+	@Override
+	public void genReview(String id, int gNo, String genReview) {
+		Map map = new HashMap();
+		map.put("id", id);
+		map.put("gNo", gNo);
+		map.put("genReview", genReview);
+		
+		sqlSession.update("groupSpace.genReview", map);
+	}
+
+	
+	//그룹멤버 총평댓글
+	@Override
+	public void genReply(String id, int gNo, String genReply) {
+		Map map = new HashMap();
+		map.put("id", id);
+		map.put("gNo", gNo);
+		map.put("genReply", genReply);
+		
+		sqlSession.update("groupMember.genReply", map);
+	}
+	
+	//공개여부 업데이트
+	@Override
+	public void updateShared(int gNo, int shared) {
+		Map map = new HashMap();
+		map.put("gNo", gNo);
+		map.put("shared", shared);
+		System.out.println("DAO 들어감");
+		sqlSession.update("groupSpace.updateShared", map);
+		System.out.println("DAO 나옴");
+	}
+
 	
 }

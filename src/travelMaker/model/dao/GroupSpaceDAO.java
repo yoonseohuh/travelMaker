@@ -41,4 +41,12 @@ public interface GroupSpaceDAO {
 	public void changeGrpStatus(int gNo, int status) throws Exception;
 	//모든 그룹 글 가져오기
 	public List getAllGroups() throws Exception;
+	
+	//개설자 총평작성
+	public void genReview(String id, int gNo, String genReview);
+	//그룹멤버 총평댓글
+	public void genReply(String id, int gNo, String genReply);
+	//공개여부 업데이트
+	public void updateShared(int gNo, int shared);
+	
 }
