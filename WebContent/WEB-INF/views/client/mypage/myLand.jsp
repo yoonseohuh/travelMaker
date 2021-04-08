@@ -164,27 +164,36 @@
 	<div class="content1"></div>
 	<div class="content2"></div>
 	<div class="content3"></div>
-
-	<h3>좋아요 한 랜드마크 | ${fn:length(lLand)}개</h3>
-	<c:forEach var="land" items="${lLand}">
-		<ul>
-			<li>${land.lName}</li>
-			<li>${land.lType}</li>
-			<li>${land.addr}</li>
-			<li>작성자:${land.writer}</li>
-		</ul>
-	</c:forEach>
 	
-	<h3>작성한 랜드마크 | ${fn:length(wLand)}개</h3>
-	<c:forEach var="land" items="${wLand}">
-		<ul>
-			<li>${land.lName}</li>
-			<li>${land.lType}</li>
-			<li>${land.addr}</li>
-		<!-- 	<li><input type="button" onclick="window.location=''" value="삭제"/></li> -->
-		</ul>
-	</c:forEach>
+	<c:if test="${fn:length(lLand)==0}">
+		아직 좋아요한 랜드마크가 없습니다.
+	</c:if>
+	<c:if test="${fn:length(lLand)>0}">
+		<h3>좋아요 한 랜드마크 | ${fn:length(lLand)}개</h3>
+		<c:forEach var="land" items="${lLand}">
+			<ul>
+				<li>${land.lName}</li>
+				<li>${land.lType}</li>
+				<li>${land.addr}</li>
+				<li>작성자:${land.writer}</li>
+			</ul>
+		</c:forEach>
+	</c:if>
 	
+	<c:if test="${fn:length(wLand)==0}">
+		아직 작성한 랜드마크가 없습니다.	
+	</c:if>
+	<c:if test="${fn:length(wLand)>0}">
+		<h3>작성한 랜드마크 | ${fn:length(wLand)}개</h3>
+		<c:forEach var="land" items="${wLand}">
+			<ul>
+				<li>${land.lName}</li>
+				<li>${land.lType}</li>
+				<li>${land.addr}</li>
+			<!-- 	<li><input type="button" onclick="window.location=''" value="삭제"/></li> -->
+			</ul>
+		</c:forEach>
+	</c:if>
 	
 </div>
 <!-- //wrapAll end -->
