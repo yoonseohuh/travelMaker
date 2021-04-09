@@ -75,7 +75,6 @@
 						image: markerImage, // 마커 이미지 
 						clickable: true
 					});
-					
 					//console.log(positions[i].latlng);
 					
 					// 마커 클릭 시 정보를 뿌려주기 위함
@@ -94,13 +93,13 @@
 							success: function(res){
 								
 								$('#lNo').val(res.lNo);
-								
 								$('.content1').html("<br/><h1>"+res.lName+"</h1><br/><h2>"+res.writer+"님의 랜드마크</h2></br></br>");
 								$('.content2').html("<h3>"+res.lType+"&nbsp;&nbsp;|&nbsp;&nbsp;"+res.addr+"</h3></br></br>");
 								$('.content3').html("<h3>"+res.lCont+"</h3>");
 								
 								for(var i=0;i<arr.length;i++){
 									if(arr[i]==res.lNo){
+										alert("좋아요했다고");
 										$('.like').empty();
 										$('.like').append("좋아요 한 랜드마크입니다&nbsp;"
 												+"<img src=\"../resources/images/heart-colored.png\" width=\"14\"/>"
