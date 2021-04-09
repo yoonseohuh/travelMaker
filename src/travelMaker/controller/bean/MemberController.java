@@ -43,6 +43,12 @@ public class MemberController {
 		return "client/index";
 	}
 	
+	@RequestMapping("undefinedPage.tm")
+	public String undefined() {
+		return "client/undefined";
+	}
+	
+	
 	//회원가입 폼 페이지 
 	@RequestMapping("signupForm.tm")
 	public String signupForm() {

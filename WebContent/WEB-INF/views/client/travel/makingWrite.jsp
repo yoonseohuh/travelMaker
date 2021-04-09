@@ -10,7 +10,7 @@
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
 	<!-- //top end -->
 	
-	<div class="wrapAll">
+	<div class="wrapAll client">
 		<script>
 			function validation(){
 				var inputs = document.inputForm;
@@ -115,40 +115,6 @@
 					minDate: 0,
 					changeMonth: true,
 				});
-				
-				/*
-				예산에 세 자리마다 콤마 찍기: 값이 콤마 붙어서 넘어가길래 일단 보류
-				function isEmpty(value){
-					if(value.length==0||value==null){
-						return true;
-					}else{
-						return false;
-					}
-				}
-				function isNumeric(value){
-					var regExp = /^[0-9]+$/g;
-					return regExp.test(value);
-				}
-				function currencyFormatter(amount){
-					return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',');
-				}
-				$('#inputPrice').on('focus',function(){
-					var val = $('#inputPrice').val();
-					if(!isEmpty(val)){
-						val = val.replace(/,/g,'');
-						$('#inputPrice').val(val);
-					}
-				});
-				$('#inputPrice').on('blur',function(){
-					var val = $('#inputPrice').val();
-					if(!isEmpty(val) && isNumeric(val)){
-						val = currencyFormatter(val);
-						$('#inputPrice').val(val);
-					}
-				});
-				cost 인풋 옆에 이거 붙여주기
-				oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-				*/
 			});
 		</script>
 		
