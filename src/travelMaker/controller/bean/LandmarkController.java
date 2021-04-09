@@ -131,21 +131,21 @@ public class LandmarkController {
 		return likedLand;
 	}
 	
-	
 	@RequestMapping("myLandDelete.tm")
-	public String myLandDelete(int lNo) {
-		System.out.println(lNo);
-		return "client/mypage/myLandDelete";
+	public String myLandDelete(int[] lNo) throws Exception {
+		for(int i=0 ; i<lNo.length ; i++) {
+			landmarkService.deleteMyLand(lNo[i]);
+		}
+		return "redirect:/my/myLand.tm";
 	}
 	
-	@RequestMapping("myLandDeletePro.tm")
-	public String myLandDeletePro(HttpSession session, String pw, String lNo) throws Exception{
-		//아이디, 비밀번호 일치하는지 확인하는 메서드 
-		//맞으면 삭제해주는 메서드
-		//landmarkService.deleteMyLand(pw);
-		System.out.println(pw);
-		System.out.println(lNo);
-		return "redirect:/myLand.tm";
+	@RequestMapping("likedLandCancel.tm")
+	public String likedLandCancel(int[] lNo) throws Exception {
+		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
+		for(int i=0 ; i<lNo.length ; i++) {
+			landmarkService.landmarkLikedCancel(id, lNo[i]);
+		}
+		return "redirect:/my/myLand.tm";
 	}
 	
 	@ResponseBody

@@ -166,7 +166,6 @@ public class MypageController {
 		List<LandmarkBoardDTO> likedLand = new ArrayList();
 		for(int i=0;i<list.size();i++) {
 			int lNo = list.get(i).getlNo();
-			System.out.println(lNo);
 			LandmarkBoardDTO dto = landmarkService.getLand(lNo);
 			likedLand.add(dto);
 		}

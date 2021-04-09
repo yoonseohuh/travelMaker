@@ -51,7 +51,11 @@ public class LandmarkLikedDAOImpl implements LandmarkLikedDAO {
 		return myLandLiked;
 	}
 
-	
+	// 랜드마크 삭제 시 좋아요 레코드 삭제
+	@Override
+	public void deleteLand(int lNo) throws Exception {
+		sqlSession.delete("landmarkLiked.deleteLand",lNo);
+	}
 
 	
 
