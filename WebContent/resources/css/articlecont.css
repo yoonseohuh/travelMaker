@@ -1,2 +1,24 @@
 @charset "UTF-8";
+/*yoonhho*/
+/*makingCont == myHistoryCont == CompletedCont*/
 
+.aContWrap {padding:50px 50px; margin:0 20% 0; max-width:850px;}
+.aContHead {overflow:hidden; padding:20px 0; text-align:center; border-bottom:1px solid #cccccc; font-weight:lighter;}
+.aContTit {float:left; font-weight:normal; font-size:30px;}
+.aContDate {float:left; width:100%; text-align:left; margin-bottom:20px;}
+.aContWri {float:right; padding:15px 0 0;}
+.aContInfo {padding:20px 0;}
+.aInfoTit {float:left; width:100%; text-align:left; font-weight:normal; font-size:35px; margin-bottom:30px;}
+.aContBox {width:100%; overflow:hidden; margin-bottom:60px;}
+.aContLeft {float:left; width:10%; text-align:right; color:#a1a1a1;}
+.aContRight{float:left; width:80%; padding:0 40px 0;}
+.aMemTit {border-top:1px solid #cccccc; padding-top:20px;}
+.aMemCnt {font-size:23px; margin-bottom:15px;}
+.aMemPos {margin-bottom:50px;}
+.aConList {overflow: hidden;}
+.aConList li {float: left; width: 24.25%; height: 200px; border: 0; background: #777; transition: .3s; padding: 45px; margin: 0 1% 1% 0; position: relative;}
+.aConList li:nth-child(4n) {margin: 0 0 1% 0;}
+.comBtn {width: 130px;height: 40px; margin:10px 3px; padding: 0; border: 0; border-radius: 4px; font-size: 15px; color: #191919; background-color: #e9e9e9; cursor:pointer;}
+.comBtn:hover {background-color:#d6d6d6;}
+.btnRight {float:right;}
+textarea {resize:none; padding:20px;}

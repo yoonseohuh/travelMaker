@@ -36,121 +36,130 @@
 				}
 			}
 		</script>
-		
 	
 		<jsp:include page="/WEB-INF/views/include/myMenu.jsp" />
 		<!-- myMenu end -->
-		
-		<div>
-			<table>
-				<tr>
-					<td>
-						${getGroup.startDate} ~ ${getGroup.endDate} <br/>
-						개설자 :${getGroup.id}
-						<h1>${getGroup.subject}</h1>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<h2>Info</h2>
-						<h4>코스설명</h4>
-							${getGroup.courseExpl}<br/>
-						<h4>부가설명</h4>
-							${getGroup.addExpl} <br/>
-						<h4>일	  정</h4>
+		<div class="aContWrap">
+			<div class="aContHead">
+				<div class="aContDate">
+					[${getGroup.startDate} ~ ${getGroup.endDate}]
+				</div>
+				<div class="aContLine">
+					<p class="aContTit">${getGroup.subject}</p>
+					<p class="aContWri">개설자: ${getGroup.id} </p>
+				</div>
+			</div>
+			<div class="aContInfo">
+				<div class="aInfoTit">Info</div>
+				<div class="aContBox">
+					<div class="aContLeft">
+						코스설명
+					</div>
+					<div class="aContRight">
+						${getGroup.courseExpl}
+					</div>	
+				</div>		
+				
+				<div class="aContBox">
+					<div class="aContLeft">
+						부가설명
+					</div>
+					<div class="aContRight">
+						${getGroup.addExpl} 
+					</div>	
+				</div>	
+						
+				<div class="aContBox">
+					<div class="aContLeft">
+						일정
+					</div>
+					<div class="aContRight">
 						<c:forEach var="scheList" items="${scheList}">
-							${scheList.sDate} : ${scheList.sCont} <br/>
+							- ${scheList.sDate} : ${scheList.sCont}
 						</c:forEach>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<h2>Member</h2>
-							가이드  ${fn:length(gMem) - fn:length(posMem)} <br/>
-						<c:forEach var="posMem" items="${posMem}" >
-							${posMem.key} :${posMem.value}명 
-						</c:forEach>
-						<br/>참여 ${fn:length(gMem)}<br/>						
-						<c:forEach var="gMem" items="${gMem}">
-							${gMem.nickname}     
-						</c:forEach>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<h2>Gallery</h2>	
-						<table>
-						<c:forEach var="gList" items="${gList}">
-							<c:if test="${!empty gList.pRoot}">
-								<tr>
-									<td>
-										사진1:<img src="/travelMaker/save/${glist.pRoot}" width="200"/> <br/> <!-- 사진안된다.. -->
-									</td>
-								</tr>
-							</c:if>
-							<c:if test="${empty gList.pRoot}">
-								<h1>게시된 사진이 없습니다.</h1>
-							</c:if>
-						</c:forEach>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<h2>General Review</h2>	
-						개설자의 여행총평 : 
-						
-						<c:if test="${memId == getGroup.id}">
-							<c:if test="${empty getGroup.genReview}">
-								 ${getGroup.id}님 ! 동행자들이 개설자의 후기를 기다리고있어요!
-							 	<button id="tab1">총평작성</button>
-							 	<form action="/travelMaker/travel/genReviewPro.tm" id="cont2" name="reply" onsubmit="return check()" method="get">
-							 		<input type="hidden" name="id" value="${getGroup.id}" />
-							 		<input type="hidden" name="gNo" value="${getGroup.gNo}" />
-							 		<input type="hidden" name="from" value="myHistory" />
-							 		
-									<textarea cols="100" rows="10" name="genReview" placeholder="개설자 ${getGroup.id}님의 여행총평을 남겨주세요!" ></textarea>
-									<input type="submit" value="작성" />
-								</form>
-								<input type="button" value="취소" id="cancel" />
-							</c:if>
-							<c:if test="${!empty getGroup.genReview}">
-								 ${getGroup.genReview}   -> 세션아이디랑 개설자랑 아이디 똑같을때
-							</c:if>
+					</div>	
+				</div>			
+			</div>	
+			<!-- aContInfo end -->		
+			<div class="aInfoTit aMemTit">Member</div>			
+			<p class="aMemCnt">가이드  ${fn:length(gMem) - fn:length(posMem)}명 </p>			
+			<div class="aMemPos">
+				<c:forEach var="posMem" items="${posMem}" >
+					${posMem.key} :${posMem.value}명 
+				</c:forEach>
+			</div>
+			<p class="aMemCnt">	참여 ${fn:length(gMem)}명 </p>			
+			<div class="aMemPos">
+				<c:forEach var="gMem" items="${gMem}">
+					 ${gMem.nickname}     
+				</c:forEach>
+			</div>			
+			<!-- aMemTit end -->			
+			<div class="aInfoTit aMemTit">Gallery</div>					
+			<ul class="aConList">
+				<li>
+					<c:forEach var="gList" items="${gList}">
+						<c:if test="${!empty gList.pRoot}">
+							<img src="/travelMaker/save/${glist.pRoot}" width="200px"/> 
 						</c:if>
-						
-						<c:if test="${memId != getGroup.id}">
-							<c:if test="${empty getGroup.genReview}">
-								개설자의 총평이 아직 작성되지 않았습니다ㅠ_ㅠ  -> 세션아이디랑 개설자랑 다를떄
-							</c:if>
-							<c:if test="${!empty getGroup.genReview}">
-								 ${getGroup.genReview} 
-								<c:forEach var="reviewList" items="${reviewList}">
-											<br/>└ ${reviewList.nickname}님 :  ${reviewList.genReply}
-								</c:forEach>
-								<c:if test="${result == 1 }">
-									<br/><button id="tab1">답글달기</button>
-								</c:if>
-							</c:if>	
-							
-								 
-							 	<form action="/travelMaker/travel/genReplyPro.tm" id="cont2" name="reply" method="get">
-							 		<input type="hidden" name="id" value="${memId}" />
-							 		<input type="hidden" name="gNo" value="${getGroup.gNo}" />
-							 		<input type="hidden" name="from" value="myHistory" />
-							 		
-									<textarea cols="100" rows="10" name="genReply" onsubmit="return check()" placeholder="총평에 댓글로 소감을 남겨주세요!" ></textarea>
-									<input type="submit" value="답글작성" />
-								</form>
-								<input type="button" value="취소" id="cancel" />
-								 
+						<c:if test="${empty gList.pRoot}">
+							<h1>게시된 사진이 없습니다.</h1>
 						</c:if>
-						<br/><button onclick="window.location='/travelMaker/my/myHistory.tm'">뒤로</button>
-					</td>
-				</tr>
-			</table>
+					</c:forEach>
+				</li>
+			</ul>	
+			<div class="aInfoTit aMemTit">General Review</div>		
+			
+			
+			<c:if test="${memId == getGroup.id}">
+				<c:if test="${empty getGroup.genReview}">
+					<p class="aMemPos"> ${getGroup.id}님 ! 동행자들이 개설자의 후기를 기다리고있어요!</p>
+				 	<button id="tab1" class="comBtn btnRight">총평작성</button>
+				 	<form action="/travelMaker/travel/genReviewPro.tm" id="cont2" name="reply" onsubmit="return check()" method="get">
+				 		<input type="hidden" name="id" value="${getGroup.id}" />
+				 		<input type="hidden" name="gNo" value="${getGroup.gNo}" />
+				 		<input type="hidden" name="from" value="myHistory" />
+				 		
+						<textarea cols="100" rows="10" name="genReview" placeholder="개설자 ${getGroup.id}님의 여행총평을 남겨주세요!" ></textarea>
+						<button type="submit" class="comBtn btnRight">작성</button>
+					</form>
+					<button class="comBtn btnRight"  id="cancel">취소</button>
+				</c:if>
+				<!-- -> 세션아이디랑 개설자랑 아이디 똑같을때 -->
+				<c:if test="${!empty getGroup.genReview}">
+					 ${getGroup.genReview}   
+				</c:if>
+			</c:if>
+			
+			<c:if test="${memId != getGroup.id}">
+				<c:if test="${empty getGroup.genReview}">
+					<p class="aMemPos"> 개설자의 총평이 아직 작성되지 않았습니다!</p> <!--세션아이디랑 개설자랑 다를떄 --> 
+				</c:if>
+				<c:if test="${!empty getGroup.genReview}">
+					 ${getGroup.genReview} 
+					<c:forEach var="reviewList" items="${reviewList}">
+								<br/>└ ${reviewList.nickname}님 :  ${reviewList.genReply}
+					</c:forEach>
+					<c:if test="${result == 1 }">
+						<button id="tab1" class="comBtn btnRight">답글달기</button>
+					</c:if>
+				</c:if>	
+					 
+				 	<form action="/travelMaker/travel/genReplyPro.tm" id="cont2" name="reply" method="get">
+				 		<input type="hidden" name="id" value="${memId}" />
+				 		<input type="hidden" name="gNo" value="${getGroup.gNo}" />
+				 		<input type="hidden" name="from" value="myHistory" />
+				 		
+						<textarea cols="100" rows="10" name="genReply" onsubmit="return check()" placeholder="총평에 댓글로 소감을 남겨주세요!" ></textarea>
+						<button class="comBtn btnRight" type="submit">답글작성</button>
+					</form>
+					<button class="comBtn btnRight" id="cancel">취소</button>
+					 
+			</c:if>
+			
+			<button onclick="window.location='/travelMaker/my/myHistory.tm'" class="comBtn btnRight">back</button>
 		</div>
-		
+		<!-- aContWrap end -->
 		
 		
 	
