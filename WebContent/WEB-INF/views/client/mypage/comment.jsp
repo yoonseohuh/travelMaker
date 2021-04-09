@@ -126,7 +126,7 @@
 		   		<select name="groupMem">
 		   		<option value="" selected disabled hidden>동행자를 선택하세요</option>
 		   		<c:forEach var="fin" items="${fin}" >
-		   				<c:if test="${fin.gNo == 4}">
+		   				<c:if test="${fin.gNo == 51}">
 		   					<option value="${fin.id}">${fin.gNo}/${fin.nickname}/${fin.id}</option>
 		   				</c:if>
 		   		</c:forEach>
