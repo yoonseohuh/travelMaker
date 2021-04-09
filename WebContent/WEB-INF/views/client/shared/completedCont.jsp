@@ -12,9 +12,9 @@
 
 	<c:if test="${sessionScope.memId==null}">
 		<script>
-				alert("자세한 정보를 보시려면 로그인을 해주세요.");
-				history.go(-1);
-			</script>
+			alert("자세한 정보를 보시려면 로그인을 해주세요.");
+			history.go(-1);
+		</script>
 	</c:if>
 	<c:if test="${sessionScope.memId!=null}">
 		<table>
@@ -27,23 +27,19 @@
 			<tr>
 				<td>
 					<h2>Info</h2>
-					<h4>코스설명</h4> 
-						${article.courseExpl}<br />
-					<h4>부가설명</h4> 
-						${article.addExpl} <br />
-					<h4>일 정</h4> 
-					<c:forEach var="schedules" items="${scheList}">
-						${article.sDate} : ${article.sCont} <br />
+					<h4>코스설명</h4> ${article.courseExpl}<br />
+					<h4>부가설명</h4> ${article.addExpl} <br />
+					<h4>일 정</h4> <c:forEach var="schedules" items="${schedules}">
+						${schedules.sDate} : ${schedules.sCont} <br />
 					</c:forEach>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<h2>Member</h2> 가이드 ${fn:length(gMem) - fn:length(posMem)} <br />
+					<h2>Member</h2> 가이드 ${fn:length(gMem) - fn:length(posMem)}명 <br />
 					<c:forEach var="posMem" items="${posMem}">
 						${posMem.key} :${posMem.value}명 
-					</c:forEach> <br /> 참여 ${fn:length(gMem)}<br /> 
-					<c:forEach var="gMem" items="${gMem}">
+					</c:forEach> <br /> 참여 ${fn:length(gMem)}명<br /> <c:forEach var="gMem" items="${gMem}">
 						${gMem.nickname}
 					</c:forEach>
 				</td>
@@ -68,27 +64,37 @@
 			</tr>
 			<tr>
 				<td>
-					<h2>General Review</h2> 
-					개설자의 여행총평 : 
-					<c:if test="${memId == getGroup.id}">
-							<c:if test="${empty getGroup.genReview}">
+					<h2>General Review</h2> 개설자의 여행총평 : <c:if
+						test="${memId == getGroup.id}">
+						<c:if test="${empty getGroup.genReview}">
 								총평을 작성 합시다.
 							</c:if>
-							<c:if test="${!empty getGroup.genReview}">
+						<c:if test="${!empty getGroup.genReview}">
 								 ${getGroup.genReview}
 							</c:if>
-						</c:if>
-						<c:if test="${memId != getGroup.id}">
-							<c:if test="${empty getGroup.genReview}">
+					</c:if> <c:if test="${memId != getGroup.id}">
+						<c:if test="${empty getGroup.genReview}">
 								개설자의 총평이 작성되지 않았습니다.
 							</c:if>
-							<c:if test="${!empty getGroup.genReview}">
+						<c:if test="${!empty getGroup.genReview}">
 								 ${getGroup.genReview}
 							</c:if>
-						</c:if>
+					</c:if>
 				</td>
-			</tr>	
+			</tr>
 		</table>
+		
+		<input type="button" id="sharedLiked" value="좋아요" onclick="window.location='completedContPro.tm'">
+		<script>
+		$("#sharedLiked").click(function(){
+			if(confirm("좋아요를 누르시겠습니까?")){
+				document.form.action="sharedLiked.do";
+				document.form.submit();
+			}
+			alert("좋아요 완료!")
+		});
+		</script>
+		
 	</c:if>
 </div>
 <!-- //wrapAll end -->

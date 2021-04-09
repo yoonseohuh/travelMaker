@@ -49,7 +49,7 @@ public class SharedDAOImpl  implements SharedDAO{
 	}
 
 	@Override
-	public void sharedLiked(int gNo, String id) {
+	public void sharedLiked(int gNo, String id) throws Exception{
 		Map map = new HashMap();
 		map.put("gNo", gNo);
 		map.put("id", id);
@@ -57,15 +57,18 @@ public class SharedDAOImpl  implements SharedDAO{
 		sqlSession.insert("shared.insertSharedLiked", map);
 		
 	}
-
+	
 	@Override
-	public void sharedlikedCnt(int gNo, int i) {
+	public void sharedlikedCnt(int gNo, int cnt) throws Exception {
 		Map map = new HashMap();
 		map.put("gNo", gNo);
-		map.put("i", i);
-		sqlSession.update("shared.sharedlikedCnt", map);
+		map.put("cnt", cnt);
+		System.out.println("dao 오니?");
+		sqlSession.update("shared.sharedLikedCnt", map);
 		
 	}
+
+
 	
 	
 	
