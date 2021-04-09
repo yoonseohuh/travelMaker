@@ -137,8 +137,9 @@
 			});
 		</script>
 		<form action="/travelMaker/land/landWritePro.tm" name="inputForm" onsubmit="return validation()" method="post">
-			<input type="hidden" name="xLoc" id="xLoc">
-			<input type="hidden" name="yLoc" id="yLoc">
+			<input type="hidden" name="xLoc" id="xLoc"/>
+			<input type="hidden" name="yLoc" id="yLoc"/>
+			<input type="hidden" name="lOpen" value="0"/>
 			<table>
 				<tr>
 					<td>랜드마크 장소명</td>
@@ -155,13 +156,6 @@
 				<tr>
 					<td>랜드마크 주소</td>
 					<td><input type="text" name="addr" id="road_address_name" readonly></td>
-				</tr>
-				<tr>
-					<td>공개범위</td>
-					<td>
-						<input type="radio" name="lOpen" value="0">전체 공개
-						<input type="radio" name="lOpen" value="1">회원 공개
-					</td>
 				</tr>
 				<tr>
 					<td>랜드마크 소개</td>

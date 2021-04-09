@@ -38,8 +38,8 @@ public class LandmarkBoardDAOImpl implements LandmarkBoardDAO{
 		return land;
 	}
 	
-	public void deletemyLand(String id) throws Exception{
-		sqlSession.delete("landmarkBoard.deletemyLand", id);
+	public void deletemyLand(int lNo) throws Exception{
+		sqlSession.delete("landmarkBoard.deletemyLand", lNo);
 	}
 
 	@Override

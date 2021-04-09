@@ -47,10 +47,13 @@ public class LandmarkServiceImpl implements LandmarkService{
 		return land;
 	}
 
-	// 내 마이랜드 삭제
+	// 랜드마크 삭제
 	@Override
-	public void deleteMyLand(String id) throws Exception{
-		landmarkBoardDAO.deletemyLand(id);
+	public void deleteMyLand(int lNo) throws Exception{
+		//landmarkBoard 테이블에서 해당 레코드 하나 삭제 후
+		landmarkBoardDAO.deletemyLand(lNo);
+		//해당 랜마에 좋아요 눌렀던 레코드도 모두 삭제
+		landmarkLikedDAO.deleteLand(lNo);
 	}
 
 	@Override
