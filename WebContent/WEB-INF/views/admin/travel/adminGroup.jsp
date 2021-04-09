@@ -5,6 +5,14 @@
 	<jsp:include page="/WEB-INF/views/include/adminMenu.jsp" />
 	<!-- //adminMenu end -->
 	
+	<c:if test="${sessionScope.memId != 'admin'}">
+      <script>
+         alert("관리자만 사용가능한 페이지 입니다.");
+         history.go(-1);
+      </script>
+   </c:if>
+	
+	
 	<div class="wrapAll admin">
 		
 		<h1>그룹관리</h1>
@@ -34,7 +42,7 @@
 			<c:forEach var="groupAllList" items="${groupAllList}" varStatus="status">
 			<li>
 				<button onclick="window.location='/travelMaker/admin/adminGroupDel.tm?gNo=${groupAllList.gNo}'">그룹삭제</button>
-				<a href="/travelMaker/travel/makingCont.tm?gNo=${groupAllList.gNo}">
+				<a href="/travelMaker/travel/makingCont.tm?gNo=${groupAllList.gNo}&id=${memId}">
 				<p>No.${status.count}</p>
 				<p>그룹번호 : ${groupAllList.gNo}</p>
 				<p>개설자ID : ${groupAllList.id}</p>
