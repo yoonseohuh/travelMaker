@@ -50,13 +50,20 @@ public class SharedDAOImpl  implements SharedDAO{
 
 	@Override
 	public void sharedLiked(int gNo, String id) {
-		// TODO Auto-generated method stub
+		Map map = new HashMap();
+		map.put("gNo", gNo);
+		map.put("id", id);
+		
+		sqlSession.insert("shared.insertSharedLiked", map);
 		
 	}
 
 	@Override
 	public void sharedlikedCnt(int gNo, int i) {
-		// TODO Auto-generated method stub
+		Map map = new HashMap();
+		map.put("gNo", gNo);
+		map.put("i", i);
+		sqlSession.update("shared.sharedlikedCnt", map);
 		
 	}
 	

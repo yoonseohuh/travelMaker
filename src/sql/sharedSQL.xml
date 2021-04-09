@@ -22,6 +22,14 @@
 		update groupSpace set readCnt = readCnt+1 where gNo=#{gNo}
 	</update>
 	
+	<insert id="insertSharedLiked">
+		insert into groupSpace values(#{gNo},#{id})
+	</insert>
+	
+	<update id="sharedlikedCnt">
+		update groupSpace set likedCnt = likedCnt+1 where gNo=#{gNo} and id=#{id}
+	</update>
+	
 	
   		
 </mapper>

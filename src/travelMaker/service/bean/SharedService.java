@@ -9,6 +9,9 @@ public interface SharedService {
 	public Map getArtilces(String pageNum) throws Exception;
 
 	public GroupSpaceDTO getArticle(int gNo) throws Exception;
+	
+	// 좋아요 
+	public void sharedLiked(int gNo, String id) throws Exception;
 
 
 
