@@ -20,7 +20,7 @@
 			</div>
 			<!-- headCont end -->
 		</div>
-		<!--manualWrap end -->
+		<!--manualHead end -->
 		<div class="manualBody">
 			<div class="manualInfo">
 				<div class="manualTitle">
@@ -32,13 +32,13 @@
 			</div>
 			<!--manualInfo end -->
 			<div class="picWrap">
-				<div class="manualPic">
+				<div class="manualPic soloT">
 					<div class="picTxt">
 						<p class="picTxtHead">1인일 때</p>
 						<p class="picTxtSub">혼자 여행을 개설하고 경험을 쌓아 승급해보세요.</p>
 					</div>
 				</div>
-				<div class="manualPic sec">
+				<div class="manualPic sec groupT">
 					<div class="picTxt">
 						<p class="picTxtHead">여러명</p>
 						<p class="picTxtSub">혼자 여행을 개설하고 경험을 쌓아 승급해보세요.</p>

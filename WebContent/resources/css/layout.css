@@ -4,7 +4,7 @@
 
 /*wrapAll*/
 .wrapAll {overflow: hidden; width: 100%; height: auto; min-height: 550px;}
-.wrapAll.client {background: #ccc; padding: 80px;}
+.wrapAll.client {padding: 80px;}
 .wrapAll.admin {padding: 80px 80px 80px 330px;}
 
 
