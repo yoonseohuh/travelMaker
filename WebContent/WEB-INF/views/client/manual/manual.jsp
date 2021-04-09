@@ -73,7 +73,7 @@
 				<div class="txtArea sec">
 					<div class="txtLoc">
 						<div class="txtTitle">
-							<p>혼자만 여행해서는 리더가 될 수 없어요!</p>
+							<p>여수밤바다 그 조명에 담긴...</p>
 						</div>
 						<div class="txtCont">
 							<p>여수 밤바다 이 조명에 담긴아름다운 얘기가 있어네게 들려주고파전활 걸어뭐 하고
