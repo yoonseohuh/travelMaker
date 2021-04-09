@@ -12,6 +12,8 @@
 		$('#myMenuWrap').children('li').eq(0).addClass('on');
 	}else if(nowUrl == "/travelMaker/my/myHistory.tm"){
 		$('#myMenuWrap').children('li').eq(1).addClass('on');
+	}else if(nowUrl == "/travelMaker/my/myHistoryCont.tm"){
+		$('#myMenuWrap').children('li').eq(1).addClass('on');
 	}else if(nowUrl == "/travelMaker/cmt/comment.tm"){
 		$('#myMenuWrap').children('li').eq(2).addClass('on');
 	}else if(nowUrl == "/travelMaker/my/myLand.tm"){

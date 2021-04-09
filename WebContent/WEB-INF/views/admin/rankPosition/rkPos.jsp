@@ -33,7 +33,12 @@
 			}
 		}
    	</script>
-   	
+   	<c:if test="${sessionScope.memId != 'admin'}">
+		<script>
+			alert("관리자만 사용가능한 페이지 입니다.");
+			history.go(-1);
+		</script>
+	</c:if>
 	<div class="wrapAll admin">
 		<c:if test="${fn:length(rkList)==0}">
 			<h3>랭크를 추가해주세요</h3>

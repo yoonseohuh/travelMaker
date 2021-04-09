@@ -2,10 +2,46 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
 	<jsp:include page="/WEB-INF/views/include/adminMenu.jsp" />
+	<script>
+	//유효성 검사 
+	function check(){
+		var inputs = document.memberModi;
+		if(!inputs.rk.value){
+			alert("레벨을 입력해주세요");
+			return false;
+		}else if(!inputs.position1.value){
+			alert("포지션1을 입력하세요");
+			return false;
+		}else if(!inputs.position2.value){
+			alert("포지션2를 입력하세요");
+			return false;
+		}else if((inputs.position2.value == inputs.position1.value) && inputs.position1.value !=0){
+			alert("포지션1과 2를 다르게 선택해주세요");
+			return false;
+		}else if(!inputs.travelCnt.value){
+			alert("여행 횟수를 입력하세요");
+			return false;
+		}else if(inputs.status.value != 0 && inputs.status.value != 1 && inputs.status.value != 2 &&inputs.status.value != 99 ){
+			alert("회원상태를 0,1,2,99 중에 선택하여 입력하세요");
+			return false;
+		}
+	}
+	</script>
+	<c:if test="${sessionScope.memId != 'admin'}">
+		<script>
+			alert("관리자만 사용가능한 페이지 입니다.");
+			history.go(-1);
+		</script>
+	</c:if>
 	<!-- //adminMenu end -->
-	
+	<c:if test="${sessionScope.memId != 'admin'}">
+		<script>
+			alert("관리자만 사용가능한 페이지 입니다.");
+			history.go(-1);
+		</script>
+	</c:if>
 	<div class="wrapAll admin">
-	    <form action="/travelMaker/admin/memberModiPro.tm" method="post">
+	    <form action="/travelMaker/admin/memberModiPro.tm" name="memberModi" onsubmit="return check()" method="post">
 	    	<input type="hidden" name="id" value="${mem.id }"/>
 			<table>
 				<tr>
@@ -38,13 +74,13 @@
 				<tr>
 					<td>포지션1</td>
 					<td>
-						<input type="text" name="position1" value="${mem.position1}"/>
+						<input type="number" min="0" name="position1" value="${mem.position1}"/>
 					</td>
 				</tr>
 				<tr>
 					<td>포지션2</td>
 					<td>
-						<input type="text" name="position2" value="${mem.position2}"/>
+						<input type="number" min="0" name="position2" value="${mem.position2}"/>
 					</td>
 				</tr>
 				<tr>
@@ -57,12 +93,12 @@
 				</tr>
 				<tr>
 					<td>여행횟수</td>
-					<td><input type="text" name="travelCnt" value="${mem.travelCnt}"/></td>
+					<td><input type="number" min="0" name="travelCnt" value="${mem.travelCnt}"/></td>
 				</tr>
 				<tr>
 					<td>회원 상태</td>
 					<td>
-						<input type="text" name="status" value="${mem.status}"/><br/>
+						<input type="number" name="status" value="${mem.status}"/><br/>
 						0:정상/1:활동정지/2:탈퇴/99:관리자
 					</td>
 				</tr>

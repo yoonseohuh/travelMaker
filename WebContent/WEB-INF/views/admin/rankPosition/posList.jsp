@@ -67,6 +67,12 @@
 				}
 			}
    	</script>
+   	<c:if test="${sessionScope.memId != 'admin'}">
+		<script>
+			alert("관리자만 사용가능한 페이지 입니다.");
+			history.go(-1);
+		</script>
+	</c:if>
 	<div class="wrapAll admin">
 		<div id="list">
 			
@@ -78,26 +84,6 @@
 				</tr>
 			</table>
 		</c:if>
-		<!-- 포지션 추가  -->
-		<form action="/travelMaker/admin/addSPosPro.tm" name="addPosForm" onsubmit="return check()" method="post" enctype="multipart/form-data">
-			<table>
-	    		<tr>
-					<th>포지션 대분류</th>
-					<th>이모티콘</th>
-					<th>포지션 이름</th>
-					<th>포지션 설명</th>
-					<th>버튼</th>
-				</tr>
-				<tr>
-					<td><input type="number" min="1" max="6" name="posCate" placeholder="숫자 입력"/></td>
-					<td><input type="file" name="img"/></td>
-					<td><input type="text" name="posName"/></td>
-					<td><input type="text" name="posExpl"/></td>
-					<td><input type="submit" value="추가"/></td>
-				</tr>
-	  		  </table>
-		</form>
-		<br/>
 		<!-- 포지션 대분류 보여주기 -->
 		<table style="margin:50px 0;">
 			<tr>
@@ -119,7 +105,28 @@
 				<td>히든</td>
 			</tr>
 		</table>
+		<br/><br/>
+		<!-- 포지션 추가  -->
+		<form action="/travelMaker/admin/addSPosPro.tm" name="addPosForm" onsubmit="return check()" method="post" enctype="multipart/form-data">
+			<table>
+	    		<tr>
+					<th>포지션 대분류</th>
+					<th>이모티콘</th>
+					<th>포지션 이름</th>
+					<th>포지션 설명</th>
+					<th>버튼</th>
+				</tr>
+				<tr>
+					<td><input type="number" min="1" max="6" name="posCate" placeholder="숫자 입력"/></td>
+					<td><input type="file" name="img"/></td>
+					<td><input type="text" name="posName"/></td>
+					<td><input type="text" name="posExpl"/></td>
+					<td><input type="submit" value="추가"/></td>
+				</tr>
+	  		  </table>
+		</form>
 		<br/>
+		
 		<!-- 포지션 분류 선택  
 		<form id="inputForm">
 			<input type="hidden" name="pageNum" value="${pageNum}"/>
