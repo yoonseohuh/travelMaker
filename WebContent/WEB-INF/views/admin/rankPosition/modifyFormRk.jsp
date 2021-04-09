@@ -4,10 +4,34 @@
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
 
 	<jsp:include page="/WEB-INF/views/include/adminMenu.jsp" />
+	<script>
+		//유효성 검사 
+		function check(){
+			var inputs = document.modiRk;
+			if(!inputs.rkName.value){
+				alert("등급이름을 입력해주세요");
+				return false;
+			}else if(!inputs.rkNeed.value){
+				alert("요구 횟수를 입력하세요");
+				return false;
+			}else if(!inputs.rkExpl.value){
+				alert("주요설명을 입력해주세요");
+				return false;
+			}else if(!inputs.rkAddExpl.value){
+				alert("부가설명을 입력해주세요 ");
+				return false;
+			}
+		}
+	</script>
 	<!-- //adminMenu end -->
-	
+	<c:if test="${sessionScope.memId != 'admin'}">
+		<script>
+			alert("관리자만 사용가능한 페이지 입니다.");
+			history.go(-1);
+		</script>
+	</c:if>
 	<div class="wrapAll admin">
-		<form action="/travelMaker/admin/modifyProRk.tm" method="post">
+		<form action="/travelMaker/admin/modifyProRk.tm" name="modiRk" onsubmit="return check()" method="post">
 			<input type="hidden" name="rkNo" value="${rdto.rkNo}" />
 			<table>
 				<tr>

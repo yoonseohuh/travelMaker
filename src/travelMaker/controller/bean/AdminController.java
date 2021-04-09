@@ -80,6 +80,7 @@ public class AdminController {
 	//회원 정보수정 버튼으로 id 넘겨 받음 
 	@RequestMapping("memberModiForm.tm")
 	public String memberModiForm(String id,Model model) {
+		
 		//id로 mem 전체 정보 받아오기
 		TmUserDTO mem = memService.getMember(id);
 		//posNo으로 posName 구하는 메서드

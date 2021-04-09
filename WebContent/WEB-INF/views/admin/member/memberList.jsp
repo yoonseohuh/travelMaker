@@ -5,7 +5,12 @@
 
 	<jsp:include page="/WEB-INF/views/include/adminMenu.jsp" />
 	<!-- //adminMenu end -->
-	
+	<c:if test="${sessionScope.memId != 'admin'}">
+		<script>
+			alert("관리자만 사용가능한 페이지 입니다.");
+			history.go(-1);
+		</script>
+	</c:if>
 	<div class="wrapAll admin">
 		<h1>회원 관리</h1>
 		<br/><br/>

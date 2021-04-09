@@ -74,7 +74,7 @@
 	</select>
 	
 	<update id="updateMember" parameterType="TmUserDTO">
-		update tmUser set nickname=#{nickname},gender=#{gender},rk=#{rk},
+		update tmUser set gender=#{gender},rk=#{rk},
 		position1=#{position1},position2=#{position2},travelCnt=#{travelCnt},status=#{status} 
 		where id=#{id}
 	</update>
