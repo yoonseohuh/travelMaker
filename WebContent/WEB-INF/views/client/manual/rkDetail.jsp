@@ -76,6 +76,7 @@
 						<div class="rightSub">
 							<p>1인 여행 개설</p>
 							<p>생성된 모험에 참여 가능</p>
+							<a href="manual.tm" class="posA rankA">메뉴얼 ></a>
 						</div>	
 					</div>
 			</div>
