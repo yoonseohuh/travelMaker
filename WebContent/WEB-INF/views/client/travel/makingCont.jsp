@@ -143,7 +143,12 @@
 					<c:if test="${sessionScope.memId!=content.id && memStatus==3}">
 						개설자에 의해 강제퇴장된 여행입니다.
 					</c:if>
-					<input type="button" value="리스트" onclick="window.location='/travelMaker/travel/makingList.tm?pageNum=${pageNum}'"/>					
+					<c:if test="${memId eq 'admin'}"> 
+						<input type="button" value="리스트" onclick="window.location='/travelMaker/admin/adminGroup.tm'"/>	
+					</c:if>
+					<c:if test="${memId ne 'admin'}"> 
+						<input type="button" value="리스트" onclick="window.location='/travelMaker/travel/makingList.tm?pageNum=${pageNum}'"/>		
+					</c:if>			
 					<c:if test="${sessionScope.memId==content.id}">
 						<input type="button" value="삭제" onclick="removeCheck()"/>											
 					</c:if>

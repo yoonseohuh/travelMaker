@@ -297,8 +297,7 @@
 											<input type="button" value="취소" id="cancel" />
 										</c:if>
 										<c:if test="${!empty grpSpace.genReview}">
-											개설자의 총평 : ${grpSpace.genReview}   -> 세션아이디랑 개설자랑 아이디 똑같을때 
-											
+											개설자의 총평 : ${grpSpace.genReview}
 											<c:if test="${grpSpace.shared == 0}">   <!-- 그룹스페이스 쉐어드가 0이면 공개여부 보여줌 -->
 												<form action="/travelMaker/travel/groupSpace.tm" name="openOrbOpen" method="get">
 													<input type="hidden" name="gNo" value="${grpSpace.gNo}" />
