@@ -76,7 +76,7 @@
 						clickable: true
 					});
 					
-				//	console.log(positions[i].latlng);
+					//console.log(positions[i].latlng);
 					
 					// 마커 클릭 시 정보를 뿌려주기 위함
 					kakao.maps.event.addListener(marker, 'click', function(mouseEvent) {
@@ -92,7 +92,7 @@
 							contentType: "application/json",
 							data: JSON.stringify(data),
 							success: function(res){
-								console.log(res);
+								
 								$('#lNo').val(res.lNo);
 								
 								$('.content1').html("<br/><h1>"+res.lName+"</h1><br/><h2>"+res.writer+"님의 랜드마크</h2></br></br>");
@@ -101,17 +101,19 @@
 								
 								for(var i=0;i<arr.length;i++){
 									if(arr[i]==res.lNo){
-										$('.likeBtn').html("좋아요 한 랜드마크입니다&nbsp;"
+										$('.like').empty();
+										$('.like').append("좋아요 한 랜드마크입니다&nbsp;"
 												+"<img src=\"../resources/images/heart-colored.png\" width=\"14\"/>"
 												+"<br/><input type=\"button\" onclick=\"window.location='/travelMaker/my/myLand.tm'\" value=\"나의 랜드마크\"/>"
 										);
+										$('.likeBtn').hide();
 									}else{
-										$('.like').show();
+										$('.like').empty();
+										$('.likeBtn').show();
 									}
 								}
 							}
 						});
-						
 					});//addListener
 				}//for
 			}//markers
@@ -134,7 +136,7 @@
 						$('.likeBtn').html("좋아요 한 랜드마크입니다&nbsp;"
 								+"<img src=\"../resources/images/heart-colored.png\" width=\"14\"/>"
 								+"<br/><input type=\"button\" onclick=\"window.location='/travelMaker/my/myLand.tm'\" value=\"나의 랜드마크\"/>"
-						);	
+						);
 					}
 				});
 			});//likeBtn
@@ -149,8 +151,8 @@
 	<div class="content2"></div>
 	<div class="content3"></div>
 	
-	<div class="like">
-	</div>
+	<div class="like"></div>
+	
 	<form class="likeBtn">
 		<input type="hidden" id="lNo" name="lNo"/>
 		<input type="hidden" name="id" value="${sessionScope.memId}"/>

@@ -21,4 +21,8 @@
 		select * from landmarkLiked where id=#{value}
 	</select>
 	
+	<delete id="deleteLand" parameterType="int">
+		delete from landmarkLiked where lNo=#{value}
+	</delete>
+	
 </mapper>

@@ -11,57 +11,39 @@
 	
 	<div class="wrapAll client">
 		<script>
+		
+			function validation(){
+				var inputs = document.searchForm;
+				if(!inputs.startD.value){
+					alert("시작일을 선택해주세요");
+					return false;
+				}
+				if(!inputs.endD.value){
+					alert("종료일을 선택해주세요");
+					return false;
+				}
+			}
+		
 			$(document).ready(function(){
 				
 				$('#startD').datepicker({
 					showOn: "both",
 					buttonText: "날짜선택",
 					dateFormat: "yymmdd",
-					changeMonth: true
+					changeMonth: true,
+					onClose: function(selectedDate) {    
+						$("#endD").datepicker("option","minDate",selectedDate);	//종료일의 최소일은 시작일
+					}  
 				});
 				$('#endD').datepicker({
 					showOn: "both",
 					buttonText: "날짜선택",
 					dateFormat: "yymmdd",
-					changeMonth: true
+					changeMonth: true,
+					onClose: function(selectedDate) {
+						$("#startD").datepicker("option","maxDate",selectedDate);	//시작일의 최대일은 종료일
+					}
 				});
-
-			/*
-				$('#searchForm').submit(function(event){
-					event.preventDefault();
-					var data = {};
-					$.each($(this).serializeArray(), function(index, i){
-						data[i.name] = i.value;
-					});
-					
-					$.ajax({
-						url: "/travelMaker/travel/listSearch.tm",
-						type: "POST",
-						dataType: "json",
-						contentType: "application/json",
-						data: JSON.stringify(data),
-						success: function(res){
-							var searchValues = JSON.parse(res);
-							console.log(res);
-							console.log(res.startD);
-							console.log(res.endD);
-						//	console.log(searchValues.articleList[0].subject);
-							var currentLocation = window.location;
-							$('.list').load(currentLocation + ' .list');
-							$('#articleTable').remove();
-							$('.pageNumbers').remove();
-							$('#searchTable').remove();
-							$('#list').append("<div id=\"searchTable\"><ul class=\"makingList\">");
-							for(var i=0 ; i<searchValues.articleList.length ; i++ ){
-								$('#list').append("<li><a href=\"makingCont.tm?gNo="+searchValues.articleList[i].gNo+"\">");
-								$('#list').append("<p class=\"no\">"+searchValues.articleList[i].dongsung+"</td>");
-								$('#list').append("<td><a href=\"makingCont.tm?gNo="+searchValues.articleList[i].gNo+"\">"+searchValues.articleList[i].subject+"</a></td></tr>");
-							}
-							$('#list').append("</ul></div>");
-						}
-					});
-				});
-			*/
 			});
 		</script>
 		<!-- search script end -->
@@ -108,7 +90,7 @@
 		</c:if>
 		
 		<!-- 검색창 -->
-		<form id="searchForm" method="post" action="makingList.tm">
+		<form id="searchForm" name="searchForm" onsubmit="return validation()" method="post" action="makingList.tm">
 			IN <input type="text" id="startD" name="startD"/>
 			OUT <input type="text" id="endD" name="endD"/>
 			<input type="submit" value="검색"/>

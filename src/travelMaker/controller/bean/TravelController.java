@@ -80,7 +80,7 @@ public class TravelController {
 	@Scheduled(fixedDelay = 1800000)
 	public void memberRankCheck() throws Exception {
 		Date date = new Date();
-		System.out.println("30분마다 호출"+date);
+		System.out.println("30분마다 호출 "+date);
 		List<TmUserDTO> list = memberService.getAllMembers();
 		for(int i=0 ; i<list.size() ; i++) {
 			TmUserDTO dto = list.get(i);
@@ -283,6 +283,18 @@ public class TravelController {
 			}
 		}
 		
+		//새로들어온 신청에서 신청포지션 이름 보여주기위함
+		List posName = new ArrayList();
+		for(int i=0; i< awaiters.size(); i++) {
+			if(((GroupRequestDTO)awaiters.get(i)).getPosNo() != -1) {
+				SmallPosDTO grpReqPos = travelService.getPosInfo(((GroupRequestDTO)awaiters.get(i)).getPosNo());
+				posName.add(grpReqPos);   //(포스번호, 포스이름)
+			}
+		}
+		
+
+		
+		
 		//jbr여기부터...
 		//status = 1 인 멤버들의 그룹리퀘스트dto
 		List<GroupRequestDTO> joinMem = new ArrayList<GroupRequestDTO>();
@@ -380,18 +392,14 @@ public class TravelController {
 			shared = "";
 		}
 		*/
-		System.out.println("여기도안오나?");
 		
 		if("1".equals(shared) || "2".equals(shared)) {
-			
-			System.out.println("shared전" + shared);
 			travelService.updateShared(gNo, Integer.parseInt(shared));
-			System.out.println("shared후" + shared);
 			int sharedResult = grpSpace.getShared();
 			model.addAttribute("sharedResult",sharedResult);
 		}
 		
-		
+		model.addAttribute("posName", posName);
 		model.addAttribute("getGroup",getGroup);
 		model.addAttribute("reviewList",reviewList);
 		model.addAttribute("result",result);

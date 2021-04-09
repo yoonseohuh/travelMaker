@@ -12,7 +12,8 @@ public interface LandmarkLikedDAO {
 	public void landmarkLikedCancel(String id, int lNo) throws Exception;
 	// 내가 좋아요 한 랜드마크 
 	public List myLandLiked(String id) throws Exception;	
-
+	// 랜드마크 삭제 시 좋아요 레코드 삭제
+	public void deleteLand(int lNo) throws Exception;
 	
 	
 }

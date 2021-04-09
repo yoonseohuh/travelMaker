@@ -17,8 +17,8 @@ public interface LandmarkBoardDAO {
 	public List myLand(String id) throws Exception;
 	// 랜드마크 가져오기
 	public LandmarkBoardDTO getLand(int lNo) throws Exception;
-	// 내가 작성한 랜드마크 삭제
-	public void deletemyLand(String id) throws Exception;
+	// 랜드마크 삭제
+	public void deletemyLand(int lNo) throws Exception;
 	// 랜드마크 좋아요 하나 올려주기
 	public void landmarkLikedCnt(int lNo, int ud) throws Exception;
 	

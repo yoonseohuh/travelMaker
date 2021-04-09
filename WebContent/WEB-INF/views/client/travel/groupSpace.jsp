@@ -231,7 +231,16 @@
 										<c:if test="${req.reqType==1}">가이드</c:if>
 									</td>
 									<td>
-										<c:if test="${req.posNo!=-1}">${req.posNo}</c:if>
+										<c:if test="${req.posNo!=-1}">
+											<c:forEach var="posName" items="${posName}">
+												<c:if test="${posName.posNo == req.posNo}">
+													${posName.posName}
+												</c:if>
+											</c:forEach>
+										</c:if>
+										<c:if test="${req.posNo == -1}">
+											-
+										</c:if>
 									</td>
 									<td>
 										${req.reqTxt}
@@ -288,20 +297,22 @@
 											<input type="button" value="취소" id="cancel" />
 										</c:if>
 										<c:if test="${!empty grpSpace.genReview}">
-											개설자의 총평 : ${grpSpace.genReview}   -> 세션아이디랑 개설자랑 아이디 똑같을때 
-											
+											개설자의 총평 : ${grpSpace.genReview}
 											<c:if test="${grpSpace.shared == 0}">   <!-- 그룹스페이스 쉐어드가 0이면 공개여부 보여줌 -->
 												<form action="/travelMaker/travel/groupSpace.tm" name="openOrbOpen" method="get">
 													<input type="hidden" name="gNo" value="${grpSpace.gNo}" />
-													
-													</br> 공개여부 :
+													</br> 공개여부 : 
 													<input type="radio" name="shared" value="1" />공개
 													<input type="radio" name="shared" value="2" />비공개
 													<input type="submit" value="확인">
 												</form>
 											</c:if>
-											
-											
+											<c:if test="${grpSpace.shared == 1}">
+												</br>공개여부 : 공개 
+											</c:if>
+											<c:if test="${grpSpace.shared ==2}">
+												</br>공개여부 : 비공개 
+											</c:if>
 										</c:if>
 									</c:if>	
 								</c:if>

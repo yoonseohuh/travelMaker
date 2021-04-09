@@ -20,8 +20,8 @@
 		select * from LANDMARKBOARD where writer=#{id}
 	</select> 
 	
-	<delete id="deletemyLand" parameterType="string" >
-		delete from LANDMARKBOARD where id=#{id}
+	<delete id="deletemyLand" parameterType="int">
+		delete from landmarkBoard where lNo=#{value}
 	</delete>
 	
 	<update id="landmarkLikedCnt" parameterType="int">

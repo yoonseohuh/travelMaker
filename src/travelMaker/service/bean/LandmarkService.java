@@ -17,8 +17,8 @@ public interface LandmarkService {
 	// public void getLandOpen() throws Exception;
 	// 내가 작성한 랜드마크
 	public 	List myLand(String id) throws Exception;
-	// 내가 작성한 랜드마크 삭제
-	public void deleteMyLand(String id) throws Exception;
+	// 랜드마크 삭제
+	public void deleteMyLand(int lNo) throws Exception;
 	// 랜드마크 좋아요
 	public void landmarkLiked(String id, int lNo) throws Exception;
 	// 랜드마크 좋아요 1번만 할 수 있게

@@ -512,6 +512,7 @@ public class TravelServiceImpl implements TravelService{
 	//그룹멤버 총평댓
 	@Override
 	public void genReply(String id, int gNo, String genReply) {
+		
 		groupSpaceDAO.genReply(id,gNo,genReply);
 	}
 	//총평가져오기
@@ -534,9 +535,22 @@ public class TravelServiceImpl implements TravelService{
 	@Override
 	public int chReview(int gNo, String id) {
 		int result = 0;
-		GroupMemberDTO dto = groupMemberDAO.chReview(gNo, id);
-		if(dto.getGenReply() == null) {
-			result = 1;
+		GroupMemberDTO dto = new GroupMemberDTO();
+		if(id==null) {
+		//	id가 null이어서 발생하는 nullPointerException 방지
+			id = "";
+			dto.setId("");
+			result = 0;
+		}else {
+		//	id가 해당 그룹의 멤버가 아니어서 발생하는 nullPointerException 방지
+			dto = groupMemberDAO.chReview(gNo, id);
+			if(dto==null) {
+				result = 0;				
+			}else {
+				if(dto.getGenReply() == null) {
+					result = 1;
+				}				
+			}
 		}
 		
 		return result;

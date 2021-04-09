@@ -19,7 +19,46 @@
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dbb3c6ebdae00379cc812a1240d45848&libraries=services,clusterer,drawing"></script>
 	
 	<script>
+		function removeCheck(){
+			if(confirm("정말 진심으로 삭제하시겠습니까?")==true){
+				document.removefrm.submit();
+			}else{
+				return false;
+			}
+		}
+		function cancelCheck(){
+			if(confirm("정말 진심으로 취소하시겠습니까?")==true){
+				document.cancelfrm.submit();
+			}else{
+				return false;
+			}
+		}
+	</script>
+	
+	
+	<script>
 		$(document).ready(function(){
+			
+		//	다중 삭제
+			$("input:checkbox[name=delLnum]").on("click",function(){
+				var arr = new Array();
+				$("input:checkbox[name=delLnum]:checked").each(function(){
+					var checkVal = $(this).val();
+					arr.push(checkVal);
+				});
+				$("#delLNo").val(arr);
+			});
+		
+		//	다중 좋아요 취소
+			$("input:checkbox[name=cnlLnum]").on("click",function(){
+				var arr = new Array();
+				$("input:checkbox[name=cnlLnum]:checked").each(function(){
+					var checkVal = $(this).val();
+					arr.push(checkVal);
+				});
+				$("#cnlLNo").val(arr);
+			});
+		
 		//	*** 좋아요한 랜드마크 ***
 			var positions = [];
 			$.ajax({
@@ -164,20 +203,28 @@
 	<div class="content1"></div>
 	<div class="content2"></div>
 	<div class="content3"></div>
-	
+	<h2>-----------------------</h2>
+	<h2>랜드마크 관리</h2>
 	<c:if test="${fn:length(lLand)==0}">
 		아직 좋아요한 랜드마크가 없습니다.
 	</c:if>
 	<c:if test="${fn:length(lLand)>0}">
 		<h3>좋아요 한 랜드마크 | ${fn:length(lLand)}개</h3>
-		<c:forEach var="land" items="${lLand}">
-			<ul>
-				<li>${land.lName}</li>
-				<li>${land.lType}</li>
-				<li>${land.addr}</li>
-				<li>작성자:${land.writer}</li>
-			</ul>
-		</c:forEach>
+		<form action="/travelMaker/land/likedLandCancel.tm" name="cancelfrm" method="post" onsubmit="return cancelCheck()">
+			<input type="submit" value="좋아요 취소"/>
+			<input type="hidden" name="lNo" id="cnlLNo"/>
+			<c:forEach var="land" items="${lLand}">
+				<ul>
+					<li>
+						<input type="checkbox" name="cnlLnum" value="${land.lNo}"/>
+					</li>
+					<li>${land.lName}</li>
+					<li>${land.lType}</li>
+					<li>${land.addr}</li>
+					<li>작성자:${land.writer}</li>
+				</ul>
+			</c:forEach>
+		</form>
 	</c:if>
 	
 	<c:if test="${fn:length(wLand)==0}">
@@ -185,14 +232,20 @@
 	</c:if>
 	<c:if test="${fn:length(wLand)>0}">
 		<h3>작성한 랜드마크 | ${fn:length(wLand)}개</h3>
-		<c:forEach var="land" items="${wLand}">
-			<ul>
-				<li>${land.lName}</li>
-				<li>${land.lType}</li>
-				<li>${land.addr}</li>
-			<!-- 	<li><input type="button" onclick="window.location=''" value="삭제"/></li> -->
-			</ul>
-		</c:forEach>
+		<form action="/travelMaker/land/myLandDelete.tm" name="removefrm" method="post" onsubmit="return removeCheck()">
+			<input type="submit" value="삭제"/>
+			<input type="hidden" name="lNo" id="delLNo"/>
+			<c:forEach var="land" items="${wLand}">
+				<ul>
+					<li>
+						<input type="checkbox" name="delLnum" value="${land.lNo}"/>
+					</li>
+					<li><b>${land.lName}</b></li>
+					<li>${land.lType}</li>
+					<li>${land.addr}</li>
+				</ul>
+			</c:forEach>
+		</form>
 	</c:if>
 	
 </div>
