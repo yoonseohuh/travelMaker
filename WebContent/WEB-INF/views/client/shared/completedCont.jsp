@@ -33,7 +33,7 @@
 						${article.addExpl} <br />
 					<h4>일 정</h4> 
 					<c:forEach var="schedules" items="${scheList}">
-						${scheList.sDate} : ${scheList.sCont} <br />
+						${article.sDate} : ${article.sCont} <br />
 					</c:forEach>
 				</td>
 			</tr>
