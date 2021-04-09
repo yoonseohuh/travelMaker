@@ -104,8 +104,20 @@ public class SharedController {
 	}
 	@RequestMapping("sharedLiked.tm")
 	public String sharedLiked(int gNo, String id) throws Exception {
+		
 		sharedService.sharedLiked(gNo, id);
-		return "client/shared/sharedLiked";
+		System.out.println("컨트롤러왔니?");
+		return "client/shared/completedContPro";
 	}
+	
+	@RequestMapping("completedContPro.tm")
+	public String completedContPro(int gNo, int cnt, Model model) throws Exception {
+		sharedService.sharedLikedCnt(gNo, cnt);
+		
+		model.addAttribute("gNo", gNo);
+		model.addAttribute("cnt", cnt);
+		return "redirect:/client/shared/completedCont";
+	}
+	
 
 }

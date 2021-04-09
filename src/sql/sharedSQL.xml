@@ -26,9 +26,13 @@
 		insert into groupSpace values(#{gNo},#{id})
 	</insert>
 	
-	<update id="sharedlikedCnt">
+	
+	<update id="sharedlikedCnt" parameterType="int" >
 		update groupSpace set likedCnt = likedCnt+1 where gNo=#{gNo} and id=#{id}
 	</update>
+	
+
+	
 	
 	
   		
