@@ -8,9 +8,20 @@
 	
 	<div class="wrapAll">
 		<script>
+			function validation(){
+				var inputs = document.inputForm;
+				if(inputs.reqType.value==1){
+					if(!inputs.posNo.value){						
+						alert("참여하실 포지션을 선택해주세요");
+						return false;
+					}
+				}
+			}
+			
 			$(document).ready(function(){
 				$('.pstn').hide();
 			});
+			
 			function posSlide(typeVal){
 				if(typeVal==1){
 					console.log("가이드");
@@ -27,14 +38,14 @@
 		<h1>여행 신청폼</h1>
 		${content.id}님의 ${content.subject} 여행에 동행 신청합니다.
 		<br/>
-		<form action="/travelMaker/travel/makingReqPro.tm" method="post">
+		<form action="/travelMaker/travel/makingReqPro.tm" name="inputForm" onsubmit="return validation()" method="post">
 			<input type="hidden" name="gNo" value="${content.gNo}"/>
 			<h2>참여유형</h2>
 			<div class="joinType">
 				<c:if test="${pos1==0 && pos2==0}">
 					${id}님은 일반으로만 지원 가능합니다.
 				</c:if>			
-				<input type="radio" name="reqType" value="0" id="joinTypeN" onclick="posSlide(this.value)"/>일반
+				<input type="radio" name="reqType" value="0" id="joinTypeN" onclick="posSlide(this.value)" checked/>일반
 				<c:if test="${pos1!=0 || pos2!=0}">
 				<input type="radio" name="reqType" value="1" id="joinTypeG" onclick="posSlide(this.value)"/>가이드
 				</c:if>
