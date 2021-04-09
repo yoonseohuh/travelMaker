@@ -80,7 +80,7 @@ public class TravelController {
 	@Scheduled(fixedDelay = 1800000)
 	public void memberRankCheck() throws Exception {
 		Date date = new Date();
-		System.out.println("30분마다 호출"+date);
+		System.out.println("30분마다 호출 "+date);
 		List<TmUserDTO> list = memberService.getAllMembers();
 		for(int i=0 ; i<list.size() ; i++) {
 			TmUserDTO dto = list.get(i);
