@@ -10,11 +10,7 @@ public interface SharedService {
 
 	public GroupSpaceDTO getArticle(int gNo) throws Exception;
 	
-	// 좋아요 
 	public void sharedLiked(int gNo, String id) throws Exception;
-	// 좋아요 카운팅
-	public void sharedLikedCnt(int gNo, int cnt) throws Exception;
-	
 
 
 	
