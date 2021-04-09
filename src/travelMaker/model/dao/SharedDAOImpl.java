@@ -47,26 +47,24 @@ public class SharedDAOImpl  implements SharedDAO{
 		//System.out.println("조회수 dao 왔니?");
 		
 	}
-
 	@Override
-	public void sharedLiked(int gNo, String id) throws Exception{
+	public void sharedLiked(int gNo, String id) throws Exception {
 		Map map = new HashMap();
 		map.put("gNo", gNo);
 		map.put("id", id);
-		
+		System.out.println("dao 따라오니?");
 		sqlSession.insert("shared.insertSharedLiked", map);
 		
 	}
-	
+
 	@Override
-	public void sharedlikedCnt(int gNo, int cnt) throws Exception {
-		Map map = new HashMap();
-		map.put("gNo", gNo);
-		map.put("cnt", cnt);
-		System.out.println("dao 오니?");
-		sqlSession.update("shared.sharedLikedCnt", map);
+	public void updateLikedCnt(int gNo, String id) throws Exception {
+		// TODO Auto-generated method stub
 		
 	}
+
+	
+	
 
 
 	

@@ -25,6 +25,11 @@
 				</td>
 			</tr>
 			<tr>
+				<td> 조회수 : ${article.readCnt}</td>
+				<td>좋아요 수: ${article.likedCnt}</td>
+			</tr>
+			
+			<tr>
 				<td>
 					<h2>Info</h2>
 					<h4>코스설명</h4> ${article.courseExpl}<br />
@@ -85,15 +90,7 @@
 		</table>
 		
 		<input type="button" id="sharedLiked" value="좋아요" onclick="window.location='completedContPro.tm'">
-		<script>
-		$("#sharedLiked").click(function(){
-			if(confirm("좋아요를 누르시겠습니까?")){
-				document.form.action="sharedLiked.do";
-				document.form.submit();
-			}
-			alert("좋아요 완료!")
-		});
-		</script>
+		
 		
 	</c:if>
 </div>

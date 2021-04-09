@@ -9,7 +9,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import travelMaker.model.dto.GroupRequestDTO;
 import travelMaker.model.dto.GroupSpaceDTO;
@@ -51,6 +53,7 @@ public class SharedController {
 		List gMem = travelService.getMembers(gNo);
 		List gList = travelService.getGroupImgs(gNo);
 
+
 		// status = 1 인 멤버들의 그룹리퀘스트dto
 		List<GroupRequestDTO> joinMem = new ArrayList<GroupRequestDTO>();
 		for (int i = 0; i < grpReq.size(); i++) {
@@ -87,7 +90,7 @@ public class SharedController {
 				posMem.put(dto.getPosName(), posCnt);
 			}
 		}
-
+		
 		model.addAttribute("gNo", gNo);
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("article", article);
@@ -102,22 +105,25 @@ public class SharedController {
 
 		return "client/shared/completedCont";
 	}
+	
+	@ResponseBody
 	@RequestMapping("sharedLiked.tm")
-	public String sharedLiked(int gNo, String id) throws Exception {
+	public String sharedLiked(@RequestBody Map<Object, Object> map) throws Exception {
+		
+		int gNo = Integer.parseInt((String)map.get("id"));
+		
+		String id = (String)map.get("id");
+		
+		GroupSpaceDTO result = new GroupSpaceDTO();
+		
 		
 		sharedService.sharedLiked(gNo, id);
-		System.out.println("컨트롤러왔니?");
-		return "client/shared/completedContPro";
+		return "";
 	}
 	
-	@RequestMapping("completedContPro.tm")
-	public String completedContPro(int gNo, int cnt, Model model) throws Exception {
-		sharedService.sharedLikedCnt(gNo, cnt);
-		
-		model.addAttribute("gNo", gNo);
-		model.addAttribute("cnt", cnt);
-		return "redirect:/client/shared/completedCont";
-	}
+	
+	
+	
 	
 
 }

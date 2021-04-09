@@ -15,10 +15,8 @@ public interface SharedDAO {
 	public void updateReadCnt(int gNo);
 
 	public void sharedLiked(int gNo, String id) throws Exception;
-
-	public void sharedlikedCnt(int gNo, int cnt) throws Exception;
-
-
+	
+	public void updateLikedCnt(int gNo, String id) throws Exception;
 	
 
 }

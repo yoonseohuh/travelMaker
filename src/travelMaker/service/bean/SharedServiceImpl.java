@@ -63,6 +63,7 @@ public class SharedServiceImpl implements SharedService {
 	public GroupSpaceDTO getArticle(int gNo) throws Exception {
 		// readCnt 추가
 		sharedDAO.updateReadCnt(gNo);
+		
 		//System.out.println("조회수 서비스도 왔니?");
 		GroupSpaceDTO article = sharedDAO.getArticle(gNo);
 		//System.out.println("서비스"+gNo);
@@ -71,17 +72,14 @@ public class SharedServiceImpl implements SharedService {
 		
 		return article;
 	}
+
 	@Override
-	// shared 페이지 좋아요 
 	public void sharedLiked(int gNo, String id) throws Exception {
 		sharedDAO.sharedLiked(gNo, id);
+		
 	}
+
 	
-	@Override
-	// shared 좋아요 수 +1
-	public void sharedLikedCnt(int gNo, int cnt) throws Exception{
-		sharedDAO.sharedlikedCnt(gNo, cnt);
-	}
 	
 
 	
