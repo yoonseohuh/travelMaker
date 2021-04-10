@@ -15,7 +15,8 @@ public interface CommentService {
 	//내가 여행한 모든 여행그룹 가져오기
 	public List getMyGroup(String id) throws SQLException;
 	
-	
+	// 그그룹넘에 해당하는 사람들 가져오기
+	public List getGMem(int gNo) throws SQLException;
 	
 	
 
@@ -39,7 +40,8 @@ public interface CommentService {
 	// 보낸사람이 사용자인 코멘트DTO가져오기 
 	public List comSenUser(String id) throws SQLException;
 	
-	
+	//셀렉트두개 테스트
+		public List<GroupMemberDTO> testMem(int groupNum);
 	
 	
 }
