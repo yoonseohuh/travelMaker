@@ -45,5 +45,10 @@
 	select * from userCmt where sender=#{id} and status=0
 </select>
 
+<!-- 여행가져오기 -->
+<select id="selectGroupMem" parameterType="int" resultType="GroupMemberDTO">
+	select * from groupmember where gNo=#{groupNum}
+</select>
+
 
 </mapper>

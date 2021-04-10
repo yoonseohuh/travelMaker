@@ -100,7 +100,12 @@ public class UserCmtDAOImpl implements UserCmtDAO {
 	}
 	
 	
-	
+	//셀렉트두개 테스트
+	public List<GroupMemberDTO> testMem(int groupNum){
+		List dto = sqlSession.selectList("userCmt.selectGroupMem",groupNum); 
+		
+		return dto;
+	}
 	
 	
 	
