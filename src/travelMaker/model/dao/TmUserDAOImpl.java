@@ -246,8 +246,20 @@ public class TmUserDAOImpl implements TmUserDAO {
 	}
 	
 	//전체 회원 중에서 해당 회원 랭킹 가져오기
+	@Override
 	public int getUserRanking(String id) {
 		int ranking = sqlSession.selectOne("tmUser.getUserRanking",id);
 		return ranking;
 	}
+	
+	//포지션 결정
+	@Override
+	public void posDecision(String id, int num, int posNo) throws Exception {
+		Map map = new HashMap();
+		map.put("id", id);
+		map.put("num", num);
+		map.put("posNo", posNo);
+		sqlSession.update("tmUser.posDecision",map);
+	}
+	
 }
