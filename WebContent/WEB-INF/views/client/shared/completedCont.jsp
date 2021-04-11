@@ -69,8 +69,9 @@
 			</tr>
 			<tr>
 				<td>
-					<h2>General Review</h2> 개설자의 여행총평 : <c:if
-						test="${memId == getGroup.id}">
+					<h2>General Review</h2> 
+					개설자의 여행총평 : 
+					<c:if test="${memId == getGroup.id}">
 						<c:if test="${empty getGroup.genReview}">
 								총평을 작성 합시다.
 							</c:if>
@@ -80,16 +81,16 @@
 					</c:if> <c:if test="${memId != getGroup.id}">
 						<c:if test="${empty getGroup.genReview}">
 								개설자의 총평이 작성되지 않았습니다.
-							</c:if>
+						</c:if>
 						<c:if test="${!empty getGroup.genReview}">
 								 ${getGroup.genReview}
-							</c:if>
+						</c:if>
 					</c:if>
 				</td>
 			</tr>
 		</table>
 		
-		<input type="button" id="sharedLiked" value="좋아요" onclick="window.location='completedContPro.tm'">
+		<input type="image" id="heartIcon" src="../resources/images/heart-empty.png" width="14" alt="좋아요"/>
 		
 		
 	</c:if>

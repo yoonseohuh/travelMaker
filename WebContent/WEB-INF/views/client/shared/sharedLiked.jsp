@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>sharedLiked</title>
 </head>
 <body>
-<h1>CompletedContPro</h1>
+	<input type="image" id="heartIcon" src="../resources/images/heart-empty.png" width="14" alt="좋아요"/>
 
 </body>
 </html>

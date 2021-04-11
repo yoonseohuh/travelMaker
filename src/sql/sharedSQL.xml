@@ -21,10 +21,10 @@
 	<update id="updateReadcount">
 		update groupSpace set readCnt = readCnt+1 where gNo=#{gNo}
 	</update>
-	
-	<insert id="insertSharedLiked" parameterType="hashmap">
-		insert into groupSpace values(#{gNo},#{id})
-	</insert>
+
+	<update id="sharedLikedCnt" parameterType="int">
+		update groupSpace set likedCnt = likedCnt+#{sl} where gNo=#{gNo}
+	</update>
 
 
 	
