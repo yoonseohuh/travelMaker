@@ -17,7 +17,7 @@
 			<tr><td> 게시글이 없습니다. </td></tr>
 		</table>
 	</c:if>
-	<c:if test="${count >0 }">
+	<c:if test="${count > 0 }">
 		<div id="sList">
 			<div id="articleTable">
 				<ul class="makingList">

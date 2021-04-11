@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import travelMaker.model.dao.GroupSpaceDAO;
 import travelMaker.model.dao.SharedDAO;
+import travelMaker.model.dao.sharedLikedDAO;
 import travelMaker.model.dto.GroupSpaceDTO;
 
 @Service
@@ -16,6 +17,9 @@ public class SharedServiceImpl implements SharedService {
 
 	@Autowired
 	private SharedDAO sharedDAO = null;
+	
+	@Autowired
+	private sharedLikedDAO sharedLikedDAO = null;
 	
 	@Autowired
 	private GroupSpaceDAO groupSpaceDAO = null;
@@ -70,16 +74,34 @@ public class SharedServiceImpl implements SharedService {
 		//System.out.println("서비스"+ article);
 		//System.out.println("dao 왔으니까 서비스는 왔니?");
 		
+		
 		return article;
 	}
 
+	// 좋아요
 	@Override
 	public void sharedLiked(int gNo, String id) throws Exception {
-		sharedDAO.sharedLiked(gNo, id);
+		sharedDAO.sharedLikedCnt(gNo, 1);
+		sharedLikedDAO.sharedLiked(gNo, id);
+		
+	}
+	// 좋아요를 했는지 안했는지
+	@Override
+	public int likedCheck(int gNo, String id) throws Exception {
+		int count = sharedLikedDAO.likedCheck(gNo, id);
+		return count;
+	}
+
+	// 좋아요 취소
+	@Override
+	public void sharedLikedCancel(int gNo, String id) throws Exception {
+		sharedDAO.sharedLikedCnt(gNo, -1);
+		sharedLikedDAO.sharedLikedCancel(gNo, id);
 		
 	}
 
 	
+
 	
 
 	
