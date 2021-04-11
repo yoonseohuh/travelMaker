@@ -96,18 +96,20 @@
 			</div>			
 			<!-- aMemTit end -->			
 			<div class="aInfoTit aMemTit">Gallery</div>					
-			<ul class="aConList">
+			<ul>
 				<li>
-					<c:forEach var="gList" items="${gList}">
-						<c:if test="${!empty gList.pRoot}">
+					<c:if test="${empty gList}">
+							게시된 사진이 없습니다. </br></br></br>
+					</c:if>
+					<c:if test="${!empty gList}">
+						<c:forEach var="gList" items="${gList}">
 							<img src="/travelMaker/save/${glist.pRoot}" width="200px"/> 
-						</c:if>
-						<c:if test="${empty gList.pRoot}">
-							<h1>게시된 사진이 없습니다.</h1>
-						</c:if>
-					</c:forEach>
+						</c:forEach>
+					</c:if>
 				</li>
-			</ul>	
+			</ul>
+
+			
 			<div class="aInfoTit aMemTit">General Review</div>		
 			
 			
@@ -138,7 +140,7 @@
 				<c:if test="${!empty getGroup.genReview}">
 					 ${getGroup.genReview} 
 					<c:forEach var="reviewList" items="${reviewList}">
-								<br/>└ ${reviewList.nickname}님 :  ${reviewList.genReply}
+								<br/>&nbsp; &nbsp; >>  ${reviewList.nickname}님 :  ${reviewList.genReply}
 					</c:forEach>
 					<c:if test="${result == 1 }">
 						<button id="tab1" class="comBtn btnRight">답글달기</button>
