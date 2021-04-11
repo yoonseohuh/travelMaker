@@ -23,6 +23,8 @@ import travelMaker.model.dto.LandmarkLikedDTO;
 import travelMaker.model.dto.QnaBoardDTO;
 import travelMaker.model.dto.ScheduleDTO;
 import travelMaker.model.dto.SmallPosDTO;
+import travelMaker.model.dto.TmUserDTO;
+import travelMaker.model.dto.UserRkDTO;
 import travelMaker.service.bean.LandmarkService;
 import travelMaker.service.bean.MemberService;
 import travelMaker.service.bean.QnaReportService;
@@ -47,8 +49,16 @@ public class MypageController {
 	public String index(Model model) {
 		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
 		int ranking = memberService.getUserRanking(id)-1;
+		TmUserDTO memInfo = memberService.getMember(id);
+		
+		List<SmallPosDTO> posList = memberService.getAllPos();
+		List rkList = memberService.getRk();
+		
 		model.addAttribute("id",id);
 		model.addAttribute("ranking",ranking);
+		model.addAttribute("memInfo",memInfo);
+		model.addAttribute("rkList",rkList);
+		model.addAttribute("posList",posList);
 		
 		return "client/mypage/myPage";
 	}
