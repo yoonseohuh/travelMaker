@@ -123,6 +123,7 @@ public class MypageController {
 		
 		for(int i = 0; i < posList.size(); i++) { 
 			System.out.println("이프문위");
+			System.out.println("포스리스트" + posList);
 			if(posList.get(i) == -1) {   //포지션에 번호가 -1 이면
 				System.out.println("이프문아래");
 				int nomalCnt = travelService.posCount(Integer.parseInt(gNo),posList.get(i));
@@ -139,6 +140,7 @@ public class MypageController {
 		
 		//갤러리
 		List gList = travelService.getGroupImgs(Integer.parseInt(gNo));
+		System.out.println("갤러리 사진있니?" +  gList);
 
 		
 		

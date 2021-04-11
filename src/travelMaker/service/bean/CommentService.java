@@ -40,8 +40,5 @@ public interface CommentService {
 	// 보낸사람이 사용자인 코멘트DTO가져오기 
 	public List comSenUser(String id) throws SQLException;
 	
-	//셀렉트두개 테스트
-		public List<GroupMemberDTO> testMem(int groupNum);
-	
 	
 }
