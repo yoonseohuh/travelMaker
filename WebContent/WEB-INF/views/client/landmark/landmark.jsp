@@ -21,8 +21,6 @@
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dbb3c6ebdae00379cc812a1240d45848&libraries=services,clusterer,drawing"></script>
 	<script>
 		$(document).ready(function(){
-			//첫 페이지에서 좋아요 버튼 숨겨놓기
-			$('.likeBtn').hide();
 			
 			// *** ajax로 랜드마크 DB에서 가져오기 *** 
 			var positions = [];
@@ -97,22 +95,19 @@
 								$('.content2').html("<h3>"+res.lType+"&nbsp;&nbsp;|&nbsp;&nbsp;"+res.addr+"</h3></br></br>");
 								$('.content3').html("<h3>"+res.lCont+"</h3>");
 								
-								for(var i=0;i<arr.length;i++){
-									if(arr[i]==res.lNo){
-										alert("좋아요했다고");
-										$('.like').empty();
-										$('.like').append("좋아요 한 랜드마크입니다&nbsp;"
-												+"<img src=\"../resources/images/heart-colored.png\" width=\"14\"/>"
-												+"<br/><input type=\"button\" onclick=\"window.location='/travelMaker/my/myLand.tm'\" value=\"나의 랜드마크\"/>"
-										);
-										$('.likeBtn').hide();
-									}else{
-										$('.like').empty();
-										$('.likeBtn').show();
-									}
+								if(arr.includes(res.lNo+"")==true){	//arr 원소가 문자열로 들어있으므로 res.lNo도 문자형으로 형변환하여 비교
+									$('.like').html("좋아요 한 랜드마크입니다&nbsp;"
+											+"<img src=\"../resources/images/heart-colored.png\" width=\"14\"/>"
+											+"<br/><input type=\"button\" class=\"comBtn\" onclick=\"window.location='/travelMaker/my/myLand.tm'\" value=\"나의 랜드마크\"/>"
+									);
+									$('.likeBtn').hide();
+								}else{
+									$('.like').html("");
+									$('.likeBtn').show();s
 								}
-							}
-						});
+								
+							}//success
+						});//ajax
 					});//addListener
 				}//for
 			}//markers
@@ -134,7 +129,7 @@
 					success: function(res){
 						$('.likeBtn').html("좋아요 한 랜드마크입니다&nbsp;"
 								+"<img src=\"../resources/images/heart-colored.png\" width=\"14\"/>"
-								+"<br/><input type=\"button\" onclick=\"window.location='/travelMaker/my/myLand.tm'\" value=\"나의 랜드마크\"/>"
+								+"<br/><input type=\"button\" class=\"comBtn\" onclick=\"window.location='/travelMaker/my/myLand.tm'\" value=\"나의 랜드마크\"/>"
 						);
 					}
 				});
@@ -144,19 +139,22 @@
 		
 	</script>
 		
-	<a href="/travelMaker/land/landWrite.tm"><button>랜드마크 작성</button></a>
-	
+	<a href="/travelMaker/land/landWrite.tm"><button class="comBtn">랜드마크 작성</button></a>
+
+	<!-- 마커 클릭 시 상세 정보 보이는 부분 -->
 	<div class="content1"></div>
 	<div class="content2"></div>
 	<div class="content3"></div>
 	
+	<!-- 좋아요 여부에 따라 보여줄 내용 달리 함 -->
 	<div class="like"></div>
 	
-	<form class="likeBtn">
-		<input type="hidden" id="lNo" name="lNo"/>
-		<input type="hidden" name="id" value="${sessionScope.memId}"/>
-		<input type="image" id="heartIcon" src="../resources/images/heart-empty.png" width="14" alt="좋아요"/>
-	</form>
+	<!-- 좋아요 버튼 -->
+		<form class="likeBtn">
+			<input type="hidden" id="lNo" name="lNo"/>
+			<input type="hidden" name="id" value="${sessionScope.memId}"/>
+			<input type="image" id="heartIcon" src="../resources/images/heart-empty.png" width="14" alt="좋아요"/>
+		</form>
 </div>
 <!-- //wrapAll end -->
 
