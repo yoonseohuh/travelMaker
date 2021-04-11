@@ -90,7 +90,7 @@
 			</tr>
 		</table>
 		
-		<input type="button" id="sharedLiked" value="좋아요" onclick="window.location='sharedLiked.tm'">
+		<input type="image" id="heartIcon" src="../resources/images/heart-empty.png" width="14" alt="좋아요"/>
 		
 		
 	</c:if>
