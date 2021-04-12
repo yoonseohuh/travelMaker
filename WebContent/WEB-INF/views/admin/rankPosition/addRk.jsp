@@ -68,7 +68,7 @@
 					<td><input type="text" id="rkName" name="rkName"/></td>
 					<td><input type="number" name="rkNeed"/></td>
 					<td><input type="text" name="rkExpl"/></td>
-					<td><input type="text" name="rkAddExpl"/></td>
+					<td><input type="text" name="rkAddExpl" placeholder="설명이 많을 시 콤마(,)로 구분해주세요"/></td>
 					<td><input type="submit" value="추가"/></td>
 				</tr>
 	  		  </table>
