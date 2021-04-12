@@ -13,7 +13,9 @@
 			</script>
 		</c:if>
 		<c:if test="${result == 1}">
-			<c:redirect url="/mem/index.tm"/>		
+			<script>
+				history.go(-2)
+			</script>	
 		</c:if>		
 	</div>
 	<!-- //wrapAll end -->

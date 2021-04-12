@@ -96,7 +96,7 @@
 			</div>			
 			<!-- aMemTit end -->			
 			<div class="aInfoTit aMemTit">Gallery</div>					
-			<ul class="aConList">
+			<ul >
 				<li>
 					<c:forEach var="gList" items="${gList}">
 						<c:if test="${!empty gList.pRoot}">
