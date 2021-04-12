@@ -75,7 +75,7 @@
 					</div>
 					<div class="aContRight">
 						<c:forEach var="scheList" items="${scheList}">
-							- ${scheList.sDate} : ${scheList.sCont}
+							- ${scheList.sDate} : ${scheList.sCont}   </br>
 						</c:forEach>
 					</div>	
 				</div>			
