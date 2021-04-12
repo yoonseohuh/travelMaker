@@ -6,15 +6,15 @@
   
   	
 	<insert id="insertSharedLiked" parameterType="hashmap">
-		insert into groupSpace values(#{gNo},#{id})
+		insert into sharedLiked values(#{gNo},#{id})
 	</insert>
   	
-	<select id="likedCnt">
-		select count(*) from groupSpace where gNo-=#{gNo} and id=#{id}
+	<select id="likedCheck" parameterType="hashmap" resultType="int">
+		select count(*) from sharedLiked where id=#{id} and gNo=#{gNo}
 	</select>
 	
 	<delete id="sharedLikedCancel" parameterType="hashmap">
-		delete from groupSpace where gNo=#{gNo} and id=#{id}
+		delete from sharedLiked where gNo=#{gNo} and id=#{id}
 	</delete>
 	
   

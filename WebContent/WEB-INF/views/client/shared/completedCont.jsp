@@ -89,10 +89,16 @@
 				</td>
 			</tr>
 		</table>
-		
-		<input type="image" id="heartIcon" src="../resources/images/heart-empty.png" width="14" alt="좋아요"/>
-		
-		
+		<c:if test="${check == 0}">
+			<form class="likeForm" action="/travelMaker/shared/sharedLikedPro.tm" method="post">
+				<input type="hidden" name="gNo" value="${article.gNo}">
+				<input type="hidden" name="id" value="${sessionScope.memId}">
+				<input type="image" id="heartIcon" src="../resources/images/heart-empty.png" width="14" alt="좋아요"/>
+			</form>
+		</c:if>
+		<c:if test="${check == 1}">
+			<img src="../resources/images/heart-colored.png" width="14">
+		</c:if>
 	</c:if>
 </div>
 <!-- //wrapAll end -->

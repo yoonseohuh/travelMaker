@@ -84,12 +84,14 @@ public class SharedServiceImpl implements SharedService {
 		sharedDAO.sharedLikedCnt(gNo, 1);
 		sharedLikedDAO.sharedLiked(gNo, id);
 		
+		
 	}
 	// 좋아요를 했는지 안했는지
 	@Override
 	public int likedCheck(int gNo, String id) throws Exception {
-		int count = sharedLikedDAO.likedCheck(gNo, id);
-		return count;
+		int check = sharedLikedDAO.likedCheck(gNo, id);
+		//System.out.println("오냐?");
+		return check;
 	}
 
 	// 좋아요 취소
