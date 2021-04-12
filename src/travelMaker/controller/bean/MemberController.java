@@ -53,7 +53,6 @@ public class MemberController {
 		return "client/error500";
 	}
 	
-	
 	//회원가입 폼 페이지 
 	@RequestMapping("signupForm.tm")
 	public String signupForm() {

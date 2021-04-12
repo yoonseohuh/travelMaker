@@ -10,7 +10,7 @@
 		<br/>
 		<h1>다시 확인해주세요.</h1>
 		<button class="comBtn" onclick="window.location='/travelMaker/mem/index.tm'">메인으로</button>
-
+		<button class="comBtn" onclick="history.back()">뒤로가기</button>
 	</div>
 	<!-- //wrapAll end -->
 	
