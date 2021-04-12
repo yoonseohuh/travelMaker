@@ -19,6 +19,16 @@ public interface CommentService {
 	public List getGMem(int gNo) throws SQLException;
 	
 	
+	 // 코멘트 전용..그룹멤버들
+	public List getCmtGMem(int gNo);
+	
+	//코멘트에서 사용할 여행목록
+	public List cmtGroup(String id)throws SQLException;
+	
+	//그룹인원확인
+	public int groupMemCnt(int gNo);
+	
+	
 
 	//사용자아이디가 참여중인 그룹넘들 가져오기
 	public List getGroupNum(String id) throws SQLException;
@@ -40,5 +50,9 @@ public interface CommentService {
 	// 보낸사람이 사용자인 코멘트DTO가져오기 
 	public List comSenUser(String id) throws SQLException;
 	
+	/*
+	//코멘트작성을위한 여행목록
+	public List getCmtGroup(String id)throws SQLException;
+	*/
 	
 }

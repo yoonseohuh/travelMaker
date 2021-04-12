@@ -50,5 +50,19 @@
 	select * from groupmember where gNo=#{groupNum}
 </select>
 
+<!-- 코멘트작성에서 사용할 코멘트 확인 -->
+<select id="cmtCh" parameterType="Hashmap" resultType="int">
+	select count(*) from userCmt where gNo=#{gNo} and receiver=#{recMem}
+</select>
+
+<!-- 사용자가 작성한 코멘트 전체수확인 -->
+<select id="cntCmt" parameterType="Hashmap" resultType="int">
+	select count(*) from userCmt where gNo=#{gNo} and sender=#{senId}
+</select>
+
+<!-- 코멘트 작성 가능한 여행카운트 status=4 -->
+<select id="okCmtGroupCnt" parameterType="int" resultType="int"> 
+	select count(*) from GroupSpaceDTO where gNo=${gNo} and status=4
+</select>
 
 </mapper>

@@ -46,5 +46,11 @@
 		select * from groupMember where id=#{id} and gNo=#{gNo} 
 	</select>
 	
+	<!-- 코멘트 그룹멤버 카운트-->
+	<select id="groupMemCnt" parameterType="int" resultType="int">
+		select count(*) from groupMember where gNo=#{gNo} and status=1
+	</select>
+	
+	
 	
 </mapper>
