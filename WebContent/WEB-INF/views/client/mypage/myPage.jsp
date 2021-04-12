@@ -59,9 +59,18 @@
 						<progress max="100" value="100"></progress> ${memInfo.travelCnt}/${rk.rkNeed}
 					</c:if>
 					<!-- 만렙 아닐 때 -->
-					<c:if test="${nextVal!=null}">					
+					<c:if test="${nextVal!=null}">
 						NEXT: ${nextVal.rkName}<br/>
-						UNTIL NEXT RANK <progress max="${nextVal.rkNeed}" value="${memInfo.travelCnt}"></progress> ${memInfo.travelCnt}/${nextVal.rkNeed}
+						UNTIL NEXT RANK <progress max="${nextVal.rkNeed}" value="${memInfo.travelCnt}"></progress> ${memInfo.travelCnt}/${nextVal.rkNeed}<br/>
+						<c:if test="${rk.rkNo==1}">
+							스타터 ▶ 트래블러 설명란
+						</c:if>
+						<c:if test="${rk.rkNo==2}">
+							트래블러 ▶ 어드바이저 설명란
+						</c:if>
+						<c:if test="${rk.rkNo==3}">
+							어드바이저 ▶ 마스터 설명란
+						</c:if>
 					</c:if>
 				</c:if>
 			</c:forEach>
