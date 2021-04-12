@@ -15,6 +15,7 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import travelMaker.model.dao.SmallPosDAO;
 import travelMaker.model.dao.TmUserDAO;
 import travelMaker.model.dto.SmallPosDTO;
 import travelMaker.model.dto.TmUserDTO;
@@ -25,6 +26,8 @@ public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private TmUserDAO tmuserDAO = null;
+	@Autowired
+	private SmallPosDAO smallPosDAO = null;
 	
 	//회원 가입
 	@Override
@@ -427,4 +430,15 @@ public class MemberServiceImpl implements MemberService {
 		return ranking;
 	}
 	
+	//모든 포지션 가져오기
+	@Override
+	public List getAllPositions() throws Exception {
+		List<SmallPosDTO> list = smallPosDAO.getPositions();
+		return list;
+	}
+	//포지션 결정
+	@Override
+	public void posDecision(String id, int num, int posNo) throws Exception {
+		tmuserDAO.posDecision(id,num,posNo);
+	}
 }

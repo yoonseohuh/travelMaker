@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
@@ -29,6 +30,28 @@ public class CommentController {
 	private CommentService commentService = null;
 	@Autowired
 	private TravelService travelService = null;
+	
+	//코멘트 셀렉트박스 두개 ajax
+	@RequestMapping("selectTravel.tm")
+	@ResponseBody
+	public Object test(int gNo) throws SQLException {
+		System.out.println("에이작스테스트" + gNo);
+		List memList = new ArrayList<GroupMemberDTO>();
+		memList = commentService.getGMem(gNo);
+		System.out.println("에이작스멤리스트" + ((GroupMemberDTO)memList.get(0)).getNickname());
+       
+		//Map<String, Object> msvo = new HashMap<String, Object>();
+        //msvo.put("memList", memList);
+		
+		System.out.println("msvo출력" + memList);
+		System.out.println("msvo리스트 출력" + ((GroupMemberDTO)memList.get(0)).getNickname());
+		System.out.println("에이작스테스트");
+				//partyService.sPartyGetMembershipDetail(no);
+		return memList;
+	}
+	
+	
+	
 	
 	
 	//에이작스테스트
@@ -116,5 +139,6 @@ public class CommentController {
 		
 		return "client/mypage/commentWritePro";
 	}
-
+	
+	
 }

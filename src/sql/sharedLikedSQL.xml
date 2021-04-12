@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="sharedLiked">
+  
+  	
+	<insert id="insertSharedLiked" parameterType="hashmap">
+		insert into groupSpace values(#{gNo},#{id})
+	</insert>
+  	
+	<select id="likedCnt">
+		select count(*) from groupSpace where gNo-=#{gNo} and id=#{id}
+	</select>
+	
+	<delete id="sharedLikedCancel" parameterType="hashmap">
+		delete from groupSpace where gNo=#{gNo} and id=#{id}
+	</delete>
+	
+  
+  </mapper>

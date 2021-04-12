@@ -17,7 +17,7 @@
 			<tr><td> 게시글이 없습니다. </td></tr>
 		</table>
 	</c:if>
-	<c:if test="${count >0 }">
+	<c:if test="${count > 0 }">
 		<div id="sList">
 			<div id="articleTable">
 				<ul class="makingList">
@@ -27,6 +27,8 @@
 							<p class="title">${article.subject}</p>
 							<p class="maker">${article.id}</p>
 							<p class="date">${article.startDate}~${article.endDate}</p>
+							<p class="readCnt">조회수 : ${article.readCnt}</p>
+							<p class="likedCnt">좋아요 : ${article.likedCnt}</p>
 						</li>
 					</c:forEach>
 				</ul>

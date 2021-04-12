@@ -159,5 +159,15 @@
 		select a from (select id, rank() over (order by travelCnt desc) a from tmUser) where id=#{value}
 	</select>
 	
+	<update id="posDecision" parameterType="hashmap">
+		update tmUser set
+		<if test='num==1'>
+			position1=#{posNo}, posModi=#{num}
+		</if>
+		<if test='num==2'>
+			position2=#{posNo}, posModi=#{num}
+		</if>
+		where id=#{id}
+	</update>
 	
 </mapper>

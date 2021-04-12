@@ -10,9 +10,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import travelMaker.model.dao.ScheduleDAO;
 import travelMaker.model.dto.GroupMemberDTO;
@@ -23,6 +27,8 @@ import travelMaker.model.dto.LandmarkLikedDTO;
 import travelMaker.model.dto.QnaBoardDTO;
 import travelMaker.model.dto.ScheduleDTO;
 import travelMaker.model.dto.SmallPosDTO;
+import travelMaker.model.dto.TmUserDTO;
+import travelMaker.model.dto.UserRkDTO;
 import travelMaker.service.bean.LandmarkService;
 import travelMaker.service.bean.MemberService;
 import travelMaker.service.bean.QnaReportService;
@@ -44,13 +50,45 @@ public class MypageController {
 	
 	//마이페이지 홈
 	@RequestMapping("myPage.tm")
-	public String index(Model model) {
+	public String index(Model model) throws Exception {
 		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
 		int ranking = memberService.getUserRanking(id)-1;
+		TmUserDTO memInfo = memberService.getMember(id);
+		
+		List<SmallPosDTO> posList = memberService.getAllPositions();
+		List rkList = memberService.getRk();
+		
+		if(memInfo.getPosition1()!=null) {
+			String pos1 = memberService.getPosName(memInfo.getPosition1());
+			model.addAttribute("pos1",pos1);
+		}
+		if(memInfo.getPosition2()!=null) {
+			String pos2 = memberService.getPosName(memInfo.getPosition2());
+			model.addAttribute("pos2",pos2);
+		}
+		
 		model.addAttribute("id",id);
 		model.addAttribute("ranking",ranking);
+		model.addAttribute("memInfo",memInfo);
+		model.addAttribute("rkList",rkList);
+		model.addAttribute("posList",posList);
 		
 		return "client/mypage/myPage";
+	}
+	
+	//첫번째 포지션 선택
+	@ResponseBody
+	@RequestMapping("posDcsn.tm")
+	public String posDcsn(@RequestBody Map<String, Object> map) throws Exception {
+		int num = (Integer)map.get("num");
+		int posNo = (Integer)map.get("posNo");
+		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
+	//	id가 1번째 결정을 했으면 posNo를 pos1에 넣고 posModi를 1로 바꿈
+	//	id가 2번째 결정을 했으면 posNo를 pos2에 넣고 posModi를 2로 바꿈
+		memberService.posDecision(id,num,posNo);
+		ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.writeValueAsString(map);
+		return json;
 	}
 	
 	//여행이력
@@ -123,6 +161,7 @@ public class MypageController {
 		
 		for(int i = 0; i < posList.size(); i++) { 
 			System.out.println("이프문위");
+			System.out.println("포스리스트" + posList);
 			if(posList.get(i) == -1) {   //포지션에 번호가 -1 이면
 				System.out.println("이프문아래");
 				int nomalCnt = travelService.posCount(Integer.parseInt(gNo),posList.get(i));
@@ -139,6 +178,7 @@ public class MypageController {
 		
 		//갤러리
 		List gList = travelService.getGroupImgs(Integer.parseInt(gNo));
+		System.out.println("갤러리 사진있니?" +  gList);
 
 		
 		

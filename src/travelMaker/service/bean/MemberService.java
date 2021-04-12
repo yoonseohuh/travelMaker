@@ -83,4 +83,8 @@ public interface MemberService {
 	public List getAllMembers();
 	//전체 회원 중에서 해당 회원 랭킹 가져오기
 	public int getUserRanking(String id);
+	//모든 포지션 가져오기
+	public List getAllPositions() throws Exception;
+	//포지션 결정
+	public void posDecision(String id, int num, int posNo) throws Exception;
 }

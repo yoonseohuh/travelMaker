@@ -6,72 +6,72 @@
 	<!-- //top end -->
 	
 
- <script>
-            
-            // onchange에서 호출하는 함수. 
-            function testChange(obj){
-                // 'obj'는 this를 지칭하는 것입니다.
-                alert($(obj).val());
-                
-                // 값 비교로 테스트 가능.
-               	var currentLocation = window.location;
-                if($(obj).val() == ""){
-                    alert("값이 없습니다.");
-                } else if($(obj).val() == "학생"){
-                    alert("저는 학생입니다.");
-                    $('.test').append("<h1>학생을 선택하셨습니다</h1>");
-                } else if($(obj).val() == "회사원"){
-                    alert("저는 회사원입니다.");
-                } else if($(obj).val() == "4"){
-                	 alert("4번 눌렀니?.");
-					$('.joinMembers').load(currentLocation + ' .joinMembers');
-                }
-            }
-            
-            
-            
-            $(document).ready(function() {
-            	  $('#selectBox').change(function() {
-            	    var result = $('#selectBox option:selected').val();
-            	    if (result == '4') {
-            	      $('.div1').show();
-            	    } else {
-            	      $('.div1').hide();
-            	    }
-            	  }); 
-            	}); 
-            
-        </script>
-	<div class="wrapAll">
-=<br/><br/><br/><br/><br/><br/>
+ 	<script>
+ 	
+ 	$(document).ready(function () {
+ 		$('#group').change(function () {
+ 			var selectType=$(this).val();
+ 			//alert(selectType);
+ 			 $.ajax({
+ 				type : "get",
+ 				url : "/travelMaker/cmt/.tm",   //요청할 컨트롤러
+ 				dataType : "json",
+ 				data : "gNo="+ selectType,     //나는 gno로
+ 				success : function(result) {
+ 					
+ 					var memList = result;
+ 	 				//alert(memList[0].id);
+ 						
+ 					
+ 					$("#groupMem").html("");
+ 					$('#groupMem').append('<option value="">동행자를 선택해주세요</option>');	
+ 					
+ 					//alert(result.membershipName);
+ 					//alert(result.memList);}
+ 			 
+ 				for(var i = 1 ; i<=memList.length; i++){
+ 					$('#groupMem').append("<option value="+memList[i].id+">"+memList[i].nickname+"님</option>");	
+ 				}
+ 		
+ 				
+ 			 }
+ 			});//ajax 
+ 		})//첫번째 select 박스
+ 		$('#groupMem').change(function () {
+ 			//alert($('#groupMem').val());
+ 			
+ 		})// 두번째 select 박스
+ 	})
 
-	
-        <select id="selectBox" name="selectBox">
-		  <option value="" selected="selected">전체</option>
-		   <c:forEach var="dto" items="${dtoList}"> 
-			  <option value="${dto.gNo}">${dto.gNo} / ${dto.subject}</option>
-			  </c:forEach>
+ 	</script>
+            
+	<div class="wrapAll">
+	ss</br></br></br></br></br></br></br>
+		
+		<select name="groupNum" id="group" required >
+			<option value="">이용권 종류를 선택해주세요</option>
+			<c:forEach var="dto" items="${dtoList}">
+			<option value="${dto.gNo}">${dto.subject}</option>
+			</c:forEach>
 		</select>
 		
+		<!-- 
+		<select name="membershipVO.membershipNo" id="group" required >
+		<option value="">이용권 종류를 선택해주세요</option>
+		<option value="1">BASIC</option>
+		<option value="2">STANDARD</option>
+		<option value="3">PREMIUM</option>
+		</select>
+		 -->
 		
-		
-		<div class="div1"> 
-			
-				 <select>
-				 <c:forEach var="fin" items="${fin}"> 
-				  <option value="${fin.id}">${fin.gNo} / ${fin.id} / ${fin.nickname}</option>
-				  </c:forEach>
-				</select>
-			
-		</div>
-        
-        
-       
-        
-        
-        
+		<select name="groupMem" id="groupMem" required>
+		<option>여행을 선택해주세요</option>
+		</select>
+		    
+      
 	</div>
 	<!-- //wrapAll end -->
 	
 <jsp:include page="/WEB-INF/views/include/footer.jsp" />
 <!-- //footer end -->
+

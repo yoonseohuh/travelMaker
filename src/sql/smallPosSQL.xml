@@ -8,5 +8,9 @@
 	<select id="getPosInfo" parameterType="int" resultType="SmallPosDTO">
 		select * from smallPos where posNo=#{value}
 	</select>
-
+	
+	<select id="getPositions" resultType="SmallPosDTO">
+		select * from smallPos
+	</select>
+	
 </mapper>

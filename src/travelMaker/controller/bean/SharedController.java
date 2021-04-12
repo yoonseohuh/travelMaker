@@ -106,20 +106,21 @@ public class SharedController {
 		return "client/shared/completedCont";
 	}
 	
-	@ResponseBody
 	@RequestMapping("sharedLiked.tm")
-	public String sharedLiked(@RequestBody Map<Object, Object> map) throws Exception {
-		
-		int gNo = Integer.parseInt((String)map.get("id"));
-		
-		String id = (String)map.get("id");
-		
-		GroupSpaceDTO result = new GroupSpaceDTO();
-		
-		
+	public String sharedLiked(String id, int gNo) throws Exception{
 		sharedService.sharedLiked(gNo, id);
-		return "";
+		
+		return "client/shared/sharedLiked";
 	}
+	
+	@RequestMapping("sharedLikedPro.tm")
+	public String sharedLikedPro(String id, int gNo) throws Exception{
+		
+		return "client/shared/sharedLikedPro";
+	}
+	
+	
+	
 	
 	
 	

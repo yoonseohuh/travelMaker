@@ -6,7 +6,9 @@
 	<!-- //top end -->
 	
 	<div class="wrapAll">
+	  
 		<c:if test="${result == 1}">
+		
 			<script>
 				alert("코멘트 작성 완료");
 				location.href = "comment.tm";
@@ -14,7 +16,7 @@
 			
 		</c:if>
 		
-		<!-- 여행이나 동행자를 선택안했을때.. -->
+		 여행이나 동행자를 선택안했을때..
 		<c:if test="${result == 2}">
 			<script>
 				alert("여행 또는 동행자를 선택해주세요!");
@@ -23,7 +25,7 @@
 			
 		</c:if>
 
-	
+	 
 	</div>
 	<!-- //wrapAll end -->
 	
