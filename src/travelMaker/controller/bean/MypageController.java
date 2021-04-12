@@ -56,24 +56,25 @@ public class MypageController {
 		TmUserDTO memInfo = memberService.getMember(id);
 		List<SmallPosDTO> posList = memberService.getAllPositions();
 		List rkList = memberService.getRk();
-		
-		if(memInfo.getPosition1()!=0) {
-			SmallPosDTO pos1 = travelService.getPosInfo(memInfo.getPosition1());
-			for(int i=0 ; i<posList.size() ; i++) {
-				if(pos1!=null && pos1.getPosNo()==posList.get(i).getPosNo()){
-					posList.remove(i);
+		if(memInfo!=null) {
+			if(memInfo.getPosition1()!=0) {
+				SmallPosDTO pos1 = travelService.getPosInfo(memInfo.getPosition1());
+				for(int i=0 ; i<posList.size() ; i++) {
+					if(pos1!=null && pos1.getPosNo()==posList.get(i).getPosNo()){
+						posList.remove(i);
+					}
 				}
+				model.addAttribute("pos1",pos1);
 			}
-			model.addAttribute("pos1",pos1);
-		}
-		if(memInfo.getPosition2()!=0) {
-			SmallPosDTO pos2 = travelService.getPosInfo(memInfo.getPosition2());
-			for(int i=0 ; i<posList.size() ; i++) {
-				if(pos2!=null && pos2.getPosNo()==posList.get(i).getPosNo()){
-					posList.remove(i);
+			if(memInfo.getPosition2()!=0) {
+				SmallPosDTO pos2 = travelService.getPosInfo(memInfo.getPosition2());
+				for(int i=0 ; i<posList.size() ; i++) {
+					if(pos2!=null && pos2.getPosNo()==posList.get(i).getPosNo()){
+						posList.remove(i);
+					}
 				}
+				model.addAttribute("pos2",pos2);
 			}
-			model.addAttribute("pos2",pos2);
 		}
 		
 		model.addAttribute("id",id);

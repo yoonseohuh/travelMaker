@@ -7,20 +7,18 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import travelMaker.model.dto.LargePosDTO;
+import travelMaker.model.dto.SmallPosDTO;
 import travelMaker.model.dto.TmUserDTO;
+import travelMaker.model.dto.UserRkDTO;
 import travelMaker.service.bean.MemberService;
 
 @Controller
@@ -43,6 +41,7 @@ public class MemberController {
 		return "client/index";
 	}
 	
+	//404에러페이지
 	@RequestMapping("undefinedPage.tm")
 	public String undefined() {
 		return "client/undefined";
@@ -52,7 +51,6 @@ public class MemberController {
 	//회원가입 폼 페이지 
 	@RequestMapping("signupForm.tm")
 	public String signupForm() {
-		
 		return "client/member/signupForm";
 	}
 	
@@ -301,15 +299,17 @@ public class MemberController {
 	
 	//rk페이지
 	@RequestMapping("rkDetail.tm")
-	public String rank() {
-		
+	public String rank(Model model) {
+		List<UserRkDTO> rk = memService.getRk();
+		model.addAttribute("rkList",rk);
 		return "client/manual/rkDetail";
 	}
 	
-	//rk페이지
+	//position페이지
 	@RequestMapping("positionDetail.tm")
-	public String position() {
-		
+	public String position(Model model) {
+		List<SmallPosDTO> sPos = memService.getAllPos();
+		model.addAttribute("sPos",sPos);
 		return "client/manual/positionDetail";
 	}
 	
