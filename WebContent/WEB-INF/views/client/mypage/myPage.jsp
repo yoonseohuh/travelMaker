@@ -90,7 +90,7 @@
 				
 				<!-- 첫번째 포지션 결정 후 -->
 				<c:if test="${memInfo.posModi==1}">
-					YOUR 1st POSITION: ${pos1}<br/>
+					YOUR 1st POSITION: ${pos1.posName}<br/>
 				</c:if>
 			</c:if>
 			
@@ -109,8 +109,8 @@
 				</c:if>
 				<!-- 두번째 포지션 결정 후 -->
 				<c:if test="${memInfo.posModi==2}">
-					YOUR 1st POSITION: ${pos1}<br/>
-					YOUR 2nd POSITION: ${pos2}<br/>
+					YOUR 1st POSITION: ${pos1.posName}<br/>
+					YOUR 2nd POSITION: ${pos2.posName}<br/>
 				</c:if>
 			</c:if>
 		</div>

@@ -103,7 +103,7 @@
 									$('.likeBtn').hide();
 								}else{
 									$('.like').html("");
-									$('.likeBtn').show();s
+									$('.likeBtn').show();
 								}
 								
 							}//success
