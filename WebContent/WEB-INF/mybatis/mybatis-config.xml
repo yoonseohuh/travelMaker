@@ -54,6 +54,7 @@
 		<mapper resource="/sql/userCmtSQL.xml"/>
 		<mapper resource="/sql/userRkSQL.xml"/>
 		<mapper resource="/sql/sharedSQL.xml" />
+		<mapper resource="/sql/sharedLikedSQL.xml" />
 	</mappers>
 
 </configuration>

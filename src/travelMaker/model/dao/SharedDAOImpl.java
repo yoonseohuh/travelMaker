@@ -55,18 +55,7 @@ public class SharedDAOImpl  implements SharedDAO{
 		map.put("sl", sl);
 		sqlSession.update("shared.sharedLikedCnt", map);
 		
-		
 	}
-
-
-	
-
-	
-	
-
-
-	
-	
 	
 	
 
