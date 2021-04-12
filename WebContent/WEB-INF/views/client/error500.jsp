@@ -9,7 +9,7 @@
 		<br/>
 		<h1>저희가 잘못했거나요...</h1>
 		<button class="comBtn" onclick="window.location='/travelMaker/mem/index.tm'">못 본 척 메인으로</button>
-	
+		<button class="comBtn" onclick="history.back()">뒤로가기</button>
 	</div>
 	<!-- //wrapAll end -->
 	
