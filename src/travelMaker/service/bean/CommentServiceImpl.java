@@ -61,6 +61,43 @@ public class CommentServiceImpl implements CommentService {
    }
    
    
+   //사용자가 여행한 모든 여행그룹인데 사용자 혼자여행인건 뺀 여행그룹 (상태4)
+   @Override
+   public List cmtMyGroup(String id) throws SQLException {      
+      
+     //사용자가 참여중인 그룹들 가져옴
+      List<GroupMemberDTO> myGroup = userCmtDAO.myGroup(id);
+      List cmtMyGroup = new ArrayList();
+      
+      for(int i = 0; i < myGroup.size(); i++) {
+    	  int result = userCmtDAO.groupMemCnt(((GroupMemberDTO)myGroup.get(i)).getgNo());
+    	  if(result > 1) { //사용자가 참여중인 그룹넘 보내서 그룹멤버 카운트가 1이면 혼자여행이니까 1보다 클경우 담는다 
+    		  System.out.println("마이그룹사이즈" + myGroup.size());
+    	      System.out.println(i + "번쨰 : " + ((GroupMemberDTO)myGroup.get(i)).getgNo());
+    	         
+    	      GroupSpaceDTO gInfo = getGroupInfo(((GroupMemberDTO)myGroup.get(i)).getgNo());
+    	      if(gInfo.getStatus() == 4 ) { //GroupSpace 여행상태가 4인것들만 담는다
+    	        	   cmtMyGroup.add(gInfo);
+    	      }
+    	  }
+    	  
+      }
+      
+    	
+    	 
+      for(int i = 0; i < cmtMyGroup.size(); i++) {
+    	  System.out.println("디티오리스트" + ((GroupSpaceDTO)cmtMyGroup.get(i)).getSubject());
+      }
+      
+
+      return cmtMyGroup;
+   } 
+   
+   
+   
+   
+   
+   
    //코멘트 조회에서 사용할 여행목록(동행자한테 코멘트 다 작성하면 사라지게함)
    public List cmtGroup(String id)throws SQLException {
 	   List list = new ArrayList<GroupSpaceDTO>();

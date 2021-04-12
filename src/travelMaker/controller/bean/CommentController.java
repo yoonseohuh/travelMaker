@@ -95,10 +95,10 @@ public class CommentController {
       System.out.println("꼬였다" + cmtGroupList);
       
       
-      //왜안뜨니
-      List dtoList = commentService.getMyGroup(id);
-      for(int i = 0; i<dtoList.size(); i++) {
-      System.out.println("컨트롤러에서 dtoList" + ((GroupSpaceDTO)dtoList.get(i)).getSubject());
+      //왜안뜨니  여기수정
+      List<GroupSpaceDTO> cmtMyGroup = commentService.cmtMyGroup(id);
+      for(int i = 0; i<cmtMyGroup.size(); i++) {
+      System.out.println("컨트롤러에서 dtoList" + ((GroupSpaceDTO)cmtMyGroup.get(i)).getSubject());
       }
       
       //그룹멤버들dto로 가져옴
@@ -120,7 +120,7 @@ public class CommentController {
       
       //model.addAttribute("dtoList", dtoList);
       
-      model.addAttribute("dtoList", dtoList);
+      model.addAttribute("cmtMyGroup", cmtMyGroup);
       model.addAttribute("cmtGroupList", cmtGroupList);
       model.addAttribute("fin", fin);
       model.addAttribute("count", count);
