@@ -96,7 +96,9 @@
 			</div>			
 			<!-- aMemTit end -->			
 			<div class="aInfoTit aMemTit">Gallery</div>					
+
 			<ul>
+
 				<li>
 					<c:if test="${empty gList}">
 							게시된 사진이 없습니다. </br></br></br>
