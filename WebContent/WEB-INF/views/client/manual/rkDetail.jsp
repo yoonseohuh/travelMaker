@@ -26,7 +26,7 @@
 							<p>이제 시작하셨군요! 모험을 떠나보세요!</p>
 						</div>
 						<div class="rightSub">
-							<p>1인 여행 개설</p>
+							<p>1인 여행 개설 가능</p>
 							<p>생성된 모험에 참여 가능</p>
 						</div>	
 					</div>
@@ -39,11 +39,10 @@
 					</div>
 					<div class="rankRight">
 						<div class="rightTit">
-							<p>이제 시작하셨군요! 모험을 떠나보세요!</p>
+							<p>여행가로서의 첫번째 발걸음을 디뎠습니다.</p>
 						</div>
 						<div class="rightSub">
-							<p>1인 여행 개설</p>
-							<p>생성된 모험에 참여 가능</p>
+							<p>그룹 여행 개설 가능</p>
 						</div>	
 					</div>
 			</div>
@@ -55,11 +54,10 @@
 					</div>
 					<div class="rankRight">
 						<div class="rightTit">
-							<p>이제 시작하셨군요! 모험을 떠나보세요!</p>
+							<p>오, 당신의 재능을 발견할 때가 되었군요.</p>
 						</div>
 						<div class="rightSub">
-							<p>1인 여행 개설</p>
-							<p>생성된 모험에 참여 가능</p>
+							<p>첫번째 포지션 선택 가능</p>
 						</div>	
 					</div>
 			</div>
@@ -71,11 +69,10 @@
 					</div>
 					<div class="rankRight">
 						<div class="rightTit">
-							<p>이제 시작하셨군요! 모험을 떠나보세요!</p>
+							<p>Travel Maker의 끝판왕! 단언컨대 당신은 여행에 충분히 숙달되었을 거예요.</p>
 						</div>
 						<div class="rightSub">
-							<p>1인 여행 개설</p>
-							<p>생성된 모험에 참여 가능</p>
+							<p>두번째 포지션 선택 가능</p>
 							<a href="manual.tm" class="posA rankA">메뉴얼 ></a>
 						</div>	
 					</div>
