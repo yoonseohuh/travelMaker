@@ -1,11 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
-
    
-
    <jsp:include page="/WEB-INF/views/include/top.jsp" />
    <!-- //top end -->
    
@@ -111,7 +109,9 @@
       	함께 여행한 동행자들에게 코멘트를 남겨보세요! </br></br>
 		<a style="cursor:pointer" id="tab1">조회</a> | <a style="cursor:pointer" id="tab2">작성</a> 
       </c:if>
-    
+
+      
+      
 	<div id="cont1">
 		<c:if test="${count == 0}">
 			<p>참여한 여행이 없으시군요! 여행떠나기 메뉴에 다양한 여행이 기다리고 있어요. 함께 떠나볼까요?</p>
@@ -119,13 +119,13 @@
 		<c:if test="${count >0}">
 		<br/><h1>너에게 난..? status4만보여줌</h1>
 				<ul>
-		 			<c:forEach var="dtoList" items="${dtoList}">
+		 			<c:forEach var="cmtMyGroup" items="${cmtMyGroup}">
 		 			<li class="menu">
-						<a style="cursor:pointer">${dtoList.subject} ${dtoList.startDate} ~ ${dtoList.endDate}</a>
+						<a style="cursor:pointer">${cmtMyGroup.subject} ${cmtMyGroup.startDate} ~ ${cmtMyGroup.endDate}</a>
 						<ul style="display: none;">
 							<c:forEach var="comRecUser" items="${comRecUser}">
 								
-								<c:if test="${dtoList.gNo == comRecUser.gNo}">
+								<c:if test="${cmtMyGroup.gNo == comRecUser.gNo}">
 									
 									<li>보낸사람: ${comRecUser.sender} / 코멘트내용: ${comRecUser.cCont} / 보낸날짜 ${comRecUser.reg}<li>&nbsp;   
 									<textarea rows="10" cols="72" name="comment" > ${comRecUser.cCont} </textarea>    
@@ -139,14 +139,13 @@
 			  
 			<br/>
 			<h1>나에게 넌..?</h1>
-
 				<ul>
-					<c:forEach var="dtoList" items="${dtoList}">
+					<c:forEach var="cmtMyGroup" items="${cmtMyGroup}">
 						<li class="menu">
-						<a style="cursor:pointer">${dtoList.subject} ${dtoList.startDate} ~ ${dtoList.endDate}</a>
+						<a style="cursor:pointer">${cmtMyGroup.subject} ${cmtMyGroup.startDate} ~ ${cmtMyGroup.endDate}</a>
 					 		<ul style="display: none;">
 							<c:forEach var="comSenUser" items="${comSenUser}">
-								<c:if test="${dtoList.gNo == comSenUser.gNo}">
+								<c:if test="${cmtMyGroup.gNo == comSenUser.gNo}">
 									<li>받는사람: ${comSenUser.receiver} / 코멘트내용: ${comSenUser.cCont} / 보낸날짜 ${comSenUser.reg}<li>&nbsp;      
 									<textarea rows="10" cols="72" name="comment" > ${comSenUser.cCont} </textarea> 
 								</c:if>
@@ -157,50 +156,7 @@
 				</ul>
 		</c:if>   
 
-
-
-		<h1>나에게 넌..?</h1>
-		<c:if test="${count == 0}">
-			<p>여행을 떠나세요</p>
-		</c:if>
-		<c:if test="${count >0}">
-			<ul>
-				<c:forEach var="dtoList" items="${dtoList}">
-					<li class="menu"><a style="cursor: pointer">${dtoList.subject}
-							${dtoList.startDate} ~ ${dtoList.endDate}</a>
-						<ul style="display: none;">
-							<c:forEach var="comSenUser" items="${comSenUser}">
-								<c:if test="${dtoList.gNo == comSenUser.gNo}">
-									<li>받는사람: ${comSenUser.receiver} / 코멘트내용:
-										${comSenUser.cCont} / 보낸날짜 ${comSenUser.reg}
-									<li>&nbsp; <textarea rows="10" cols="72" name="comment"> ${comSenUser.cCont} </textarea>
-								</c:if>
-							</c:forEach>
-						</ul>
-					</li>
-				</c:forEach>
-			</ul>
-		</c:if>
-
-		<c:if test="${count >0}">
-			<ul>
-				<c:forEach var="dtoList" items="${dtoList}">
-					<li class="menu"><a style="cursor: pointer">${dtoList.subject}
-							${dtoList.startDate} ~ ${dtoList.endDate}</a>
-						<ul style="display: none;">
-							<c:forEach var="comRecUser" items="${comRecUser}">
-								<c:if test="${dtoList.gNo == comRecUser.gNo}">
-									<li>보낸사람: ${comRecUser.sender} / 코멘트내용:
-										${comRecUser.cCont} / 보낸날짜 ${comRecUser.reg}
-									<li>
-								</c:if>
-							</c:forEach>
-						</ul></li>
-				</c:forEach>
-			</ul>
-		</c:if>
 	</div>
-
       <!-- //cont1 end  -->   
       
       <div id="cont2">

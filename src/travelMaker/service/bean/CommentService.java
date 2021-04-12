@@ -15,6 +15,10 @@ public interface CommentService {
 	//내가 여행한 모든 여행그룹 가져오기
 	public List getMyGroup(String id) throws SQLException;
 	
+	//사용자가 여행한 모든 여행그룹인데 사용자 혼자여행인건 뺀 여행그룹 (상태4)
+   public List cmtMyGroup(String id) throws SQLException;
+	
+	
 	// 그그룹넘에 해당하는 사람들 가져오기
 	public List getGMem(int gNo) throws SQLException;
 	
