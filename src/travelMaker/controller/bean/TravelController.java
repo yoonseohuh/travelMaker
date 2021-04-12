@@ -79,8 +79,7 @@ public class TravelController {
 	//스케줄러: 여행 횟수에 따른 회원 레벨 변경
 	@Scheduled(fixedDelay = 1800000)
 	public void memberRankCheck() throws Exception {
-		Date date = new Date();
-		System.out.println("30분마다 호출 "+date);
+		System.out.println("회원 레벨 변경 스케줄러- 30분마다 호출["+new Date()+"]");
 		List<TmUserDTO> list = memberService.getAllMembers();
 		for(int i=0 ; i<list.size() ; i++) {
 			TmUserDTO dto = list.get(i);
@@ -95,6 +94,18 @@ public class TravelController {
 			if(dto.getTravelCnt()>=50) {
 				dto.setRk(4);	//마스터로
 				memberService.updateMember(dto);				
+			}
+		}
+	}
+	
+	//스케줄러: 총평 작성과 공개여부 설정을 모두 마친 그룹의 status를 4로 변경
+	@Scheduled(fixedDelay = 600000)
+	public void travelEndCheck() throws Exception {
+		System.out.println("총평/공개여부 설정 시 그룹 status 변경 체크- 10분마다 호출["+new Date()+"]");
+		List<GroupSpaceDTO> list = travelService.getAllGroups();
+		for(int i=0; i<list.size(); i++) {
+			if((list.get(i).getShared()==1 || list.get(i).getShared()==2) && list.get(i).getGenReview()!=null) {
+				travelService.changeGrpStatus(list.get(i).getgNo(), 4);
 			}
 		}
 	}

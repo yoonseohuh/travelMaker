@@ -4,6 +4,7 @@
 
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
    
+
    <jsp:include page="/WEB-INF/views/include/top.jsp" />
    <!-- //top end -->
    
@@ -109,9 +110,7 @@
       	함께 여행한 동행자들에게 코멘트를 남겨보세요! </br></br>
 		<a style="cursor:pointer" id="tab1">조회</a> | <a style="cursor:pointer" id="tab2">작성</a> 
       </c:if>
-
-      
-      
+    
 	<div id="cont1">
 		<c:if test="${count == 0}">
 			<p>참여한 여행이 없으시군요! 여행떠나기 메뉴에 다양한 여행이 기다리고 있어요. 함께 떠나볼까요?</p>
@@ -139,6 +138,7 @@
 			  
 			<br/>
 			<h1>나에게 넌..?</h1>
+
 				<ul>
 					<c:forEach var="dtoList" items="${dtoList}">
 						<li class="menu">
@@ -155,6 +155,7 @@
 					</c:forEach>
 				</ul>
 		</c:if>   
+
 
 	</div>
       <!-- //cont1 end  -->   

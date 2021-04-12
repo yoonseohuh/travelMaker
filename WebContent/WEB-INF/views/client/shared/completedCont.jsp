@@ -78,7 +78,8 @@
 						<c:if test="${!empty getGroup.genReview}">
 								 ${getGroup.genReview}
 							</c:if>
-					</c:if> <c:if test="${memId != getGroup.id}">
+					</c:if> 
+					<c:if test="${memId != getGroup.id}">
 						<c:if test="${empty getGroup.genReview}">
 								개설자의 총평이 작성되지 않았습니다.
 						</c:if>
@@ -89,10 +90,16 @@
 				</td>
 			</tr>
 		</table>
-		
-		<input type="image" id="heartIcon" src="../resources/images/heart-empty.png" width="14" alt="좋아요"/>
-		
-		
+		<c:if test="${check == 0}">
+			<form class="likeForm" action="/travelMaker/shared/sharedLikedPro.tm" method="post">
+				<input type="hidden" name="gNo" value="${article.gNo}">
+				<input type="hidden" name="id" value="${sessionScope.memId}">
+				<input type="image" id="heartIcon" src="../resources/images/heart-empty.png" width="14" alt="좋아요"/>
+			</form>
+		</c:if>
+		<c:if test="${check == 1}">
+			<img src="../resources/images/heart-colored.png" width="14">
+		</c:if>
 	</c:if>
 </div>
 <!-- //wrapAll end -->

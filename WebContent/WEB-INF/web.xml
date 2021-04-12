@@ -2,14 +2,14 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
 	
 	<!-- ERROR PAGE 
-	<error-page>
-		<error-code>500</error-code>
-		<location>/mem/index.tm</location>
-	</error-page>
 	-->
 	<error-page>
+		<error-code>500</error-code>
+		<location>/mem/error500page.tm</location>
+	</error-page>
+	<error-page>
 		<error-code>404</error-code>
-		<location>/mem/undefinedPage.tm</location>
+		<location>/mem/error404page.tm</location>
 	</error-page>
 		
 	<!-- 한글 인코딩 처리 -->

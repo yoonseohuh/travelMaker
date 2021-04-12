@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import travelMaker.model.dto.GroupMemberDTO;
 import travelMaker.model.dto.GroupRequestDTO;
 import travelMaker.model.dto.GroupSpaceDTO;
 import travelMaker.model.dto.SmallPosDTO;
@@ -46,14 +47,18 @@ public class SharedController {
 	}
 
 	@RequestMapping("completedCont.tm")
-	public String completedCont(int gNo, String pageNum, Model model) throws Exception {
+	public String completedCont(int gNo, String id, String pageNum, Model model) throws Exception {
+		
+		
+		List reviewList = travelService.getReview(gNo);
 		GroupSpaceDTO article = sharedService.getArticle(gNo);
 		List scheList = travelService.getSchedule(gNo);
 		List grpReq = travelService.getRequests(gNo);
 		List gMem = travelService.getMembers(gNo);
 		List gList = travelService.getGroupImgs(gNo);
+		
 
-
+		
 		// status = 1 인 멤버들의 그룹리퀘스트dto
 		List<GroupRequestDTO> joinMem = new ArrayList<GroupRequestDTO>();
 		for (int i = 0; i < grpReq.size(); i++) {
@@ -63,7 +68,11 @@ public class SharedController {
 				joinMem.add(req);
 			}
 		}
-
+		
+		//select count(*) from sharedLiked where id=#{id} and gNo=#{gNo}
+		
+		
+		
 		// joinMem의 posNo를 리스트에 담는다
 		List<Integer> posList = new ArrayList<Integer>();
 		for (int i = 0; i < joinMem.size(); i++) {
@@ -90,6 +99,8 @@ public class SharedController {
 				posMem.put(dto.getPosName(), posCnt);
 			}
 		}
+		int check = sharedService.likedCheck(gNo, id);
+		
 		
 		model.addAttribute("gNo", gNo);
 		model.addAttribute("pageNum", pageNum);
@@ -99,9 +110,14 @@ public class SharedController {
 		model.addAttribute("gMem", gMem);
 		model.addAttribute("posMem", posMem);
 		model.addAttribute("gList", gList);
+		model.addAttribute("check", check);
+		model.addAttribute("reviewList", reviewList);
+		//System.out.println("다 들어오는데 check도 왔냐?");
 		// System.out.println(scheList);
 		// System.out.println(article);
 		// System.out.println("컨트롤러도왔니?");
+		
+		
 
 		return "client/shared/completedCont";
 	}
@@ -114,9 +130,13 @@ public class SharedController {
 	}
 	
 	@RequestMapping("sharedLikedPro.tm")
-	public String sharedLikedPro(String id, int gNo) throws Exception{
+	public String sharedLikedPro(String id, int gNo, Model model) throws Exception{
+		sharedService.sharedLiked(gNo, id);
+		System.out.println(id+"/"+gNo);
+		model.addAttribute("id", id);
+		model.addAttribute("gNo", gNo);
 		
-		return "client/shared/sharedLikedPro";
+		return "redirect:completedCont.tm?gNo="+gNo;
 	}
 	
 	

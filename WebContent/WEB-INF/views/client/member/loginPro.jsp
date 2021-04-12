@@ -13,7 +13,9 @@
 			</script>
 		</c:if>
 		<c:if test="${result == 1}">
-			<c:redirect url="/mem/index.tm"/>		
+			<script>
+			document.location.href="/travelMaker/mem/index.tm";
+			</script>	
 		</c:if>		
 	</div>
 	<!-- //wrapAll end -->

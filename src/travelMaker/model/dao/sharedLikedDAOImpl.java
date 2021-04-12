@@ -31,8 +31,8 @@ public class sharedLikedDAOImpl implements sharedLikedDAO {
 		map.put("gNo", gNo);
 		map.put("id", id);
 		
-		int count = sqlSession.selectOne("sharedLiked.likedCnt", map);
-		return count;
+		int check = sqlSession.selectOne("sharedLiked.likedCheck", map);
+		return check;
 	}
 
 	@Override
