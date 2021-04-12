@@ -78,7 +78,8 @@
 						<c:if test="${!empty getGroup.genReview}">
 								 ${getGroup.genReview}
 							</c:if>
-					</c:if> <c:if test="${memId != getGroup.id}">
+					</c:if> 
+					<c:if test="${memId != getGroup.id}">
 						<c:if test="${empty getGroup.genReview}">
 								개설자의 총평이 작성되지 않았습니다.
 						</c:if>
