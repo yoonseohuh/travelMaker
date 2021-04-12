@@ -30,6 +30,7 @@
 		<typeAlias type="travelMaker.model.dto.UserCmtDTO" alias="UserCmtDTO"/>
 		<typeAlias type="travelMaker.model.dto.QnaBoardDTO" alias="QnaBoardDTO"/>
 		<typeAlias type="travelMaker.model.dto.NoticeDTO" alias="NoticeDTO"/>
+		<typeAlias type="travelMaker.model.dto.SharedLikedDTO" alias="SharedLikedDTO"/>
 	</typeAliases>
 	
 	<!-- mapper파일의 위치 세팅. mapper가 추가되면 mappers 안에 mapper 태그를 추가하면 된다 -->

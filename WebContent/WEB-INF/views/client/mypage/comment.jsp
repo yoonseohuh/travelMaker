@@ -1,24 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
-   
-	<jsp:include page="/WEB-INF/views/include/top.jsp" />
-	<!-- //top end -->
-	
-	<div class="wrapAll client">
-		<c:if test="${sessionScope.memId==null}">
-			<script>
+
+<jsp:include page="/WEB-INF/views/include/top.jsp" />
+<!-- //top end -->
+
+<div class="wrapAll client">
+	<c:if test="${sessionScope.memId==null}">
+		<script>
 				alert("로그인 후에 이용 가능합니다");
 				history.go(-1);
 			</script>
-		</c:if>
-	
-		<jsp:include page="/WEB-INF/views/include/myMenu.jsp" />
-		<!-- myMenu end -->
-		
-		<script>
+	</c:if>
+
+	<jsp:include page="/WEB-INF/views/include/myMenu.jsp" />
+	<!-- myMenu end -->
+
+	<script>
 		$(document).ready(function(){
 	        $(".menu>a").click(function(){      //클래스가 menu의 아랫놈인 a를 클릭하면
 	            var submenu = $(this).next("ul");      //a 다음에있는 "ul을 submenu에 담고 
@@ -91,124 +91,130 @@
  		})
 		
 		</script>
-		
-		
-		<h1>comment</h1>
-		<a style="cursor:pointer" id="tab1">조회</a> | <a style="cursor:pointer" id="tab2">작성</a>
-		
-		
-		
-		<div id="cont1">
 
-			<h1>너에게 난..?</h1>
-			<c:if test="${count == 0}">
-				<p>여행을 떠나세요</p>
-			</c:if>
-			<c:if test="${count >0}">
-		    <ul>
-		    	<c:forEach var="dtoList" items="${dtoList}">
-		        <li class="menu">
-		            <a style="cursor:pointer">${dtoList.subject} ${dtoList.startDate} ~ ${dtoList.endDate}</a>
-		            <ul style="display: none;">
-		            <c:forEach var="comRecUser" items="${comRecUser}">
-		            	<c:if test="${dtoList.gNo == comRecUser.gNo}">
-							<li>보낸사람: ${comRecUser.sender} / 코멘트내용: ${comRecUser.cCont} / 보낸날짜 ${comRecUser.reg}<li>&nbsp;		
-						</c:if>
-					</c:forEach>
-		            </ul>
-		        </li>
-		        </c:forEach>
-		    </ul>
-		    </c:if>	
 
-			
-			<h1>나에게 넌..?</h1>
-			<c:if test="${count == 0}">
-				<p>여행을 떠나세요</p>
-			</c:if>
-			<c:if test="${count >0}">
-		    <ul>
-		    	<c:forEach var="dtoList" items="${dtoList}">
-		        <li class="menu">
-		            <a style="cursor:pointer">${dtoList.subject} ${dtoList.startDate} ~ ${dtoList.endDate}</a>
-		            <ul style="display: none;">
-		            <c:forEach var="comSenUser" items="${comSenUser}">
-		            	<c:if test="${dtoList.gNo == comSenUser.gNo}">
-							<li>받는사람: ${comSenUser.receiver} / 코멘트내용: ${comSenUser.cCont} / 보낸날짜 ${comSenUser.reg}<li>&nbsp;		
-							
-							<textarea rows="10" cols="72" name="comment" > ${comSenUser.cCont} </textarea> 
-							
-						</c:if>
-						<c:if test="${count >0}">
-					    <ul>
-					    	<c:forEach var="dtoList" items="${dtoList}">
-					        <li class="menu">
-					            <a style="cursor:pointer">${dtoList.subject} ${dtoList.startDate} ~ ${dtoList.endDate}</a>
-					            <ul style="display: none;">
-					            <c:forEach var="comRecUser" items="${comRecUser}">
-					            	<c:if test="${dtoList.gNo == comRecUser.gNo}">
-										<li>보낸사람: ${comRecUser.sender} / 코멘트내용: ${comRecUser.cCont} / 보낸날짜 ${comRecUser.reg}<li>		
-									</c:if>
-								</c:forEach>
-					            </ul>
-					        </li>
-					        </c:forEach>
-					    </ul>
-					    </c:if>	
-					</div>
-					<!-- dContList -->
-				</div>
-				<!-- dContMy -->
-					
-					<h1>나에게 넌..?</h1>
-					<c:if test="${count == 0}">
-						<p>여행을 떠나세요</p>
-					</c:if>
-					<c:if test="${count >0}">
-				    <ul>
-				    	<c:forEach var="dtoList" items="${dtoList}">
-				        <li class="menu">
-				            <a style="cursor:pointer">${dtoList.subject} ${dtoList.startDate} ~ ${dtoList.endDate}</a>
-				            <ul style="display: none;">
-				            <c:forEach var="comSenUser" items="${comSenUser}">
-				            	<c:if test="${dtoList.gNo == comSenUser.gNo}">
-									<li>받는사람: ${comSenUser.receiver} / 코멘트내용: ${comSenUser.cCont} / 보낸날짜 ${comSenUser.reg}<li>		
+	<h1>comment</h1>
+	<a style="cursor: pointer" id="tab1">조회</a> | <a
+		style="cursor: pointer" id="tab2">작성</a>
+
+
+
+	<div id="cont1">
+
+		<h1>너에게 난..?</h1>
+		<c:if test="${count == 0}">
+			<p>여행을 떠나세요</p>
+		</c:if>
+		<c:if test="${count >0}">
+			<ul>
+				<c:forEach var="dtoList" items="${dtoList}">
+					<li class="menu"><a style="cursor: pointer">${dtoList.subject}
+							${dtoList.startDate} ~ ${dtoList.endDate}</a>
+						<ul style="display: none;">
+							<c:forEach var="comRecUser" items="${comRecUser}">
+								<c:if test="${dtoList.gNo == comRecUser.gNo}">
+									<li>보낸사람: ${comRecUser.sender} / 코멘트내용:
+										${comRecUser.cCont} / 보낸날짜 ${comRecUser.reg}
+									<li>&nbsp;
 								</c:if>
 							</c:forEach>
-				            </ul>
-				        </li>
-				        </c:forEach>
-				    </ul>
-				    </c:if>	
-		
+						</ul></li>
+				</c:forEach>
+			</ul>
+		</c:if>
 
-		<div id="cont2">
-			<form action="/travelMaker/cmt/commentWritePro.tm" name="commentWrite" onsubmit="return check()" method="get">
-			<input type="hidden" name="id" value="${sessionScope.memId}" />
-			<input type="hidden" name="result" value="1" />
-		     	여행목록 : ${sessionScope.memId}
-				<select name="groupNum" id="group" required >
-					<option value="">여행을 선택해주세요</option>
-					<c:forEach var="dto" items="${dtoList}">
-					<option value="${dto.gNo}">${dto.subject}/ ${dto.gNo}</option>
-					</c:forEach>
-				</select>&nbsp;
-				
-				
-				동행자 : 							
-		   		<select name="groupMem" id="groupMem" required>
-					<option>동행자를 선택해주세요</option>
-				</select> <br/>
-				
-		   		<textarea rows="10" cols="72" name="comment" ></textarea>
-		   		<input type="submit" value="버튼" />
-		   	</form>
-		</div>
-		<!-- //cont2 end  -->  
-	  			
 
+		<h1>나에게 넌..?</h1>
+		<c:if test="${count == 0}">
+			<p>여행을 떠나세요</p>
+		</c:if>
+		<c:if test="${count >0}">
+			<ul>
+				<c:forEach var="dtoList" items="${dtoList}">
+					<li class="menu"><a style="cursor: pointer">${dtoList.subject}
+							${dtoList.startDate} ~ ${dtoList.endDate}</a>
+						<ul style="display: none;">
+							<c:forEach var="comSenUser" items="${comSenUser}">
+								<c:if test="${dtoList.gNo == comSenUser.gNo}">
+									<li>받는사람: ${comSenUser.receiver} / 코멘트내용:
+										${comSenUser.cCont} / 보낸날짜 ${comSenUser.reg}
+									<li>&nbsp; <textarea rows="10" cols="72" name="comment"> ${comSenUser.cCont} </textarea>
+								</c:if>
+							</c:forEach>
+						</ul>
+					</li>
+				</c:forEach>
+			</ul>
+		</c:if>
+
+		<c:if test="${count >0}">
+			<ul>
+				<c:forEach var="dtoList" items="${dtoList}">
+					<li class="menu"><a style="cursor: pointer">${dtoList.subject}
+							${dtoList.startDate} ~ ${dtoList.endDate}</a>
+						<ul style="display: none;">
+							<c:forEach var="comRecUser" items="${comRecUser}">
+								<c:if test="${dtoList.gNo == comRecUser.gNo}">
+									<li>보낸사람: ${comRecUser.sender} / 코멘트내용:
+										${comRecUser.cCont} / 보낸날짜 ${comRecUser.reg}
+									<li>
+								</c:if>
+							</c:forEach>
+						</ul></li>
+				</c:forEach>
+			</ul>
+		</c:if>
 	</div>
-	<!-- //wrapAll end -->
-	
+	<!-- dContList -->
+</div>
+<!-- dContMy -->
+
+<h1>나에게 넌..?</h1>
+<c:if test="${count == 0}">
+	<p>여행을 떠나세요</p>
+</c:if>
+<c:if test="${count >0}">
+	<ul>
+		<c:forEach var="dtoList" items="${dtoList}">
+			<li class="menu"><a style="cursor: pointer">${dtoList.subject}
+					${dtoList.startDate} ~ ${dtoList.endDate}</a>
+				<ul style="display: none;">
+					<c:forEach var="comSenUser" items="${comSenUser}">
+						<c:if test="${dtoList.gNo == comSenUser.gNo}">
+							<li>받는사람: ${comSenUser.receiver} / 코멘트내용:
+								${comSenUser.cCont} / 보낸날짜 ${comSenUser.reg}
+							<li>
+						</c:if>
+					</c:forEach>
+				</ul></li>
+		</c:forEach>
+	</ul>
+</c:if>
+
+
+<div id="cont2">
+	<form action="/travelMaker/cmt/commentWritePro.tm" name="commentWrite"
+		onsubmit="return check()" method="get">
+		<input type="hidden" name="id" value="${sessionScope.memId}" /> <input
+			type="hidden" name="result" value="1" /> 여행목록 :
+		${sessionScope.memId} <select name="groupNum" id="group" required>
+			<option value="">여행을 선택해주세요</option>
+			<c:forEach var="dto" items="${dtoList}">
+				<option value="${dto.gNo}">${dto.subject}/${dto.gNo}</option>
+			</c:forEach>
+		</select>&nbsp; 동행자 : <select name="groupMem" id="groupMem" required>
+			<option>동행자를 선택해주세요</option>
+		</select> <br />
+
+		<textarea rows="10" cols="72" name="comment"></textarea>
+		<input type="submit" value="버튼" />
+	</form>
+</div>
+<!-- //cont2 end  -->
+
+
+</div>
+<!-- //wrapAll end -->
+
 <jsp:include page="/WEB-INF/views/include/footer.jsp" />
 <!-- //footer end -->

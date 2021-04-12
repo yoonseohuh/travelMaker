@@ -1,6 +1,6 @@
 package travelMaker.controller.bean;
 
-import java.util.ArrayList;
+import java.util.ArrayList;	
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -9,11 +9,11 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import travelMaker.model.dto.GroupMemberDTO;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+
 import travelMaker.model.dto.GroupRequestDTO;
 import travelMaker.model.dto.GroupSpaceDTO;
 import travelMaker.model.dto.SmallPosDTO;
@@ -28,6 +28,7 @@ public class SharedController {
 	private SharedService sharedService = null;
 	@Autowired
 	private TravelService travelService = null;
+	
 
 	@RequestMapping("sharedList.tm")
 	public String sharedList(String pageNum, Model model) throws Exception {
@@ -45,19 +46,20 @@ public class SharedController {
 
 		return "client/shared/sharedList";
 	}
-
+	
 	@RequestMapping("completedCont.tm")
 	public String completedCont(int gNo, String id, String pageNum, Model model) throws Exception {
 		
-		
+		// 리뷰 리스트
 		List reviewList = travelService.getReview(gNo);
+		// sharedPage에서 completedCont 가져오기
 		GroupSpaceDTO article = sharedService.getArticle(gNo);
+		// 스케쥴 리스트 가져오기
 		List scheList = travelService.getSchedule(gNo);
+		
 		List grpReq = travelService.getRequests(gNo);
 		List gMem = travelService.getMembers(gNo);
 		List gList = travelService.getGroupImgs(gNo);
-		
-
 		
 		// status = 1 인 멤버들의 그룹리퀘스트dto
 		List<GroupRequestDTO> joinMem = new ArrayList<GroupRequestDTO>();
@@ -99,6 +101,7 @@ public class SharedController {
 				posMem.put(dto.getPosName(), posCnt);
 			}
 		}
+		// 좋아요 체크 확인 
 		int check = sharedService.likedCheck(gNo, id);
 		
 		
@@ -125,23 +128,31 @@ public class SharedController {
 	@RequestMapping("sharedLiked.tm")
 	public String sharedLiked(String id, int gNo) throws Exception{
 		sharedService.sharedLiked(gNo, id);
-		
+		System.out.println("좋아요 컨트롤 왔니?");
 		return "client/shared/sharedLiked";
 	}
 	
 	@RequestMapping("sharedLikedPro.tm")
 	public String sharedLikedPro(String id, int gNo, Model model) throws Exception{
+		
 		sharedService.sharedLiked(gNo, id);
-		System.out.println(id+"/"+gNo);
+		//System.out.println(id+"/"+gNo);
 		model.addAttribute("id", id);
 		model.addAttribute("gNo", gNo);
+		System.out.println("좋아요프로 컨트롤 왔니?");
 		
 		return "redirect:completedCont.tm?gNo="+gNo;
 	}
 	
-	
-	
-	
+	@RequestMapping("sharedLikedCancel.tm")
+	public String sharedLikedCancel(int gNo, String id, Model model) throws Exception {
+		sharedService.sharedLikedCancel(gNo, id);
+		System.out.println("안오냐?");
+		model.addAttribute("gNo", gNo);
+		model.addAttribute("id", id);
+		return "client/shared/sharedLikedCancel";
+	}
+
 	
 	
 	

@@ -23,8 +23,11 @@
 	</update>
 
 	<update id="sharedLikedCnt" parameterType="int">
-		update groupSpace set likedCnt = likedCnt+#{sl} where gNo=#{gNo}
+		update groupSpace set likedCnt = likedCnt+#{sl} where gNo=#{gNo} 
 	</update>
+	
+	
+	
 
 
 	

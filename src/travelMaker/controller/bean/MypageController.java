@@ -32,6 +32,7 @@ import travelMaker.model.dto.UserRkDTO;
 import travelMaker.service.bean.LandmarkService;
 import travelMaker.service.bean.MemberService;
 import travelMaker.service.bean.QnaReportService;
+import travelMaker.service.bean.SharedService;
 import travelMaker.service.bean.TravelService;
 
 @Controller
@@ -46,7 +47,8 @@ public class MypageController {
 	private MemberService memberService = null;
 	@Autowired
 	private LandmarkService landmarkService = null;
-	
+	@Autowired
+	private SharedService sharedService = null;
 	
 	//마이페이지 홈
 	@RequestMapping("myPage.tm")
@@ -102,15 +104,24 @@ public class MypageController {
 	
 	//여행이력
 	@RequestMapping("myHistory.tm")
-	public String myHistory(Model model)throws Exception {
+	public String myHistory( Model model)throws Exception {
 		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
 		int status = 1;
 		
 		//참여중인 여행 다 가져오기
 		List travelAll = travelService.getMyGroups(id, status);
-		
-		
 		model.addAttribute("travelAll", travelAll);
+		
+		
+		// 내가 좋아요한 completedCont 가져오기
+		List<GroupSpaceDTO> lsharedList = sharedService.getSharedLiked(id);
+		for(int i=0;i<lsharedList.size();i++) {
+			System.out.print(lsharedList.get(i).getSubject()+"/");
+		}
+		model.addAttribute("lsharedList", lsharedList);
+		model.addAttribute("id", id);
+		
+		//System.out.println("sharedLikedlist 컨트롤러 오니?");
 		
 		return "client/mypage/myHistory";
 	}

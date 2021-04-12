@@ -1,5 +1,6 @@
 package travelMaker.service.bean;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import travelMaker.model.dao.GroupSpaceDAO;
 import travelMaker.model.dao.SharedDAO;
 import travelMaker.model.dao.sharedLikedDAO;
 import travelMaker.model.dto.GroupSpaceDTO;
+import travelMaker.model.dto.SharedLikedDTO;
 
 @Service
 public class SharedServiceImpl implements SharedService {
@@ -94,7 +96,19 @@ public class SharedServiceImpl implements SharedService {
 		return check;
 	}
 
-	// 좋아요 취소
+
+	@Override
+	public List getSharedLiked(String id) throws Exception {
+		List lsharedList = sharedLikedDAO.getSharedLiked(id);
+		List<GroupSpaceDTO> list = new ArrayList();
+		for(int i=0;i<lsharedList.size();i++) {
+			SharedLikedDTO dto = (SharedLikedDTO)lsharedList.get(i);
+			list.add(groupSpaceDAO.getContent(dto.getgNo()));
+		}
+		//System.out.println("sharedLikedlist 서비스 오니?");
+		return list;
+	}
+
 	@Override
 	public void sharedLikedCancel(int gNo, String id) throws Exception {
 		sharedDAO.sharedLikedCnt(gNo, -1);
