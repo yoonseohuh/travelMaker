@@ -3,12 +3,12 @@
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
 	<!-- //top end -->
 	<div class="wrapAll client">
-	
-	
-	
-	<h1>존재하지 않는 주소입니다.</h1>
-	<h1>다시 확인해주세요.</h1>
-	
+		
+		<img src="/travelMaker/resources/images/error500.png"/>
+		<h1>잘못된 요청입니다.</h1>
+		<br/>
+		<h1>저희가 잘못했거나요...</h1>
+		<button class="comBtn" onclick="window.location='/travelMaker/mem/index.tm'">못 본 척 메인으로</button>
 	
 	</div>
 	<!-- //wrapAll end -->
