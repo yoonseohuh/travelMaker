@@ -1,6 +1,7 @@
 package travelMaker.model.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -19,7 +20,7 @@ public class sharedLikedDAOImpl implements sharedLikedDAO {
 		Map map = new HashMap();
 		map.put("gNo", gNo);
 		map.put("id", id);
-		System.out.println("dao 따라오니?");
+		//System.out.println("dao 따라오니?");
 		sqlSession.insert("sharedLiked.insertSharedLiked", map);
 		
 	}
@@ -36,11 +37,19 @@ public class sharedLikedDAOImpl implements sharedLikedDAO {
 	}
 
 	@Override
+	public List getSharedLiked(String id) throws Exception{
+		List lsharedList = sqlSession.selectList("sharedLiked.getSharedLiked", id);
+		//System.out.println("sharedLikedlist 오니?");
+		return lsharedList;
+	}
+
+
+	@Override
 	public void sharedLikedCancel(int gNo, String id) throws Exception {
 		Map map = new HashMap();
 		map.put("gNo", gNo);
 		map.put("id", id);
-		
+		System.out.println("여기는 오냐?");
 		sqlSession.insert("sharedLiked.sharedLikedCancel", map);
 		
 	}

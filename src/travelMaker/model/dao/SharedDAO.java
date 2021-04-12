@@ -16,5 +16,4 @@ public interface SharedDAO {
 	// 좋아요 +1
 	public void sharedLikedCnt(int gNo, int sl) throws Exception;
 	
-
 }
