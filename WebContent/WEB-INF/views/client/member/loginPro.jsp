@@ -14,7 +14,7 @@
 		</c:if>
 		<c:if test="${result == 1}">
 			<script>
-				history.go(-2)
+			document.location.href="/travelMaker/mem/index.tm";
 			</script>	
 		</c:if>		
 	</div>
