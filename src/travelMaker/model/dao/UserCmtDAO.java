@@ -34,6 +34,15 @@ public interface UserCmtDAO {
 	
 	//보낸사람이 사용자인 코멘트DTO 가져오기
 	public List comSenUser(String id);
+	
+	//그룹인원확인
+   public int groupMemCnt(int gNo);
+   
+   //그룹방에 내가 작성한 코멘트 갯수 확인
+   public int cntCmt(int gNo, String id);
+	
+
+		
 
 }
 
