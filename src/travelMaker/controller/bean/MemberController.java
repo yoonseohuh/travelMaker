@@ -42,9 +42,15 @@ public class MemberController {
 	}
 	
 	//404에러페이지
-	@RequestMapping("undefinedPage.tm")
-	public String undefined() {
-		return "client/undefined";
+	@RequestMapping("error404page.tm")
+	public String error404() {
+		return "client/error404";
+	}
+	
+	//500에러페이지
+	@RequestMapping("error500page.tm")
+	public String error500() {
+		return "client/error500";
 	}
 	
 	
