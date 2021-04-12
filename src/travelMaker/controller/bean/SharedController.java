@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import travelMaker.model.dto.GroupMemberDTO;
 import travelMaker.model.dto.GroupRequestDTO;
 import travelMaker.model.dto.GroupSpaceDTO;
 import travelMaker.model.dto.SmallPosDTO;
@@ -48,6 +49,8 @@ public class SharedController {
 	@RequestMapping("completedCont.tm")
 	public String completedCont(int gNo, String id, String pageNum, Model model) throws Exception {
 		
+		
+		List reviewList = travelService.getReview(gNo);
 		GroupSpaceDTO article = sharedService.getArticle(gNo);
 		List scheList = travelService.getSchedule(gNo);
 		List grpReq = travelService.getRequests(gNo);
@@ -55,6 +58,7 @@ public class SharedController {
 		List gList = travelService.getGroupImgs(gNo);
 		
 
+		
 		// status = 1 인 멤버들의 그룹리퀘스트dto
 		List<GroupRequestDTO> joinMem = new ArrayList<GroupRequestDTO>();
 		for (int i = 0; i < grpReq.size(); i++) {
@@ -107,7 +111,8 @@ public class SharedController {
 		model.addAttribute("posMem", posMem);
 		model.addAttribute("gList", gList);
 		model.addAttribute("check", check);
-		
+		model.addAttribute("reviewList", reviewList);
+		//System.out.println("다 들어오는데 check도 왔냐?");
 		// System.out.println(scheList);
 		// System.out.println(article);
 		// System.out.println("컨트롤러도왔니?");
