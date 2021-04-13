@@ -25,21 +25,49 @@
 			<br />
 		</c:forEach>
 	</c:if>
-
-	<h1>내가 좋아요한 여행</h1>
+	<script>
+		function cancelCheck(){
+			if(confirm("취소하시겠습니까?")== true){
+				document.cancelLiked.submit();
+			}else{
+				return false;
+			}
+		}
+	</script>
 	
-		<form action="/travelMaker/shared/sharedLikedCancel.tm" name="likeCancel" method="post">
-			<input type="submit" value="취소" /> 
+	<script>
+		// 좋아요 한 여행 다중 삭제 하기
+		$(document).ready(function(){
+			$("input:checkbox[name=canGnum]").on("click",function(){
+				var arr = new Array();
+				$("input:checkbox[name=canGnum]:checked").each(function(){
+					var checkVal = $(this).val();
+					arr.push(checkVal);
+				});
+				$("#cangNo").val(arr);
+			});
 			
+		});
+	</script>
+	<h1>내가 좋아요한 여행</h1>
+	<c:if test="${empty lsharedList}">
+			좋아요 한 여행이 존재 하지 않습니다.
+		</c:if>
+	<c:if test="${!empty lsharedList}">
+		<form action="/travelMaker/shared/sharedLikedCancel.tm" name="cancelLiked" method="post" onsubmit="return cancelCheck()" >
+			<input type="submit" value="취소">
+			<input type="hidden" name="gNo" id="cangNo">
 			<c:forEach var="list" items="${lsharedList}">
 				<ul>
-					<li><input type="checkbox" name="cancel" value="${list.gNo}" /></li>
-					<li> 그룹 번호 : ${list.gNo}</li>
+					<li><input type="checkbox" name="canGnum" value="${list.gNo}" /></li>
+					<li>그룹 번호 : ${list.gNo}</li>
 					<li>여행 이름 : ${list.subject}</li>
 					<li></li>
 				</ul>
-		</c:forEach>
-	</form>
+			</c:forEach>
+		</form>
+	</c:if>
+
 </div>
 <!-- //wrapAll end -->
 
