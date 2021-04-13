@@ -233,10 +233,10 @@
   font-size: 0;
 }
 .swiper-pagination-bullet {
-  width: 6px;
+  width: 100px;
   height: 6px;
   display: inline-block;
-  background: #fff;
+  background: rgba(255,255,255,.4);
   opacity: 1;
   transition:.3s;
 }

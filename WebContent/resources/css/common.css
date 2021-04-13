@@ -1,9 +1,7 @@
 @charset "UTF-8";
 /*common.css*/
-
 /*SCROLLBAR IE*/
 * {scrollbar-arrow-color:#9D9992; scrollbar-3dlight-color:#D4D0C8; scrollbar-darkshadow-color:#D4D0C8; scrollbar-face-color:#FFFFFF; scrollbar-hightlight-color:#FFFFFF; scrollbar-shadow-color:#FFFFFF; scrollbar-track-color:#EAE7E1;}
-
 
 /*SCROLLBAR Chrome, Safari*/
 ::-webkit-scrollbar {width: 5px; border: 3px solid #ddd; }
@@ -11,9 +9,157 @@
 ::-webkit-scrollbar-track {background: #efefef; -webkit-border-radius: 10px; border-radius:10px; -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.2)}
 ::-webkit-scrollbar-thumb {height: 50px; width: 50px; background: rgba(0,0,0,.2); -webkit-border-radius: 8px; border-radius: 8px; -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.1)}
 
-
 /*table*/
 table {width: 100%; text-align: center;}
 table th {height: 55px; line-height: 55px; background: #888; color: #fff; font-size:15px; font-weight: 600;}
 table td {height: 70px; line-height: 70px; border-bottom: 1px solid #e8e8e8; font-size:17px;}
 table input {width: 80%; font-size:17px;}
+
+/*Underline From Left*/
+.underline-from-left {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    position: relative;
+    overflow: hidden;
+}
+.underline-from-left:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    right: 100%;
+    bottom: 0;
+    background: #ff0000;
+    height: 3px;
+    -webkit-transition-property: right;
+    transition-property: right;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+}
+.underline-from-left:hover:before, .underline-from-left:focus:before, .hvr-underline-from-left:active:before {
+    right: 0;
+}
+
+
+/*layout*/
+/*wrapAll*/
+.wrapAll {overflow: hidden; width: 100%; height: auto; min-height: 550px;}
+.wrapAll.client {padding: 80px;}
+.wrapAll.admin {padding: 80px 80px 80px 330px;}
+
+
+/*top_index*/
+/*logo*/
+#logo {line-height: 24px; color: #ff0000; font-size: 23px; font-weight: 600; position: fixed;top: 28px;left: 30px; z-index:997;}
+
+/*searchBar*/
+.searchBar {width:55%; height:80px; background:#fff; transition:.3s; cursor:pointer; position:absolute;bottom:0;left:0; z-index:996;}
+.searchBar.on {height:250px; background:#fff;}
+.searchBar.on .ment {display:none;}
+
+/*sign*/
+#sign {position: fixed;top: 28px;right: 110px; z-index:997;}
+#sign a {line-height: 24px; color: #000; font-size: 16px; font-weight: 400; margin-left: 15px;}
+
+/*ham*/
+#ham {
+    position: absolute;
+    top: 27px; right: 35px;
+    width: 36px; height: 26px;
+    cursor:pointer;
+    z-index: 999;
+}
+#ham span {
+    display: block;
+    background: #000;
+    width: 36px;
+    height: 4px;
+    border-radius: 3px;
+    transition: margin 0.25s 0.25s, transform 0.25s ;
+}
+#ham .bar1 {margin-bottom: 6px;}
+#ham .bar3 {margin-top: 6px;}
+
+#ham.active span {
+    transition: margin 0.25s, transform 0.25s 0.25s;
+}
+
+#ham.active .bar1 {
+    margin-top: 8px;
+    margin-bottom: -4px;
+    transform: rotate(45deg);
+}
+#ham.active .bar2 {
+    transform: rotate(45deg);        
+}
+#ham.active .bar3 {
+    margin-top: -4px;
+    transform: rotate(135deg);
+}
+
+/*top*/
+#top {width: 100%; height:80px; background: #fff; border-bottom: 1px solid #f8f9fa; transition: .3s; position: fixed;top: 0;left: 0; z-index:999;}
+#top.nav-up {top: -80px;}
+#top.nav-down {top: 0;}
+#top #logo {position: absolute;top: 28px;left: 30px; z-index:997;}
+#top #sign {position: absolute;top: 28px;right: 110px; z-index:997;}
+
+/*clientMenu*/
+#clientMenuWrap {display: none; width: 350px; height: 100vh; background: #fff; position: fixed;top: 0;right: 0; z-index:998;}
+#clientMenuWrap .menu {margin: 80px 0;}
+#clientMenuWrap .menu li {height: 50px;}
+#clientMenuWrap .menu li a {display: block; width: 100%; height: 100%; line-height: 50px; text-indent: 30px; color: #000; font-size: 21px; transition:.3s;}
+#clientMenuWrap .menu li.on a {background: #ff0000; color: #fff;}
+#clientMenuWrap .menu li a:hover {background: #ff0000; color: #fff;}
+
+/*mCover*/
+#mCover {
+    display: none;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0,0,0,.8);
+    position: fixed;
+    top: 0; left: 0;
+    z-index: 997;
+}
+
+/*myMenu*/
+#myMenuWrap {overflow: hidden; margin: 0 0 30px;}
+#myMenuWrap li {float: left; margin: 0 5px 0 0;}
+#myMenuWrap li a {display: block; background: #aaa; color: #fff; transition:.3s; padding: 15px;}
+#myMenuWrap li.on a {background: #333;}
+#myMenuWrap li a:hover {background: #333;}
+
+/*adminMenu*/
+#adminMenuWrap {width: 250px; height: 100vh; background: #5543FF; position: fixed;top: 0;left: 0; z-index:999;}
+#adminMenuWrap .logo {text-align: center; color: #fff; font-size: 30px; font-weight: 600; border-bottom: 3px solid #fff; padding-bottom: 20px; margin: 80px 25px 0;}
+#adminMenuWrap .menu {margin: 60px 0;}
+#adminMenuWrap .menu li {height: 45px;}
+#adminMenuWrap .menu li a {display: block; width: 100%; height: 100%; line-height: 45px; text-indent: 25px; color: #fff; transition:.3s;}
+#adminMenuWrap .menu li.on a {background: #2C1ED6;}
+#adminMenuWrap .menu li a:hover {background: #2C1ED6;}
+
+/*footer*/
+.footer {overflow:hidden; width: 100%; height:300px; background: #fff; padding:56px 70px; }
+.footer > li {float:left; width: 33.33%;}
+.footer > li:nth-child(1) {width: 33.34%; font-size:12px;}
+.footer > li:nth-child(2) {padding-left: 150px;}
+.footer > li:nth-child(4) {width: 100%; font-size: 12px; line-height: 2; font-weight:600;}
+
+.footer .icon {overflow: hidden;}
+.footer .icon li {float:left;  width: 24px; height: 24px;  background: #000; margin-right: 25px;}
+.footer .icon li:nth-child(1) {background: url(/resources/images/ic-insta.svg)no-repeat;}
+.footer .icon li:nth-child(2) {background: url(/resources/images/ic-youtube.svg)no-repeat;}
+.footer .icon li:nth-child(3) {background: url(/resources/images/ic-blog.svg)no-repeat;}
+.footer .info {margin: 35px 0;}
+.footer .info p {line-height: 1.67; font-weight: 500;}
+.footer .sub {font-size:14px; line-height: 1.7; font-weight: 500;}
+.footer .ph {font-size:24px; letter-spacing: 3px; ; font-weight:600; line-height: 1.5;}
+
+.footer .sel_portfolio {float:right; width: 220px; height: 45px; font-size: 14px; font-weight: 500px; border: 0; border-bottom: 1px solid #e8e8e8; }
+.footer .sel_portfolio:focus { outline: 0; border-bottom: 1px solid #e8e8e8;}
