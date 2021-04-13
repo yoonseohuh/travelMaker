@@ -105,7 +105,7 @@
 					</c:if>
 					<c:if test="${!empty gList}">
 						<c:forEach var="gList" items="${gList}">
-							<img src="/travelMaker/save/${glist.pRoot}" width="200px"/> 
+							<img src="/travelMaker/save/${gList.pRoot}" width="200px"/> 
 						</c:forEach>
 					</c:if>
 				</li>

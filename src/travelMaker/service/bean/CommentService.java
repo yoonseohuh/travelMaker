@@ -1,6 +1,7 @@
 package travelMaker.service.bean;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,13 @@ public interface CommentService {
 	
 	//사용자가 여행한 모든 여행그룹인데 사용자 혼자여행인건 뺀 여행그룹 (상태4)
    public List cmtMyGroup(String id) throws SQLException;
+   
+   // 그룹방별로 받는사람이 사용자인거 카운트
+   public Map comRecUserCnt(String id)throws SQLException;
+   
+   // 그룹방별로 보낸사람이 사용자인거 카운트
+   public Map comSenUserCnt(String id)throws SQLException;
+   
 	
 	
 	// 그그룹넘에 해당하는 사람들 가져오기

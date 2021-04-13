@@ -29,7 +29,7 @@ public class CommentServiceImpl implements CommentService {
    // 사용자가 참여중인 그룹스페이스를 한줄씩(groupSpaceDTO) 가져올것임
    public GroupSpaceDTO getGroupInfo(int num) throws SQLException{
       GroupSpaceDTO gInfo = userCmtDAO.getGroupInfo(num);
-      System.out.println("서비스에서 그룹명이 안뜨나? " + gInfo.getSubject());
+    //  System.out.println("서비스에서 그룹명이 안뜨나? " + gInfo.getSubject());
       return gInfo;
    }
          
@@ -44,8 +44,8 @@ public class CommentServiceImpl implements CommentService {
       
       List dtoList = new ArrayList();
       for(int i = 0 ; i < myGroup.size(); i++) {
-         System.out.println("마이그룹사이즈" + myGroup.size());
-         System.out.println(i + "번쨰 : " + ((GroupMemberDTO)myGroup.get(i)).getgNo());
+        // System.out.println("마이그룹사이즈" + myGroup.size());
+        // System.out.println(i + "번쨰 : " + ((GroupMemberDTO)myGroup.get(i)).getgNo());
          
            GroupSpaceDTO gInfo = getGroupInfo(((GroupMemberDTO)myGroup.get(i)).getgNo());
            if(gInfo.getStatus() == 4 ) { //GroupSpace 여행상태가 4인것들만 담는다
@@ -54,9 +54,9 @@ public class CommentServiceImpl implements CommentService {
               
            }   
       }
-      for(int i = 0; i < dtoList.size(); i++) {
-    	  System.out.println("디티오리스트" + ((GroupSpaceDTO)dtoList.get(i)).getSubject());
-      }
+    //  for(int i = 0; i < dtoList.size(); i++) {
+    //	  System.out.println("디티오리스트" + ((GroupSpaceDTO)dtoList.get(i)).getSubject());
+    //  }
       return dtoList;
    }
    
@@ -72,8 +72,8 @@ public class CommentServiceImpl implements CommentService {
       for(int i = 0; i < myGroup.size(); i++) {
     	  int result = userCmtDAO.groupMemCnt(((GroupMemberDTO)myGroup.get(i)).getgNo());
     	  if(result > 1) { //사용자가 참여중인 그룹넘 보내서 그룹멤버 카운트가 1이면 혼자여행이니까 1보다 클경우 담는다 
-    		  System.out.println("마이그룹사이즈" + myGroup.size());
-    	      System.out.println(i + "번쨰 : " + ((GroupMemberDTO)myGroup.get(i)).getgNo());
+    		//  System.out.println("마이그룹사이즈" + myGroup.size());
+    	    //  System.out.println(i + "번쨰 : " + ((GroupMemberDTO)myGroup.get(i)).getgNo());
     	         
     	      GroupSpaceDTO gInfo = getGroupInfo(((GroupMemberDTO)myGroup.get(i)).getgNo());
     	      if(gInfo.getStatus() == 4 ) { //GroupSpace 여행상태가 4인것들만 담는다
@@ -83,13 +83,48 @@ public class CommentServiceImpl implements CommentService {
     	  
       }
     	 
-      for(int i = 0; i < cmtMyGroup.size(); i++) {
-    	  System.out.println("디티오리스트" + ((GroupSpaceDTO)cmtMyGroup.get(i)).getSubject());
-      }
+     // for(int i = 0; i < cmtMyGroup.size(); i++) {
+     //	  System.out.println("디티오리스트" + ((GroupSpaceDTO)cmtMyGroup.get(i)).getSubject());
+     // }
 
       return cmtMyGroup;
    } 
    
+   
+   // 그룹방별로 받는사람이 사용자인거 카운트
+   public Map comRecUserCnt(String id)throws SQLException {
+	   Map comRecUserCnt = new HashMap();
+	   
+	   //사용자가 여행한 모든 여행그룹인데 사용자 혼자여행인건 뺀 여행그룹 (상태4)
+	   List<GroupSpaceDTO> list = cmtMyGroup(id);
+	   
+	   for(int i = 0; i < list.size(); i++) {
+		   //그룹방서 코멘트 받는 사람이 사용자인거 카운트해서 map에다가 gNo, 카운트값 으로 담음 
+		   int result = userCmtDAO.comRecUserCnt(id, ((GroupSpaceDTO)list.get(i)).getgNo());
+		   comRecUserCnt.put(((GroupSpaceDTO)list.get(i)).getgNo(), result);
+	   }
+	   
+	  
+	   return comRecUserCnt; 
+   }
+   
+   
+   // 그룹방별로 보낸사람이 사용자인거 카운트
+   public Map comSenUserCnt(String id)throws SQLException {
+	   Map comSenUserCnt = new HashMap();
+	   
+	   //사용자가 여행한 모든 여행그룹인데 사용자 혼자여행인건 뺀 여행그룹 (상태4)
+	   List<GroupSpaceDTO> list = cmtMyGroup(id);
+	   
+	   for(int i = 0; i < list.size(); i++) {
+		   //그룹방서 코멘트 보낸 사람이 사용자인거 카운트해서 map에다가 gNo, 카운트값 으로 담음 
+		   int result = userCmtDAO.comSenUserCnt(id, ((GroupSpaceDTO)list.get(i)).getgNo());
+		   comSenUserCnt.put(((GroupSpaceDTO)list.get(i)).getgNo(), result);
+	   }
+	   
+	  
+	   return comSenUserCnt; 
+   }
    
    
    
@@ -110,7 +145,7 @@ public class CommentServiceImpl implements CommentService {
 		   //내가 작성한 코멘트 전체갯수  51카운트 1
 		   int cmtCnt = userCmtDAO.cntCmt(((GroupSpaceDTO)list.get(i)).getgNo(), id);
 		   
-		   System.out.println("그룹멤버 총인원확인" + groupMemCnt);
+		   //System.out.println("그룹멤버 총인원확인" + groupMemCnt);
 		   
 		        //      3 >1   ||    2   <  3-1                     
 		   if(groupMemCnt > 1 && cmtCnt < groupMemCnt-1) {   
@@ -118,9 +153,9 @@ public class CommentServiceImpl implements CommentService {
 		   }
 		   
 	   }
-	   for(int i = 0; i<cmtGroupList.size(); i++) {
-		   System.out.println("꼬여버린듯하다.. dto리스트" + ((GroupSpaceDTO)cmtGroupList.get(i)).getSubject());
-	   }
+	 //  for(int i = 0; i<cmtGroupList.size(); i++) {
+	//   System.out.println("꼬여버린듯하다.. dto리스트" + ((GroupSpaceDTO)cmtGroupList.get(i)).getSubject());
+	//   }
 	   return cmtGroupList;
    }
    
@@ -150,7 +185,7 @@ public class CommentServiceImpl implements CommentService {
    // 코멘트 전용..그룹멤버들
    public List getCmtGMem(int gNo) {
 	   String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
-	   System.out.println("코멘트전용id" + id);
+	  // System.out.println("코멘트전용id" + id);
 	   List<GroupMemberDTO> list = userCmtDAO.getMem(gNo); 
 	   List blank = new ArrayList();
 	   
@@ -158,13 +193,13 @@ public class CommentServiceImpl implements CommentService {
 	   //사용자 아이디 빼줄꺼임 
 	   for(int i = 0; i<list.size(); i++) {
 		   int result = userCmtDAO.chComment(id, list.get(i).getId(), gNo);
-		   System.out.println("result : " + result + " id :" + id + "receiver : " + list.get(i).getId() + " gNo : " + gNo);
+		 //  System.out.println("result : " + result + " id :" + id + "receiver : " + list.get(i).getId() + " gNo : " + gNo);
 		   if(!id.equals(list.get(i).getId()) && result == 0){
-			   System.out.println("담기는 멤버 : " + list.get(i).getId());
+			  // System.out.println("담기는 멤버 : " + list.get(i).getId());
 			   memList.add(list.get(i));
 		   }
 	   }
-	   System.out.println("멤리스트출력"+ memList);
+	 //  System.out.println("멤리스트출력"+ memList);
 	   
 	   return memList;
    }
@@ -176,7 +211,7 @@ public class CommentServiceImpl implements CommentService {
       
       //그룹멤버dto담겨있음 gNo뽑아야함
       List myG = getGroupNum(id);  //사용자가 가입된 그룹리스트
-      System.out.println("마이지사이즈" + myG.size());
+    //  System.out.println("마이지사이즈" + myG.size());
       
       //1.gno하나씩 뽑아서 그그룹에 해당하는 멤버들  닉네임담음
       List memList = new ArrayList();
@@ -188,17 +223,17 @@ public class CommentServiceImpl implements CommentService {
       
       for(int i = 0; i < myG.size(); i++) {
          memList = userCmtDAO.getMem(((GroupMemberDTO)myG.get(i)).getgNo());   //가입된 그룹번호를 하나씩 크게 돌려서 그 그룹에 해당하는 멤버들 목록에 담음?
-         System.out.println(" 그룹번호" + ((GroupMemberDTO)myG.get(i)).getgNo());
+       //  System.out.println(" 그룹번호" + ((GroupMemberDTO)myG.get(i)).getgNo());
          //코멘트 남겼는지 확인할꺼
          for(int j = 0; j < memList.size(); j++) {
             int result = userCmtDAO.chComment(id,((GroupMemberDTO)memList.get(j)).getId(),((GroupMemberDTO)myG.get(i)).getgNo());
             
             // 밑에서 사용자아이디인지 체크할 변수
             String chId =((GroupMemberDTO)memList.get(j)).getId();
-            System.out.println(chId);
+          //  System.out.println(chId);
             //System.out.println(" 그룹목록"+i +" : " + ((GroupMemberDTO)myG.get(i)).getgNo());
             
-            System.out.println("result값" + result);
+          //  System.out.println("result값" + result);
             
                if(result == 0 && !chId.equals(id)) {
                   comMemList.add(((GroupMemberDTO)memList.get(j)));
@@ -245,7 +280,7 @@ public class CommentServiceImpl implements CommentService {
       
       comRecUser = userCmtDAO.comRecUser(id);
    
-      System.out.println("comRecUser" + comRecUser.size());
+    //  System.out.println("comRecUser" + comRecUser.size());
       return comRecUser;
    }
    
@@ -254,7 +289,7 @@ public class CommentServiceImpl implements CommentService {
       
       List comSenUser = new ArrayList();
       comSenUser= userCmtDAO.comSenUser(id);
-      System.out.println("comSenUser :" + comSenUser.size());
+   //   System.out.println("comSenUser :" + comSenUser.size());
          
       return comSenUser;
    }
