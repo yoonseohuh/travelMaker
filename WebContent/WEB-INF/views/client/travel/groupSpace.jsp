@@ -190,7 +190,6 @@
 					return false;
 				}
 			}
-			
 			</script>
 			<!-- //accept logic end -->		
 			
@@ -279,7 +278,7 @@
 						</c:if>
 						<c:if test="${grpSpace.status==3}">
 							<!-- 총평 작성하고 여행 공개여부 다 처리하면 status==4로 바꾸기 -->
-							<div>
+							<div class="genSharedDiv">
 								<c:if test="${grpSpace.status==3}">
 									<c:if test="${memId == grpSpace.id}">
 										<c:if test="${empty grpSpace.genReview}">
@@ -306,6 +305,8 @@
 													<input type="submit" value="확인">
 												</form>
 											</c:if>
+										</c:if>
+										<c:if test="${grpSpace.shared!=0}">
 											<c:if test="${grpSpace.shared == 1}">
 												<br/>공개여부 : 공개 
 											</c:if>
@@ -473,8 +474,6 @@
 								<br/><button id="tab1">답글달기</button>
 							</c:if>
 						</c:if>	
-						
-							 
 						 	<form action="/travelMaker/travel/genReplyPro.tm" id="cont2" name="reply" method="get">
 						 		<input type="hidden" name="id" value="${memId}" />
 						 		<input type="hidden" name="gNo" value="${grpSpace.gNo}" />
@@ -483,7 +482,7 @@
 								<textarea cols="100" rows="10" name="genReply" onsubmit="return check()" placeholder="총평에 댓글로 소감을 남겨주세요!" ></textarea>
 								<input type="submit" value="답글작성" />
 							</form>
-							<input type="button" value="취소" id="cancel" />
+							<input type="button" value="취소" id="cancel"/>
 					</c:if>					
 				</div>
 				
