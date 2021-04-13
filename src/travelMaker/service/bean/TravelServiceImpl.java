@@ -277,8 +277,6 @@ public class TravelServiceImpl implements TravelService{
 			GroupMemberDTO dto = (GroupMemberDTO)list.get(i);
 			gNoList.add(dto.getgNo());
 		}
-		System.out.println("gNoList" + gNoList);
-		
 		GroupSpaceDTO article = new GroupSpaceDTO();
 		List articleList = new ArrayList();		//실제 그룹방들을 담을 리스트
 		for(int i=0 ; i<gNoList.size(); i++) {
