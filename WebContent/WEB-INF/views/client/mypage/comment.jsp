@@ -124,9 +124,7 @@
 						<a style="cursor:pointer">${cmtMyGroup.subject} ${cmtMyGroup.startDate} ~ ${cmtMyGroup.endDate}</a>
 						<ul style="display: none;">
 							<c:forEach var="comRecUser" items="${comRecUser}">
-								
 								<c:if test="${cmtMyGroup.gNo == comRecUser.gNo}">
-									
 									<li>보낸사람: ${comRecUser.sender} / 코멘트내용: ${comRecUser.cCont} / 보낸날짜 ${comRecUser.reg}<li>&nbsp;   
 									<textarea rows="10" cols="72" name="comment" > ${comRecUser.cCont} </textarea>    
 								</c:if>
