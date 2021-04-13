@@ -60,13 +60,16 @@
 				<p class="tit2" data-aos="fade-right" data-aos-duration="400">[${rkInfo.rkName}] ${id}님 환영합니다!</p>
 				<c:if test="${rkInfo.rkNo==1}">
 				<p class="tit2" data-aos="fade-right" data-aos-delay="200" data-aos-duration="400">가이드와 함께 하는 여행에 참여해볼까요?</p>			
+				<div class="goMake">
+					<img src="<c:url value="/resources/images/makingico2.png" />" class="bag bag2" data-aos="fade-down" data-aos-delay="200" data-aos-duration="400" />		
+				</div>
 				</c:if>
 				<c:if test="${rkInfo.rkNo>1}">
 				<p class="tit2" data-aos="fade-right" data-aos-delay="200" data-aos-duration="400">직접 여행 만들고 리더가 되어볼까요?</p>
 				<div class="goMake">
 					<a href="/travelMaker/travel/makingWrite.tm"></a>
-					<p class="txt">Click to make!</p>
-					<img src="<c:url value="/resources/images/makingico.png" />" class="bag" data-aos="fade-down" data-aos-delay="200" data-aos-duration="400" />			
+					<p class="txt">Click to making!</p>
+					<img src="<c:url value="/resources/images/makingico1.png" />" class="bag" data-aos="fade-down" data-aos-delay="200" data-aos-duration="400" />			
 					<img src="<c:url value="/resources/images/makingico_sh.png" />" class="bagsh" data-aos="fade-down" data-aos-delay="200" data-aos-duration="400" />
 				</div>
 				</c:if>
@@ -83,7 +86,7 @@
 			<div class="myMake">
 				<p class="tit">승인대기 중</p>
 				<c:if test="${fn:length(waitingList)==0}">
-				<p class="txt">대기 중인 여행이 없습니다.</p>
+				<p class="txt">승인대기 중인 여행이 없습니다.</p>
 				</c:if>
 				<c:if test="${fn:length(waitingList)>0}">
 				<ul class="list">
