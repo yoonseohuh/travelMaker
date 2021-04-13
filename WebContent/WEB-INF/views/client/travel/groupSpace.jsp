@@ -188,11 +188,8 @@
 				}else if(!input.genReply.value){
 					alert("내용을 입력해주세요.");
 					return false;
-					}
 				}
-			
-			
-			
+			}
 			
 			</script>
 			<!-- //accept logic end -->		
@@ -268,14 +265,16 @@
 						<c:if test="${grpSpace.status==0}">
 							멤버를 모집 중입니다. 멤버가 충분히 모였다면 모집 마감을 할 수 있습니다.
 							<!-- status==1로 바꾸어 모집 완료 처리 -->
-							<input type="button" value="모집마감" onclick="changeStatus(${gNo},1)"/>
+							<input type="button" class="comBtn" value="모집마감" onclick="changeStatus(${gNo},1)"/>
 						</c:if>
 						<c:if test="${grpSpace.status==1}">
 							<!-- status==2로 바꾸어 여행 시작 처리 -->
 							모집이 완료되어 여행을 떠나기 전입니다. 여행을 시작할까요?							
-							<input type="button" value="여행시작" onclick="changeStatus(${gNo},2)"/>
+							<input type="button" class="comBtn" value="여행시작" onclick="changeStatus(${gNo},2)"/>
 						</c:if>
 						<c:if test="${grpSpace.status==2}">
+							여행 중이시네요! 이것은 시연을 위한 여행 종료 처리 버튼입니다.
+							<input type="button" class="comBtn" value="여행종료" onclick="changeStatus(${gNo},3)"/>
 							<!-- 종료일과 현재 시간 비교해서 status==3으로 바꾸어 여행 끝 처리 -->
 						</c:if>
 						<c:if test="${grpSpace.status==3}">
@@ -301,17 +300,17 @@
 											<c:if test="${grpSpace.shared == 0}">   <!-- 그룹스페이스 쉐어드가 0이면 공개여부 보여줌 -->
 												<form action="/travelMaker/travel/groupSpace.tm" name="openOrbOpen" method="get">
 													<input type="hidden" name="gNo" value="${grpSpace.gNo}" />
-													</br> 공개여부 : 
+													<br/> 공개여부 : 
 													<input type="radio" name="shared" value="1" />공개
 													<input type="radio" name="shared" value="2" />비공개
 													<input type="submit" value="확인">
 												</form>
 											</c:if>
 											<c:if test="${grpSpace.shared == 1}">
-												</br>공개여부 : 공개 
+												<br/>공개여부 : 공개 
 											</c:if>
 											<c:if test="${grpSpace.shared ==2}">
-												</br>공개여부 : 비공개 
+												<br/>공개여부 : 비공개 
 											</c:if>
 										</c:if>
 									</c:if>	

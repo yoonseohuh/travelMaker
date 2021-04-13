@@ -441,4 +441,11 @@ public class MemberServiceImpl implements MemberService {
 	public void posDecision(String id, int num, int posNo) throws Exception {
 		tmuserDAO.posDecision(id,num,posNo);
 	}
+	
+	//여행횟수 업데이트
+	@Override
+	public void updateTravelCnt(String id, int ud) throws Exception {
+		tmuserDAO.updateTravelCnt(id,ud);
+	}
+	
 }

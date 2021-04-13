@@ -262,4 +262,13 @@ public class TmUserDAOImpl implements TmUserDAO {
 		sqlSession.update("tmUser.posDecision",map);
 	}
 	
+	//여행횟수 업데이트
+	@Override
+	public void updateTravelCnt(String id, int ud) throws Exception {
+		Map map = new HashMap();
+		map.put("id", id);
+		map.put("ud", ud);
+		sqlSession.update("tmUser.updateTravelCnt",map);
+	}
+	
 }
