@@ -22,7 +22,7 @@ public class UserCmtDAOImpl implements UserCmtDAO {
    // groupMember테이블에서 사용자가 참여중인 그룹 가져오기
    @Override
    public List myGroup(String id) throws SQLException {
-      System.out.println("dao에서 id:" +id);
+     // System.out.println("dao에서 id:" +id);
       //status=1임
       List<GroupMemberDTO> myGroup = sqlSession.selectList("userCmt.myGroup", id); 
       
@@ -48,6 +48,33 @@ public class UserCmtDAOImpl implements UserCmtDAO {
          
       return getMemList;
    }
+   
+   // 그룹방별로 받는사람이 사용자인거 카운트
+   public int comRecUserCnt(String id, int gNo) {
+	   Map map = new HashMap();
+	   map.put("id", id);
+	   map.put("gNo", gNo);
+	   
+	   int result = sqlSession.selectOne("userCmt.comRecUserCnt", map);
+	   
+	   return result; 
+   }
+   
+   
+   // 그룹방별로 보낸사람이 사용자인거 카운트
+   public int comSenUserCnt(String id, int gNo)throws SQLException {
+	   Map map = new HashMap();
+	   map.put("id", id);
+	   map.put("gNo", gNo);
+	   
+	   int result = sqlSession.selectOne("userCmt.comSenUserCnt", map);
+	   
+	   return result; 
+   }
+   
+   
+   
+   
    
    // 코멘트 남겼는지 확인
    public int chComment(String id, String recId, int gNo ) {

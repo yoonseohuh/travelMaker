@@ -1,6 +1,7 @@
 package travelMaker.model.dao;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import travelMaker.model.dto.GroupMemberDTO;
@@ -40,6 +41,12 @@ public interface UserCmtDAO {
    
    //그룹방에 내가 작성한 코멘트 갯수 확인
    public int cntCmt(int gNo, String id);
+   
+   //그룹방별로 받는사람이 사용자인거 카운트
+   public int comRecUserCnt(String id, int gNo);
+   
+   // 그룹방별로 보낸사람이 사용자인거 카운트
+   public int comSenUserCnt(String id, int gNo)throws SQLException;
 	
 
 		

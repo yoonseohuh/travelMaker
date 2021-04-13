@@ -8,6 +8,12 @@
 <!-- //top end -->
 
 <div class="wrapAll client">
+	<c:if test="${sessionScope.memId==null}">
+		<script>
+            alert("로그인 후에 이용 가능합니다");
+            history.go(-1);
+		</script>
+	</c:if>
 
 	<jsp:include page="/WEB-INF/views/include/myMenu.jsp" />
 	<!-- myMenu end -->
@@ -20,9 +26,13 @@
 	</c:if>
 	<c:if test="${!empty travelAll}">
 		<c:forEach var="travelAll" items="${travelAll}" varStatus="status">
-				${status.count}번째 여행 : <a
-				href="/travelMaker/my/myHistoryCont.tm?gNo=${travelAll.gNo}&status=${travelAll.status}">${travelAll.subject}</a>
-			<br />
+				No.${status.count} </br>
+				<a href="/travelMaker/my/myHistoryCont.tm?gNo=${travelAll.gNo}&status=${travelAll.status}"><h3>${travelAll.subject}</h3></a>
+				-여행기간 : ${travelAll.startDate} ~ ${travelAll.endDate} </br>
+			 	-여행컨셉 : ${travelAll.concept} </br>
+			 	-코	   스 : ${travelAll.courseExpl}</br></br>
+				 
+			
 		</c:forEach>
 	</c:if>
 	<script>

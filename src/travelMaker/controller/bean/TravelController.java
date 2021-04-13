@@ -522,7 +522,7 @@ public class TravelController {
 			mf.transferTo(copyFile);
 			System.out.println(copyFile);
 			
-			//서버 폴더에 저장된 이미지 복사해서 github에 공유하는 workspace에도 넣기
+			/*서버 폴더에 저장된 이미지 복사해서 github에 공유하는 workspace에도 넣기
 			fis = new FileInputStream(copyFile);
 			fos = new FileOutputStream(new File("D:\\yoonseohuh\\framework\\workspace\\travelMaker\\tmGallery\\"+finalName));
 			int readBuffer = 0;
@@ -533,7 +533,7 @@ public class TravelController {
             }
             fis.close();
             fos.close();
-            
+            */
 			//DB에 저장
 			GalleryDTO dto = new GalleryDTO();
 			dto.setgNo(Integer.parseInt(request.getParameter("gNo")));

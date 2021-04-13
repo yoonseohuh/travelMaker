@@ -463,7 +463,7 @@
 				<div>
 					<c:if test="${memId != grpSpace.id}">
 						<c:if test="${empty grpSpace.genReview}">
-							개설자의 총평이 아직 작성되지 않았습니다ㅠ_ㅠ  -> 세션아이디랑 개설자랑 다를떄
+							개설자의 총평이 아직 작성되지 않았습니다.
 						</c:if>
 						<c:if test="${!empty grpSpace.genReview}">
 							 ${grpSpace.genReview} 

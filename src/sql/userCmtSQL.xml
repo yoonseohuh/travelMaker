@@ -65,4 +65,14 @@
 	select count(*) from GroupSpaceDTO where gNo=${gNo} and status=4
 </select>
 
+<!-- 받는사람이 사용자인거 카운트 receiver=사용자 -->
+<select id="comRecUserCnt" parameterType="Hashmap" resultType="int">
+	select count(*) from userCmt where gNo=#{gNo} and receiver=#{id}
+</select>
+
+<!-- 보낸사람이 사용자인거 카운트 sender=사용자 -->
+<select id="comSenUserCnt" parameterType="Hashmap" resultType="int">
+	select count(*) from userCmt where gNo=#{gNo} and sender=#{id}
+</select>
+
 </mapper>

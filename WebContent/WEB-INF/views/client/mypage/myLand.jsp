@@ -8,6 +8,13 @@
 <!-- //top end -->
 
 <div class="wrapAll client">
+	<c:if test="${sessionScope.memId==null}">
+		<script>
+            alert("로그인 후에 이용 가능합니다");
+            history.go(-1);
+		</script>
+	</c:if>
+	
 	
 	<jsp:include page="/WEB-INF/views/include/myMenu.jsp" />
 	<!-- myMenu end -->
