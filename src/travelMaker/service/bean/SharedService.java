@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import travelMaker.model.dto.GroupSpaceDTO;
+import travelMaker.model.dto.SharedLikedDTO;
 
 public interface SharedService {
 	// shared 가져오기
@@ -15,9 +16,11 @@ public interface SharedService {
 	// shared 좋아요 한번만
 	public int likedCheck(int gNo, String id) throws Exception;
 	// 좋아요 취소
-	public void sharedLikedCancel(int gNo, String id) throws Exception;
+	void sharedLikedCancel(int gNo, String id) throws Exception;
 	// 좋아요 한 여행 리스트
 	public List getSharedLiked(String id) throws Exception;
+	
+	
 
 	
 	

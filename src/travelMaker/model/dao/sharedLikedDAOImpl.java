@@ -8,6 +8,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import travelMaker.model.dto.SharedLikedDTO;
+
 @Repository
 public class sharedLikedDAOImpl implements sharedLikedDAO {
 	
@@ -49,8 +51,6 @@ public class sharedLikedDAOImpl implements sharedLikedDAO {
 		Map map = new HashMap();
 		map.put("gNo", gNo);
 		map.put("id", id);
-		System.out.println("여기는 오냐?");
-		sqlSession.insert("sharedLiked.sharedLikedCancel", map);
-		
+		sqlSession.delete("sharedLiked.sharedLikedCancel", map);	
 	}
 }

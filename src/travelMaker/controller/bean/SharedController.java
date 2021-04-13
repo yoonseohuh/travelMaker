@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 
 import travelMaker.model.dto.GroupRequestDTO;
 import travelMaker.model.dto.GroupSpaceDTO;
+import travelMaker.model.dto.SharedLikedDTO;
 import travelMaker.model.dto.SmallPosDTO;
 import travelMaker.service.bean.SharedService;
 import travelMaker.service.bean.TravelService;
@@ -48,8 +51,9 @@ public class SharedController {
 	}
 	
 	@RequestMapping("completedCont.tm")
-	public String completedCont(int gNo, String id, String pageNum, Model model) throws Exception {
-		
+	public String completedCont(int gNo, String pageNum, Model model) throws Exception {
+		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
+
 		// 리뷰 리스트
 		List reviewList = travelService.getReview(gNo);
 		// sharedPage에서 completedCont 가져오기
@@ -126,7 +130,8 @@ public class SharedController {
 	}
 	
 	@RequestMapping("sharedLiked.tm")
-	public String sharedLiked(String id, int gNo) throws Exception{
+	public String sharedLiked(int gNo) throws Exception{
+		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
 		sharedService.sharedLiked(gNo, id);
 		System.out.println("좋아요 컨트롤 왔니?");
 		return "client/shared/sharedLiked";
@@ -145,12 +150,15 @@ public class SharedController {
 	}
 	
 	@RequestMapping("sharedLikedCancel.tm")
-	public String sharedLikedCancel(int gNo, String id, Model model) throws Exception {
-		sharedService.sharedLikedCancel(gNo, id);
-		System.out.println("안오냐?");
-		model.addAttribute("gNo", gNo);
-		model.addAttribute("id", id);
-		return "client/shared/sharedLikedCancel";
+	public String sharedLikedCancel(int[] gNo) throws Exception {
+		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
+		
+		for(int i=0; i<gNo.length; i++) {
+			System.out.println(gNo[i]);
+			sharedService.sharedLikedCancel(gNo[i], id);
+		}
+		System.out.println("취소컨트롤 왔니?");
+		return "redirect:/my/myHistory.tm";
 	}
 
 	

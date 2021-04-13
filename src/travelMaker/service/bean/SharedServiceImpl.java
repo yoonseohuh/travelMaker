@@ -111,9 +111,10 @@ public class SharedServiceImpl implements SharedService {
 
 	@Override
 	public void sharedLikedCancel(int gNo, String id) throws Exception {
-		sharedDAO.sharedLikedCnt(gNo, -1);
+		//sharedLiked테이블에서 해당 레코드 delete
 		sharedLikedDAO.sharedLikedCancel(gNo, id);
-		
+		//gNo 주고 groupSpace테이블의 likedCnt 하나빼기
+		sharedDAO.sharedLikedCnt(gNo, -1);
 	}
 
 	
