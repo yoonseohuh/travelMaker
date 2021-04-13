@@ -106,9 +106,9 @@ public class MypageController {
 			int gNo = wList.get(i).getgNo();
 			Map map = new HashMap();
 			map.put("gNo", gNo);
-			map.put("startDate",jList.get(i).getStartDate());
-			map.put("endDate", jList.get(i).getEndDate());
-			map.put("subject", jList.get(i).getSubject());
+			map.put("startDate",wList.get(i).getStartDate());
+			map.put("endDate",wList.get(i).getEndDate());
+			map.put("subject",wList.get(i).getSubject());
 			map.put("myStatus","대기중");
 			List<GroupRequestDTO> list = travelService.getRequests(gNo);
 			for(int j=0;j<list.size();j++) {
