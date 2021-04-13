@@ -19,7 +19,7 @@
 				<p class="tit2" data-aos="fade-right" data-aos-duration="700">여행에 참여할수록, <span class="c-red">랭크(rank)</span>가 높아집니다.</p>
 				<p class="tit2" data-aos="fade-right" data-aos-duration="700">더 높은 단계에 도전해보세요!</p>
 				<p class="txt" data-aos="fade-right" data-aos-duration="700">힘차게 거친 용기가 싹이 이것이야말로 철환하였는가? 같이, 끓는 바로 것이다. 황금시대의 만천하의 없으면, 두기 인류의 찬미를 뜨고, 보라. 청춘에서만 그림자는 있는 얼마나 청춘 우는 듣는다. 못하다 같이, 청춘의 뿐이다. 크고 없으면, 인생의 할지니, 광야에서 듣는다. 그러므로 이것은 예수는 피가 곧 두기 이것이다. 찾아 없으면 우리는 남는 뿐이다. 돋고, 있는 충분히 그들의 품고 것이다.</p>
-				<a href="#"><p class="gr">자세히보기<span></span></p></a>
+				<a href="/travelMaker/mem/manual.tm"><p class="gr">자세히보기<span></span></p></a>
 			</div>
 			
 			<ul class="flow">				
@@ -179,7 +179,7 @@
 						<p class="tit">함께 떠나는 맛집 탐방!</p>
 						<p class="txt">추운 겨울을 보내고, 싱그럽고, 푸른 생기의 물이 오르는 3월의 대표색은 보기만 해도 싱그러운 #풋사과연두색과 새 꿈, 새 희망의 기운이 느껴지는 #푸른꿈색입니다</p>
 					</li>
-					<a href="#"><p class="gr">바로가기<span></span></p></a>
+					<a href="/travelMaker/travel/makingList.tm"><p class="gr">바로가기<span></span></p></a>
 				</ul>
 			</div>			
 		</div>
