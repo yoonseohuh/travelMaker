@@ -62,7 +62,6 @@
 					<li><input type="checkbox" name="canGnum" value="${list.gNo}" /></li>
 					<li>그룹 번호 : ${list.gNo}</li>
 					<li>여행 이름 : ${list.subject}</li>
-					<li></li>
 				</ul>
 			</c:forEach>
 		</form>

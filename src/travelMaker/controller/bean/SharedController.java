@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
+import travelMaker.model.dto.GroupMemberDTO;
 import travelMaker.model.dto.GroupRequestDTO;
 import travelMaker.model.dto.GroupSpaceDTO;
 import travelMaker.model.dto.SharedLikedDTO;
@@ -55,7 +56,12 @@ public class SharedController {
 		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
 
 		// 리뷰 리스트
-		List reviewList = travelService.getReview(gNo);
+		List<GroupMemberDTO> reviewList = travelService.getReview(gNo);
+		// 방장이 리뷰를 썼는지 확인
+		int result = travelService.chReview(gNo, id);		
+		GroupSpaceDTO getGroup = travelService.getGroup(gNo);
+		
+		
 		// sharedPage에서 completedCont 가져오기
 		GroupSpaceDTO article = sharedService.getArticle(gNo);
 		// 스케쥴 리스트 가져오기
@@ -119,6 +125,8 @@ public class SharedController {
 		model.addAttribute("gList", gList);
 		model.addAttribute("check", check);
 		model.addAttribute("reviewList", reviewList);
+		model.addAttribute("result", result);
+		model.addAttribute("getGroup", getGroup);
 		//System.out.println("다 들어오는데 check도 왔냐?");
 		// System.out.println(scheList);
 		// System.out.println(article);
@@ -133,7 +141,7 @@ public class SharedController {
 	public String sharedLiked(int gNo) throws Exception{
 		String id = (String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
 		sharedService.sharedLiked(gNo, id);
-		System.out.println("좋아요 컨트롤 왔니?");
+		//System.out.println("좋아요 컨트롤 왔니?");
 		return "client/shared/sharedLiked";
 	}
 	
@@ -144,7 +152,7 @@ public class SharedController {
 		//System.out.println(id+"/"+gNo);
 		model.addAttribute("id", id);
 		model.addAttribute("gNo", gNo);
-		System.out.println("좋아요프로 컨트롤 왔니?");
+		//System.out.println("좋아요프로 컨트롤 왔니?");
 		
 		return "redirect:completedCont.tm?gNo="+gNo;
 	}
@@ -157,7 +165,7 @@ public class SharedController {
 			System.out.println(gNo[i]);
 			sharedService.sharedLikedCancel(gNo[i], id);
 		}
-		System.out.println("취소컨트롤 왔니?");
+		//System.out.println("취소컨트롤 왔니?");
 		return "redirect:/my/myHistory.tm";
 	}
 

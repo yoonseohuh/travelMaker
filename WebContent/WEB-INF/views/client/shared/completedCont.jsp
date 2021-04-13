@@ -37,6 +37,7 @@
 					<h2>Info</h2>
 					<h4>코스설명</h4> ${article.courseExpl}<br />
 					<h4>부가설명</h4> ${article.addExpl} <br />
+					<h4>성별</h4> ${aritlce.dongsung} <br/>
 					<h4>일 정</h4> <c:forEach var="schedules" items="${schedules}">
 						${schedules.sDate} : ${schedules.sCont} <br />
 					</c:forEach>
