@@ -46,6 +46,13 @@
 		<h1>myPage</h1><br/><br/>
 		<h2>${id}님 [랭킹 ${ranking}위]</h2>
 		
+		<!-- 여행 부분 -->
+		<div>
+			<h2>대기 및 참여 중인 여행</h2>
+			<c:forEach var="list" items="${allList}">
+				 ${list.gNo} / ${list.startDate}~${list.endDate} / ${list.subject} / ${list.myStatus} / ${list.myPos} <br/>
+			</c:forEach>
+		</div>
 		<!-- 랭크 부분 -->
 		<div>
 			<h2>랭크 현황</h2>
@@ -82,7 +89,6 @@
 			<c:if test="${memInfo.rk<3}">
 				"어드바이저 이상이 되면 포지션을 정할 수 있습니다!" 대충 이런 메시지 보여주기
 			</c:if>
-			
 			<c:if test="${memInfo.rk>=3}">
 				<!-- 첫번째 포지션 결정 전 -->
 				<c:if test="${memInfo.posModi==0}">
@@ -96,13 +102,11 @@
 						</c:forEach>
 					</div>
 				</c:if>
-				
 				<!-- 첫번째 포지션 결정 후 -->
 				<c:if test="${memInfo.posModi==1}">
 					YOUR 1st POSITION: ${pos1.posName}<br/>
 				</c:if>
 			</c:if>
-			
 			<c:if test="${memInfo.rk==4}">
 				<!-- 두번째 포지션 결정 전 -->
 				<c:if test="${memInfo.posModi==1}">
@@ -123,7 +127,6 @@
 				</c:if>
 			</c:if>
 		</div>
-		
 	</div>
 	<!-- //wrapAll end -->
 	

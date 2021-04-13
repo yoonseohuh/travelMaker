@@ -58,6 +58,75 @@ public class MypageController {
 		TmUserDTO memInfo = memberService.getMember(id);
 		List<SmallPosDTO> posList = memberService.getAllPositions();
 		List rkList = memberService.getRk();
+		
+		List finList = new ArrayList();
+		
+	//	모든 여행 가져와서 상태가 참여 중(1)인 것만 담음
+		List<GroupSpaceDTO> jList = travelService.getMyGroups(id,1);
+		for(int i=0;i<jList.size();i++) {
+			if(jList.get(i).getStatus()>=3) {	//끝났거나 모집취소한 건 제외
+				jList.remove(i);
+			}
+		}
+		for(int i=0;i<jList.size();i++) {
+			int gNo = jList.get(i).getgNo();
+			Map map = new HashMap();
+			map.put("gNo", gNo);
+			map.put("startDate",jList.get(i).getStartDate());
+			map.put("endDate", jList.get(i).getEndDate());
+			map.put("subject", jList.get(i).getSubject());
+			map.put("myStatus","참여중");
+			if(id.equals(jList.get(i).getId())) {	//개설자라면
+				map.put("myPos","방장");
+			}else {									//참여자라면
+				List<GroupRequestDTO> list = travelService.getRequests(gNo);
+				for(int j=0;j<list.size();j++) {
+					if(id.equals(list.get(j).getId())) {
+						int posNo = list.get(j).getPosNo();
+						if(posNo==-1) {
+							map.put("myPos", "일반");
+						}else {
+							SmallPosDTO dto = travelService.getPosInfo(posNo);
+							map.put("myPos",dto.getPosName());
+						}
+					}
+				}
+			}
+			finList.add(map);
+		}
+		
+	//	모든 여행 가져와서 상태가 대기 중(0)인 것만 담음
+		List<GroupSpaceDTO> wList = travelService.getMyGroups(id,0);
+		for(int i=0;i<wList.size();i++) {
+			if(wList.get(i).getStatus()!=0) {	//아직 모집 중인 것만 담아야 하므로
+				wList.remove(i);
+			}
+		}
+		for(int i=0;i<wList.size();i++) {
+			int gNo = wList.get(i).getgNo();
+			Map map = new HashMap();
+			map.put("gNo", gNo);
+			map.put("startDate",jList.get(i).getStartDate());
+			map.put("endDate", jList.get(i).getEndDate());
+			map.put("subject", jList.get(i).getSubject());
+			map.put("myStatus","대기중");
+			List<GroupRequestDTO> list = travelService.getRequests(gNo);
+			for(int j=0;j<list.size();j++) {
+				if(id.equals(list.get(j).getId())) {
+					int posNo = list.get(j).getPosNo();
+					if(posNo==-1) {
+						map.put("myPos", "일반");
+					}else {
+						SmallPosDTO dto = travelService.getPosInfo(posNo);
+						map.put("myPos",dto.getPosName());
+					}
+				}
+			}
+			finList.add(map);
+		}
+		
+		model.addAttribute("allList",finList);
+		
 		if(memInfo!=null) {
 			if(memInfo.getPosition1()!=0) {
 				SmallPosDTO pos1 = travelService.getPosInfo(memInfo.getPosition1());

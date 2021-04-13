@@ -137,12 +137,27 @@ public class TravelController {
 			rkInfo.setRkNo(0);
 			rkInfo.setRkName("비로그인");
 		}
+		
 		//모든 여행 가져와서 상태가 참여 중(1)인 것만 담음
-		List JList = travelService.getMyGroups(id,1);
-		model.addAttribute("joiningList",JList);		
+		List<GroupSpaceDTO> jList = travelService.getMyGroups(id,1);
+		for(int i=0;i<jList.size();i++) {
+			if(jList.get(i).getStatus()>=3) {	//끝났거나 모집취소한 건 제외
+				jList.remove(i);
+			}
+		}					
+		
+		model.addAttribute("joiningList",jList);
+		
 		//모든 여행 가져와서 상태가 대기 중(0)인 것만 담음
-		List WList = travelService.getMyGroups(id,0);
-		model.addAttribute("waitingList",WList);
+		List<GroupSpaceDTO> wList = travelService.getMyGroups(id,0);
+		for(int i=0;i<wList.size();i++) {
+			if(wList.get(i).getStatus()!=0) {	//아직 모집 중인 것만 담아야 하므로
+				wList.remove(i);
+			}
+		}
+		
+		model.addAttribute("waitingList",wList);
+		
 		
 		//모집 중인 여행
 		Map map = travelService.getArticles(pageNum);
@@ -551,12 +566,6 @@ public class TravelController {
 			gMap.put("isLiked",count);
 			finList.add(gMap);
 		}
-	/*	잘 담긴 걸 확인할 수 있다
-		for(int i=0 ; i<finList.size() ; i++) {
-			Map mm = finList.get(i);
-			System.out.println(mm.get("gNo")+" | "+mm.get("pNo")+" | "+mm.get("writer")+" | "+mm.get("pRoot")+" | "+mm.get("likedCnt")+" | "+mm.get("reg")+" | "+mm.get("isLiked"));
-		}
-	*/
 		model.addAttribute("finList",finList);
 		model.addAttribute("idStatus",idStatus);
 		model.addAttribute("grp",grp);
