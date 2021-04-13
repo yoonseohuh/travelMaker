@@ -82,13 +82,10 @@ public class CommentServiceImpl implements CommentService {
     	  }
     	  
       }
-      
-    	
     	 
       for(int i = 0; i < cmtMyGroup.size(); i++) {
     	  System.out.println("디티오리스트" + ((GroupSpaceDTO)cmtMyGroup.get(i)).getSubject());
       }
-      
 
       return cmtMyGroup;
    } 
