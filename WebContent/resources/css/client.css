@@ -5,7 +5,7 @@
 /*basic*/
 .c-red {color:#ff0000;}
 
-.titWrap .tit1 {color:#666; font-family: 'Noto Serif TC', serif; font-size: 95px; font-weight: 500;}
+.titWrap .tit1 {color:#444; font-family: 'Noto Serif TC', serif; font-size: 95px; font-weight: 500;}
 .titWrap .tit2 {line-height: 48px; letter-spacing: -1.1px; font-size: 37px; font-weight: 500;}
 .titWrap .txt {line-height: 26px; letter-spacing: -0.4px; font-size: 17px; font-weight: 300;}
 
@@ -109,15 +109,67 @@
 
 
 /*making*/
-.makingList {overflow: hidden;}
-.makingList li {float: left; width: 24.25%; height: 300px; border: 0; background: #777; transition: .3s; padding: 45px; margin: 0 1% 1% 0; position: relative;}
-.makingList li:nth-child(4n) {margin: 0 0 1% 0;}
+.makingListWrap {width: 100%; margin: 0 auto;}
+
+.makingListWrap .titWrap {width: 1300px; padding: 140px 0 130px 340px; margin: 0 auto; position: relative;}
+.makingListWrap .titWrap .myMakeBtn {display: inline-block; color:#444; font-size: 25px; font-weight: 600; cursor: pointer; margin: 50px 0 0;}
+.makingListWrap .titWrap .myMakeBtn span {float: left; display: block; width: 50px; height: 25px; background: url(../images/da.png)no-repeat center; background-size: auto 100%; position: relative;}
+.makingListWrap .titWrap .myMakeBtn.on span {background: url(../images/ua.png)no-repeat center; background-size: auto 100%;}
+.makingListWrap .titWrap .myMakeBtn:hover span {animation: da .3s linear infinite alternate;}
+.makingListWrap .titWrap .goMake {width: 230px; height: 380px; position: absolute;bottom: 20px;left: 0;}
+.makingListWrap .titWrap .goMake .txt {text-align: center; font-size:30px; font-weight: 500; transition:.3s;}
+.makingListWrap .titWrap .goMake:hover .txt {opacity:0;}
+.makingListWrap .titWrap .goMake a {display: block; width: 100%; height: 100%; position: absolute;top: 0;left: 0; z-index:1;}
+.makingListWrap .titWrap .goMake .bag {width: 100%; transition:.3s; position: absolute;top: 40px;left: 0;}
+.makingListWrap .titWrap .goMake:hover .bag {animation: bag .3s linear infinite alternate;}
+.makingListWrap .titWrap .goMake .bagsh {transition:.3s; position: absolute;bottom: 0;left: 50%; transform: translateX(-50%);}
+@-webkit-keyframes bag {
+    0% {
+        top: 40px;
+    }
+    100% {
+        top: 30px;
+    }
+}
+@-webkit-keyframes da {
+    0% {
+        top: 0px;
+    }
+    100% {
+        top: 5px;
+    }
+}
+
+.makingListWrap .myMake {display: none; width: 1300px; border: 2px solid #777; padding: 50px 50px 0; margin: 0 auto 80px; position: relative;top:-30px;}
+.makingListWrap .myMake .tit {font-size: 17px; font-weight: 600; margin: 0 0 15px;}
+.makingListWrap .myMake .txt {font-size: 17px; font-weight: 400;}
+
+.makingListWrap .myMake .list {overflow: hidden;}
+.makingListWrap .myMake .list li {float: left; width: 22%; height: 150px; background: #444; border-radius: 5px; margin: 0 4% 4% 0; padding: 30px; position: relative;}
+.makingListWrap .myMake .list li:nth-child(4n) {margin: 0 0 4% 0;}
+.makingListWrap .myMake .list li a {width: 100%; height: 100%; position: absolute;top: 0;left: 0;}
+.makingListWrap .myMake .list li .sub {color: #fff; font-size: 18px; font-weight: 500;}
+
+.searchMake {width: 100%; height: 100px; background: #333; margin: 0 0 80px; position: relative;}
+.searchMake .inner {overflow: hidden; padding: 24px 0 0; position: absolute;left: 50%; transform: translateX(-50%);}
+.searchMake .inner .dp {float: left; line-height:52px; color:#fff; font-size: 20px; font-weight: 300; margin: 0 20px 0 0;}
+.searchMake .inner .dp input {height: 46px; background: transparent; border-bottom: 2px solid #fff; outline: 0; line-height:52px; color:#fff; font-size: 20px; font-weight: 400; margin: 0; padding: 0;}
+.searchMake .inner .sc {float: left;}
+.searchMake .inner .sc input {width: 48px; height: 48px; background: url(../images/ic_search.png)no-repeat center, #fff; background-size: 23px; cursor:pointer;}
+
+.makingList {overflow: hidden; width: 1300px; margin: 0 auto;}
+.makingList li {float: left; width: 22%; height: 300px; border: 0; transition: .3s; margin: 0 4% 4% 0; position: relative;}
+.makingList li:nth-child(4n) {margin: 0 0 4% 0;}
 .makingList li a {display: block; width: 100%; height: 100%; position: absolute;top: 0;left: 0;}
 .makingList li .no {}
-.makingList li .tit {text-align: center; font-size: 20px; font-weight: 600;}
-.makingList li .maker {}
-.makingList li .gen {}
-.makingList li:hover {background: rgb(0, 68, 255); color: #fff;}
+.makingList li .tit {font-size: 27px; font-weight: 500; border-bottom: 1px solid #ccc; padding: 0 0 15px; margin: 0 0 30px;}
+.makingList li .tit span {float: right; display: none; width: 27px; height: 20px; background: url(../images/ra.png)no-repeat center; background-size: auto 100%; margin-top: 3.5px;}
+.makingList li .date {font-size:20px;}
+.makingList li .date2 {color:#777; font-size:14px;}
+.makingList li .txt {display: inline-block; width: 100%; font-size: 16px; line-height: 1.2; max-height: 3.6em; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; margin: 15px 0;}
+.makingList li .maker {font-size: 20px; font-weight: 500; margin: 0 0 7px;}
+.makingList li .cost {font-size: 20px; font-weight: 500; margin: 0 0 13px;}
+.makingList li:hover .tit span {display: block;}
 
 /*groupSpace*/
 .gsLeft {float: left; width: calc(100% - 530px); padding: 80px 0 80px 115px;}
