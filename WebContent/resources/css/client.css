@@ -1,0 +1,299 @@
+@charset "UTF-8";
+/*client.css*/
+
+/*index*/
+/*basic*/
+.c-red {color:#ff0000;}
+
+.titWrap .tit1 {color:#666; font-family: 'Noto Serif TC', serif; font-size: 95px; font-weight: 500;}
+.titWrap .tit2 {line-height: 48px; letter-spacing: -1.1px; font-size: 37px; font-weight: 500;}
+.titWrap .txt {line-height: 26px; letter-spacing: -0.4px; font-size: 17px; font-weight: 300;}
+
+.btnMore {line-height: 35px; color:#000; font-size:20px; font-weight: 400;}
+.btnMore:hover {color:#ff0000;}
+
+/*mainVisual*/
+.mainVisual {width: 100%; height: calc(85vh + 80px); background: #333;}
+
+/*rankM*/
+.rankM {overflow: hidden; position: relative;}
+.rankM .rankBg {width: 43%; height: 80vh; background: url(../images/rankBg.jpg)no-repeat left top; background-size: auto 100%; position: absolute;top: 0;right: 0; z-index: -1;}
+.rankM .rankBg img {height: 100%;}
+.rankM .titWrap {margin: 11% 0 180px 20%;}
+.rankM .titWrap .tit1 {margin: 0 0 70px -50px;}
+.rankM .titWrap .tit2 {}
+.rankM .titWrap .txt {width: 550px; margin: 25px 0 30px;}
+.rankM .gr {width:150px; color:#000; font-size: 22px; font-weight: 500; letter-spacing: -1px; padding: 0 50px 0 0; position: relative;}
+.rankM .gr span {display: block; width: 50px; height: 22px; background:url(../images/goRight.png)no-repeat center; background-size: auto 100%; position: absolute;bottom: 0;right: 5px;}
+.rankM .gr:hover span {animation: gr .3s linear infinite alternate;}
+
+.flow {float: left; overflow: hidden; margin: 0 0 0 7%;}
+.flow li {float: left; width: 250px; margin-right: 5px; position: relative;}
+.flow li img {display: block; height: 130px; filter: grayscale(100%); margin: 0 auto;}
+.flow li.on img {height: 130px; filter: grayscale(0%);}
+.flow li:hover img {height: 130px; filter: grayscale(0%);}
+.flow li .name {text-align: center; letter-spacing: -0.4px; font-size:24px; font-weight: 600; margin: 37px 0 16px;}
+.flow li .txt {line-height: 26px; text-align: center; letter-spacing: -0.7px; font-size:16px; font-weight: 300;}
+.flow li .rnext {width: 9px; height: 9px; background:url(../images/rnext.png)no-repeat center; background-size: 100% auto; position: absolute;top: 25%;right: 0;transform:translateY(-50%);}
+
+.rankM .titWrap.right {float:left; text-align: right; margin: 30px 0 0 50px;}
+.rankM .titWrap.right .tit2 {width: 400px;}
+.rankM .titWrap.right .txt {width: 400px;}
+
+/*posM*/
+.posM {margin: 250px 0 0;}
+
+.posM .titWrap {width: 1200px; margin: 0 auto;}
+.posM .titWrap .tit1 {margin: 0 0 70px -50px;}
+.posM .titWrap .tit2 {}
+.posM .titWrap .txt {margin: 25px 0 80px;}
+.posM .titWrap .btnMore {margin: 0 0 100px;}
+
+.posM .posBgWrap {overflow: hidden;}
+.posM .posBg1 {float: left; width: 45%; height: 400px; background: #000;}
+.posM .posBg2 {float: left; width: 15%; height: 200px; background: #000;}
+
+.posSlide {position: relative;}
+.posSlide #posTit {color:#fff; font-size: 45px; font-weight: 300; transition:.5s .2s; position: absolute;top: 210px;left: calc(28.8% + 100px); z-index: 2;}
+.posSlide .cont {overflow: hidden;}
+.posSlide .cont li {overflow: hidden; float: left; width: 7%; height: 550px; background: #eee; filter: grayscale(100%); cursor:pointer; transition:.4s; margin-right: 0.2%; position: relative;}
+.posSlide .cont li img {height: 100%; position: absolute;bottom: 0;left: 0; z-index:1;}
+.posSlide .cont li .txtWrap {position: absolute;top: 20px;left: 20px; z-index:2;}
+.posSlide .cont li .txtWrap .tit {writing-mode: vertical-rl; color:#fff; font-size:25px; font-weight: 100;}
+.posSlide .cont li .txtWrap .txt {display: none; line-height: 26px; color:#fff; font-size:17px; font-weight: 100;}
+.posSlide .cont li:last-child {margin: 0;}
+.posSlide .cont li.on {width: 64%; cursor:default; background-size: 110% auto; filter: grayscale(0);}
+.posSlide .cont li.on .txtWrap {top:auto;bottom: 170px;left: 100px;}
+.posSlide .cont li.on .txtWrap .tit {writing-mode: unset; font-size:35px; font-weight: 500; margin-bottom: 15px;}
+.posSlide .cont li.on .txtWrap .txt {display: block;}
+.posSlide .cont li:hover {filter: grayscale(0);}
+
+/*travelM*/
+.travelM {overflow: hidden; padding: 180px 0 50px;}
+
+.travelM .titWrap {margin: 0 0 0 20%;}
+.travelM .titWrap .tit2 {margin: 40px 0 25px;}
+
+.tListWrap {overflow: hidden; margin: 50px 0 0 25%;}
+.tListWrap .tList {float: left; margin: 100px 100px 0 0; position: relative;}
+.tListWrap .tList li {width: 480px; margin: 0 0 120px;}
+.tListWrap .tList li img {display:block; width:100%;}
+.tListWrap .tList li .tit {font-size: 32px; font-weight: 500; letter-spacing: -1px; margin: 30px 0 20px;}
+.tListWrap .tList li .txt {line-height: 1.5; font-size: 16px; letter-spacing: -0.5;}
+.tListWrap .tList.tListR {margin: 0; position: relative;}
+
+.travelM .gr {color:#000; font-size: 22px; font-weight: 500; letter-spacing: -1px; padding: 0 50px 0 0; position: absolute;bottom: 0;right: 0;}
+.travelM .gr span {display: block; width: 50px; height: 22px; background:url(../images/goRight.png)no-repeat center; background-size: auto 100%; position: absolute;bottom: 0;right: 5px;}
+.travelM .gr:hover span {animation: gr .3s linear infinite alternate;}
+@-webkit-keyframes gr {
+    0% {
+        right: 5px;
+    }
+    100% {
+        right: -5px;
+    }
+}
+
+/*landM*/
+.landM {width:100%; height:500px; background-color: #000; position: relative;}
+.landBg {overflow: hidden; width:100%; height:500px;  position:relative; z-index: 1;}
+.landBg .left {float:left; width:50%; height:500px; background-color:#20242a;}
+.landBg .right {float:left; width:50%; height:500px; background-color:#f1f1f1;}
+.landM .cont {min-width:1150px; min-height:354px; position:absolute; top:50%;left:50%; transform:translate(-50%,-50%); z-index:2;}
+.landM .cont .tit {color:#fff; font-family: 'Noto Serif TC', serif; font-size: 80px; font-weight: 500; position:absolute; left:200px; top:50px; z-index:3;}
+.landM .cont .map {position:absolute;top:50%;left:50%; transform:translate(-50%,-50%);}
+.landM .cont .info {line-height:28px;  font-size:18px; font-weight:lighter; position:absolute; right:150px; bottom:50px;}
+.landname {font-size: 30px; font-weight: 600; margin-bottom:10px;}
+.landM .cont .info .arrow {overflow: hidden;}
+.landM .cont .info .arrow a {float:right; color:#5066aa; font-size:12px;}
+
+
+/*making*/
+.makingList {overflow: hidden;}
+.makingList li {float: left; width: 24.25%; height: 300px; border: 0; background: #777; transition: .3s; padding: 45px; margin: 0 1% 1% 0; position: relative;}
+.makingList li:nth-child(4n) {margin: 0 0 1% 0;}
+.makingList li a {display: block; width: 100%; height: 100%; position: absolute;top: 0;left: 0;}
+.makingList li .no {}
+.makingList li .tit {text-align: center; font-size: 20px; font-weight: 600;}
+.makingList li .maker {}
+.makingList li .gen {}
+.makingList li:hover {background: rgb(0, 68, 255); color: #fff;}
+
+/*groupSpace*/
+.gsLeft {float: left; width: calc(100% - 530px); padding: 80px 0 80px 115px;}
+.gsLeft .tit1 {font-size:30px; font-weight: 500;}
+.gsLeft .tit2 {font-size:18px; font-weight: 500; margin: 20px 0 5px;}
+
+.groupCont1 {overflow: hidden;}
+.groupCont1 > li {float: left; width: 32.33%; margin: 0 1% 0 0;}
+#ingMem {background: #fff; border-radius: 7px; padding: 35px;}
+#ingPos {background: #fff; border-radius: 7px; padding: 35px;}
+#ingNew {background: #fff; border-radius: 7px; padding: 35px;}
+
+.groupCont2 {float: left; width: 49%; margin: 0 1% 0 0;}
+.groupCont2 > li {width: 100%; margin: 0 1% 0 0;}
+#ingPlan {height: 200px; background: #fff; border-radius: 7px; padding: 35px;}
+#ingPlan textarea {width: 100%; height: 100%; border: 0;}
+#ingCost {font-size:20px;}
+
+.groupCont3 {float: left; width: 49%; margin: 0 1% 0 0;}
+.groupCont3 .chat {overflow: hidden; height:300px; background: #fff; border-radius: 7px;}
+.groupCont3 .chat .viewChatWrap {overflow: auto; height:260px; background: #777; padding: 35px;}
+.groupCont3 .chat .viewChatWrap li {line-height:30px; height:30px; text-align: left; color: #fff;}
+.groupCont3 .chat .viewChatWrap li.mine {text-align: right;}
+.groupCont3 .chat .sendChatWrap {overflow: hidden;}
+.groupCont3 .chat .sendChatWrap #sendChat {float:left; width: 80%; height: 40px; border: 0; padding: 0;}
+.groupCont3 .chat .sendChatWrap #sendChatBtn {float:left; width: 20%; height: 40px; border: 0; cursor: pointer; padding: 0;}
+
+.gsRight {float: left; width: 530px;}
+.gsGallery {width: 300px; height: 100%; padding: 80px 10px 20px 0;}
+.gsGallery .swiper-slide {width: 100%; height: 180px; background: #333; color: #fff;}
+.gsGallery .swiper-slide.add {background: url(../images/plus.png)no-repeat center, #fff; background-size:40px; cursor:pointer;}
+
+/*gallery*/
+.gallery {overflow: hidden;}
+.gallery li {float: left; width:32.33%; min-height: 350px; background: #eee; margin: 0 1.5% 1.5% 0;}
+.gallery li:nth-child(3n) {float: left; width:32.34%; margin: 0 0 1.5% 0;}
+
+
+/*manual*/
+/*main*/
+.manualWrap {position:relative; width:100%;}
+.manualHead {position:relative; background: url(../images/forest.png) no-repeat rgba(0,0,0,0.9); background-size:cover; min-height:500px;}
+.headCont {position:absolute; padding:150px 15% 20px; color:#ffffff; }
+.headTitle {font-size:50px; font-weight:bold; line-height:70px; margin-bottom:30px;}
+.headSubTitle {font-size:20px; line-height:30px; font-weight:lighter;}
+.manualBody {padding:180px 15%; }
+.manualTitle {font-size:35px; font-weight:bold; margin-bottom:20px;}
+.manualSubTit {font-size:20px; font-weight:lighter;}
+.picWrap {overflow:hidden; margin-top:25px;}
+.manualPic {position:relative; float:left; width:49%; height:490px;}
+.sec {margin-left:2%;}
+.picTxt { position:absolute; left:20px; bottom:20px; color:#ffffff; font-weight:lighter;}
+.manualMix {overflow:hidden; margin-top:150px; }
+.txtArea {padding: 0 30px;  float:left; width:49%; height:490px; }
+.txtTitle {font-size:36px; font-weight:bold; margin-bottom:20px;}
+.txtCont {font-size:30px; font-weight:lighter; line-height:40px; margin: 35px 0;}
+.posTxt {margin-top:150px;}
+.posPic {width:100%; height:490px; border:solid 1px; margin:25px 0;}
+.posA {color:#5066aa; font-size:20px; float:right;}
+.soloT {background: url(../images/soloT.png) no-repeat rgba(0,0,0,0.9); background-size:cover;}
+.groupT {background: url(../images/groupT.png) no-repeat rgba(0,0,0,0.9); background-size:cover;}
+.picTxtHead {margin-bottom:10px;}
+
+/*rank*/
+.rankHead {padding:5px 0; overflow:hidden;}
+.rankLeft {position:relative; border-style:solid; border-width: 0 3px 0 0 ; float:left; width:20%; height: 150px;}
+.rankNeed {position:absolute; top:50px; right:30px;}
+.rankRight {float:left; width:70%; font-size:20px; margin-left:100px; line-height:30px; letter-spacing:2px; font-weight:thin;}
+.rankBody {overflow:hidden; margin-top:120px;}
+.rightTit {font-weight:lighter; border-bottom:solid 0.5px; margin-bottom:10px; padding: 0 0 10px 0;}
+.rightSub {font-weight:lighter;}
+.firstRank {overflow:hidden;}
+.rankRLeft {height:250px;}
+.rankA {margin-top:100px; font-size:15px;}
+
+/*position*/
+.posTitle {font-size:30px; font-weight:bold; margin-bottom:20px;}
+.posEx {margin-top:30px;}
+.beer {width:80px; height:80px; background: url(../images/bus.png) no-repeat; background-size:cover;}
+
+
+/*member*/
+/*loginForm*/
+.loginCover {display:flex; justify-content:center; align-items:center; height:100vh;}
+.loginForm {position:relative; width:420px; padding: 60px 70px; vertical-align: top; text-align:left;font-size: 16px; box-sizing: border-box; border: 1px solid #e5e5e5;}
+.loginForm h1 {text-align:left; margin: 0 0 30px 0; font-weight:400; font-size:32px;}
+.input-area input {width:100%; left:0; padding: 20px 10px 10px 0; border:none; border-bottom:1px solid #cccccc; outline:none;}
+/* input::placeholder {position:absolute; top: 5px; left: 0; width: 100%; height: 47px; line-height: 47px; color: #ccc;} */
+.set-login {margin-top:25px; font-size:14px;} 
+.btn-area {margin-top:40px;}
+.btn-area button {width:100%; height:50px; border-radius: 4px; color:#ffffff; font-size: 15px; background-color:#ff0000; border:0; cursor:pointer;}
+.caption {margin-top:30px; font-size:12px;}
+.caption .list_user {float:right;}
+.caption .list_user li {float:left; margin-left:5px;}
+.caption a{color:rgba(0,0,0,0.7);}
+
+
+/*signupForm*/
+#signupWrap {position:relative; height:100%; vertical-align:middle; padding:150px 0;}
+#signup-head {text-align:center; margin:0 auto; }
+#signup-title{font-weight:400; font-size:32px;}
+#signup-article {overflow:hidden; position: relative; width:580px; margin:40px auto; padding: 58px 69px 139px; border: 1px solid #e5e5e5; border-radius: 2px; box-sizing: border-box;}
+#signup-article input {width:80%; left:0; height:28px; padding: 11px 70px 8px 0; border:none; border-bottom:1px solid #cccccc; outline:none; font-size:16px; }
+.tf_required {display: block; font-size: 12px; color: #000; font-weight: normal; margin-top: 40px;}
+#signup-radio {margin-top:20px;}
+#signup-radio .radioDetail {float:left; width:20px; margin:0 40px 0 0;}
+.radioDetail .gen {position:relative; left:7px; font-size:13px;}
+#sign-btn {width:100%; margin-top:60px; height: 50px; padding: 0; border: 0; border-radius: 4px; font-size: 15px; color: #ffffff; cursor:pointer; background-color:#ff0000;}
+
+/*findId*/
+.travelPWrap {display:table; width:100%; height:100%; min-width:320px;border-collapse: separate;}
+.travelPWrap .travelWrap {position: relative; display: table-cell; height: 100%; vertical-align: middle;  padding: 200px 0;}
+.travelHead h1 {font-weight:400; font-size:32px; text-align:center; }
+.tArticle {position: relative; max-width: 580px; min-height: 440px; margin: 40px auto; padding: 70px 69px 100px; border: 1px solid #e5e5e5; border-radius: 2px; box-sizing: border-box;}
+.titMain {font-size: 24px; line-height: 34px; color: #252525; letter-spacing: -1px; font-weight: normal;}
+.descMain {margin-top: 15px; text-align: left; color:#7c7c7c;}
+.formArea {margin-top:4px;}
+.itemTf {position: relative; padding-right: 0;}
+.itemTf input {width:80%; left:0; height:28px; padding: 13px 70px 8px 0; border:none; border-bottom:1px solid #cccccc; outline:none; font-size:16px;}    
+.subBtn {width:100%; margin-top:60px; height: 50px; padding: 0; border: 0; border-radius: 4px; font-size: 15px; color: #ffffff; cursor:pointer; background-color:#ff0000;}    
+    
+/*findIdPro*/
+.wrapFind {margin-top: 20px; border-top: 1px solid rgba(0,0,0,0.08);}
+.boxFind {padding: 20px 0; border-bottom: 1px solid rgba(0,0,0,0.08); letter-spacing: 0;} 
+.txtContact {font-size:20px; font-weight:bold; color:#191919; margin-botton:30px;}
+.linkComm {text-decoration: underline;color: #2c88de; font-size:12px;margin: 20px 0 0;}
+.descMain .findIdPro {line-height:5px;}
+
+/*myModi*/
+.travelContent {padding-bottom:140px; padding-top:20px; background-color:#ffffff;}
+.mArticle {max-width: 450px; margin: 50px auto 0;}
+.titModi {font-weight: normal; font-size: 20px; letter-spacing: 0;}
+.wrapModi {margin-top:10px; padding-bottom: 80px; border-top: 1px solid #7c7c7c;}
+.boxManage {margin-top:40px;}
+.boxManage:first-child {margin-top:30px;}
+.descComm {margin-top:4px; margin-bottom:10px; font-size:12px; color:#959595;}
+.boxSet {padding: 10px 25px 10px 0; border-bottom: 1px solid #ebebeb; font-size: 16px; color: #252525; }
+.titManage {font-weight: normal; font-size: 12px; color: #4a4a4a;}
+.titSet {font-weight:normal;}
+.txtSet {float:right; color:#5066aa;}
+.linkSet {display: block;position: relative;padding: 10px 25px 10px 0;border-bottom: 1px solid #ebebeb;font-size: 16px;color: #252525;}
+.deleBtn {float:right; margin-top:40px; width:20%; height:20%;  padding: 3px 0; border: 0; border-radius: 4px; font-size: 10px; color: #b2b2b2; cursor:pointer; background-color:#e7e7e7;;}
+
+
+/*mypage*/
+/*makingCont == myHistoryCont == CompletedCont*/
+.aContWrap {padding:50px 50px; margin:0 20% 0; max-width:850px;}
+.aContHead {overflow:hidden; padding:20px 0; text-align:center; border-bottom:1px solid #cccccc; font-weight:lighter;}
+.aContTit {float:left; font-weight:normal; font-size:30px;}
+.aContDate {float:left; width:100%; text-align:left; margin-bottom:20px;}
+.aContWri {float:right; padding:15px 0 0;}
+.aContInfo {padding:20px 0;}
+.aInfoTit {float:left; width:100%; text-align:left; font-weight:normal; font-size:35px; margin-bottom:30px;}
+.aContBox {width:100%; overflow:hidden; margin-bottom:60px;}
+.aContLeft {float:left; width:10%; text-align:right; color:#a1a1a1;}
+.aContRight{float:left; width:80%; padding:0 40px 0;}
+.aMemTit {border-top:1px solid #cccccc; padding-top:20px;}
+.aMemCnt {font-size:23px; margin-bottom:15px;}
+.aMemPos {margin-bottom:50px;}
+.aConList {overflow: hidden;}
+.aConList li {float: left; width: 24.25%; height: 200px; border: 0; background: #777; transition: .3s; padding: 45px; margin: 0 1% 1% 0; position: relative;}
+.aConList li:nth-child(4n) {margin: 0 0 1% 0;}
+.comBtn {width: 130px;height: 40px; margin:10px 3px; padding: 0; border: 0; border-radius: 4px; font-size: 15px; color: #191919; background-color: #e9e9e9; cursor:pointer;}
+.comBtn:hover {background-color:#d6d6d6;}
+.btnRight {float:right;}
+textarea {resize:none; padding:20px;}
+
+/*myhome 승헌 다녀감*/
+.myHome .inner {width:1180px; height:800px; min-height:300px; margin:auto; padding: 260px 0 170px 400px; box-sizing: border-box; position: relative;}
+.myHome .inner .rank {position:absolute; left:0px; top:260px;}
+.myHome .inner h2 {font-family: 'Noto Serif TC', serif; font-size:80px; font-weight:500; line-height:1.2; color:#000;}
+.myHome .inner .rank .rankCont {margin-top:30px; font-size:16px; line-height:1.5; color:#555; }
+.myHome .inner .rank .rankCont .barArea p {color:#000; font-size:24px; font-weight:500;}
+.barArea .bar {margin:10px 10px 30px 0;}
+.barArea .bar span {font-size:15px;}
+.rankCont .auth {line-height: 30px;}
+.myHome .inner .position .posList li {border-bottom:1px #e5e5e5 solid; letter-spacing:-0.5px; font-size:16px; line-height:1.5; color:#555; padding:30px 0;}
+.myHome .inner .position .posList li strong {font-size:24px; font-weight:500; line-height:1.5; letter-spacing:-0.6px; color: #000; display:block; margin-bottom:20px;}
+.myHome .inner .position .posList li span {overflow:hidden; display:inline-block; width:740px; height:26px; text-overflow:ellipsis; font-weight:400; white-space:nowrap;}
