@@ -31,31 +31,47 @@
 		<c:if test="${sessionScope.memId eq 'admin'}">
 			<button onclick="window.location='/travelMaker/admin/adminGroupDel.tm?gNo=${content.gNo}'">그룹삭제</button>
 		</c:if>
-		<h1>${content.subject}</h1>
-		<table>
-			<tr>
-				<td>작성자: </td>
-				<td>${content.id}</td>
-			</tr>
-			<tr>
-				<td>여행 컨셉: </td>
-				<td>${content.concept}</td>
-			</tr>
-			<tr>
-				<td>모집 유형: </td>
-				<td>
+		
+		<div class="makingContWrap">
+			<div class="titWrap">
+				<p class="tit2" data-aos="flip-down" data-aos-duration="400">"${content.subject}"</p>
+				<p class="txt" data-aos="flip-down" data-aos-duration="400">여행 사전계획을 자세히 살펴보고 참여신청 할 수 있습니다!</p>
+			</div>
+			
+			<div class="fl">			
+				<div class="txtWrap">
+					<p class="sub">작성자</p>
+					<p class="txt">${content.id}</p>
+				</div>
+				
+				<div class="txtWrap">
+					<p class="sub">여행 컨셉</p>
+					<p class="txt">${content.concept}</p>
+				</div>
+				
+				<div class="txtWrap">
+					<p class="sub">모집 유형</p>
+					<p class="txt">
 					<c:forEach var="i" items="${posList}">
 						${i} /
 					</c:forEach>
-				</td>
-			</tr>
-			<tr>
-				<td>모집 인원: </td>
-				<td>현재 ${content.actualNum}명 / 최대 ${content.maxNum}명</td>
-			</tr>
-			<tr>
-				<td>날짜: </td>
-				<td>
+					</p>
+				</div>
+				
+				<div class="txtWrap">
+					<p class="sub">모집 인원</p>
+					<p class="txt">현재 ${content.actualNum}명 / 최대 ${content.maxNum}명</p>
+				</div>
+			</div>
+			
+			<div class="fl mz">
+				<div class="txtWrap">
+					<p class="sub">지역</p>
+					<p class="txt">${content.loc}</p>
+				</div>
+				<div class="txtWrap">
+					<p class="sub">날짜</p>
+					<p class="txt">
 					<c:if test="${esGap==0}">
 						${content.startDate} (당일치기)
 					</c:if>
@@ -63,11 +79,22 @@
 						${content.startDate} ~ ${content.endDate}
 						(${esGap}박 ${esGap+1}일)
 					</c:if>
-				</td>
-			</tr>
-			<tr>
-				<td>동성필터 여부: </td>
-				<td>
+					</p>
+				</div>
+				<div class="txtWrap">
+					<p class="sub">모집 마감일</p>
+					<p class="txt">
+					<c:if test="${ctGap==0}">
+						${content.closingDate} (오늘 마감)
+					</c:if>
+					<c:if test="${ctGap>0}">
+						${content.closingDate} (D-${ctGap})
+					</c:if>
+					</p>
+				</div>				
+				<div class="txtWrap">
+					<p class="sub">모집 성별</p>
+					<p class="txt">
 					<c:if test="${content.dongsung==0}">
 						모두 참여 가능
 					</c:if>
@@ -79,42 +106,73 @@
 							여성만
 						</c:if>
 					</c:if>
-				</td>
-			</tr>
-			<tr>
-				<td>모집 마감일</td>
-				<td>
-					<c:if test="${ctGap==0}">
-						${content.closingDate} (오늘 마감)
+					</p>
+				</div>
+			</div>
+			
+			<p class="line"></p>
+			
+			<div class="txtWrap">
+				<p class="sub">코스 설명</p>
+				<p class="txt">${content.courseExpl}</p>
+			</div>
+			
+			<div class="txtWrap">
+				<p class="sub">부가 설명</p>
+				<p class="txt">${content.addExpl}</p>
+			</div>
+			
+			<div class="txtWrap">
+				<p class="sub">예산</p>
+				<p class="txt">약 <fmt:formatNumber type="number" maxFractionDigits="3" value="${content.cost}"/>원</p>
+			</div>			
+		</div>
+		
+		<div class="btnWrap">			
+			<c:if test="${sessionScope.memId!=content.id && content.status==0 && memStatus==-1}">
+				<c:if test="${memIdGender==writerGender || content.dongsung==0}">
+				<a href="/travelMaker/travel/makingReq.tm?gNo=${content.gNo}"><p class="btn btnY">신청</p></a>
+				<a href="/travelMaker/travel/makingList.tm?pageNum=${pageNum}"><p class="btn btnC">뒤로</p></a>
+				</c:if>						
+				<c:if test="${memIdGender!=writerGender && content.dongsung==1}">
+					<c:if test="${memIdGender==0}">
+						<p class="txt">남성 회원은 신청할 수 없습니다.</p> 
 					</c:if>
-					<c:if test="${ctGap>0}">
-						${content.closingDate} (D-${ctGap})
+					<c:if test="${memIdGender==1}">
+						<p class="txt">여성 회원은 신청할 수 없습니다.</p> 
 					</c:if>
-				</td>
-			</tr>
-			<tr>
-				<td>지역: </td>
-				<td>${content.loc}</td>
-			</tr>
-			<tr>
-				<td>코스 설명: </td>
-				<td>
-					${content.courseExpl}
-				</td>
-			</tr>
-			<tr>
-				<td>부가 설명: </td>
-				<td>
-					${content.addExpl}
-				</td>
-			</tr>
-			<tr>
-				<td>예산: </td>
-				<td>약 <fmt:formatNumber type="number" maxFractionDigits="3" value="${content.cost}"/>원</td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<c:if test="${sessionScope.memId!=content.id && content.status==0 && memStatus==-1}">
+				</c:if>
+			</c:if>
+			<c:if test="${sessionScope.memId!=content.id && content.maxNum<=content.actualNum}">
+				<p class="txt">모집이 완료되었습니다.</p> 
+			</c:if>
+			<c:if test="${sessionScope.memId!=content.id && memStatus==0}">
+				<p class="txt">이미 신청하셨습니다.</p> 
+			</c:if>
+			<c:if test="${sessionScope.memId!=content.id && memStatus==1}">
+				<p class="txt">이미 참여 중입니다.</p> 
+				<a href="/travelMaker/travel/groupSpace.tm?gNo=${content.gNo}"><p class="btn btnY">그룹 공간으로</p></a>
+			</c:if>
+			<c:if test="${sessionScope.memId!=content.id && memStatus==2}">
+				<p class="txt">이미 거절되었습니다.</p> 
+			</c:if>
+			<c:if test="${sessionScope.memId!=content.id && memStatus==3}">
+				<p class="txt">개설자에 의해 강제퇴장된 여행입니다.</p> 
+			</c:if>
+			<%-- <c:if test="${memId eq 'admin'}"> 
+				<input type="button" value="리스트" onclick="window.location='/travelMaker/admin/adminGroup.tm'"/>	
+			</c:if>
+			<c:if test="${memId ne 'admin'}"> 
+				<input type="button" value="리스트" onclick="window.location='/travelMaker/travel/makingList.tm?pageNum=${pageNum}'"/>		
+			</c:if> --%>
+			<c:if test="${sessionScope.memId==content.id}">
+			<a onclick="removeCheck()"><p class="btn btnC">삭제</p></a>
+			<!-- <input type="button" value="삭제" onclick="removeCheck()"/> -->											
+			</c:if>			
+		</div>
+		
+		
+					<%-- <c:if test="${sessionScope.memId!=content.id && content.status==0 && memStatus==-1}">
 						<c:if test="${memIdGender==writerGender || content.dongsung==0}">
 							<input type="button" value="신청" onclick="window.location='/travelMaker/travel/makingReq.tm?gNo=${content.gNo}'"/>
 						</c:if>						
@@ -151,12 +209,17 @@
 					</c:if>			
 					<c:if test="${sessionScope.memId==content.id}">
 						<input type="button" value="삭제" onclick="removeCheck()"/>											
-					</c:if>
-				</td>
-			</tr>
-		</table>
+					</c:if> --%>
+					
+					
 	</div>
 	<!-- //wrapAll end -->
+	
+	<script>
+	AOS.init({
+		easing: 'ease-in-out-sine'
+	});
+	</script>
 	
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 	<!-- //footer end -->
