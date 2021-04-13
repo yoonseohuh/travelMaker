@@ -411,7 +411,7 @@ public class TravelController {
 		GroupSpaceDTO getGroup = travelService.getGroup(gNo);
 		
 		//공개여부 업데이트
-	
+		
 		System.out.println("shared값 :" + shared);
 		/*if(shared == null) {
 			System.out.println("쉐어드 너 설마 여기타니?");
@@ -423,6 +423,13 @@ public class TravelController {
 			travelService.updateShared(gNo, Integer.parseInt(shared));
 			int sharedResult = grpSpace.getShared();
 			model.addAttribute("sharedResult",sharedResult);
+		//	공개여부를 설정하는 시점에 참여자들의 travelCnt를 +1
+			for(int i=0;i<joinMem.size();i++) {
+				String member = joinMem.get(i).getId();
+				memberService.updateTravelCnt(member,1);
+			}
+		//	개설자의 travelCnt를 +1
+			memberService.updateTravelCnt(leader, 1);
 		}
 		
 		model.addAttribute("posName", posName);

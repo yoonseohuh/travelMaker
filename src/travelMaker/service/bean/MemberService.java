@@ -87,4 +87,6 @@ public interface MemberService {
 	public List getAllPositions() throws Exception;
 	//포지션 결정
 	public void posDecision(String id, int num, int posNo) throws Exception;
+	//여행횟수 업데이트
+	public void updateTravelCnt(String id, int ud) throws Exception;
 }

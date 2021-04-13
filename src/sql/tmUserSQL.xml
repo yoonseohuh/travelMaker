@@ -170,4 +170,9 @@
 		where id=#{id}
 	</update>
 	
+	<update id="updateTravelCnt" parameterType="hashmap">
+		update tmUser set travelCnt = travelCnt + #{ud} where id = #{id}
+	</update>
+	
+	
 </mapper>
