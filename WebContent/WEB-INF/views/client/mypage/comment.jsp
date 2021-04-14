@@ -193,8 +193,6 @@
 	</div>
 	</div>
       <!-- //cont1 end  -->   
- 
- 
 	<div id="cont2">
 		<form action="/travelMaker/cmt/commentWritePro.tm" name="commentWrite" onsubmit="return check()" method="get">
 			<input type="hidden" name="id" value="${sessionScope.memId}" />
