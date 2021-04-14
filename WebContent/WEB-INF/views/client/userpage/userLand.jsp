@@ -9,23 +9,11 @@
 	<!-- //top end -->
 	
 	<div class="wrapAll client">
-		<!-- 
-		<jsp:include page="/WEB-INF/views/include/userMenu.jsp"/>
-		-->
 		<c:import url="/WEB-INF/views/include/userMenu.jsp">
 			<c:param name="userId" value="${userId}"></c:param>
 		</c:import>
-		<!-- userMenu end -->
-		
-		<c:if test="${sessionScope.memId==null}">
-			<script>
-				alert("로그인 후에 접근 가능합니다");
-				location.href='/travelMaker/mem/loginForm.tm';
-			</script>
-		</c:if>
-		
-		<h1>${userId}님의 페이지</h1>
-		
+		<h1>${userId}님의 랜드마크</h1>
+	
 	</div>
 	<!-- //wrapAll end -->
 	

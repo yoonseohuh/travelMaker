@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <ul id="myMenuWrap">
-	<li><a href="/travelMaker/mem/userPage.tm">유저홈</a></li>
-	<li><a href="/travelMaker/mem/userHistory.tm">여행이력</a></li>
-	<li><a href="/travelMaker/mem/userLand.tm">작성한 랜드마크</a></li>
+	
+	<li><a href="/travelMaker/mem/userPage.tm?userId=<c:out value="${param.userId}"/>">유저홈</a></li>
+	<li><a href="/travelMaker/mem/userHistory.tm?userId=<c:out value="${param.userId}"/>">여행이력</a></li>
+	<li><a href="/travelMaker/mem/userLand.tm?userId=<c:out value="${param.userId}"/>">작성한 랜드마크</a></li>
 </ul>
 <script>
 	if(nowUrl == "/travelMaker/mem/userPage.tm"){
