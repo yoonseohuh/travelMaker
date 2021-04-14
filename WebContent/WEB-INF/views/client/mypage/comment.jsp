@@ -6,22 +6,24 @@
    
    <jsp:include page="/WEB-INF/views/include/top.jsp" />
    <!-- //top end -->
+	<jsp:include page="/WEB-INF/views/include/myMenu.jsp" />
+	<!-- myMenu end -->
    
-	<div class="wrapAll client">
-			
+
+	<div class="myPageWrap">
+
 		<c:if test="${sessionScope.memId==null}">
 			<script>
 				alert("로그인 후에 접근 가능합니다");
 				location.href='/travelMaker/mem/loginForm.tm';
 			</script>
 		</c:if>
-	
-	<jsp:include page="/WEB-INF/views/include/myMenu.jsp" />
-	<!-- myMenu end -->
+
       
 	<script>
       $(document).ready(function(){
-           $(".menu>a").click(function(){      //클래스가 menu의 아랫놈인 a를 클릭하면
+           $(".posA").click(function(){      //클래스가 menu의 아랫놈인 a를 클릭하면
+        	   console.log('hi');
                var submenu = $(this).next("ul");      //a 다음에있는 "ul을 submenu에 담고 
     
                if( submenu.is(":visible") ){     // ul display: none 아닐떄         -->display: none false 를 반환 한다.
@@ -95,19 +97,34 @@
       
 	</script>
       
-	<h1>comment</h1>
-     함께 여행한 동행자들에게 코멘트를 남겨보세요! </br></br>
+	<h2 class="pageTit">
+                나에게 넌.  너에게 난. <br/>
+                동행자들이 남긴 코멘트를 확인해보세요
+     </h2>
+      <img src="/travelMaker/resources/images/myhomeimg.png"></img>
+     
      <c:if test="${!empty cmtMyGroup}">
-		<a style="cursor:pointer" id="tab1">조회</a> | <a style="cursor:pointer" id="tab2">작성</a> 
+     	<ul class="commentTab">
+                <li>
+                   <a style="cursor:pointer" id="tab1" class="active">코멘트 조회</a> 
+                </li>
+                <li>
+                    <a style="cursor:pointer" id="tab2">코멘트 작성</a>
+                </li>
+        </ul>
+            <!--commentTab End-->
 	</c:if>
      
+
      <!-- 여행카운트는 있지만 코멘트 작성할 여행이없을떄 조회/작성탭 안보이게 하기위함 -->
+
 	<c:if test="${count > 0}">
 		<c:if test="${!empty cmtMyGroup}">
 			
 		</c:if>
 	</c:if>
-      
+    
+     <div class="commentContent">   
 	<div id="cont1">
 		<c:if test="${count == 0}">
 			<p>참여한 여행이 없으시군요! 여행떠나기 메뉴에 다양한 여행이 기다리고 있어요. 함께 떠나볼까요?</p>
@@ -119,56 +136,67 @@
 				- 여행이 종료되지 않았을 경우 </br>
 				- 개설자의 총평이 작성되지 않았을 경우</br>
 			</c:if>
-			<c:if test="${!empty cmtMyGroup}">
-			<br/><h1>동행자들이 나에게 보내준 코멘트 (status 4만뜬다)</h1>
-				<ul>
+		<c:if test="${!empty cmtMyGroup}">
+				<p class="com">받은 코멘트</p>
 		 			<c:forEach var="cmtMyGroup" items="${cmtMyGroup}">
-		 			<li class="menu">
-						<a style="cursor:pointer">${cmtMyGroup.subject} ${cmtMyGroup.startDate} ~ ${cmtMyGroup.endDate}</a>
-						<ul style="display: none;">
-						<!-- 테스트 -->
-						<c:forEach var="comRecUserCnt" items="${comRecUserCnt}">
-							<c:if test="${(comRecUserCnt.key == cmtMyGroup.gNo) && (comRecUserCnt.value == 0)}">
-							&nbsp;작성된 코멘트가 없습니다! 함께 했던 동행자들에게 닦달해보아요.						
-							</c:if>
-						</c:forEach>
-						<c:forEach var="comRecUser" items="${comRecUser}">
-							 <c:if test="${cmtMyGroup.gNo == comRecUser.gNo}">
-								<li><textarea rows="2" cols="72" name="comment" > ${comRecUser.cCont} </textarea> <br/>보낸사람: ${comRecUser.sender} / 받은날짜 ${comRecUser.reg}</br></br></li>&nbsp; 
-							</c:if>
-						</c:forEach>
-						</ul>
-					</li>
+			 			<div class="menu comBox">
+			 				<dl>
+		                        <dt>
+		                            <strong>${cmtMyGroup.subject}</strong>
+		                        </dt>
+		                        <dd>
+		                            <p>${cmtMyGroup.startDate} ~ ${cmtMyGroup.endDate} </p><a class="posA">확인</a>
+		                        
+									<ul style="display: none;">
+									<!-- 테스트 -->
+										<c:forEach var="comRecUserCnt" items="${comRecUserCnt}">
+											<c:if test="${(comRecUserCnt.key == cmtMyGroup.gNo) && (comRecUserCnt.value == 0)}">
+											&nbsp;작성된 코멘트가 없습니다! 함께 했던 동행자들에게 닦달해보아요.						
+											</c:if>
+										</c:forEach>
+										<c:forEach var="comRecUser" items="${comRecUser}">
+											 <c:if test="${cmtMyGroup.gNo == comRecUser.gNo}">
+												<li><textarea rows="2" cols="72" name="comment" > ${comRecUser.cCont} </textarea> <br/>보낸사람: ${comRecUser.sender} / 받은날짜 ${comRecUser.reg}</br></br></li>&nbsp; 
+											</c:if>
+										</c:forEach>
+									</ul>
+								</dd>
+		                    </dl>
+						</div>
 					</c:forEach>
-				</ul>
-			<br/>
-			<h1>내가 동행자들에게 보낸 코멘트</h1>
-				<ul>
+				
+				<p class="com send">보낸 코멘트</p>
 					<c:forEach var="cmtMyGroup" items="${cmtMyGroup}">
-						<li class="menu">
-							<a style="cursor:pointer">${cmtMyGroup.subject} ${cmtMyGroup.startDate} ~ ${cmtMyGroup.endDate}</a>
-					 		<ul style="display: none;">
-					 		<!-- 테스트 -->
-							<c:forEach var="comSenUserCnt" items="${comSenUserCnt}">
-								<c:if test="${(comSenUserCnt.key == cmtMyGroup.gNo) && (comSenUserCnt.value == 0)}">
-								&nbsp;작성하신 코멘트가 없습니다. 동행자들에게 코멘트를 남겨보세요!						
-								</c:if>
-							</c:forEach>
-							<c:forEach var="comSenUser" items="${comSenUser}">
-							 	<c:if test="${cmtMyGroup.gNo == comSenUser.gNo}"> 
-							 		<li><textarea rows="2" cols="72" name="comment" > ${comSenUser.cCont} </textarea> <br/>받는사람: ${comSenUser.receiver} / 보낸날짜 ${comSenUser.reg}</br></br></li>&nbsp;
-								</c:if>
-							</c:forEach>
-							</ul>
-						</li>
+						<div class="menu comBox">
+							<dl>
+		                        <dt>
+		                            <strong>${cmtMyGroup.subject}</strong>
+		                        </dt>
+		                        <dd>
+		                            <p>${cmtMyGroup.startDate} ~ ${cmtMyGroup.endDate} </p><a class="posA">확인</a>
+		                        
+									<ul style="display: none;">
+									<!-- 테스트 -->
+										<c:forEach var="comSenUserCnt" items="${comSenUserCnt}">
+											<c:if test="${(comSenUserCnt.key == cmtMyGroup.gNo) && (comSenUserCnt.value == 0)}">
+											&nbsp;작성하신 코멘트가 없습니다. 동행자들에게 코멘트를 남겨보세요!							
+											</c:if>
+										</c:forEach>
+										<c:forEach var="comSenUser" items="${comSenUser}">
+											 <c:if test="${cmtMyGroup.gNo == comSenUser.gNo}">
+												<li><textarea rows="2" cols="72" name="comment" > ${comSenUser.cCont} </textarea> <br/>보낸사람: ${comSenUser.sender} / 받은날짜 ${comSenUser.reg}</br></br></li>&nbsp; 
+											</c:if>
+										</c:forEach>
+									</ul>
+								</dd>
+		                    </dl>
+						</div>
 					</c:forEach>
-				</ul>
 			</c:if>
 		</c:if>   
 	</div>
+	</div>
       <!-- //cont1 end  -->   
- 
- 
 	<div id="cont2">
 		<form action="/travelMaker/cmt/commentWritePro.tm" name="commentWrite" onsubmit="return check()" method="get">
 			<input type="hidden" name="id" value="${sessionScope.memId}" />
@@ -180,7 +208,6 @@
 	            <option value="${cmtGroupList.gNo}">${cmtGroupList.subject} ${cmtGroupList.gNo}</option>
 	            </c:forEach>
 			</select>&nbsp;
-         
          
          동행자 :                      
 			<select name="groupMem" id="groupMem" required>

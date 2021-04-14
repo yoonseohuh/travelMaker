@@ -410,3 +410,23 @@ progress {-webkit-appearance: none; }
 .infoList dl {margin-top: 20px; position: relative; box-sizing: border-box; padding-left: 100px; font-size: 16px; font-weight: 500; letter-spacing: -0.7px; color: #000; line-height: 28px;}
 .infoList dt {position: absolute; left: 0; text-align: left;}
 .infoList .cos {font-weight:normal;}
+
+/*MyComment*/
+.commentTab {text-align: left; margin-top: 100px; padding-bottom: 176px;}
+.commentTab li {display: inline-block; position: relative; font-size: 24px; font-weight: 500; line-height: 40px; letter-spacing: -1px; box-sizing: border-box; padding: 0 20px 0 0;}
+.commentTab li:nth-child(2) {padding: 0 20px ;}
+.commentTab a{color:#888;}
+.commentTab a.active{color:#000;}
+.commentTab li::before {content: ''; display: block; width: 1px; height: 20px; background: #d4d4d4; position: absolute; left: 0; top: 50%; margin-top: -10px;}
+.commentTab ul::after {content: '';display: block; clear: both;}
+.com {margin-bottom: 50px; font-size:40px; font-weight:500;}
+.commentContent {width:75%; margin-bottom:100px;}
+.comBox {position: relative; box-sizing: border-box; padding: 30px 0; padding-left: 400px; border-bottom: 1px #ccc solid;}
+.comBox a {font-size:16px; padding-right: 12px;}
+.commentContent dl dt {position: absolute; width: 240px; padding-right: 60px; left: 0; top: 30px;}
+.commentContent dl dt strong {font-size:19px; font-weight: normal; line-height: 36px; letter-spacing: -0.5px; color: #000; display: block; margin-bottom: 20px;}
+.commentContent dl dd {position:relative;}
+.commentContent dl dd ul {margin-top:50px;}
+.commentContent dl dd p {font-size: 18px; line-height: 8px; letter-spacing: -0.5px; color: #000;}
+.send {margin-top:170px;}
+.comBox textarea {border:none;}
