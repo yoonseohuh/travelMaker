@@ -10,7 +10,7 @@
 		<c:if test="${sessionScope.memId==null}">
 			<script>
 				alert("로그인 후에 이용 가능합니다");
-				location.href='/travelMaker/mem/index.tm';
+				location.href='/travelMaker/mem/loginForm.tm';
 			</script>
 		</c:if>
 		
@@ -34,8 +34,8 @@
 		
 		<div class="makingContWrap">
 			<div class="titWrap">
-				<p class="tit2" data-aos="flip-down" data-aos-duration="400">"${content.subject}"</p>
-				<p class="txt" data-aos="flip-down" data-aos-duration="400">여행 사전계획을 자세히 살펴보고 참여신청 할 수 있습니다!</p>
+				<p class="tit2" data-aos="flip-down" data-aos-duration="600">"${content.subject}"</p>
+				<p class="txt" data-aos="flip-down" data-aos-duration="600">여행 사전계획을 자세히 살펴보고 참여신청 할 수 있습니다!</p>
 			</div>
 			
 			<div class="fl">			
@@ -159,12 +159,17 @@
 			<c:if test="${sessionScope.memId!=content.id && memStatus==3}">
 				<p class="txt">개설자에 의해 강제퇴장된 여행입니다.</p> 
 			</c:if>
-			<%-- <c:if test="${memId eq 'admin'}"> 
-				<input type="button" value="리스트" onclick="window.location='/travelMaker/admin/adminGroup.tm'"/>	
+			
+			
+			<c:if test="${memId eq 'admin'}"> 
+				<a href="/travelMaker/admin/adminGroup.tm"><p class="btn btnY">리스트</p></a>
 			</c:if>
 			<c:if test="${memId ne 'admin'}"> 
-				<input type="button" value="리스트" onclick="window.location='/travelMaker/travel/makingList.tm?pageNum=${pageNum}'"/>		
-			</c:if> --%>
+				<a href="/travelMaker/travel/makingList.tm?pageNum=${pageNum}"><p class="btn btnY">리스트</p></a>
+			</c:if>
+			
+			
+			
 			<c:if test="${sessionScope.memId==content.id}">
 			<a onclick="removeCheck()"><p class="btn btnC">삭제</p></a>
 			<!-- <input type="button" value="삭제" onclick="removeCheck()"/> -->											

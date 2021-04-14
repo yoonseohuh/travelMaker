@@ -6,11 +6,11 @@
 <!-- //top end -->
 
 <div class="wrapAll client">
-
+	
 	<c:if test="${sessionScope.memId==null}">
 		<script>
-			alert("로그인 후에 이용 가능합니다");
-			location.href='/travelMaker/mem/index.tm';
+			alert("로그인 후에 접근 가능합니다");
+			location.href='/travelMaker/mem/loginForm.tm';
 		</script>
 	</c:if>
 	
@@ -89,11 +89,10 @@
 							contentType: "application/json",
 							data: JSON.stringify(data),
 							success: function(res){
-								
 								$('#lNo').val(res.lNo);
-								$('.content1').html("<br/><h1>"+res.lName+"</h1><br/><h2>"+res.writer+"님의 랜드마크</h2></br></br>");
-								$('.content2').html("<h3>"+res.lType+"&nbsp;&nbsp;|&nbsp;&nbsp;"+res.addr+"</h3></br></br>");
-								$('.content3').html("<h3>"+res.lCont+"</h3>");
+								$('.content1').html("<br/><h1>"+res.lName+"</h1><br/>");
+								$('.content2').html("<input type=\"button\" class=\"clickId\" idx=\""+res.writer+"\" value=\""+res.writer+"\"/>"+"</br></br>");
+								$('.content3').html("<h3>"+res.lType+"&nbsp;&nbsp;|&nbsp;&nbsp;"+res.addr+"</h3></br><h3>"+res.lCont+"</h3>");
 								
 								if(arr.includes(res.lNo+"")==true){	//arr 원소가 문자열로 들어있으므로 res.lNo도 문자형으로 형변환하여 비교
 									$('.like').html("좋아요 한 랜드마크입니다&nbsp;"
@@ -142,9 +141,9 @@
 	<a href="/travelMaker/land/landWrite.tm"><button class="comBtn">랜드마크 작성</button></a>
 
 	<!-- 마커 클릭 시 상세 정보 보이는 부분 -->
-	<div class="content1"></div>
-	<div class="content2"></div>
-	<div class="content3"></div>
+	<div class="content1"></div>	<!-- 장소명 -->
+	<div class="content2 clickMenu"></div>	<!-- 아이디 -->
+	<div class="content3"></div>	<!-- 카테고리, 주소, 설명 -->
 	
 	<!-- 좋아요 여부에 따라 보여줄 내용 달리 함 -->
 	<div class="like"></div>

@@ -13,7 +13,7 @@
 .btnMore:hover {color:#ff0000;}
 
 .btnWrap {overflow: hidden; display: inline-block; position: relative;left: 50%; transform: translateX(-50%);}
-.btnWrap .btn {float: left; display: inline-block; color:#fff; font-size:20px; font-weight:500; padding: 20px 60px; margin: 0 3px;}
+.btnWrap .btn {float: left; display: inline-block; color:#fff; font-size:20px; font-weight:500; cursor:pointer; padding: 20px 60px; margin: 0 3px;}
 .btnWrap .btn.btnY {background:#ff0000;}
 .btnWrap .btn.btnC {background:#444;}
 .btnWrap .txt {text-align: center; font-size:17px; font-weight: 500; margin: 0 0 20px;}
@@ -128,7 +128,9 @@
 .makingListWrap .titWrap .goMake a {display: block; width: 100%; height: 100%; position: absolute;top: 0;left: 0; z-index:1;}
 .makingListWrap .titWrap .goMake .bag {width: 100%; transition:.3s; position: absolute;top: 40px;left: 0;}
 .makingListWrap .titWrap .goMake .bag.bag2 {animation: bag .3s linear infinite alternate;}
+.makingListWrap .titWrap .goMake .bag.bag3 {animation: bag3 .3s linear infinite alternate; top: 70px;}
 .makingListWrap .titWrap .goMake:hover .bag {animation: bag .3s linear infinite alternate;}
+.makingListWrap .titWrap .goMake:hover .bag.bag3 {animation: bag3 .3s linear infinite alternate;}
 .makingListWrap .titWrap .goMake .bagsh {opacity:0; transition:.3s; position: absolute;bottom: 0;left: 50%; transform: translateX(-50%);}
 .makingListWrap .titWrap .goMake:hover .bagsh {opacity:.6;}
 @-webkit-keyframes bag {
@@ -137,6 +139,14 @@
     }
     100% {
         top: 30px;
+    }
+}
+@-webkit-keyframes bag3 {
+    0% {
+        top: 70px;
+    }
+    100% {
+        top: 80px;
     }
 }
 @-webkit-keyframes da {

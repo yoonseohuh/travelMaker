@@ -9,6 +9,14 @@
 	<!-- //top end -->
 	
 	<div class="wrapAll client">
+	
+		<c:if test="${sessionScope.memId==null}">
+			<script>
+				alert("로그인 후에 접근 가능합니다");
+				location.href='/travelMaker/mem/loginForm.tm';
+			</script>
+		</c:if>
+		
 		<script>
 		$(document).ready(function(){
 	        $('#cont2').hide();
@@ -82,15 +90,23 @@
 			</div>	
 			<!-- aContInfo end -->		
 			<div class="aInfoTit aMemTit">Member</div>			
-			<p class="aMemCnt">가이드  ${fn:length(gMem) - fn:length(posMem)}명 </p>			
+			<p class="aMemCnt">가이드 : ${guideCnt}명</p>
+			<!--  테스트 -->
+			
+			
+			
+						
 			<div class="aMemPos">
 				<c:forEach var="posMem" items="${posMem}" >
-					${posMem.key} :${posMem.value}명 
+					<c:if test="${posMem.key ne '일반'}">
+						${posMem.key} :${posMem.value}명 
+					</c:if>
 				</c:forEach>
 			</div>
 			<p class="aMemCnt">	참여 ${fn:length(gMem)}명 </p>			
 			<div class="aMemPos">
 				<c:forEach var="gMem" items="${gMem}">
+					<c:if test="${gMem.nickname == memId}">${gMem.nickname}(개설자)</c:if>
 					 ${gMem.nickname}     
 				</c:forEach>
 			</div>			

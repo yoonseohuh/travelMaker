@@ -8,13 +8,14 @@
    <!-- //top end -->
    
 	<div class="wrapAll client">
+			
 		<c:if test="${sessionScope.memId==null}">
 			<script>
-	            alert("로그인 후에 이용 가능합니다");
-	            history.go(-1);
+				alert("로그인 후에 접근 가능합니다");
+				location.href='/travelMaker/mem/loginForm.tm';
 			</script>
 		</c:if>
-   
+	
 	<jsp:include page="/WEB-INF/views/include/myMenu.jsp" />
 	<!-- myMenu end -->
       
@@ -186,7 +187,7 @@
 				<option>동행자를 선택해주세요</option>
 			</select> <br/>
 			<textarea rows="10" cols="72" name="comment" ></textarea>
-			<input type="submit" value="버튼" />
+			<input type="submit" value="작성하기" />
 		</form>
 	</div>
 	<!-- //cont2 end  -->  

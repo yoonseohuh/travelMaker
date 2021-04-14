@@ -25,7 +25,8 @@ public interface CommentService {
    // 그룹방별로 보낸사람이 사용자인거 카운트
    public Map comSenUserCnt(String id)throws SQLException;
    
-	
+	 //참여중인 멤버드르이 리퀘스트 가져옴
+	// public List memListFin(int gNo)throws Exception;
 	
 	// 그그룹넘에 해당하는 사람들 가져오기
 	public List getGMem(int gNo) throws SQLException;
