@@ -85,7 +85,7 @@
 				var gn = $('#gNo').val();
 				console.log(gn);
 				
-				setInterval(getChatLists, 10000);
+				setInterval(getChatLists, 3000);
 				
 				function getChatLists(){
 					var currentLocation = window.location;

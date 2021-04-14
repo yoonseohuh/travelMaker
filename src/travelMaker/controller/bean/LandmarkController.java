@@ -121,7 +121,6 @@ public class LandmarkController {
 	@ResponseBody
 	@RequestMapping("userWrittenLand.tm")
 	public List userWrittenLand(String userId) throws Exception {
-		System.out.println("userId 넘어왔냐고 "+userId);
 		List userLand = landmarkService.myLand(userId);
 		return userLand;
 	}
