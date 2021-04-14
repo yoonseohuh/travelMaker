@@ -51,8 +51,11 @@
 		
 			<c:if test="${id==null}">
 			<div class="titWrap">
-				<p class="tit2" data-aos="fade-right" data-aos-duration="400">로그인하시면 여행에 함께할 수 있습니다!</p>
-				<img src="<c:url value="/resources/images/makingico.png" />" />
+				<p class="tit2" data-aos="fade-right" data-aos-duration="400">아직 회원이 아니신가요?</p>
+				<p class="tit2" data-aos="fade-right" data-aos-delay="200" data-aos-duration="400">지금 회원 가입하고 다양한 혜택을 누려보세요!</p>
+				<div class="goMake">
+					<img src="<c:url value="/resources/images/makingico3.png" />" class="bag bag3" data-aos="fade-down" data-aos-delay="200" data-aos-duration="400" />		
+				</div>
 			</div>
 			</c:if>
 			<c:if test="${id!=null}">

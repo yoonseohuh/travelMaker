@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<div id="divView" style="position:absolute; display:none; background-color:#ffffff; border:solid 2px #d0d0d0; width:150px; height:50px; padding: 5px 15px 0;"></div>
+
 <div id="top">
 	<div id="ham">
 		<span class="bar1"></span>
@@ -8,7 +10,7 @@
 	</div>
 	<jsp:include page="/WEB-INF/views/include/clientMenu.jsp" />
 	<div id="mCover"></div>
-	<a href="/travelMaker/mem/index.tm"><p id="logo">Travel Maker</p></a>
+	<a href="/travelMaker/mem/index.tm"><p id="logo"></p></a>
 	<div id="sign">
 		<c:if test="${sessionScope.memId == null}">
 			<a href="/travelMaker/mem/signupForm.tm">회원가입</a>

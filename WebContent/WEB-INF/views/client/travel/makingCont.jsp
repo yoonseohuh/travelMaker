@@ -34,8 +34,8 @@
 		
 		<div class="makingContWrap">
 			<div class="titWrap">
-				<p class="tit2" data-aos="flip-down" data-aos-duration="400">"${content.subject}"</p>
-				<p class="txt" data-aos="flip-down" data-aos-duration="400">여행 사전계획을 자세히 살펴보고 참여신청 할 수 있습니다!</p>
+				<p class="tit2" data-aos="flip-down" data-aos-duration="600">"${content.subject}"</p>
+				<p class="txt" data-aos="flip-down" data-aos-duration="600">여행 사전계획을 자세히 살펴보고 참여신청 할 수 있습니다!</p>
 			</div>
 			
 			<div class="fl">			

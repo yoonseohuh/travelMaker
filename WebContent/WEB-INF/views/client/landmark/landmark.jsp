@@ -89,9 +89,8 @@
 							contentType: "application/json",
 							data: JSON.stringify(data),
 							success: function(res){
-								
 								$('#lNo').val(res.lNo);
-								$('.content1').html("<br/><h1>"+res.lName+"</h1><br/><h2>"+res.writer+"님의 랜드마크</h2></br></br>");
+								$('.content1').html("<br/><h1>"+res.lName+"</h1><br/><input type=\"button\" class=\"clickMenu\" idx=\""+res.writer+"\" value=\"닉네임1\"/>"+"<h2>님의 랜드마크</h2></br></br>");
 								$('.content2').html("<h3>"+res.lType+"&nbsp;&nbsp;|&nbsp;&nbsp;"+res.addr+"</h3></br></br>");
 								$('.content3').html("<h3>"+res.lCont+"</h3>");
 								
@@ -145,6 +144,8 @@
 	<div class="content1"></div>
 	<div class="content2"></div>
 	<div class="content3"></div>
+	
+	<input type="button" class="clickMenu" idx="zzaaqq543" value="지존전사1"/>
 	
 	<!-- 좋아요 여부에 따라 보여줄 내용 달리 함 -->
 	<div class="like"></div>
