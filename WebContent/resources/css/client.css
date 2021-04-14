@@ -376,7 +376,7 @@ textarea {resize:none; padding:20px;}
 .myPageWrap .pageTit {font-size:56px; font-weight:bold; color:#000; line-height:1.5; letter-spacing:-1.5px;}
 .myPageWrap .pageSub {font-size:18px; line-height:1.89; letter-spacing:-0.7px; font-weight:normal; margin-top:30px;}
 .myPageWrap img {width:100%; margin-top: 60px;}
-.myPageWrap .HomeSubTit {font-size: 24px; line-height: 1.5; letter-spacing: -0.7px; font-weight: bold; color: #000; display: inline-block; margin-top: 80px; margin-bottom:50px;}
+.myPageWrap .HomeSubTit {font-size: 24px; line-height: 1.5; letter-spacing: -0.7px; font-weight: bold; color: #000; display: inline-block; margin-top: 80px; margin-bottom:30px;}
 .myPageWrap .HomeSubCont {font-size:17px; line-height: 1.5; margin-bottom:50px;}
 .myPageWrap .travelList {overflow:hidden;}
 .myPageWrap .travelList ul {margin-left: -20px;}
