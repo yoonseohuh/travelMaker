@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -63,11 +64,14 @@ public class MypageController {
 		
 	//	모든 여행 가져와서 상태가 참여 중(1)인 것만 담음
 		List<GroupSpaceDTO> jList = travelService.getMyGroups(id,1);
-		for(int i=0;i<jList.size();i++) {
-			if(jList.get(i).getStatus()>=3) {	//끝났거나 모집취소한 건 제외
-				jList.remove(i);
+		
+		Iterator<GroupSpaceDTO> iter = jList.iterator();
+		while(iter.hasNext()) {
+			if(iter.next().getStatus()>=3) {	//끝났거나 모집취소한 건 제외
+				iter.remove();
 			}
 		}
+		
 		for(int i=0;i<jList.size();i++) {
 			int gNo = jList.get(i).getgNo();
 			Map map = new HashMap();
@@ -97,11 +101,14 @@ public class MypageController {
 		
 	//	모든 여행 가져와서 상태가 대기 중(0)인 것만 담음
 		List<GroupSpaceDTO> wList = travelService.getMyGroups(id,0);
-		for(int i=0;i<wList.size();i++) {
-			if(wList.get(i).getStatus()!=0) {	//아직 모집 중인 것만 담아야 하므로
-				wList.remove(i);
+		
+		Iterator<GroupSpaceDTO> iter2 = wList.iterator();
+		while(iter2.hasNext()) {
+			if(iter2.next().getStatus()!=0) {	//끝났거나 모집취소한 건 제외
+				iter2.remove();
 			}
 		}
+		
 		for(int i=0;i<wList.size();i++) {
 			int gNo = wList.get(i).getgNo();
 			Map map = new HashMap();
