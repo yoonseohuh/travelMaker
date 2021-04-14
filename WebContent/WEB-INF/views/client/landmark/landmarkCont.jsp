@@ -37,6 +37,15 @@
 	
 	</script>
 	<h1>LandmarkCont</h1>
+	
+	
+	<c:if test="${sessionScope.memId==null}">
+		<script>
+			alert("로그인 후에 접근 가능합니다");
+			location.href='/travelMaker/mem/loginForm.tm';
+		</script>
+	</c:if>
+	
 	<form action="/travelMaker/land/myLandDelete.tm" method="post">
 	<input type="hidden" name="lNo" value="${land.lNo}"/>
 	<table>

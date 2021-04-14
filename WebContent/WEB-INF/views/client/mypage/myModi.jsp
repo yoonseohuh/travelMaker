@@ -4,11 +4,11 @@
 
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
 	<!-- //top end -->
-	<c:if test="${sessionScope.memId == null}">
-			<script>
-				alert('로그인 후 이용해주세요.')
-				history.go(-1)
-			</script>
+	<c:if test="${sessionScope.memId==null}">
+		<script>
+			alert("로그인 후에 접근 가능합니다");
+			location.href='/travelMaker/mem/loginForm.tm';
+		</script>
 	</c:if>
 	<div class="wrapAll client">
 		<jsp:include page="/WEB-INF/views/include/myMenu.jsp" />

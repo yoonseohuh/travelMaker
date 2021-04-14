@@ -67,8 +67,8 @@
 			<h2>한마디</h2>
 			<textarea rows="5" cols="90" name="reqTxt" style="resize:none;"></textarea>
 			<br/><br/><br/><br/>
-			<input type="submit" value="신청"/>
-			<input type="button" value="리스트" onclick="window.location='/travelMaker/travel/makingList.tm'"/>
+			<input class="btn btnY" type="submit" value="신청"/>
+			<a href="/travelMaker/travel/makingList.tm"><p class="btn btnC">리스트</p></a>
 		</form>
 	</div>
 	<!-- //wrapAll end -->
