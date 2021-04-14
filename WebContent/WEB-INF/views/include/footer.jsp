@@ -35,7 +35,9 @@
 		var divLeft = e.clientX; //좌측 좌표 위치 안맞을시 e.pageX
 		var serial = $(this).attr("serial");
 		var idx = $(this).attr("idx");
-		$('#divView').empty().append('<div style="position:absolute;top:5px;right:5px"><span id="close" style="cursor:pointer;font-size:1.5em" title="닫기">x</span> </div><a href="#">이력보기</a><br/><a href="/travelMaker/qr/reportWriteForm.tm?rType=2&&idx=' + idx + '">채팅신고</a>');
+		var userId = $('.clickId').val();
+		console.log(userId);
+		$('#divView').empty().append('<div style="position:absolute;top:5px;right:5px"><span id="close" style="cursor:pointer;font-size:1.5em" title="닫기">x</span> </div><a href="/travelMaker/mem/userPage.tm?userId='+userId+'">이력보기</a><br/><a href="/travelMaker/msg/messageWrite.tm?receiver='+userId+'">쪽지 보내기</a>');
 		$('#divView').css({
 			"top": divTop,
 			"left": divLeft,
