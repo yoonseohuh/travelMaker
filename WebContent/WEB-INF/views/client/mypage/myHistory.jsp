@@ -26,7 +26,7 @@
 	</c:if>
 	<c:if test="${!empty travelAll}">
 		<c:forEach var="travelAll" items="${travelAll}" varStatus="status">
-			<c:if test="${travelAll.status >= 3}">
+			<c:if test="${travelAll.status == 3 || travelAll.status == 4}">
 				No.${status.count} </br>
 				<a href="/travelMaker/my/myHistoryCont.tm?gNo=${travelAll.gNo}&status=${travelAll.status}"><h3>${travelAll.subject}</h3></a>
 				-여행기간 : ${travelAll.startDate} ~ ${travelAll.endDate} </br>

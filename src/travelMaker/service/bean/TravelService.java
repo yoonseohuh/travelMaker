@@ -110,5 +110,7 @@ public interface TravelService {
 	
 	//참여중인 멤버드르이 리퀘스트 가져옴
 	public List memListFin(int gNo)throws Exception;
+	//참여중인 멤버들 리퀘스트 가져옴
+	
 	
 }

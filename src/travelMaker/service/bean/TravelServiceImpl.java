@@ -295,6 +295,7 @@ public class TravelServiceImpl implements TravelService{
 		return memList;
 	}
 	
+	
 	//참여중인 멤버들 리퀘스트 가져옴
 	@Override
 	public List memListFin(int gNo)throws Exception {
@@ -306,13 +307,12 @@ public class TravelServiceImpl implements TravelService{
 				listTwo.add(list.get(i));
 			}
 		}
-		
 		for(int i =0; i <listTwo.size(); i++) {
 			memListFin = groupRequestDAO.getRequests(((GroupMemberDTO)listTwo.get(i)).getgNo());
 		}
-		
 		return memListFin;
 	}
+	
 	
 	//그룹에 들어온 신청 목록들 가져오기
 	@Override
