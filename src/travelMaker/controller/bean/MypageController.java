@@ -271,6 +271,21 @@ public class MypageController {
 		System.out.println("갤러리 사진있니?" +  gList);
 
 		
+		//가이드 수 카운트
+		List memListFin = new ArrayList<GroupRequestDTO>();
+		memListFin = travelService.memListFin(Integer.parseInt(gNo));
+		int guideCnt = 0;
+		
+		for(int i=0; i<memListFin.size(); i++) {
+			if(((GroupRequestDTO)memListFin.get(i)).getReqType() == 1) {
+				guideCnt = guideCnt + 1; 
+			}
+		}
+		System.out.println("가이드카운트" + guideCnt);
+		
+		model.addAttribute("guideCnt",guideCnt);
+		model.addAttribute("memListFin",memListFin);
+		
 		
 		model.addAttribute("reviewList",reviewList);
 		model.addAttribute("gList",gList);

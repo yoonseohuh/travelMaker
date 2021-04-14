@@ -82,7 +82,12 @@
 			</div>	
 			<!-- aContInfo end -->		
 			<div class="aInfoTit aMemTit">Member</div>			
-			<p class="aMemCnt">가이드</p>			
+			<p class="aMemCnt">가이드 : ${guideCnt}명</p>
+			<!--  테스트 -->
+			
+			
+			
+						
 			<div class="aMemPos">
 				<c:forEach var="posMem" items="${posMem}" >
 					<c:if test="${posMem.key ne '일반'}">
@@ -93,6 +98,7 @@
 			<p class="aMemCnt">	참여 ${fn:length(gMem)}명 </p>			
 			<div class="aMemPos">
 				<c:forEach var="gMem" items="${gMem}">
+					<c:if test="${gMem.nickname == memId}">${gMem.nickname}(개설자)</c:if>
 					 ${gMem.nickname}     
 				</c:forEach>
 			</div>			
