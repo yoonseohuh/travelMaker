@@ -186,7 +186,6 @@
 									</ul>
 								</dd>
 		                    </dl>
-							
 						</div>
 					</c:forEach>
 			</c:if>
