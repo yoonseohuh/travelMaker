@@ -29,6 +29,7 @@
 				});
 			}
 			
+			//포지션 목록 토글
 			$(document).ready(function(){
 		        $('#cont2').hide();
 		        $('#cancel').hide();
