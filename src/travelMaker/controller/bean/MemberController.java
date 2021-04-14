@@ -28,6 +28,7 @@ public class MemberController {
 	@Autowired
 	private MemberService memService = null;
 	
+	
 	@RequestMapping("index.tm")
 	public String index(Model model) {
 		//쿠키 가져오기 
@@ -317,24 +318,32 @@ public class MemberController {
 		model.addAttribute("sPos",sPos);
 		return "client/manual/positionDetail";
 	}
+
+	/* 	타 유저 이력 페이지 	*/
 	
-	// *********** 타 유저 이력 페이지 ***********
-	
-	@RequestMapping("userPage.tm")
-	public String userInfo(String userId, Model model) {
-		System.out.println("userId: "+userId);
-		model.addAttribute("userId",userId);
-		return "client/userpage/userPage";
-	}
-	
+	//회원의 여행이력
 	@RequestMapping("userHistory.tm")
 	public String userHistory(String userId, Model model) {
+		
+		
 		model.addAttribute("userId",userId);
 		return "client/userpage/userHistory";
 	}
 	
+	//회원의 코멘트
+	@RequestMapping("userComment.tm")
+	public String userInfo(String userId, Model model) {
+		
+		
+		model.addAttribute("userId",userId);
+		return "client/userpage/userComment";
+	}
+	
+	//회원이 작성한 랜드마크
 	@RequestMapping("userLand.tm")
 	public String userLand(String userId, Model model) {
+		
+		
 		model.addAttribute("userId",userId);
 		return "client/userpage/userLand";
 	}

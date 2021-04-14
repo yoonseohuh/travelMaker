@@ -24,7 +24,7 @@
 			</script>
 		</c:if>
 		
-		<h1>${userId}님의 페이지</h1>
+		<h1>${userId}님이 주고 받은 코멘트</h1>
 		
 	</div>
 	<!-- //wrapAll end -->
