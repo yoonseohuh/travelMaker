@@ -12,7 +12,7 @@
 		<c:import url="/WEB-INF/views/include/userMenu.jsp">
 			<c:param name="userId" value="${userId}"></c:param>
 		</c:import>
-		<h1>${userId}님의 히스토리</h1>
+		<h1>${userId}님의 여행이력</h1>
 		
 		<c:if test="${empty travelAll}">
 			<h2>

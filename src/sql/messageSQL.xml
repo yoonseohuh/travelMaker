@@ -17,12 +17,12 @@
 
 <!-- 메세지 보낸사람:사용자 조회  -->
 <select id="getSenMsg" parameterType="String" resultType="MessageDTO">
-	select * from message where sender=#{id}
+	select * from message where sender=#{id} ORDER BY reg DESC
 </select>
 
 <!-- 메세지 받은 사람:사용자 조회 -->
 <select id="getRecMsg" parameterType="String" resultType="MessageDTO">
-	select * from message where receiver=#{id}
+	select * from message where receiver=#{id} ORDER BY reg DESC
 </select>
 
 <!-- 메세지 삭제 -->

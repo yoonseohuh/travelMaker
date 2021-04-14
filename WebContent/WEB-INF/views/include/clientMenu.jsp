@@ -4,17 +4,14 @@
 	<ul class="menu">
         <li><a href="/travelMaker/mem/index.tm">홈</a></li>
         <li><a href="/travelMaker/my/myPage.tm">내정보</a></li>
-
         <li><a href="/travelMaker/travel/makingList.tm">여행떠나기</a></li>
-
         <li><a href="/travelMaker/shared/sharedList.tm">여행공유</a></li>
         <li><a href="/travelMaker/land/landmark.tm">랜드마크</a></li>
         <li><a href="/travelMaker/mem/manual.tm">랭크/포지션 안내</a></li>
         <li><a href="/travelMaker/msg/message.tm">쪽지함</a></li>
-        
         <br/>
-		
         <li><a href="/travelMaker/admin/member.tm">관리자 페이지</a></li>
         <li><a href="/travelMaker/qr/reportTest.tm">신고테스트</a></li>
     </ul>
 </div>
+
