@@ -186,7 +186,14 @@ public class MypageController {
 		int status = 1;
 		
 		//참여중인 여행 다 가져오기
-		List travelAll = travelService.getMyGroups(id, status);
+		List<GroupSpaceDTO> travels = travelService.getMyGroups(id, status);
+		//이력이므로 끝난 것만 보내기
+		List<GroupSpaceDTO> travelAll = new ArrayList<GroupSpaceDTO>();
+		for(int i=0 ; i<travels.size() ; i++) {
+			if(travels.get(i).getStatus()==4) {
+				travelAll.add(travels.get(i));
+			}
+		}
 		model.addAttribute("travelAll", travelAll);
 		
 		

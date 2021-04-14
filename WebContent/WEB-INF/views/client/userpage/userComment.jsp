@@ -20,8 +20,13 @@
 				location.href='/travelMaker/mem/loginForm.tm';
 			</script>
 		</c:if>
-		
 		<h1>${userId}님이 주고 받은 코멘트</h1>
+		
+		
+		
+		
+		
+		
 		
 	</div>
 	<!-- //wrapAll end -->

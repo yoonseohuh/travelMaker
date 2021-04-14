@@ -15,7 +15,6 @@
 		</script>
 	</c:if>
 	
-	
 	<jsp:include page="/WEB-INF/views/include/myMenu.jsp" />
 	<!-- myMenu end -->
 	
