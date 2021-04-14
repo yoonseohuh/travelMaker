@@ -8,239 +8,145 @@
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
 	<!-- //top end -->
 
-	<div class="wrapAll client">
-
+	<div id="transcroller-body" class="wrapAll client">
+	
+		<input type="hidden" id="gNo" value="${gNo}"/>
+		<c:if test="${idStatus!=1}">
+			<script>
+				alert("해당 그룹의 멤버가 아닙니다");
+				location.href="/travelMaker/travel/makingList.tm";
+			</script>
+		</c:if>
+		
+		<c:if test="${idStatus==1}">
 		<div class="gsWrap">
-
-			<div class="titWrap">
-				<p class="tit2">${grpSpace.subject}의 그룹 방입니다.</p>
+		
+			<div class="chatWrap">
+				<div class="btnChat"></div>
+				<div class="chat">
+					<ul id="viewChatWrap" class="viewChatWrap">
+						<c:if test="${fn:length(chatList)==0}">
+							아직 작성된 채팅이 없습니다.
+						</c:if>
+						<c:forEach var="chatList" items="${chatList}">
+							<c:if test="${chatList.writer==id}">
+								<li class="mine">
+									${chatList.cont} (<fmt:formatDate value="${chatList.reg}" type="both" dateStyle="short" timeStyle="short"/>)
+								</li>						
+							</c:if>
+							<c:if test="${chatList.writer!=id}">
+								<li>
+									${chatList.writer}님: ${chatList.cont} (<fmt:formatDate value="${chatList.reg}" type="both" dateStyle="short" timeStyle="short"/>)
+								</li>						
+							</c:if>
+						</c:forEach>
+					</ul>					
+					<div class="sendChatWrap">
+						<form action="#" id="chatForm" method="post">
+							<input type="hidden" value="${gNo}" name="gNo"/>
+							<input type="hidden" value="${id}" name="writer"/>
+							<input type="text" id="sendChat" name="cont"/>
+							<input type="submit" id="sendChatBtn" value="전송"/>
+						</form>
+					</div>
+				</div>
+				<script>					
+					$(".viewChatWrap").scrollTop($(".viewChatWrap")[0].scrollHeight);
+					$('.btnChat').click(function(){
+						$(this).toggleClass('on');
+						$('.chat').fadeToggle();
+					});
+				</script>				
 			</div>
+			<!-- //chatWrap end -->
 
 			<ul class="gsMenu">
-				<li>멤버</li>
-				<li>채팅</li>
+				<li class="on">그룹홈</li>
 				<li>갤러리</li>
 			</ul>
 
-			<div class="gsCont gsMem">mem</div>
-			<div class="gsCont gsChat">chat</div>
-			<div class="gsCont gsGal">gal</div>
+			<div class="gsCont gsHome">
+				<div class="titWrap">
+					<p class="tit2" data-aos="fade-right" data-aos-duration="600">환영합니다!</p>
+					<p class="tit2" data-aos="fade-right" data-aos-delay="400" data-aos-duration="600">${grpSpace.subject}의 그룹 방입니다.</p>
+					<p class="txt" data-aos="fade-right" data-aos-delay="700" data-aos-duration="600">
+						[날짜 <strong>${grpSpace.startDate}-${grpSpace.endDate}</strong>] [예상비용 <strong><fmt:formatNumber type="number" maxFractionDigits="3" value="${grpSpace.cost}"/></strong>원]
+					</p>	
+					<input type="hidden" value="${eDate}" id="eDate"/>
+				</div>				
 
-			<script>
-				$('.gsMenu > li').eq(0).click(function(){
-					$('.gsCont').hide();
-					$('.gsMem').fadeIn();
-				});
-				$('.gsMenu > li').eq(1).click(function(){
-					$('.gsCont').hide();
-					$('.gsChat').fadeIn();
-				});
-				$('.gsMenu > li').eq(2).click(function(){
-					$('.gsCont').hide();
-					$('.gsGal').fadeIn();
-				});
-			</script>
-
-		</div>
-	</div>
-
-	
-	<div class="wrapAll" style="background: #ccc; position: relative;">
-		
-		<div class="gsLeft">
-			<script>
-			$(document).ready(function(){	
-				$('.accepted').submit(function(event){
-					event.preventDefault();
-					var data = {};
-					$.each($(this).serializeArray(), function(index, i){
-						data[i.name] = i.value;
-					});
-					$.ajax({
-						url: "/travelMaker/travel/accepted.tm",
-						type: "POST",
-						dataType: "json",
-						cache: false,
-						contentType: "application/json",
-						data: JSON.stringify(data),
-						success: function(res){
-							var currentLocation = window.location;
-							var result = JSON.parse(res);
-							if(result==true){
-								alert("수락이 완료되었습니다");
-								$('#applicants').load(currentLocation + ' #applicants');	//신청자 목록 load
-								$('#ingMem').load(currentLocation + ' #ingMem');			//참여 중인 멤버 목록 load
-								$('#ingPos').load(currentLocation + ' #ingPos');			//참여 중인 포지션 목록 load								
-							}
-							if(result==false){
-								alert("모집 마감! 더 이상 멤버를 받을 수 없습니다");								
-								$('#applicants').load(currentLocation + ' #applicants');
-							}
-						}
-					});
-				});
-				$('.rejected').submit(function(event){
-					event.preventDefault();
-					var data = {};
-					$.each($(this).serializeArray(), function(index, i){
-						data[i.name] = i.value;
-					});
-					$.ajax({
-						url: "/travelMaker/travel/rejected.tm",
-						type: "POST",
-						dataType: "json",
-						cache: false,
-						contentType: "application/json",
-						data: JSON.stringify(data),
-						success: function(res){
-							var currentLocation = window.location;
-							alert("거절이 완료되었습니다");
-							$('#applicants').load(currentLocation + ' #applicants');	//신청자 목록 load
-						}
-					});
-				});
-				//채팅 입력
-				$('#chatForm').submit(function(event){
-					event.preventDefault();
-					var data = {};
-					$.each($(this).serializeArray(), function(index, i){
-						data[i.name] = i.value;
-					});
-					$.ajax({
-						url: "/travelMaker/travel/sendChat.tm",
-						type: "POST",
-						dataType: "json",
-						contentType: "application/json",
-						data: JSON.stringify(data),
-						success: function(res){
-							console.log(res);
-							$('#sendChat').val("");
-						}
-					});
-				});
-				
-				var gn = $('#gNo').val();
-				console.log(gn);
-				
-				setInterval(getChatLists, 3000);
-				
-				function getChatLists(){
-					var currentLocation = window.location;
-					$('#viewChatWrap').load(currentLocation + ' #viewChatWrap');			
-				}
-				$(".viewChatWrap").scrollTop($(".viewChatWrap")[0].scrollHeight);
-				
-			/*	https://songjihyeon.tistory.com/21	
-				0.3초 간격으로 현재 시간과 DB에 저장된 채팅 글을 체크하는 함수 호출. 새로운 채팅 글이 입력될 때만 readAjax함수를 호출.
-				var gn = $('#gNo').val();
-				console.log(gn);
-				
-				setInterval(function(){
-					$.ajax({
-						url: "/travelMaker/travel/lastDate.tm",
-						cache: false,
-						async: false,
-						data: {gNo: gn},
-						success: function(res){
-							if(lastDateTime < res){
-								readAjax(lastDateTime);
-								lastDateTime = res;
-							}else{
-								lastDateTime = res;
-							}
-						}
-					});
-				},100);
-				
-				function readAjax(compareTime){
-					$.ajax({
-						method: "POST",
-						url: "/travelMaker/travel/read.tm",
-						dataType: "json",
-						cache: false,
-						async: false,
-						data: {
-							"lastDate": compareTime
-						},
-						success: function(data){
-							if(data.length==0){
-								return;
-							}else{
-								$.each(data, function(index, entry){
-									//채팅창 div에 맞게 글을 뿌려주자
-									$('.viewChatWrap').append(res);
-									$(".viewChatWrap").scrollTop($(".viewChatWrap")[0].scrollHeight);	//스크롤바 맨 밑으로 유지
-								});
-							}
-						}
-					});
-				}					*/
+				<ul class="list">
+					<li>
+						<p class="tit">Member</p>
+						<p class="maker">[개설자 ${leader}님]</p>
+						<c:if test="${fn:length(grpMem)>0}">
+						<c:forEach var="mem" items="${grpMem}">
+						<c:if test="${mem.status==1}">
+						<p class="txt">
+							${mem.id}님
+							<c:if test="${mem.id!=id}">
+								<input type="button" onclick="window.location='/travelMaker/msg/messageWrite.tm?receiver=${mem.id}&sender=${id}'" value="쪽지쓰기"/>
+							</c:if>
+						</p>
+						</c:if>			
+						</c:forEach>
+						</c:if>
+					</li>
+					<li>
+						<p class="tit">Waiting</p>
+						<p class="txt">pos1</p>
+						<p class="txt">pos2</p>
+						<p class="txt">pos3</p>
+						<p class="txt">pos4</p>
+					</li>
+					<li>
+						<p class="tit">Schedule</p>
+						<div id="ingPlan">
+							<c:forEach var="list" items="${scheList}">
+							<form action="scheduleModi.tm?gNo=${gNo}&sNo=${list.sNo}&sDate=${list.sDate}&sCont=${list.sCont}" method="get">
+								<input type="hidden" name="gNo" value="${list.gNo}"/>
+								<input type="hidden" name="sNo" value="${list.sNo}"/>
+								날짜 <input type="text" name="sDate" value="${list.sDate}"/>
+								일정 <input type="text" name="sCont" value="${list.sCont}"/>
+								<c:if test="${id==leader}">
+								<input type="submit" value="수정"/>
+								<input type="button" value="삭제" onclick="window.location='/travelMaker/travel/scheduleDel.tm?gNo=${gNo}&sNo=${list.sNo}'" />
+								</c:if>
+								<br/>
+							</form>
+							</c:forEach>
+							<c:if test="${id==leader}">
+								<form action="schedulePro.tm">
+									<input type="hidden" name="gNo" value="${gNo}"/>
+									<select name="sDate">
+										<c:forEach var="i" items="${dateList}">
+												<option value="${i}">${i}</option>
+										</c:forEach>
+									</select>
+									<input type="text" name="sCont"/>
+									<input type="submit" value="작성"/>
+								</form>
+							</c:if>
+						</div>
+						<!-- //ingPlan end -->
+					</li>
+					<li>
+						<p class="tit">Now</p>
+						<div id="ingPos">
+						<c:forEach var="posMem" items="${posMem}">
+						<c:if test="${posMem != null}">
+							<p class="txt">${posMem.key}회원 : ${posMem.value}명</p>
+						</c:if>
+						<c:if test="${posMem == null}">
+							<p class="txt">냉무</p>
+						</c:if>
+						</c:forEach>
+						</div>
+						<!-- //ingPos end -->
+					</li>
+				</ul>
 				
 				
-			});		//document.ready end
-			
-			//여행 상태 변경 함수
-			function changeStatus(gNo, status){
-				event.preventDefault();
-				var data = {
-					"gNo":gNo,
-					"status":status
-				};
-				$.ajax({
-					url: "/travelMaker/travel/changeStatus.tm",
-					type: "POST",
-					dataType: "json",
-					contentType: "application/json",
-					data: JSON.stringify(data),
-					success: function(res){
-						console.log(res);	//{"gNo":50,"status":1}과 같이 들어옴
-						var currentLocation = window.location;
-						alert("여행 상태가 성공적으로 변경되었습니다!");
-						$('#statusForLeader').load(currentLocation + ' #statusForLeader');	//여행상태 부분 load
-					}
-				});
-			}	//changeStatus end
-			
-			//총평버튼
-			$(document).ready(function(){
-		        $('#cont2').hide();
-		        $('#cancel').hide();
-		        $('#tab1').click(function(){
-		    		$('#cont2').show();
-		    		$('#cancel').show();
-		    		$('#tab1').hide();
-		    	});    
-		        $('#cancel').click(function(){
-		    		$('#cont2').hide();
-		    		 $('#cancel').hide();
-		    		$('#tab1').show();
-		    	});    
-		    });
-			//총평유효성 검사 
-			function check(){
-				var inputs = document.reply;
-				if(!inputs.genReview.value){
-					alert("내용을 입력해주세요.");
-					return false;
-				}else if(!input.genReply.value){
-					alert("내용을 입력해주세요.");
-					return false;
-				}
-			}
-			</script>
-			<!-- //accept logic end -->		
-			
-			<input type="hidden" id="gNo" value="${gNo}"/>
-			<p class="tit1">${grpSpace.subject}의 그룹 방입니다.</p>
-			
-			<c:if test="${idStatus!=1}">
-				<script>
-					alert("해당 그룹의 멤버가 아닙니다");
-					location.href="/travelMaker/travel/makingList.tm";
-				</script>
-			</c:if>
-			
-			<c:if test="${idStatus==1}">
 				
 				<c:if test="${id==leader}">
 					<p class="tit2">새로 들어온 신청</p>
@@ -248,7 +154,7 @@
 						신청자가 없습니다.
 					</c:if>
 					<c:if test="${fn:length(awaiters)>0}">
-						<table id="applicants">
+						<table class="tm" id="applicants">
 							<tr>
 								<th>아이디</th>
 								<th>신청유형</th>
@@ -299,7 +205,6 @@
 						</table>
 					</c:if>
 					
-					<p class="tit2">개설자 권한(임시 위치)</p>
 					<div id="statusForLeader">
 					
 						<c:if test="${grpSpace.status==0}">
@@ -361,146 +266,9 @@
 							</div>
 							
 						</c:if>
-					</div>
-					
-					
-					
+					</div>					
 				</c:if>
 				<!-- if: leader end -->
-				
-				<ul class="groupCont1">
-					<li>
-						<p class="tit2">참여 중인 멤버</p>
-						<div id="ingMem">
-							<h3>개설자 ${leader}님</h3><br/>
-							<c:if test="${fn:length(grpMem)>0}">
-								<c:forEach var="mem" items="${grpMem}">
-									<c:if test="${mem.status==1}">
-										<p>
-											${mem.id}님
-											<c:if test="${mem.id!=id}">
-												<input type="button" onclick="window.location='/travelMaker/msg/messageWrite.tm?receiver=${mem.id}&sender=${id}'" value="쪽지쓰기"/>
-											</c:if>
-										</p>
-									</c:if>			
-								</c:forEach>
-							</c:if>
-						</div>
-						<!-- //ingMem end -->
-					</li>
-									
-					<li>
-						<p class="tit2">모집 현황</p>
-						<div id="ingPos">
-						<c:forEach var="posMem" items="${posMem}">
-						<c:if test="${posMem != null}">
-							<p>${posMem.key} : ${posMem.value}명</p>
-						</c:if>
-						<c:if test="${posMem == null}">
-							<p>냉무</p>
-						</c:if>
-						</c:forEach>
-						</div>
-						<!-- //ingPos end -->
-					</li>
-					<li>
-						<p class="tit2">새로 들어온 신청</p>
-						<div id="ingNew">
-							<p>pos1</p>
-							<p>pos2</p>
-							<p>pos3</p>
-							<p>pos4</p>
-						</div>
-						<!-- //ingNew end -->
-					</li>
-				</ul>
-				<!-- //groupCont1 end -->
-				
-				<ul class="groupCont2">
-					<li>
-						<p class="tit2">일정</p>
-						<div id="ingPlan">
-							<c:forEach var="list" items="${scheList}">
-							<form action="scheduleModi.tm?gNo=${gNo}&sNo=${list.sNo}&sDate=${list.sDate}&sCont=${list.sCont}" method="get">
-								<input type="hidden" name="gNo" value="${list.gNo}"/>
-								<input type="hidden" name="sNo" value="${list.sNo}"/>
-								날짜 <input type="text" name="sDate" value="${list.sDate}"/>
-								일정 <input type="text" name="sCont" value="${list.sCont}"/>
-								<c:if test="${id==leader}">
-								<input type="submit" value="수정"/>
-								<input type="button" value="삭제" onclick="window.location='/travelMaker/travel/scheduleDel.tm?gNo=${gNo}&sNo=${list.sNo}'" />
-								</c:if>
-								<br/>
-							</form>
-							</c:forEach>
-							<c:if test="${id==leader}">
-								<form action="schedulePro.tm">
-									<input type="hidden" name="gNo" value="${gNo}"/>
-									<select name="sDate">
-										<c:forEach var="i" items="${dateList}">
-												<option value="${i}">${i}</option>
-										</c:forEach>
-									</select>
-									<input type="text" name="sCont"/>
-									<input type="submit" value="작성"/>
-								</form>
-							</c:if>
-						</div>
-						<!-- //plan end -->
-					</li>
-					<li>
-						<p class="tit2">예산</p>
-						<p id="ingCost"><fmt:formatNumber type="number" maxFractionDigits="3" value="${grpSpace.cost}"/>원</p>
-						<!-- //cost end -->
-					</li>
-					<li>
-						<p class="tit2">날짜 관련(임시로 이 위치에)</p>
-						시작일 ${grpSpace.startDate} /
-						종료일 ${grpSpace.endDate}
-						<input type="hidden" value="${eDate}" id="eDate"/>					
-					</li>
-				</ul>
-				<!-- //groupCont2 end -->
-				
-				<div class="groupCont3">
-					<p class="tit2">채팅</p>
-					<div class="chat">
-						<ul id="viewChatWrap" class="viewChatWrap">
-							<c:if test="${fn:length(chatList)==0}">
-								아직 작성된 채팅이 없습니다.
-							</c:if>
-							<c:forEach var="chatList" items="${chatList}">
-								<c:if test="${chatList.writer==id}">
-									<li class="mine">
-										${chatList.cont} (<fmt:formatDate value="${chatList.reg}" type="both" dateStyle="short" timeStyle="short"/>)
-									</li>						
-								</c:if>
-								<c:if test="${chatList.writer!=id}">
-									<li>
-										${chatList.writer}님: ${chatList.cont} (<fmt:formatDate value="${chatList.reg}" type="both" dateStyle="short" timeStyle="short"/>)
-									</li>						
-								</c:if>
-							</c:forEach>
-						</ul>
-						<script>
-						$(".viewChatWrap").scrollTop($(".viewChatWrap")[0].scrollHeight);							
-						</script>
-						<div class="sendChatWrap">								
-							<form action="#" id="chatForm" method="post">
-								<input type="hidden" value="${gNo}" name="gNo"/>
-								<input type="hidden" value="${id}" name="writer"/>
-								<input type="text" id="sendChat" name="cont"/>
-								<input type="submit" id="sendChatBtn" value="전송"/>
-							</form>
-						</div>
-					</div>
-					<!-- //chat end -->
-				</div>
-				<!-- //groupCont3 end -->
-				
-				
-				<!-- 어디에다 놓아야할지.... -->
-				
 				
 				<div>
 					<c:if test="${memId != grpSpace.id}">
@@ -527,63 +295,239 @@
 							<input type="button" value="취소" id="cancel"/>
 					</c:if>					
 				</div>
-				
-				
-			</c:if>
-		</div>
-		<!-- //gsLeft end -->
-		
-		<div class="gsRight">
-			<div class="swiper-container gsGallery">
-			<input type="button" value="갤러리로 이동" onclick="window.location='/travelMaker/travel/gallery.tm?gNo=${gNo}'"/>
-				<div class="swiper-wrapper">
-					<div class="swiper-slide add">
-						<form action="/travelMaker/travel/uploadPro.tm" method="post" enctype="multipart/form-data">
-							<input type="hidden" name="writer" value="${id}"/>
-							<input type="hidden" name="gNo" value="${gNo}"/>
-							<input type="file" name="img"/>
-							<input type="submit" value="업로드"/>
-						</form>
-					</div>
-					<c:forEach var="gList" items="${gList}">
-					<div class="swiper-slide">
-						<img src="/travelMaker/save/${gList.pRoot}" width="200"/>
-					</div>
-					</c:forEach>
-					<div class="swiper-slide">Slide 1</div>
-					<div class="swiper-slide">Slide 2</div>
-					<div class="swiper-slide">Slide 3</div>
-					<div class="swiper-slide">Slide 4</div>
-					<div class="swiper-slide">Slide 5</div>
-					<div class="swiper-slide">Slide 6</div>
-					<div class="swiper-slide">Slide 7</div>
-					<div class="swiper-slide">Slide 8</div>
-					<div class="swiper-slide">Slide 9</div>
-				</div>
-				<!-- Add Pagination -->
-				<div class="swiper-pagination"></div>
+				<!-- //총평 -->
+
 			</div>
-			<!-- Initialize Swiper -->
+			<!-- //gsHome end -->
+
+			<div class="gsCont gsGal">
+				<div class="titWrap">
+					<p class="tit2" data-aos="fade-right" data-aos-duration="600">여행 후 남는 건 사진,</p>
+					<p class="tit2" data-aos="fade-right" data-aos-delay="400" data-aos-duration="600">소중한 추억을 간직해보세요!</p>
+				</div>
+				<form action="/travelMaker/travel/uploadPro.tm" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="writer" value="${id}"/>
+					<input type="hidden" name="gNo" value="${gNo}"/>
+					<input type="file" name="img"/>
+					<input type="submit" value="업로드"/>
+				</form>
+				<ul class="list">
+					<c:forEach var="gList" items="${gList}">
+					<li>
+						<img src="/travelMaker/save/${gList.pRoot}" width="200"/>
+					</li>
+					</c:forEach>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+			<!-- //gsGal end -->
+
 			<script>
-			$('.gsRight').height($('.gsLeft').outerHeight());
-			
-			var swiper = new Swiper('.swiper-container', {
-				/* freeMode: true, */
-				direction: 'vertical',
-				pagination: {
-			        el: '.swiper-pagination',
-			        type: 'progressbar',
-			    },
-				mousewheel: true,
-				slidesPerView: 4.2,
-				spaceBetween: 20,
-			});
+				$('.gsMenu > li').eq(0).click(function(){
+					$(this).siblings().removeClass('on');
+					$(this).addClass('on');
+					$('.gsCont').hide();
+					$('.gsHome').fadeIn();
+				});
+				$('.gsMenu > li').eq(1).click(function(){
+					$(this).siblings().removeClass('on');
+					$(this).addClass('on');
+					$('.gsCont').hide();
+					$('.gsGal').fadeIn();
+				});
 			</script>
+
 		</div>
-		<!-- //gsRight end -->
-		
+		</c:if>
 	</div>
-	<!-- //wrapAll end -->	
+	<!-- //wrapAll end -->
+
+	<script>
+	$(document).ready(function(){	
+		$('.accepted').submit(function(event){
+			event.preventDefault();
+			var data = {};
+			$.each($(this).serializeArray(), function(index, i){
+				data[i.name] = i.value;
+			});
+			$.ajax({
+				url: "/travelMaker/travel/accepted.tm",
+				type: "POST",
+				dataType: "json",
+				cache: false,
+				contentType: "application/json",
+				data: JSON.stringify(data),
+				success: function(res){
+					var currentLocation = window.location;
+					var result = JSON.parse(res);
+					if(result==true){
+						alert("수락이 완료되었습니다");
+						$('#applicants').load(currentLocation + ' #applicants');	//신청자 목록 load
+						$('#ingMem').load(currentLocation + ' #ingMem');			//참여 중인 멤버 목록 load
+						$('#ingPos').load(currentLocation + ' #ingPos');			//참여 중인 포지션 목록 load								
+					}
+					if(result==false){
+						alert("모집 마감! 더 이상 멤버를 받을 수 없습니다");								
+						$('#applicants').load(currentLocation + ' #applicants');
+					}
+				}
+			});
+		});
+		$('.rejected').submit(function(event){
+			event.preventDefault();
+			var data = {};
+			$.each($(this).serializeArray(), function(index, i){
+				data[i.name] = i.value;
+			});
+			$.ajax({
+				url: "/travelMaker/travel/rejected.tm",
+				type: "POST",
+				dataType: "json",
+				cache: false,
+				contentType: "application/json",
+				data: JSON.stringify(data),
+				success: function(res){
+					var currentLocation = window.location;
+					alert("거절이 완료되었습니다");
+					$('#applicants').load(currentLocation + ' #applicants');	//신청자 목록 load
+				}
+			});
+		});
+		//채팅 입력
+		$('#chatForm').submit(function(event){
+			event.preventDefault();
+			var data = {};
+			$.each($(this).serializeArray(), function(index, i){
+				data[i.name] = i.value;
+			});
+			$.ajax({
+				url: "/travelMaker/travel/sendChat.tm",
+				type: "POST",
+				dataType: "json",
+				contentType: "application/json",
+				data: JSON.stringify(data),
+				success: function(res){
+					console.log(res);
+					$('#sendChat').val("");
+				}
+			});
+		});
+		
+		var gn = $('#gNo').val();
+		console.log(gn);
+		
+		setInterval(getChatLists, 3000);
+		
+		function getChatLists(){
+			var currentLocation = window.location;
+			$('#viewChatWrap').load(currentLocation + ' #viewChatWrap');			
+		}
+		$(".viewChatWrap").scrollTop($(".viewChatWrap")[0].scrollHeight);
+		
+	/*	https://songjihyeon.tistory.com/21	
+		0.3초 간격으로 현재 시간과 DB에 저장된 채팅 글을 체크하는 함수 호출. 새로운 채팅 글이 입력될 때만 readAjax함수를 호출.
+		var gn = $('#gNo').val();
+		console.log(gn);
+		
+		setInterval(function(){
+			$.ajax({
+				url: "/travelMaker/travel/lastDate.tm",
+				cache: false,
+				async: false,
+				data: {gNo: gn},
+				success: function(res){
+					if(lastDateTime < res){
+						readAjax(lastDateTime);
+						lastDateTime = res;
+					}else{
+						lastDateTime = res;
+					}
+				}
+			});
+		},100);
+		
+		function readAjax(compareTime){
+			$.ajax({
+				method: "POST",
+				url: "/travelMaker/travel/read.tm",
+				dataType: "json",
+				cache: false,
+				async: false,
+				data: {
+					"lastDate": compareTime
+				},
+				success: function(data){
+					if(data.length==0){
+						return;
+					}else{
+						$.each(data, function(index, entry){
+							//채팅창 div에 맞게 글을 뿌려주자
+							$('.viewChatWrap').append(res);
+							$(".viewChatWrap").scrollTop($(".viewChatWrap")[0].scrollHeight);	//스크롤바 맨 밑으로 유지
+						});
+					}
+				}
+			});
+		}					*/
+		
+		
+	});		//document.ready end
+	
+	//여행 상태 변경 함수
+	function changeStatus(gNo, status){
+		event.preventDefault();
+		var data = {
+			"gNo":gNo,
+			"status":status
+		};
+		$.ajax({
+			url: "/travelMaker/travel/changeStatus.tm",
+			type: "POST",
+			dataType: "json",
+			contentType: "application/json",
+			data: JSON.stringify(data),
+			success: function(res){
+				console.log(res);	//{"gNo":50,"status":1}과 같이 들어옴
+				var currentLocation = window.location;
+				alert("여행 상태가 성공적으로 변경되었습니다!");
+				$('#statusForLeader').load(currentLocation + ' #statusForLeader');	//여행상태 부분 load
+			}
+		});
+	}	//changeStatus end
+	
+	//총평버튼
+	$(document).ready(function(){
+        $('#cont2').hide();
+        $('#cancel').hide();
+        $('#tab1').click(function(){
+    		$('#cont2').show();
+    		$('#cancel').show();
+    		$('#tab1').hide();
+    	});    
+        $('#cancel').click(function(){
+    		$('#cont2').hide();
+    		 $('#cancel').hide();
+    		$('#tab1').show();
+    	});    
+    });
+	//총평유효성 검사 
+	function check(){
+		var inputs = document.reply;
+		if(!inputs.genReview.value){
+			alert("내용을 입력해주세요.");
+			return false;
+		}else if(!input.genReply.value){
+			alert("내용을 입력해주세요.");
+			return false;
+		}
+	}
+	</script>
+	<!-- //accept logic end -->
 	
 <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 <!-- //footer end -->

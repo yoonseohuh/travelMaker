@@ -13,11 +13,12 @@
 	<a href="/travelMaker/mem/index.tm"><p id="logo"></p></a>
 	<div id="sign">
 		<c:if test="${sessionScope.memId == null}">
-			<a href="/travelMaker/mem/signupForm.tm">회원가입</a>
-			<a href="/travelMaker/mem/loginForm.tm">로그인</a>
+			<a href="/travelMaker/mem/signupForm.tm"><p class="btnSign">회원가입</p></a>
+			<a href="/travelMaker/mem/loginForm.tm"><p class="btnSign">로그인</p></a>
 		</c:if>
 		<c:if test="${sessionScope.memId != null}">
-			<a href="/travelMaker/mem/logout.tm">로그아웃</a>
+			<p class="txtSign">환영합니다! <strong>${sessionScope.memId}</strong>님</p>
+			<a href="/travelMaker/mem/logout.tm"><p class="btnSign">로그아웃</p></a>
 		</c:if>
 	</div>
 </div>

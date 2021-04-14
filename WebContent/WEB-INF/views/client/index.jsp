@@ -217,40 +217,4 @@
 	</div>
 	<!-- //wrapAll end -->
 	
-	<script>
-		$(document).ready(function() {
-			$('.mainVisual .tit1').fadeIn(1000);
-        	$('.mainVisual .tit2').delay(200).fadeIn(1000);
-		});
-		var myPlugin = {
-	      name: 'debugger',
-	      params: {
-	        debugger: false,
-	      },
-	      on: {
-	        slideChange: function() {
-	          if (!this.params.debugger) return;
-	          console.log('slideChange', this.previousIndex, '->', this.activeIndex);
-	          $('.mainVisual .tit1').hide();
-    	  	  $('.mainVisual .tit2').hide();
-    	  	  $('.mainVisual .tit1').fadeIn(1000);
-    	  	  $('.mainVisual .tit2').delay(200).fadeIn(1000);
-	        },
-	      }
-	    };
-	    
-	    Swiper.use(myPlugin);
-		var swiper = new Swiper('.mainVisual', {
-			pagination: {
-		        el: '.mainVisual-pagination',
-		    },
-		    navigation: {
-		        nextEl: '.swiper-button-next',
-		        prevEl: '.swiper-button-prev',
-		    },
-			slidesPerView: 1,
-			debugger: true,
-		});		
-	</script>
-	
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
