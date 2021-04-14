@@ -10,11 +10,12 @@
 			location.href='/travelMaker/mem/loginForm.tm';
 		</script>
 	</c:if>
-	<div class="wrapAll client">
-		<jsp:include page="/WEB-INF/views/include/myMenu.jsp" />
-		<!-- myMenu end -->
-		
+	<jsp:include page="/WEB-INF/views/include/myMenu.jsp" />
+	<!-- myMenu end -->
+
+	<div class="myPageWrap">
 		<div class="travelContent">
+		<h2 class="pageTit">나의 기본정보를 확인,수정 해보세요</h2>
 			<div class="mArticle">
 				<h3 class="titModi">내정보 관리</h3>
 				<div class="wrapModi">
@@ -50,15 +51,18 @@
 							<strong class="titSet">email</strong>
 							<span class="txtSet">${mem.email}</span>
 						</div>
-						<a href="myModiNick.tm?id=${mem.id}&nickname=${mem.nickname}" class="linkSet">
-							<strong class="titSet">닉네임</strong>
-							<span class="txtSet">${mem.nickname} ></span>
-						</a>
-						<a href="myModiPwForm.tm?id=${mem.id}&pw=${mem.pw}" class="linkSet">
-							<strong class="titSet">비밀번호</strong>
-							<span class="txtSet">비밀번호 수정 ></span>
-						</a>
-						 
+						<div class="boxSet">
+							<a href="myModiNick.tm?id=${mem.id}&nickname=${mem.nickname}" class="linkSet">
+								<strong class="titSet">닉네임</strong>
+								<span class="txtSet">${mem.nickname} ></span>
+							</a>
+						</div>
+						<div class="boxSet">
+							<a href="myModiPwForm.tm?id=${mem.id}&pw=${mem.pw}" class="linkSet">
+								<strong class="titSet">비밀번호</strong>
+								<span class="txtSet">비밀번호 수정 ></span>
+							</a>
+						</div>
 					</div>
 					<div class="boxManage">
 						<input type="button" class="deleBtn" value="회원 탈퇴" onclick="window.location='/travelMaker/mem/myDelete.tm?id=${mem.id}'"/>
