@@ -7,6 +7,43 @@
 	
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
 	<!-- //top end -->
+
+	<div class="wrapAll client">
+
+		<div class="gsWrap">
+
+			<div class="titWrap">
+				<p class="tit2">${grpSpace.subject}의 그룹 방입니다.</p>
+			</div>
+
+			<ul class="gsMenu">
+				<li>멤버</li>
+				<li>채팅</li>
+				<li>갤러리</li>
+			</ul>
+
+			<div class="gsCont gsMem">mem</div>
+			<div class="gsCont gsChat">chat</div>
+			<div class="gsCont gsGal">gal</div>
+
+			<script>
+				$('.gsMenu > li').eq(0).click(function(){
+					$('.gsCont').hide();
+					$('.gsMem').fadeIn();
+				});
+				$('.gsMenu > li').eq(1).click(function(){
+					$('.gsCont').hide();
+					$('.gsChat').fadeIn();
+				});
+				$('.gsMenu > li').eq(2).click(function(){
+					$('.gsCont').hide();
+					$('.gsGal').fadeIn();
+				});
+			</script>
+
+		</div>
+	</div>
+
 	
 	<div class="wrapAll" style="background: #ccc; position: relative;">
 		
