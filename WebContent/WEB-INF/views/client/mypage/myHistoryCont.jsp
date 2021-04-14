@@ -122,8 +122,7 @@
 			<p class="aMemCnt">	참여 ${fn:length(gMem)}명 </p>			
 			<div class="aMemPos">
 				<c:forEach var="gMem" items="${gMem}">
-					<c:if test="${gMem.id eq memId}">${gMem.nickname}(개설자)</c:if>
-					<c:if test="${gMem.id ne memId}">${gMem.nickname}</c:if>    
+					${gMem.nickname}
 				</c:forEach>
 				
 			</div>			

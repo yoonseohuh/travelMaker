@@ -39,13 +39,14 @@
 		}
 	}
 	</script>
-	
+	<!-- 
 	<c:if test="${sessionScope.memId==null}">
 		<script>
 			alert("로그인 후에 접근 가능합니다");
 			location.href='/travelMaker/mem/loginForm.tm';
 		</script>
 	</c:if>
+	 -->
 	
 		<div class="travelPWrap">
 			<div class="travelWrap">
@@ -63,7 +64,7 @@
 									<input type="text" name="crNick" value="${mem.nickname}" readonly/> <br/>
 									<strong class="tf_required">새로운 닉네임</strong>
 									<input type="text" name="nickname" id="nickname"  placeholder="새로운 닉네임" /> <br/>
-									<input type="text" id="nickChRes" name="nickChRes" placeholder="닉네임 사용가능 여부" /> <br/>
+									<input type="text" id="nickChRes" name="nickChRes" placeholder="닉네임 사용가능 여부" disabled /> <br/>
 								</div>	
 								<button type="submit" class="subBtn">닉네임 수정</button>
 							</form>
