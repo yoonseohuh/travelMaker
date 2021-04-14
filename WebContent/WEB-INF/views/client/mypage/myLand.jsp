@@ -7,7 +7,9 @@
 <jsp:include page="/WEB-INF/views/include/top.jsp" />
 <!-- //top end -->
 
-<div class="wrapAll client">
+	<jsp:include page="/WEB-INF/views/include/myMenu.jsp" />
+	<!-- myMenu end -->
+<div class="myPageWrap">
 	<c:if test="${sessionScope.memId==null}">
 		<script>
 			alert("로그인 후에 접근 가능합니다");
@@ -15,11 +17,9 @@
 		</script>
 	</c:if>
 	
-	<jsp:include page="/WEB-INF/views/include/myMenu.jsp" />
-	<!-- myMenu end -->
-	
+	<h2 class="pageTit">내가 작성한 랜드마크와 <br/>좋아요한 랜드마크를 확인해보세요.</h2>
 	<!-- 지도 -->
-	<div id="map" style="width: 1000px; height: 400px;"></div>
+	<div id="map"></div>
 
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dbb3c6ebdae00379cc812a1240d45848&libraries=services,clusterer,drawing"></script>
@@ -40,7 +40,6 @@
 			}
 		}
 	</script>
-	
 	
 	<script>
 		$(document).ready(function(){
@@ -126,9 +125,9 @@
 							success: function(res){
 								console.log(res);
 								$('#lNo').val(res.lNo);
-								$('.content1').html("<br/><h1>"+res.lName+"</h1><br/><h2>"+res.writer+"님의 랜드마크</h2></br></br>");
-								$('.content2').html("<h3>"+res.lType+"&nbsp;&nbsp;|&nbsp;&nbsp;"+res.addr+"</h3></br></br>");
-								$('.content3').html("<h3>"+res.lCont+"</h3>");
+								$('.content1').html("<br/><p class=\"mapLeft\">"+res.lName+"</p><p class=\"mapRight\">"+res.writer+"님의 랜드마크</p>");
+								$('.content2').html("<p>"+res.lType+"&nbsp;&nbsp;|&nbsp;&nbsp;"+res.addr+"</p></br></br>");
+								$('.content3').html("<p>"+res.lCont+"</p>");
 							}
 						});
 						
@@ -187,9 +186,9 @@
 							success: function(res){
 								console.log(res);
 								$('#lNo').val(res.lNo);
-								$('.content1').html("<br/><h1>"+res.lName+"</h1><br/><h2>"+res.writer+"님의 랜드마크</h2></br></br>");
-								$('.content2').html("<h3>"+res.lType+"&nbsp;&nbsp;|&nbsp;&nbsp;"+res.addr+"</h3></br></br>");
-								$('.content3').html("<h3>"+res.lCont+"</h3>");
+								$('.content1').html("<br/><p class=\"mapLeft\">"+res.lName+"</p><p class=\"mapRight\">"+res.writer+"님의 랜드마크</p></br></br>");
+								$('.content2').html("<p>"+res.lType+"&nbsp;&nbsp;|&nbsp;&nbsp;"+res.addr+"</p></br></br>");
+								$('.content3').html("<p>"+res.lCont+"</p>");
 							}
 						});
 						
@@ -201,59 +200,66 @@
 		});//ready
 	</script>
 	
-	
-	<h1>MyLand 페이지</h1>
-	<a href="/travelMaker/land/landWrite.tm"><button>생성</button></a>
-	
-	<!-- 마커 클릭 시 보일 정보 -->
-	<div class="content1"></div>
-	<div class="content2"></div>
-	<div class="content3"></div>
-	<h2>-----------------------</h2>
-	<h2>랜드마크 관리</h2>
-	<c:if test="${fn:length(lLand)==0}">
-		아직 좋아요한 랜드마크가 없습니다.
-	</c:if>
-	<c:if test="${fn:length(lLand)>0}">
-		<h3>좋아요 한 랜드마크 | ${fn:length(lLand)}개</h3>
-		<form action="/travelMaker/land/likedLandCancel.tm" name="cancelfrm" method="post" onsubmit="return cancelCheck()">
-			<input type="submit" value="좋아요 취소"/>
-			<input type="hidden" name="lNo" id="cnlLNo"/>
-			<c:forEach var="land" items="${lLand}">
-				<ul>
-					<li>
-						<input type="checkbox" name="cnlLnum" value="${land.lNo}"/>
-					</li>
-					<li>${land.lName}</li>
-					<li>${land.lType}</li>
-					<li>${land.addr}</li>
-					<li>작성자:${land.writer}</li>
-				</ul>
-			</c:forEach>
-		</form>
-	</c:if>
-	
-	<c:if test="${fn:length(wLand)==0}">
-		아직 작성한 랜드마크가 없습니다.	
-	</c:if>
-	<c:if test="${fn:length(wLand)>0}">
-		<h3>작성한 랜드마크 | ${fn:length(wLand)}개</h3>
-		<form action="/travelMaker/land/myLandDelete.tm" name="removefrm" method="post" onsubmit="return removeCheck()">
-			<input type="submit" value="삭제"/>
-			<input type="hidden" name="lNo" id="delLNo"/>
-			<c:forEach var="land" items="${wLand}">
-				<ul>
-					<li>
-						<input type="checkbox" name="delLnum" value="${land.lNo}"/>
-					</li>
-					<li><b>${land.lName}</b></li>
-					<li>${land.lType}</li>
-					<li>${land.addr}</li>
-				</ul>
-			</c:forEach>
-		</form>
-	</c:if>
-	
+	<div class="btnMyWrap">
+		<button onclick="window.location='/travelMaker/land/landWrite.tm'" class="btnY">랜드마크 생성</button>
+	</div>
+	<div class="myLandCont">
+		<!-- 지도 아래  -->
+		<!-- 마커 클릭 시 보일 정보 -->
+		<div class="Cont">
+			<div class="mapBox">
+				<p class="HomeSubTit">해당 랜드마크 정보</p>
+				<div class="content1"></div>
+				<div class="content2"></div>
+				<div class="content3"></div>
+			</div>
+			<c:if test="${fn:length(lLand)==0}">
+				<p class="HomeSubTit">아직 좋아요한 랜드마크가 없습니다.</p>
+			</c:if>
+			<c:if test="${fn:length(lLand)>0}">
+				<p class="HomeSubTit">좋아요 한 랜드마크 | ${fn:length(lLand)}개</p>
+				<form action="/travelMaker/land/likedLandCancel.tm" name="cancelfrm" method="post" onsubmit="return cancelCheck()">
+					<input type="hidden" name="lNo" id="cnlLNo"/>
+					<c:forEach var="land" items="${lLand}">
+						<ul class="likeLand">
+							<input type="checkbox" name="cnlLnum" value="${land.lNo}"/>
+							<li class="landTit">${land.lName}</li>
+							<li>${land.lType}</li>
+							<li>${land.addr}</li>
+							<li>작성자:${land.writer}</li>
+						</ul>
+					</c:forEach>
+					<div class="btnMyWrap">
+						<button type="submit" class="btnC">좋아요 취소</button>
+					</div>
+				</form>
+			</c:if>
+			
+			<c:if test="${fn:length(wLand)==0}">
+				<p class="HomeSubTit">아직 작성한 랜드마크가 없습니다.</p>	
+			</c:if>
+			<c:if test="${fn:length(wLand)>0}">
+				<p class="HomeSubTit">작성한 랜드마크 | ${fn:length(wLand)}개</p>
+				<form action="/travelMaker/land/myLandDelete.tm" name="removefrm" method="post" onsubmit="return removeCheck()">
+					<input type="hidden" name="lNo" id="delLNo"/>
+					<c:forEach var="land" items="${wLand}">
+						<ul class="likeLand">
+							<input type="checkbox" name="delLnum" value="${land.lNo}"/>
+							<li class="landTit">${land.lName}</li>
+							<li>${land.lType}</li>
+							<li>${land.addr}</li>
+						</ul>
+					</c:forEach>
+					<div class="btnMyWrap">
+						<button type="submit" class="btnC">랜드마크 삭제</button>
+					</div>
+				</form>
+			</c:if>
+			
+		</div>
+		<!-- cont end -->
+	</div>
+	<!-- myLandCont end -->
 </div>
 <!-- //wrapAll end -->
 
