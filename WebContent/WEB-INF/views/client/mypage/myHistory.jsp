@@ -7,7 +7,9 @@
 <jsp:include page="/WEB-INF/views/include/top.jsp" />
 <!-- //top end -->
 
-<div class="wrapAll client">
+<jsp:include page="/WEB-INF/views/include/myMenu.jsp" />
+<div class="myPageWrap">
+
 	<c:if test="${sessionScope.memId==null}">
 		<script>
             alert("로그인 후에 이용 가능합니다");
@@ -15,9 +17,8 @@
 		</script>
 	</c:if>
 
-	<jsp:include page="/WEB-INF/views/include/myMenu.jsp" />
 	<!-- myMenu end -->
-	<h1>여행이력</h1>
+	<h2 class="pageTit">${id}님의 여행이력입니다 <br/> 다녀온 여행들을 확인해보세요 </h2>
 	<c:if test="${empty travelAll}">
 		<h2>
 			참여한 여행이 없습니다. <br />여행을 떠나보세요!
@@ -25,15 +26,36 @@
 		<button onclick="window.location='/travelMaker/travel/makingList.tm'">여행떠나기</button>
 	</c:if>
 	<c:if test="${!empty travelAll}">
-		<c:forEach var="travelAll" items="${travelAll}" varStatus="status">
-				No.${status.count} </br>
-				<a href="/travelMaker/my/myHistoryCont.tm?gNo=${travelAll.gNo}&status=${travelAll.status}"><h3>${travelAll.subject}</h3></a>
-				-여행기간 : ${travelAll.startDate} ~ ${travelAll.endDate} </br>
-			 	-여행컨셉 : ${travelAll.concept} </br>
-			 	-코	   스 : ${travelAll.courseExpl}</br></br>
-				 
+		<div class="infoList">
+			<c:forEach var="travelAll" items="${travelAll}" varStatus="status">
+		             <ul>
+		                 <li>
+		                     <div>
+		                         <h2>${travelAll.subject} <a href="/travelMaker/my/myHistoryCont.tm?gNo=${travelAll.gNo}&status=${travelAll.status}" class="posA">더 알아보기 ></a></h2>
+		                         <dl>
+		                             <dt>날짜</dt>
+		                             <dd>${travelAll.startDate} ~ ${travelAll.endDate}</dd>
+		                         </dl>
+		                         <dl>
+		                             <dt>컨셉</dt>
+		                             <dd class="cos">${travelAll.concept}</dd>
+		                         </dl>
+		                         <dl>
+		                             <dt>코스 설명</dt>
+		                             <dd class="cos">${travelAll.courseExpl}</dd>
+		                         </dl>
+		                     </div>
+		                 </li>
+		             </ul>
 			
-		</c:forEach>
+				<%-- 	No.${status.count} </br>
+					<a href="/travelMaker/my/myHistoryCont.tm?gNo=${travelAll.gNo}&status=${travelAll.status}"><h3>${travelAll.subject}</h3></a>
+					-여행기간 : ${travelAll.startDate} ~ ${travelAll.endDate} </br>
+				 	-여행컨셉 : ${travelAll.concept} </br>
+				 	-코	   스 : ${travelAll.courseExpl}</br></br> --%>
+			</c:forEach>
+         </div>
+         <!--infoList end-->
 	</c:if>
 	<script>
 		function cancelCheck(){
@@ -44,7 +66,6 @@
 			}
 		}
 	</script>
-	
 	<script>
 		// 좋아요 한 여행 다중 삭제 하기
 		$(document).ready(function(){
@@ -59,10 +80,11 @@
 			
 		});
 	</script>
+	<%-- 
 	<h1>내가 좋아요한 여행</h1>
 	<c:if test="${empty lsharedList}">
 			좋아요 한 여행이 존재 하지 않습니다.
-		</c:if>
+	</c:if>
 	<c:if test="${!empty lsharedList}">
 		<form action="/travelMaker/shared/sharedLikedCancel.tm" name="cancelLiked" method="post" onsubmit="return cancelCheck()" >
 			<input type="submit" value="취소">
@@ -76,7 +98,7 @@
 			</c:forEach>
 		</form>
 	</c:if>
-
+	--%>
 </div>
 <!-- //wrapAll end -->
 
