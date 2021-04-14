@@ -11,6 +11,7 @@
 				history.go(-1)
 			</script>
 		</c:if>
+		
 	<div class="travelPWrap">
 		<div class="travelWrap">
 			<div class="travelHead">

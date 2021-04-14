@@ -13,7 +13,7 @@
 	<c:if test="${sessionScope.memId==null}">
 		<script>
 			alert("자세한 정보를 보시려면 로그인을 해주세요.");
-			history.go(-1);
+			location.href='/travelMaker/mem/loginForm.tm';
 		</script>
 		<script>
 		

@@ -10,7 +10,7 @@
 		<c:if test="${sessionScope.memId==null}">
 			<script>
 				alert("로그인 후에 이용 가능합니다");
-				location.href='/travelMaker/mem/index.tm';
+				location.href='/travelMaker/mem/loginForm.tm';
 			</script>
 		</c:if>
 		
