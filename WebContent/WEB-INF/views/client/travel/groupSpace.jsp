@@ -221,7 +221,11 @@
 							</tr>
 							<c:forEach var="req" items="${awaiters}">
 								<tr>
-									<td>${req.id}</td>
+									<td>
+										<div class="clickMenu">
+											<input type="button" class="clickId" idx="${req.id}" value="${req.id}"/>
+										</div>
+									</td>
 									<td>
 										<c:if test="${req.reqType==0}">일반</c:if>
 										<c:if test="${req.reqType==1}">가이드</c:if>
