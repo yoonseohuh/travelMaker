@@ -296,7 +296,7 @@ public class TravelServiceImpl implements TravelService{
 	}
 	
 	
-	//참여중인 멤버들 리퀘스트 가져옴
+	//참여중인 멤버들 리퀘스트 목록에 담음
 	@Override
 	public List memListFin(int gNo)throws Exception {
 		List list = getMembers(gNo);
@@ -307,9 +307,16 @@ public class TravelServiceImpl implements TravelService{
 				listTwo.add(list.get(i));
 			}
 		}
+		//참여중인멤버들
+		
+		GroupSpaceDTO dto = groupSpaceDAO.getContent(gNo);
 		for(int i =0; i <listTwo.size(); i++) {
-			memListFin = groupRequestDAO.getRequests(((GroupMemberDTO)listTwo.get(i)).getgNo());
+			if(!((GroupMemberDTO)listTwo.get(i)).getId().equals(dto.getId())) {   //아이디가 개설자랑 같으면 목록에 안넣을꺼임 )
+				System.out.println(" 담긴다 그룹번호 : " + ((GroupMemberDTO)listTwo.get(i)).getgNo() + "아뒤 출력" +  ((GroupMemberDTO)listTwo.get(i)).getId());
+				memListFin.add(groupRequestDAO.getMemRequests(((GroupMemberDTO)listTwo.get(i)).getgNo(), ((GroupMemberDTO)listTwo.get(i)).getId()));
+			}
 		}
+		
 		return memListFin;
 	}
 	
@@ -584,4 +591,12 @@ public class TravelServiceImpl implements TravelService{
 		groupSpaceDAO.updateShared(gNo,shared);
 		System.out.println("서비스 나옴 ");
 	}
+	
+	//일정 개수 카운트
+	@Override
+	public int scheCnt(int gNo) {
+		int scheCnt = scheduleDAO.scheCnt(gNo);
+		return scheCnt;
+	}
+
 }

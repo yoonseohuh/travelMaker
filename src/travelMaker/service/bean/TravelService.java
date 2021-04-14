@@ -112,5 +112,7 @@ public interface TravelService {
 	public List memListFin(int gNo)throws Exception;
 	//참여중인 멤버들 리퀘스트 가져옴
 	
+	//일정 개수 카운트
+	public int scheCnt(int gNo);
 	
 }

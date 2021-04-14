@@ -28,6 +28,20 @@ public class GroupRequestDAOImpl implements GroupRequestDAO {
 		return list;
 	}
 	
+	
+	//참여중인 멤버의 그룹리퀘스트 가져오기
+	public GroupRequestDTO getMemRequests(int gNo, String id) {
+		Map map = new HashMap();
+		map.put("gNo", gNo);
+		map.put("id", id);
+		
+		GroupRequestDTO memReq = sqlSession.selectOne("groupRequest.getMemRequests",map);
+		
+		return memReq;
+	}
+		
+	
+	
 	// jbr :  신청자들 pos 카운트
 	@Override
 	public int posCount(int gNo, int posNo) {

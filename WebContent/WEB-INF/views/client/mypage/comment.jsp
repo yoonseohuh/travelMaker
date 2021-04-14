@@ -101,7 +101,7 @@
 		<a style="cursor:pointer" id="tab1">조회</a> | <a style="cursor:pointer" id="tab2">작성</a> 
 	</c:if>
      
-     
+     <!-- 여행카운트는 있지만 코멘트 작성할 여행이없을떄 조회/작성탭 안보이게 하기위함 -->
 	<c:if test="${count > 0}">
 		<c:if test="${!empty cmtMyGroup}">
 			

@@ -17,7 +17,9 @@ public interface ScheduleDAO {
 	// 일정 삭제
 	public void deleteSchedule(int sNo) throws Exception;
 	
-	
+	//일정 개수 카운트
+	public int scheCnt(int gNo);
+
 
 
 }
