@@ -290,9 +290,28 @@ public class TravelServiceImpl implements TravelService{
 	//그룹의 멤버들 가져오기
 	@Override
 	public List getMembers(int gNo) throws Exception {
-		List memList = new ArrayList();
+		List memList = new ArrayList<GroupMemberDTO>();
 		memList = groupMemberDAO.getMembers(gNo);
 		return memList;
+	}
+	
+	//참여중인 멤버들 리퀘스트 가져옴
+	@Override
+	public List memListFin(int gNo)throws Exception {
+		List list = getMembers(gNo);
+		List listTwo = new ArrayList<GroupMemberDTO>();
+		List memListFin = new ArrayList<GroupRequestDTO>();
+		for(int i = 0; i < list.size(); i++) {
+			if(((GroupMemberDTO)list.get(i)).getStatus() == 1) {
+				listTwo.add(list.get(i));
+			}
+		}
+		
+		for(int i =0; i <listTwo.size(); i++) {
+			memListFin = groupRequestDAO.getRequests(((GroupMemberDTO)listTwo.get(i)).getgNo());
+		}
+		
+		return memListFin;
 	}
 	
 	//그룹에 들어온 신청 목록들 가져오기
@@ -302,6 +321,10 @@ public class TravelServiceImpl implements TravelService{
 		reqList = groupRequestDAO.getRequests(gNo);
 		return reqList;
 	}
+	
+	
+	
+	
 	
 	//신청 수락 및 거절 처리
 	@Override

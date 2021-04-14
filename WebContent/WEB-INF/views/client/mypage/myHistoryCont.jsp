@@ -82,10 +82,12 @@
 			</div>	
 			<!-- aContInfo end -->		
 			<div class="aInfoTit aMemTit">Member</div>			
-			<p class="aMemCnt">가이드  ${fn:length(gMem) - fn:length(posMem)}명 </p>			
+			<p class="aMemCnt">가이드</p>			
 			<div class="aMemPos">
 				<c:forEach var="posMem" items="${posMem}" >
-					${posMem.key} :${posMem.value}명 
+					<c:if test="${posMem.key ne '일반'}">
+						${posMem.key} :${posMem.value}명 
+					</c:if>
 				</c:forEach>
 			</div>
 			<p class="aMemCnt">	참여 ${fn:length(gMem)}명 </p>			

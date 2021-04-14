@@ -181,6 +181,9 @@ public class CommentServiceImpl implements CommentService {
       List gMem = userCmtDAO.getMem(gNo);
       return gMem;
    }
+   
+
+   
       
    // 코멘트 전용..그룹멤버들
    public List getCmtGMem(int gNo) {
