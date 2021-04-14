@@ -1,12 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
-<body>
-   
-	<jsp:include page="/WEB-INF/views/include/top.jsp" />
-	<!-- //top end -->
+<jsp:include page="/WEB-INF/views/include/top.jsp" />
+<!-- //top end -->
 		<script>
 			//포지션 선택 함수
 			function posDcsn(num,posNo){
@@ -55,7 +51,7 @@
 		<jsp:include page="/WEB-INF/views/include/myMenu.jsp" />
 		<!-- myMenu end -->
 		<!-- 여행 리스트 -->
-		<div class="myPageWrap">
+		<div class="myPageWrap" id="transcroller-body">
 			<h2 class="pageTit">${id}님의 마이페이지 홈입니다.<br/>나의 여행관련 정보를 확인해보세요!</h2>
 			<div class="travelList">
 				<c:if test="${!empty allList}">
@@ -67,29 +63,31 @@
         			<p class="HomeSubCont">현재 참여중인 여행이 없습니다.</p>
 				</c:if>
 				<c:forEach var="list" items="${allList}">
-				<ul>
-					<li>
-						<c:if test="${list.myStatus eq '대기중'}">
-						<a href="/travelMaker/travel/makingCont.tm?gNo=${list.gNo}">
-							<div>
-								<p class="date">${list.startDate}~${list.endDate}</p>
-								<p class="title">${list.subject}</p>
-								<p>${list.myStatus}</p>
-								<p class="position">${list.myPos}</p>
-							</div>
-						</a>
-						</c:if>
-						<c:if test="${list.myStatus eq '참여중'}">						
-						<a href="/travelMaker/travel/groupSpace.tm?gNo=${list.gNo}">
-							<div>
-								<p class="date">${list.startDate}~${list.endDate}</p>
-								<p class="title">${list.subject}</p>
-								<p>${list.myStatus}</p>
-								<p class="position">${list.myPos}</p>
-							</div>
-						</a>
-						</c:if>
-					</li>
+				<ul data-aos="fade-up" data-aos-duration="600">
+					<c:if test="${list.myStatus eq '대기중'}">
+						<li >
+							<a href="/travelMaker/travel/makingCont.tm?gNo=${list.gNo}">
+								<div>
+									<p class="date">${list.startDate}~${list.endDate}</p>
+									<p class="title">${list.subject}</p>
+									<p>${list.myStatus}</p>
+									<p class="position">${list.myPos}</p>
+								</div>
+							</a>
+						</li>
+					</c:if>
+					<c:if test="${list.myStatus eq '참여중'}">						
+						<li>	
+							<a href="/travelMaker/travel/groupSpace.tm?gNo=${list.gNo}">
+								<div>
+									<p class="date">${list.startDate}~${list.endDate}</p>
+									<p class="title">${list.subject}</p>
+									<p>${list.myStatus}</p>
+									<p class="position">${list.myPos}</p>
+								</div>
+							</a>
+						</li>
+					</c:if>
 	            </ul>
 				</c:forEach>
 			</div>
@@ -251,5 +249,3 @@
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	<!-- //footer end -->
    
-</body>
-</html>

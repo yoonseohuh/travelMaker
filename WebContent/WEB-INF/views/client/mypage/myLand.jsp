@@ -251,7 +251,7 @@
 						</ul>
 					</c:forEach>
 					<div class="btnMyWrap">
-						<button type="submit" class="btnC">랜드마크 삭제</button>
+						<button type="submit" class="btnC lastBtn">랜드마크 삭제</button>
 					</div>
 				</form>
 			</c:if>

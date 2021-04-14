@@ -48,11 +48,9 @@
 		</script>
 		<div class="aContWrap">
 			<div class="aContHead">
-				<div class="aContDate">
-					[${getGroup.startDate} ~ ${getGroup.endDate}]
-				</div>
+				<h2 class="pageTit">"${getGroup.subject}" 여행에 대한 이력입니다.</h2>
 				<div class="aContLine">
-					<p class="aContTit">${getGroup.subject}</p>
+					<p>[${getGroup.startDate} ~ ${getGroup.endDate}]</p>
 					<p class="aContWri">개설자: ${getGroup.id} </p>
 				</div>
 			</div>
@@ -66,7 +64,7 @@
 						${getGroup.courseExpl}
 					</div>	
 				</div>		
-				
+				<!--aContBox-->
 				<div class="aContBox">
 					<div class="aContLeft">
 						부가설명
@@ -80,7 +78,7 @@
 						</c:if>
 					</div>	
 				</div>	
-						
+				<!--aContBox-->
 				<div class="aContBox">
 					<div class="aContLeft">
 						일정
@@ -94,11 +92,9 @@
 								- ${scheList.sDate} : ${scheList.sCont}   </br>
 							</c:forEach>
 						</c:if>							
-						
-					
-						
 					</div>	
-				</div>			
+				</div>		
+				<!--aContBox-->	
 			</div>	
 			<!-- aContInfo end -->		
 			<div class="aInfoTit aMemTit">Member</div>		
@@ -108,9 +104,6 @@
 				<c:if test="${guideCnt != 0}">
 					<p class="aMemCnt">가이드 ${guideCnt}명</p>
 				</c:if>
-			
-			
-						
 			<div class="aMemPos">
 				<c:forEach var="posMem" items="${posMem}" >
 					<c:if test="${posMem.key ne '일반'}">
@@ -127,9 +120,7 @@
 			</div>			
 			<!-- aMemTit end -->			
 			<div class="aInfoTit aMemTit">Gallery</div>					
-
 			<ul>
-
 				<li>
 					<c:if test="${empty gList}">
 							게시된 사진이 없습니다. </br></br></br>
@@ -141,57 +132,53 @@
 					</c:if>
 				</li>
 			</ul>
-
-			
-			<div class="aInfoTit aMemTit">General Review</div>		
-			
-			
-			<c:if test="${memId == getGroup.id}">
-				<c:if test="${empty getGroup.genReview}">
-					<p class="aMemPos"> ${getGroup.id}님 ! 동행자들이 개설자의 후기를 기다리고있어요!</p>
-				 	<button id="tab1" class="comBtn btnRight">총평작성</button>
-				 	<form action="/travelMaker/travel/genReviewPro.tm" id="cont2" name="reply" onsubmit="return check()" method="get">
-				 		<input type="hidden" name="id" value="${getGroup.id}" />
-				 		<input type="hidden" name="gNo" value="${getGroup.gNo}" />
-				 		<input type="hidden" name="from" value="myHistory" />
-				 		
-						<textarea cols="100" rows="10" name="genReview" placeholder="개설자 ${getGroup.id}님의 여행총평을 남겨주세요!" ></textarea>
-						<button type="submit" class="comBtn btnRight">작성</button>
-					</form>
-					<button class="comBtn btnRight"  id="cancel">취소</button>
-				</c:if>
-				<!-- -> 세션아이디랑 개설자랑 아이디 똑같을때 -->
-				<c:if test="${!empty getGroup.genReview}">
-					 ${getGroup.genReview}   
-				</c:if>
-			</c:if>
-			
-			<c:if test="${memId != getGroup.id}">
-				<c:if test="${empty getGroup.genReview}">
-					<p class="aMemPos"> 개설자의 총평이 아직 작성되지 않았습니다!</p> <!--세션아이디랑 개설자랑 다를떄 --> 
-				</c:if>
-				<c:if test="${!empty getGroup.genReview}">
-					 ${getGroup.genReview} 
-					<c:forEach var="reviewList" items="${reviewList}">
-								<br/>&nbsp; &nbsp; >>  ${reviewList.nickname}님 :  ${reviewList.genReply}
-					</c:forEach>
-					<c:if test="${result == 1 }">
-						<button id="tab1" class="comBtn btnRight">답글달기</button>
+			<div class="lastWrap">
+				<div class="aInfoTit aMemTit">General Review</div>		
+				<c:if test="${memId == getGroup.id}">
+					<c:if test="${empty getGroup.genReview}">
+						<p class="aMemPos"> ${getGroup.id}님 ! 동행자들이 개설자의 후기를 기다리고있어요!</p>
+					 	<button id="tab1" class="comBtn btnRight">총평작성</button>
+					 	<form action="/travelMaker/travel/genReviewPro.tm" id="cont2" name="reply" onsubmit="return check()" method="get">
+					 		<input type="hidden" name="id" value="${getGroup.id}" />
+					 		<input type="hidden" name="gNo" value="${getGroup.gNo}" />
+					 		<input type="hidden" name="from" value="myHistory" />
+					 		
+							<textarea cols="100" rows="10" name="genReview" placeholder="개설자 ${getGroup.id}님의 여행총평을 남겨주세요!" ></textarea>
+							<button type="submit" class="comBtn btnRight">작성</button>
+						</form>
+						<button class="comBtn btnRight"  id="cancel">취소</button>
 					</c:if>
-				</c:if>	
-					 
-				 	<form action="/travelMaker/travel/genReplyPro.tm" id="cont2" name="reply" method="get">
-				 		<input type="hidden" name="id" value="${memId}" />
-				 		<input type="hidden" name="gNo" value="${getGroup.gNo}" />
-				 		<input type="hidden" name="from" value="myHistory" />
-				 		
-						<textarea cols="100" rows="10" name="genReply" onsubmit="return check()" placeholder="총평에 댓글로 소감을 남겨주세요!" ></textarea>
-						<button class="comBtn btnRight" type="submit">답글작성</button>
-					</form>
-					<button class="comBtn btnRight" id="cancel">취소</button>
-					 
-			</c:if>
-			
+					<!-- -> 세션아이디랑 개설자랑 아이디 똑같을때 -->
+					<c:if test="${!empty getGroup.genReview}">
+						 ${getGroup.genReview}   
+					</c:if>
+				</c:if>
+				
+				<c:if test="${memId != getGroup.id}">
+					<c:if test="${empty getGroup.genReview}">
+						<p class="aMemPos"> 개설자의 총평이 아직 작성되지 않았습니다!</p> <!--세션아이디랑 개설자랑 다를떄 --> 
+					</c:if>
+					<c:if test="${!empty getGroup.genReview}">
+						 ${getGroup.genReview} 
+						<c:forEach var="reviewList" items="${reviewList}">
+									<br/>&nbsp; &nbsp; >>  ${reviewList.nickname}님 :  ${reviewList.genReply}
+						</c:forEach>
+						<c:if test="${result == 1 }">
+							<button id="tab1" class="comBtn btnRight">답글달기</button>
+						</c:if>
+					</c:if>	
+						 
+					 	<form action="/travelMaker/travel/genReplyPro.tm" id="cont2" name="reply" method="get">
+					 		<input type="hidden" name="id" value="${memId}" />
+					 		<input type="hidden" name="gNo" value="${getGroup.gNo}" />
+					 		<input type="hidden" name="from" value="myHistory" />
+					 		
+							<textarea cols="100" rows="10" name="genReply" onsubmit="return check()" placeholder="총평에 댓글로 소감을 남겨주세요!" ></textarea>
+							<button class="comBtn btnRight" type="submit">답글작성</button>
+						</form>
+						<button class="comBtn btnRight" id="cancel">취소</button>
+				</c:if>
+			</div>
 			<button onclick="window.location='/travelMaker/my/myHistory.tm'" class="comBtn btnRight">back</button>
 		</div>
 		<!-- aContWrap end -->

@@ -320,6 +320,7 @@ public class MypageController {
 		model.addAttribute("posMem", posMem);
 		model.addAttribute("gMem", gMem);
 		model.addAttribute("result", result);
+		model.addAttribute("id", id);
 		
 		
 		

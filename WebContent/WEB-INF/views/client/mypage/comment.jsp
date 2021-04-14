@@ -36,10 +36,14 @@
            $('#tab1').click(function(){
              $('#cont2').hide();
              $('#cont1').fadeIn();
+             $('.commentTab>li>#tab1').addClass('active');
+             $('.commentTab>li>#tab2').removeClass('active');
           });
           $('#tab2').click(function(){
              $('#cont1').hide();
              $('#cont2').fadeIn();
+             $('.commentTab>li>#tab2').addClass('active');
+             $('.commentTab>li>#tab1').removeClass('active');
           });
        });
       
@@ -105,12 +109,12 @@
      
      <c:if test="${!empty cmtMyGroup}">
      	<ul class="commentTab">
-                <li>
-                   <a style="cursor:pointer" id="tab1" class="active">코멘트 조회</a> 
-                </li>
-                <li>
-                    <a style="cursor:pointer" id="tab2">코멘트 작성</a>
-                </li>
+            <li>
+               <a style="cursor:pointer" id="tab1" class="active">코멘트 조회</a> 
+            </li>
+            <li>
+                <a style="cursor:pointer" id="tab2">코멘트 작성</a>
+            </li>
         </ul>
             <!--commentTab End-->
 	</c:if>
@@ -198,23 +202,22 @@
 	</div>
       <!-- //cont1 end  -->   
 	<div id="cont2">
-		<form action="/travelMaker/cmt/commentWritePro.tm" name="commentWrite" onsubmit="return check()" method="get">
+		<form action="/travelMaker/cmt/commentWritePro.tm" class="cWrite" name="commentWrite" onsubmit="return check()" method="get">
 			<input type="hidden" name="id" value="${sessionScope.memId}" />
 			<input type="hidden" name="result" value="1" />
-			여행목록 :
+			<!-- 여행목록 -->
  			<select name="groupNum" id="group" required >
 				<option value="">여행을 선택해주세요</option>
-	            <c:forEach var="cmtGroupList" items="${cmtGroupList}">
-	            <option value="${cmtGroupList.gNo}">${cmtGroupList.subject} ${cmtGroupList.gNo}</option>
-	            </c:forEach>
-			</select>&nbsp;
-         
-         동행자 :                      
+		            <c:forEach var="cmtGroupList" items="${cmtGroupList}">
+		            <option value="${cmtGroupList.gNo}">${cmtGroupList.subject} ${cmtGroupList.gNo}</option>
+		            </c:forEach>
+			</select>
+            <!-- 동행목록 -->                  
 			<select name="groupMem" id="groupMem" required>
 				<option>동행자를 선택해주세요</option>
-			</select> <br/>
+			</select> 
 			<textarea rows="10" cols="72" name="comment" ></textarea>
-			<input type="submit" value="작성하기" />
+			<button type="submit" class="btnY">작성하기</button>
 		</form>
 	</div>
 	<!-- //cont2 end  -->  
