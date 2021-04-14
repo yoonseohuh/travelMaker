@@ -437,13 +437,6 @@ public class TravelController {
 			travelService.updateShared(gNo, Integer.parseInt(shared));
 			int sharedResult = grpSpace.getShared();
 			model.addAttribute("sharedResult",sharedResult);
-		//	공개여부를 설정하는 시점에 참여자들의 travelCnt를 +1
-			for(int i=0;i<joinMem.size();i++) {
-				String member = joinMem.get(i).getId();
-				memberService.updateTravelCnt(member,1);
-			}
-		//	개설자의 travelCnt를 +1
-			memberService.updateTravelCnt(leader, 1);
 		}
 		
 		model.addAttribute("posName", posName);
@@ -662,8 +655,20 @@ public class TravelController {
 	
 	//개설자 총평작성
 	@RequestMapping("genReviewPro.tm")
-	public String genReviewPro(String id, String gNo, String genReview, Model model) {
+	public String genReviewPro(String id, String gNo, String genReview, Model model) throws Exception {
 		travelService.genReview(id, Integer.parseInt(gNo), genReview);
+		int gNoInt = Integer.parseInt(gNo);
+		GroupSpaceDTO space = travelService.getGroup(gNoInt);
+		String leader = space.getId();
+		
+	//	총평 작성하는 시점에 참여자들의 travelCnt를 +1
+		List<GroupMemberDTO> list = travelService.getMembers(gNoInt);
+		for(int i=0;i<list.size();i++) {
+			int status = travelService.getMemStatus(gNoInt, list.get(i).getId());
+			if(status==1) {
+				memberService.updateTravelCnt(list.get(i).getId(), 1);
+			}
+		}
 		
 		model.addAttribute("gNo", Integer.parseInt(gNo));
 		return "/client/travel/genReviewPro";
