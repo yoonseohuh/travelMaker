@@ -327,6 +327,16 @@ public class MemberController {
 		return "client/userpage/userPage";
 	}
 	
+	@RequestMapping("userHistory.tm")
+	public String userHistory(String userId, Model model) {
+		model.addAttribute("userId",userId);
+		return "client/userpage/userHistory";
+	}
 	
+	@RequestMapping("userLand.tm")
+	public String userLand(String userId, Model model) {
+		model.addAttribute("userId",userId);
+		return "client/userpage/userLand";
+	}
 	
 }
