@@ -5,7 +5,7 @@
 /*basic*/
 .c-red {color:#ff0000;}
 
-.titWrap .tit1 {color:#444; font-family: 'Noto Serif TC', serif; font-size: 95px; font-weight: 500;}
+.titWrap .tit1 {color:#444; font-family: 'Play', serif; font-size: 115px; font-weight: 600;}
 .titWrap .tit2 {line-height: 48px; letter-spacing: -1.1px; font-size: 37px; font-weight: 500;}
 .titWrap .txt {line-height: 26px; letter-spacing: -0.4px; font-size: 17px; font-weight: 300; margin: 15px 0 40px;}
 
@@ -19,7 +19,24 @@
 .btnWrap .txt {text-align: center; font-size:17px; font-weight: 500; margin: 0 0 20px;}
 
 /*mainVisual*/
-.mainVisual {width: 100%; height: calc(85vh + 80px); background: url(../images/mv1.jpg)no-repeat center; background-size: 100% auto;}
+.mainVisual {width: 100%; height: calc(85vh + 80px); background: url(../images/mv1.jpg)no-repeat center; background-size: 100% auto; position:relative;}
+.mainVisual .mvCover {display:none; width: 100%; height: 100%; background: rgba(0,0,0,.75); position:absolute;}
+.mainVisual .titWrap {position:absolute;top: 30%;left: 50%; transform: translateX(-50%);}
+.mainVisual .titWrap .tit1 {display: none; text-align: center; color:#fff;}
+.mainVisual .titWrap .tit2 {display: none; text-align: center; color:#fff; font-size: 25px; font-weight:100; margin: 30px 0 0;}
+.mainVisual .scDown {position:absolute;bottom: 0;left: 50%; transform: translateX(-50%);}
+.mainVisual .scDown .txt {text-align: center; color:#fff;}
+.mainVisual .scDown .move {overflow:hidden; width:3px; height:200px; background:rgba(255,255,255,.3); margin: 30px auto 0; position:relative;}
+.mainVisual .scDown .move .bar {width:3px; height:100px; background:#fff; animation: scd 2s linear infinite; position:absolute;top:0;}
+@-webkit-keyframes scd {
+    0% {
+        top: -100px;
+    }
+    100% {
+        top: 330px;
+    }
+}
+
 
 /*rankM*/
 .rankM {overflow: hidden; position: relative;}
