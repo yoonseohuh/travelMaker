@@ -3,12 +3,14 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 
-<jsp:include page="/WEB-INF/views/include/header.jsp" />
+	<jsp:include page="/WEB-INF/views/include/header.jsp" />
    
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
 	<!-- //top end -->
-	
-	<div class="wrapAll client">
+		
+	<jsp:include page="/WEB-INF/views/include/myMenu.jsp" />
+	<!-- myMenu end -->
+	<div class="myPageWrap">
 	
 		<c:if test="${sessionScope.memId==null}">
 			<script>
@@ -44,9 +46,6 @@
 				}
 			}
 		</script>
-	
-		<jsp:include page="/WEB-INF/views/include/myMenu.jsp" />
-		<!-- myMenu end -->
 		<div class="aContWrap">
 			<div class="aContHead">
 				<div class="aContDate">
