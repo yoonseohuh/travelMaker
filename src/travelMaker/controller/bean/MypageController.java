@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -63,11 +64,14 @@ public class MypageController {
 		
 	//	모든 여행 가져와서 상태가 참여 중(1)인 것만 담음
 		List<GroupSpaceDTO> jList = travelService.getMyGroups(id,1);
-		for(int i=0;i<jList.size();i++) {
-			if(jList.get(i).getStatus()>=3) {	//끝났거나 모집취소한 건 제외
-				jList.remove(i);
+		
+		Iterator<GroupSpaceDTO> iter = jList.iterator();
+		while(iter.hasNext()) {
+			if(iter.next().getStatus()>=3) {	//끝났거나 모집취소한 건 제외
+				iter.remove();
 			}
 		}
+		
 		for(int i=0;i<jList.size();i++) {
 			int gNo = jList.get(i).getgNo();
 			Map map = new HashMap();
@@ -97,11 +101,14 @@ public class MypageController {
 		
 	//	모든 여행 가져와서 상태가 대기 중(0)인 것만 담음
 		List<GroupSpaceDTO> wList = travelService.getMyGroups(id,0);
-		for(int i=0;i<wList.size();i++) {
-			if(wList.get(i).getStatus()!=0) {	//아직 모집 중인 것만 담아야 하므로
-				wList.remove(i);
+		
+		Iterator<GroupSpaceDTO> iter2 = wList.iterator();
+		while(iter2.hasNext()) {
+			if(iter2.next().getStatus()!=0) {	//끝났거나 모집취소한 건 제외
+				iter2.remove();
 			}
 		}
+		
 		for(int i=0;i<wList.size();i++) {
 			int gNo = wList.get(i).getgNo();
 			Map map = new HashMap();
@@ -179,7 +186,14 @@ public class MypageController {
 		int status = 1;
 		
 		//참여중인 여행 다 가져오기
-		List travelAll = travelService.getMyGroups(id, status);
+		List<GroupSpaceDTO> travels = travelService.getMyGroups(id, status);
+		//이력이므로 끝난 것만 보내기
+		List<GroupSpaceDTO> travelAll = new ArrayList<GroupSpaceDTO>();
+		for(int i=0 ; i<travels.size() ; i++) {
+			if(travels.get(i).getStatus()==4) {
+				travelAll.add(travels.get(i));
+			}
+		}
 		model.addAttribute("travelAll", travelAll);
 		
 		
@@ -221,7 +235,9 @@ public class MypageController {
 		List grpReq = travelService.getRequests(Integer.parseInt(gNo));
 		List gMem = travelService.getMembers(Integer.parseInt(gNo));
 				
-		
+		//일정 개수 카운트
+		int scheCnt = travelService.scheCnt(Integer.parseInt(gNo));
+		model.addAttribute("scheCnt", scheCnt);
 		
 		
 		//status = 1 인 멤버들의 그룹리퀘스트dto
@@ -249,27 +265,52 @@ public class MypageController {
 		Map map = new HashMap();
 		Map posMem = new HashMap(); 
 		
-		for(int i = 0; i < posList.size(); i++) { 
-			System.out.println("이프문위");
-			System.out.println("포스리스트" + posList);
-			if(posList.get(i) == -1) {   //포지션에 번호가 -1 이면
-				System.out.println("이프문아래");
-				int nomalCnt = travelService.posCount(Integer.parseInt(gNo),posList.get(i));
-				posMem.put("일반",nomalCnt);
-				model.addAttribute("nomalCnt",nomalCnt);
-			}else { //그게아니면
-				System.out.println("else안");
-				SmallPosDTO dto = travelService.getPosInfo(posList.get(i));
-				int posCnt = travelService.posCount(Integer.parseInt(gNo),posList.get(i));
-				posMem.put(dto.getPosName(),posCnt);
+		
+		
+		
+		System.out.println("포스리스트 상태는요?" + posList);
+		if(posList != null) {
+			for(int i = 0; i < posList.size(); i++) { 
+				System.out.println("이프문위");
+				System.out.println("포스리스트" + posList);
+				if(posList.get(i) == -1) {   //포지션에 번호가 -1 이면
+					System.out.println("이프문아래");
+					int nomalCnt = travelService.posCount(Integer.parseInt(gNo),posList.get(i));
+					posMem.put("일반",nomalCnt);
+					model.addAttribute("nomalCnt",nomalCnt);
+				}else { //그게아니면
+					System.out.println("else안");
+					SmallPosDTO dto = travelService.getPosInfo(posList.get(i));
+					int posCnt = travelService.posCount(Integer.parseInt(gNo),posList.get(i));
+					posMem.put(dto.getPosName(),posCnt);
+				}
 			}
+		}else {
+			System.out.println("널이다쓰글");
+			posMem.put("null",99);
 		}
-
+			System.out.println("포스멤출력" + posMem.get(null));
 		
 		//갤러리
 		List gList = travelService.getGroupImgs(Integer.parseInt(gNo));
 		System.out.println("갤러리 사진있니?" +  gList);
 
+		
+		//가이드 수 카운트   
+		List memListFin = new ArrayList<GroupRequestDTO>();
+		int guideCnt = 0;
+		
+		memListFin = travelService.memListFin(Integer.parseInt(gNo));
+		System.out.println("멤리스트핀 출력" + memListFin);
+		for(int i=0; i<memListFin.size(); i++) {
+			if(((GroupRequestDTO)memListFin.get(i)).getReqType() == 1) {
+				guideCnt = guideCnt + 1; 
+			}
+		}
+		System.out.println("가이드카운트" + guideCnt);
+		
+		model.addAttribute("guideCnt",guideCnt);
+		model.addAttribute("memListFin",memListFin);
 		
 		
 		model.addAttribute("reviewList",reviewList);

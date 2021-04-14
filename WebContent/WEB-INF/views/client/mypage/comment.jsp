@@ -9,14 +9,16 @@
 	<jsp:include page="/WEB-INF/views/include/myMenu.jsp" />
 	<!-- myMenu end -->
    
+
 	<div class="myPageWrap">
+
 		<c:if test="${sessionScope.memId==null}">
 			<script>
-	            alert("로그인 후에 이용 가능합니다");
-	            history.go(-1);
+				alert("로그인 후에 접근 가능합니다");
+				location.href='/travelMaker/mem/loginForm.tm';
 			</script>
 		</c:if>
-   
+
       
 	<script>
       $(document).ready(function(){
@@ -113,7 +115,9 @@
             <!--commentTab End-->
 	</c:if>
      
-   
+
+     <!-- 여행카운트는 있지만 코멘트 작성할 여행이없을떄 조회/작성탭 안보이게 하기위함 -->
+
 	<c:if test="${count > 0}">
 		<c:if test="${!empty cmtMyGroup}">
 			
@@ -210,7 +214,7 @@
 				<option>동행자를 선택해주세요</option>
 			</select> <br/>
 			<textarea rows="10" cols="72" name="comment" ></textarea>
-			<input type="submit" value="버튼" />
+			<input type="submit" value="작성하기" />
 		</form>
 	</div>
 	<!-- //cont2 end  -->  

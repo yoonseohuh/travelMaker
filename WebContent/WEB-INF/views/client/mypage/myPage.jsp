@@ -28,11 +28,32 @@
 					}
 				});
 			}
+			
+			//포지션 목록 토글
+			$(document).ready(function(){
+		        $('#cont2').hide();
+		        $('#cancel').hide();
+		        $('#tab1').click(function(){
+		    		$('#cont2').show();
+		    		$('#cancel').show();
+		    		$('#tab1').hide();
+		    	});    
+		        $('#cancel').click(function(){
+		    		$('#cont2').hide();
+		    		 $('#cancel').hide();
+		    		$('#tab1').show();
+		    	});    
+		    });
+			
+			
+			  
+			  
+			  
 		</script>
 		<c:if test="${sessionScope.memId==null}">
 			<script>
 				alert("로그인 후에 접근 가능합니다");
-				history.go(-1);
+				location.href='/travelMaker/mem/loginForm.tm';
 			</script>
 		</c:if>
 		<div class="myContainer">
@@ -141,15 +162,20 @@
 									<ul class="posList">
 				                        <li>
 				                            <strong>당신의 첫 번째 포지션을 선택해주세요!</strong>
+				                 			<a style="cursor:pointer" id="tab1">첫 번째 포지션 선택</a> <a style="cursor:pointer" id="cancel">접기</a> 
 				                        </li>
 				                    </ul>
+				        
+				                    <div id="cont2">
 									<c:forEach var="pos" items="${posList}">
 									<ul>
 										<li>
-										${pos.posName}: "${pos.posExpl}" <input type="button" value="선택" onclick="posDcsn(1,${pos.posNo})"/>
+											${pos.posName}:"${pos.posExpl}" <input type="button" value="선택" onclick="posDcsn(1,${pos.posNo})"/>
 										</li>
 									</ul>
 									</c:forEach>
+									</div>
+									
 								</div>
 							</c:if>
 							<!-- 첫번째 포지션 결정 후 -->
@@ -169,15 +195,18 @@
 									<ul class="posList">
 				                        <li>
 				                            <strong>당신의 두 번째 포지션을 선택해주세요!</strong>
+				                            <a style="cursor:pointer" id="tab1">포지션 선택</a> <a style="cursor:pointer" id="cancel">접기</a>
 				                        </li>
 				                    </ul>
-									<c:forEach var="pos" items="${posList}">
-									<ul>
-										<li>
-										${pos.posName}: "${pos.posExpl}" <input type="button" value="선택" onclick="posDcsn(2,${pos.posNo})"/>
-										</li>
-									</ul>
-									</c:forEach>
+				                    <div id="cont2">
+										<c:forEach var="pos" items="${posList}">
+										<ul>
+											<li>
+											${pos.posName}: "${pos.posExpl}" <input type="button" value="선택" onclick="posDcsn(2,${pos.posNo})"/>
+											</li>
+										</ul>
+										</c:forEach>
+									</div>
 								</div>
 							</c:if>
 							<!-- 두번째 포지션 결정 후 -->

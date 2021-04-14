@@ -290,10 +290,36 @@ public class TravelServiceImpl implements TravelService{
 	//그룹의 멤버들 가져오기
 	@Override
 	public List getMembers(int gNo) throws Exception {
-		List memList = new ArrayList();
+		List memList = new ArrayList<GroupMemberDTO>();
 		memList = groupMemberDAO.getMembers(gNo);
 		return memList;
 	}
+	
+	
+	//참여중인 멤버들 리퀘스트 목록에 담음
+	@Override
+	public List memListFin(int gNo)throws Exception {
+		List list = getMembers(gNo);
+		List listTwo = new ArrayList<GroupMemberDTO>();
+		List memListFin = new ArrayList<GroupRequestDTO>();
+		for(int i = 0; i < list.size(); i++) {
+			if(((GroupMemberDTO)list.get(i)).getStatus() == 1) {
+				listTwo.add(list.get(i));
+			}
+		}
+		//참여중인멤버들
+		
+		GroupSpaceDTO dto = groupSpaceDAO.getContent(gNo);
+		for(int i =0; i <listTwo.size(); i++) {
+			if(!((GroupMemberDTO)listTwo.get(i)).getId().equals(dto.getId())) {   //아이디가 개설자랑 같으면 목록에 안넣을꺼임 )
+				System.out.println(" 담긴다 그룹번호 : " + ((GroupMemberDTO)listTwo.get(i)).getgNo() + "아뒤 출력" +  ((GroupMemberDTO)listTwo.get(i)).getId());
+				memListFin.add(groupRequestDAO.getMemRequests(((GroupMemberDTO)listTwo.get(i)).getgNo(), ((GroupMemberDTO)listTwo.get(i)).getId()));
+			}
+		}
+		
+		return memListFin;
+	}
+	
 	
 	//그룹에 들어온 신청 목록들 가져오기
 	@Override
@@ -302,6 +328,10 @@ public class TravelServiceImpl implements TravelService{
 		reqList = groupRequestDAO.getRequests(gNo);
 		return reqList;
 	}
+	
+	
+	
+	
 	
 	//신청 수락 및 거절 처리
 	@Override
@@ -561,4 +591,12 @@ public class TravelServiceImpl implements TravelService{
 		groupSpaceDAO.updateShared(gNo,shared);
 		System.out.println("서비스 나옴 ");
 	}
+	
+	//일정 개수 카운트
+	@Override
+	public int scheCnt(int gNo) {
+		int scheCnt = scheduleDAO.scheCnt(gNo);
+		return scheCnt;
+	}
+
 }

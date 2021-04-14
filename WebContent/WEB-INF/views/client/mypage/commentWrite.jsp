@@ -13,6 +13,13 @@
 	
 	<div class="wrapAll">
 	
+	<c:if test="${sessionScope.memId==null}">
+		<script>
+			alert("로그인 후에 접근 가능합니다");
+			location.href='/travelMaker/mem/loginForm.tm';
+		</script>
+	</c:if>
+	
 	<h4>${fin}</h4>
 		<select id="group">
 			<option>group</option>

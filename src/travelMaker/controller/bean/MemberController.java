@@ -1,5 +1,6 @@
 package travelMaker.controller.bean;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,11 +16,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import travelMaker.model.dto.GroupSpaceDTO;
+import travelMaker.model.dto.LandmarkBoardDTO;
+import travelMaker.model.dto.LandmarkLikedDTO;
 import travelMaker.model.dto.LargePosDTO;
 import travelMaker.model.dto.SmallPosDTO;
 import travelMaker.model.dto.TmUserDTO;
 import travelMaker.model.dto.UserRkDTO;
+import travelMaker.service.bean.CommentService;
+import travelMaker.service.bean.LandmarkService;
 import travelMaker.service.bean.MemberService;
+import travelMaker.service.bean.TravelService;
 
 @Controller
 @RequestMapping("/mem/")
@@ -27,6 +34,12 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memService = null;
+	@Autowired
+	private TravelService travelService = null;
+	@Autowired
+	private LandmarkService landmarkService = null;
+	@Autowired
+	private CommentService commentService = null;
 	
 	@RequestMapping("index.tm")
 	public String index(Model model) {
@@ -316,6 +329,43 @@ public class MemberController {
 		List<SmallPosDTO> sPos = memService.getAllPos();
 		model.addAttribute("sPos",sPos);
 		return "client/manual/positionDetail";
+	}
+
+	/* 	타 유저 이력 페이지 	*/
+	
+	//회원의 여행이력
+	@RequestMapping("userHistory.tm")
+	public String userHistory(String userId, Model model) throws Exception {
+		//참여중인 여행 다 가져오기
+		List<GroupSpaceDTO> travels = travelService.getMyGroups(userId, 1);
+		//이력이므로 끝난 것만 보내기
+		List<GroupSpaceDTO> travelAll = new ArrayList<GroupSpaceDTO>();
+		for(int i=0 ; i<travels.size() ; i++) {
+			if(travels.get(i).getStatus()==4) {
+				travelAll.add(travels.get(i));
+			}
+		}
+		model.addAttribute("travelAll", travelAll);
+		model.addAttribute("userId",userId);
+		return "client/userpage/userHistory";
+	}
+	
+	//회원의 코멘트
+	@RequestMapping("userComment.tm")
+	public String userInfo(String userId, Model model) {
+		
+		
+		model.addAttribute("userId",userId);
+		return "client/userpage/userComment";
+	}
+	
+	//회원이 작성한 랜드마크
+	@RequestMapping("userLand.tm")
+	public String userLand(String userId, Model model) throws Exception {
+		List writtenLand = landmarkService.myLand(userId);
+		model.addAttribute("userId",userId);
+		model.addAttribute("wLand",writtenLand);
+		return "client/userpage/userLand";
 	}
 	
 }

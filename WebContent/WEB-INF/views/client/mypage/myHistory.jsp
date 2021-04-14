@@ -12,8 +12,8 @@
 
 	<c:if test="${sessionScope.memId==null}">
 		<script>
-            alert("로그인 후에 이용 가능합니다");
-            history.go(-1);
+			alert("로그인 후에 접근 가능합니다");
+			location.href='/travelMaker/mem/loginForm.tm';
 		</script>
 	</c:if>
 
@@ -26,6 +26,7 @@
 		<button onclick="window.location='/travelMaker/travel/makingList.tm'">여행떠나기</button>
 	</c:if>
 	<c:if test="${!empty travelAll}">
+
 		<div class="infoList">
 			<c:forEach var="travelAll" items="${travelAll}" varStatus="status">
 		             <ul>

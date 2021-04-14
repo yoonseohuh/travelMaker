@@ -117,6 +117,15 @@ public class LandmarkController {
 		return myLand;
 	}
 	
+	//유저가 작성한 랜드마크
+	@ResponseBody
+	@RequestMapping("userWrittenLand.tm")
+	public List userWrittenLand(String userId) throws Exception {
+		System.out.println("userId 넘어왔냐고 "+userId);
+		List userLand = landmarkService.myLand(userId);
+		return userLand;
+	}
+	
 	//내가 좋아요한 랜드마크
 	@ResponseBody
 	@RequestMapping("myLikedLand.tm")

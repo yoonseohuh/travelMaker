@@ -20,6 +20,14 @@
 		}
 	}
 	</script>
+	
+	<c:if test="${sessionScope.memId==null}">
+		<script>
+			alert("로그인 후에 접근 가능합니다");
+			location.href='/travelMaker/mem/loginForm.tm';
+		</script>
+	</c:if>
+	
 	<div class="travelPWrap">
 				<div class="travelWrap">
 					<div class="travelHead">
