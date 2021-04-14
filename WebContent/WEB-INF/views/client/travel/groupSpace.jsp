@@ -299,6 +299,7 @@
 											<c:if test="${grpSpace.shared == 0}">   <!-- 그룹스페이스 쉐어드가 0이면 공개여부 보여줌 -->
 												<form action="/travelMaker/travel/groupSpace.tm" name="openOrbOpen" method="get">
 													<input type="hidden" name="gNo" value="${grpSpace.gNo}" />
+													
 													<br/> 공개여부 : 
 													<input type="radio" name="shared" value="1" />공개
 													<input type="radio" name="shared" value="2" />비공개

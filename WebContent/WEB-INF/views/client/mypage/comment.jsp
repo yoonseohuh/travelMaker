@@ -186,7 +186,7 @@
 				<option>동행자를 선택해주세요</option>
 			</select> <br/>
 			<textarea rows="10" cols="72" name="comment" ></textarea>
-			<input type="submit" value="버튼" />
+			<input type="submit" value="작성하기" />
 		</form>
 	</div>
 	<!-- //cont2 end  -->  

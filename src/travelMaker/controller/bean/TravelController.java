@@ -365,9 +365,11 @@ public class TravelController {
 					}
 				}
 			}
-		
-		
-		
+		List memListFin = new ArrayList<GroupRequestDTO>();
+		memListFin = travelService.memListFin(gNo);
+		model.addAttribute("memListFin",memListFin);
+			
+			
 		//jbr여기까지...
 		
 		//시작일, 종료일, 마감일 DATE 타입으로 변환해서 보내주기
