@@ -84,13 +84,28 @@
 				</c:if>
 				<c:forEach var="list" items="${allList}">
 				<ul>
-	               <li>
-	                   <div>
-	                       <p class="date">${list.startDate}~${list.endDate}</p>
-	                       <p class="title">${list.subject}</p>
-	                       <p class="position">${list.myPos}</p>
-	                   </div>
-	               </li>
+					<li>
+						<c:if test="${list.myStatus eq '대기중'}">
+						<a href="/travelMaker/travel/makingCont.tm?gNo=${list.gNo}">
+							<div>
+								<p class="date">${list.startDate}~${list.endDate}</p>
+								<p class="title">${list.subject}</p>
+								<p>${list.myStatus}</p>
+								<p class="position">${list.myPos}</p>
+							</div>
+						</a>
+						</c:if>
+						<c:if test="${list.myStatus eq '참여중'}">						
+						<a href="/travelMaker/travel/groupSpace.tm?gNo=${list.gNo}">
+							<div>
+								<p class="date">${list.startDate}~${list.endDate}</p>
+								<p class="title">${list.subject}</p>
+								<p>${list.myStatus}</p>
+								<p class="position">${list.myPos}</p>
+							</div>
+						</a>
+						</c:if>
+					</li>
 	            </ul>
 				</c:forEach>
 			</div>
