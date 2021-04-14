@@ -135,8 +135,8 @@ table.tm input {width: 80%; font-size:17px;}
 #myMenu {overflow:hidden; width:100%; padding-top:150px; width:1180px; margin:auto;}
 #myMenu li {float: left; width: auto; text-align: center; line-height: 72px; height: 72px; padding-bottom: 13px;}
 #myMenu li a {color: #aaa;font-weight: 600; font-size: 24px; line-height: 36px;  margin-right: 40px;  position: relative; }
-#myMenu li a.active{color: #000;}
-#myMenu li a.active::after{content:'';display: block;width:100%;height:3px;position: absolute;bottom:-13px;background: #000;left:0;}
+#myMenu .menu li.active a {color: #000;}
+#myMenu .menu li.active a::after{content:'';display: block;width:100%;height:3px;position: absolute;bottom:-13px;background: #000;left:0;}
 
 /*adminMenu*/
 #adminMenuWrap {width: 250px; height: 100vh; background: #5543FF; position: fixed;top: 0;left: 0; z-index:999;}

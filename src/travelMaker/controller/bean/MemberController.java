@@ -1,5 +1,6 @@
 package travelMaker.controller.bean;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -352,7 +355,74 @@ public class MemberController {
 	
 	//회원의 코멘트
 	@RequestMapping("userComment.tm")
-	public String userInfo(String userId, Model model) {
+	public String userInfo(String userId, Model model)throws SQLException {
+		
+	      
+	      //코멘트에서 사용할 여행목록(코멘트 다 사라지면 목록에서 사라짐)
+	      List cmtGroupList = commentService.cmtGroup(userId);
+	      
+	      //사용자가 여행한 모든 여행그룹인데 사용자 혼자여행인건 뺀 여행그룹 (상태4)
+	      List<GroupSpaceDTO> cmtMyGroup = commentService.cmtMyGroup(userId);
+	      //for(int i = 0; i<cmtMyGroup.size(); i++) {
+	      // System.out.println("컨트롤러에서 dtoList" + ((GroupSpaceDTO)cmtMyGroup.get(i)).getSubject());
+	      //}
+	      
+	      //그룹멤버들dto로 가져옴
+	      List fin = commentService.groupUser(userId);
+	      
+	      // 여행 갯수 가져옴
+	      int count = commentService.countGroup(userId);
+	      
+	      //받는사람이 사용자인 userCmtDTO가져오기
+	      List comRecUser = commentService.comRecUser(userId);
+	    
+	      
+	      //보낸사람이 사용자인 userCmtDTO가져오기
+	      List comSenUser = commentService.comSenUser(userId);
+	      
+	      
+	      // 그룹방별로 받는사람이 사용자인거 카운트
+	      Map comRecUserCnt = commentService.comRecUserCnt(userId);
+	      
+	      // 그룹방별로 보낸사람이 사용자인거 카운트
+	      Map comSenUserCnt = commentService.comSenUserCnt(userId);
+	      
+	      
+	      //model.addAttribute("dtoList", dtoList);
+	      
+	      model.addAttribute("comSenUserCnt", comSenUserCnt);
+	      model.addAttribute("comRecUserCnt", comRecUserCnt);
+	      model.addAttribute("cmtMyGroup", cmtMyGroup);
+	      model.addAttribute("cmtGroupList", cmtGroupList);
+	      model.addAttribute("fin", fin);
+	      model.addAttribute("count", count);
+	      model.addAttribute("comRecUser", comRecUser);
+	      model.addAttribute("comSenUser", comSenUser);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		model.addAttribute("userId",userId);
