@@ -5,10 +5,27 @@
 	<jsp:include page="/WEB-INF/views/include/top.jsp" />
 	<!-- //top end -->
 
-    <div class="mainVisual">
-		<div class="bg"></div>
+    <div class="mainVisual">  	
+		<div class="mvCover"></div>
+		<div class="titWrap">
+			<p class="tit2">즐거운 여행의 시작!</p>
+			<p class="tit1">TRAVEL MAKER</p>						
+		</div>
+		<div class="scDown">
+			<p class="txt">scroll down</p>
+			<div class="move">
+				<div class="bar"></div>
+			</div>
+		</div>
 	</div>
 	<!-- //mainVisual end -->
+	<script>
+		$(document).ready(function(){
+			$('.mvCover').fadeIn(2000);
+			$('.mainVisual > .titWrap > .tit2').delay(1900).fadeIn(1000);
+			$('.mainVisual > .titWrap > .tit1').delay(2400).fadeIn(1000);
+		});
+	</script>
 
 	<div id="transcroller-body" class="wrapAll">
 
