@@ -154,12 +154,12 @@ table.tm input {width: 80%; font-size:17px;}
 .footer > li:nth-child(2) {padding-left: 150px;}
 .footer > li:nth-child(4) {width: 100%; font-size: 12px; line-height: 2; font-weight:600;}
 
-.footer .icon {overflow: hidden;}
+.footer .icon {display: none; overflow: hidden;}
 .footer .icon li {float:left;  width: 24px; height: 24px;  background: #000; margin-right: 25px;}
-.footer .icon li:nth-child(1) {background: url(/resources/images/ic-insta.svg)no-repeat;}
+/* .footer .icon li:nth-child(1) {background: url(/resources/images/ic-insta.svg)no-repeat;}
 .footer .icon li:nth-child(2) {background: url(/resources/images/ic-youtube.svg)no-repeat;}
-.footer .icon li:nth-child(3) {background: url(/resources/images/ic-blog.svg)no-repeat;}
-.footer .info {margin: 35px 0;}
+.footer .icon li:nth-child(3) {background: url(/resources/images/ic-blog.svg)no-repeat;} */
+.footer .info {margin: 0 0 35px;}
 .footer .info p {line-height: 1.67; font-weight: 500;}
 .footer .sub {font-size:14px; line-height: 1.7; font-weight: 500;}
 .footer .ph {font-size:24px; letter-spacing: 3px; ; font-weight:600; line-height: 1.5;}

@@ -19,7 +19,7 @@
 .btnWrap .txt {text-align: center; font-size:17px; font-weight: 500; margin: 0 0 20px;}
 
 /*mainVisual*/
-.mainVisual {width: 100%; height: calc(85vh + 80px); background: #333;}
+.mainVisual {width: 100%; height: calc(85vh + 80px); background: url(../images/mv1.jpg)no-repeat center; background-size: 100% auto;}
 
 /*rankM*/
 .rankM {overflow: hidden; position: relative;}
@@ -126,7 +126,7 @@
 .makingListWrap .titWrap .goMake .txt {text-align: center; font-size:30px; font-weight: 500; transition:.3s;}
 .makingListWrap .titWrap .goMake:hover .txt {opacity:0;}
 .makingListWrap .titWrap .goMake a {display: block; width: 100%; height: 100%; position: absolute;top: 0;left: 0; z-index:1;}
-.makingListWrap .titWrap .goMake .bag {width: 100%; transition:.3s; position: absolute;top: 40px;left: 0;}
+.makingListWrap .titWrap .goMake .bag {width: 100%; transition:.3s; position: absolute;top: 55px;left: 0;}
 .makingListWrap .titWrap .goMake .bag.bag2 {animation: bag .3s linear infinite alternate;}
 .makingListWrap .titWrap .goMake .bag.bag3 {animation: bag3 .3s linear infinite alternate; top: 70px;}
 .makingListWrap .titWrap .goMake:hover .bag {animation: bag .3s linear infinite alternate;}
@@ -135,10 +135,10 @@
 .makingListWrap .titWrap .goMake:hover .bagsh {opacity:.6;}
 @-webkit-keyframes bag {
     0% {
-        top: 40px;
+        top: 55px;
     }
     100% {
-        top: 30px;
+        top: 45px;
     }
 }
 @-webkit-keyframes bag3 {
@@ -196,10 +196,15 @@
 .makingContWrap .fl.mz {margin: 0;}
 .makingContWrap .txtWrap {margin: 0 0 30px;}
 .makingContWrap .txtWrap .sub {font-size:15px; font-weight: 600; margin: 0 0 7px;}
-.makingContWrap .txtWrap .txt {background: #fff; border-radius: 3px; line-height: 1.6; font-size:20px; font-weight: 400; padding: 12px 20px;}
+.makingContWrap .txtWrap .txt {min-height: 56px; background: #fff; border-radius: 3px; line-height: 1.6; font-size:20px; font-weight: 400; padding: 12px 20px;}
 .makingContWrap .line {clear:both; width: 100%; height: 1px; background: #ddd; margin: 0 0 40px;}
 
 /*groupSpace*/
+.gsWrap {width: 1300px; padding:80px 0; margin: 0 auto;}
+
+.gsCont {display: none;}
+.gsMem {display: block;}
+
 .gsLeft {float: left; width: calc(100% - 530px); padding: 80px 0 80px 115px;}
 .gsLeft .tit1 {font-size:30px; font-weight: 500;}
 .gsLeft .tit2 {font-size:18px; font-weight: 500; margin: 20px 0 5px;}
