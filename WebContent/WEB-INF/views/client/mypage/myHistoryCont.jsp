@@ -73,7 +73,12 @@
 						부가설명
 					</div>
 					<div class="aContRight">
-						${getGroup.addExpl} 
+						<c:if test="${getGroup.addExpl eq null}">
+							등록된 부가설명이 없습니다.
+						</c:if>
+						<c:if test="${getGroup.addExpl ne null}">
+							${getGroup.addExpl}
+						</c:if>
 					</div>	
 				</div>	
 						
@@ -82,33 +87,45 @@
 						일정
 					</div>
 					<div class="aContRight">
-						<c:forEach var="scheList" items="${scheList}">
-							- ${scheList.sDate} : ${scheList.sCont}   </br>
-						</c:forEach>
+						<c:if test="${scheCnt == 0}">
+							등록된 일정이 없습니다.
+						</c:if>
+						<c:if test="${scheCnt != 0}">
+							<c:forEach var="scheList" items="${scheList}">
+								- ${scheList.sDate} : ${scheList.sCont}   </br>
+							</c:forEach>
+						</c:if>							
+						
+					
+						
 					</div>	
 				</div>			
 			</div>	
 			<!-- aContInfo end -->		
-			<div class="aInfoTit aMemTit">Member</div>			
-			<p class="aMemCnt">가이드 : ${guideCnt}명</p>
-			<!--  테스트 -->
-			
+			<div class="aInfoTit aMemTit">Member</div>		
+				<c:if test="${guideCnt == 0}">
+					참여한 가이드가 없습니다.
+				</c:if>
+				<c:if test="${guideCnt != 0}">
+					<p class="aMemCnt">가이드 ${guideCnt}명</p>
+				</c:if>
 			
 			
 						
 			<div class="aMemPos">
 				<c:forEach var="posMem" items="${posMem}" >
 					<c:if test="${posMem.key ne '일반'}">
-						${posMem.key} :${posMem.value}명 
+						${posMem.key} &nbsp;
 					</c:if>
 				</c:forEach>
 			</div>
 			<p class="aMemCnt">	참여 ${fn:length(gMem)}명 </p>			
 			<div class="aMemPos">
 				<c:forEach var="gMem" items="${gMem}">
-					<c:if test="${gMem.nickname == memId}">${gMem.nickname}(개설자)</c:if>
-					 ${gMem.nickname}     
+					<c:if test="${gMem.id eq memId}">${gMem.nickname}(개설자)</c:if>
+					<c:if test="${gMem.id ne memId}">${gMem.nickname}</c:if>    
 				</c:forEach>
+				
 			</div>			
 			<!-- aMemTit end -->			
 			<div class="aInfoTit aMemTit">Gallery</div>					

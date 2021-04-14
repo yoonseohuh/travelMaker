@@ -49,6 +49,11 @@ public class ScheduleDAOImpl implements ScheduleDAO {
 		sqlSession.delete("schedule.deleteSchedule", sNo);
 	}
 
-
+	//일정 개수 카운트
+	@Override
+	public int scheCnt(int gNo) {
+		int scheCnt = sqlSession.selectOne("schedule.scheCnt", gNo);
+		return scheCnt;
+	}
 
 }

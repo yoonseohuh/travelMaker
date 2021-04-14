@@ -13,6 +13,11 @@
 		select * from groupRequest where gNo=#{gNo}
 	</select>
 	
+	<!-- 참여중인 멤버의 그룹리퀘스트 가져오기  -->
+	<select id="getMemRequests" parameterType="Hashmap" resultType="GroupRequestDTO">
+		select * from groupRequest where gNo=#{gNo} and id=#{id}	
+	</select>
+	
 	<!-- pos카운트 -->
 	<select id="posCount" parameterType="Hashmap"  resultType="int">
 		select count(*) from grouprequest where gNo=#{gNo} and posNo=#{posNo}

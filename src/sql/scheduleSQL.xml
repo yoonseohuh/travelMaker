@@ -20,4 +20,9 @@
 		delete from SCHEDULE where sNo=#{sNo}
 	</delete>
 
+	<!-- 그룹 스캐쥴 카운트 -->
+	<select id="scheCnt" parameterType="int" resultType="int">
+		select count(*) from schedule where gNo=#{gNo}
+	</select>
+
 </mapper>

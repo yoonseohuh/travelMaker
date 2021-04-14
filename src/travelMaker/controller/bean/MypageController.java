@@ -228,7 +228,9 @@ public class MypageController {
 		List grpReq = travelService.getRequests(Integer.parseInt(gNo));
 		List gMem = travelService.getMembers(Integer.parseInt(gNo));
 				
-		
+		//일정 개수 카운트
+		int scheCnt = travelService.scheCnt(Integer.parseInt(gNo));
+		model.addAttribute("scheCnt", scheCnt);
 		
 		
 		//status = 1 인 멤버들의 그룹리퀘스트dto
@@ -256,33 +258,43 @@ public class MypageController {
 		Map map = new HashMap();
 		Map posMem = new HashMap(); 
 		
-		for(int i = 0; i < posList.size(); i++) { 
-			System.out.println("이프문위");
-			System.out.println("포스리스트" + posList);
-			if(posList.get(i) == -1) {   //포지션에 번호가 -1 이면
-				System.out.println("이프문아래");
-				int nomalCnt = travelService.posCount(Integer.parseInt(gNo),posList.get(i));
-				posMem.put("일반",nomalCnt);
-				model.addAttribute("nomalCnt",nomalCnt);
-			}else { //그게아니면
-				System.out.println("else안");
-				SmallPosDTO dto = travelService.getPosInfo(posList.get(i));
-				int posCnt = travelService.posCount(Integer.parseInt(gNo),posList.get(i));
-				posMem.put(dto.getPosName(),posCnt);
+		
+		
+		
+		System.out.println("포스리스트 상태는요?" + posList);
+		if(posList != null) {
+			for(int i = 0; i < posList.size(); i++) { 
+				System.out.println("이프문위");
+				System.out.println("포스리스트" + posList);
+				if(posList.get(i) == -1) {   //포지션에 번호가 -1 이면
+					System.out.println("이프문아래");
+					int nomalCnt = travelService.posCount(Integer.parseInt(gNo),posList.get(i));
+					posMem.put("일반",nomalCnt);
+					model.addAttribute("nomalCnt",nomalCnt);
+				}else { //그게아니면
+					System.out.println("else안");
+					SmallPosDTO dto = travelService.getPosInfo(posList.get(i));
+					int posCnt = travelService.posCount(Integer.parseInt(gNo),posList.get(i));
+					posMem.put(dto.getPosName(),posCnt);
+				}
 			}
+		}else {
+			System.out.println("널이다쓰글");
+			posMem.put("null",99);
 		}
-
+			System.out.println("포스멤출력" + posMem.get(null));
 		
 		//갤러리
 		List gList = travelService.getGroupImgs(Integer.parseInt(gNo));
 		System.out.println("갤러리 사진있니?" +  gList);
 
 		
-		//가이드 수 카운트
+		//가이드 수 카운트   
 		List memListFin = new ArrayList<GroupRequestDTO>();
-		memListFin = travelService.memListFin(Integer.parseInt(gNo));
 		int guideCnt = 0;
 		
+		memListFin = travelService.memListFin(Integer.parseInt(gNo));
+		System.out.println("멤리스트핀 출력" + memListFin);
 		for(int i=0; i<memListFin.size(); i++) {
 			if(((GroupRequestDTO)memListFin.get(i)).getReqType() == 1) {
 				guideCnt = guideCnt + 1; 
