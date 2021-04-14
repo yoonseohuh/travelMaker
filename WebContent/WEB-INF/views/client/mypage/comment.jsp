@@ -205,7 +205,6 @@
 	            </c:forEach>
 			</select>&nbsp;
          
-         
          동행자 :                      
 			<select name="groupMem" id="groupMem" required>
 				<option>동행자를 선택해주세요</option>
