@@ -9,9 +9,6 @@
 	<!-- //top end -->
 	
 	<div class="wrapAll client">
-		<!-- 
-		<jsp:include page="/WEB-INF/views/include/userMenu.jsp"/>
-		-->
 		<c:import url="/WEB-INF/views/include/userMenu.jsp">
 			<c:param name="userId" value="${userId}"></c:param>
 		</c:import>
