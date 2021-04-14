@@ -74,11 +74,11 @@
 			
 			<div class="travelList">
 			
-				<c:if test="${!empty list}">
+				<c:if test="${!empty allList}">
 					<p class="HomeSubTit">참여중인 여행</p>
         			<p class="HomeSubCont">현재 참여중인 여행, 신청 대기중인 여행의 정보를 확인하세요.<br/>그룹 공간에서 팀원과 일정을 같이 만들어보세요.</p>
 				</c:if>
-				<c:if test="${empty list}">
+				<c:if test="${empty allList}">
 					<p class="HomeSubTit">참여중인 여행</p>
         			<p class="HomeSubCont">현재 참여중인 여행이 없습니다.</p>
 				</c:if>
