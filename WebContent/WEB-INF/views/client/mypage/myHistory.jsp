@@ -8,6 +8,7 @@
 <!-- //top end -->
 
 <jsp:include page="/WEB-INF/views/include/myMenu.jsp" />
+<!-- myMenu end -->
 <div class="myPageWrap">
 
 	<c:if test="${sessionScope.memId==null}">
@@ -17,7 +18,6 @@
 		</script>
 	</c:if>
 
-	<!-- myMenu end -->
 	<h2 class="pageTit">${id}님의 여행이력입니다 <br/> 다녀온 여행들을 확인해보세요 </h2>
 	<c:if test="${empty travelAll}">
 		<h2>
