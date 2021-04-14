@@ -46,6 +46,10 @@
 		}).show();
 		$('#close').click(function(){document.getElementById('divView').style.display='none'});
 	});
+	
+	AOS.init({
+	  easing: 'ease-in-out-sine'
+	});
 	</script>
 
 </body>

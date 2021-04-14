@@ -250,10 +250,7 @@
 		    },
 			slidesPerView: 1,
 			debugger: true,
-		});
-		AOS.init({
-		  easing: 'ease-in-out-sine'
-		});
+		});		
 	</script>
 	
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />

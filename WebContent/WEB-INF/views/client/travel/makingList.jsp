@@ -211,11 +211,5 @@
 	</div>
 	<!-- //wrapAll end -->
 	
-	<script>
-	AOS.init({
-		easing: 'ease-in-out-sine'
-	});
-	</script>
-	
 <jsp:include page="/WEB-INF/views/include/footer.jsp" />
 <!-- //footer end -->
