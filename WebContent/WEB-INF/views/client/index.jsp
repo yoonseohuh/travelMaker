@@ -26,21 +26,25 @@
 				<li class="on" data-aos="zoom-in" data-aos-duration="500">
 					<img src="<c:url value="/resources/images/rico1.png" />" />
 					<p class="name">스타터</p>
+					<!-- 
 					<p class="txt">1인 여행 개설 가능</p>
+					-->
 					<p class="txt">생성된 여행에 참여 가능</p>
 					<p class="rnext"></p>
 				</li>
 				<li data-aos="zoom-in" data-aos-delay="200" data-aos-duration="500">
 					<img src="<c:url value="/resources/images/rico2.png" />" />
 					<p class="name">트래블러</p>
-					<p class="txt">1차 포지션 선택 가능</p>
+					<p class="txt">여행 개설 가능</p>
 					<p class="rnext"></p>
 				</li>
 				<li data-aos="zoom-in" data-aos-delay="400" data-aos-duration="500">
 					<img src="<c:url value="/resources/images/rico3.png" />" />
 					<p class="name">어드바이저</p>
-					<p class="txt">여행 개설 가능</p>
+					<p class="txt">1차 포지션 선택 가능</p>
+					<!-- 
 					<p class="txt">포지션 변경 가능</p>
+					 -->
 					<p class="rnext"></p>
 				</li>
 				<li data-aos="zoom-in" data-aos-delay="600" data-aos-duration="500">
