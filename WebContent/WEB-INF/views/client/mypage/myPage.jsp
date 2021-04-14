@@ -141,19 +141,7 @@
 			                    </div>
                        		<!-- bar Area -->
                        		<div class="auth">
-	                        	<c:if test="${rk.rkNo == 1}">
-	                        		<p>1인 여행 개설 가능</p>
-	                            	<p>생성된 모험에 참여 가능</p>
-	                        	</c:if>
-	                        	<c:if test="${rk.rkNo == 2}">
-	                        		<p>그룹 여행 개설 가능</p>
-	                        	</c:if>
-	                        	<c:if test="${rk.rkNo == 3}">
-	                        		<p>첫 번째 포지션 선택 가능</p>
-	                        	</c:if>
-	                        	<c:if test="${rk.rkNo == 4}">
-	                            	<p>두 번째 포지션 선택 가능</p>
-	                        	</c:if>
+                       			<p>${rk.rkAddExpl}</p>
 	                        </div>
 	                        <!-- auth End -->
 							</c:if>
