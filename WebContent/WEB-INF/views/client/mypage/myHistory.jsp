@@ -58,6 +58,7 @@
          </div>
          <!--infoList end-->
 	</c:if>
+	<%-- 
 	<script>
 		function cancelCheck(){
 			if(confirm("취소하시겠습니까?")== true){
@@ -81,7 +82,6 @@
 			
 		});
 	</script>
-	<%-- 
 	<h1>내가 좋아요한 여행</h1>
 	<c:if test="${empty lsharedList}">
 			좋아요 한 여행이 존재 하지 않습니다.

@@ -200,7 +200,7 @@ public class MypageController {
 		// 내가 좋아요한 completedCont 가져오기
 		List<GroupSpaceDTO> lsharedList = sharedService.getSharedLiked(id);
 		for(int i=0;i<lsharedList.size();i++) {
-			System.out.print(lsharedList.get(i).getSubject()+"/");
+			//System.out.print(lsharedList.get(i).getSubject()+"/");
 		}
 		model.addAttribute("lsharedList", lsharedList);
 		model.addAttribute("id", id);
