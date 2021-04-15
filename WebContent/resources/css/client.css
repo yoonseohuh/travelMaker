@@ -13,6 +13,7 @@
 .btnMore:hover {color:#ff0000;}
 
 .btnWrap {overflow: hidden; display: inline-block; position: relative;left: 50%; transform: translateX(-50%);}
+.btnWrap.fl {left: 0; transform: translateX(0);}
 .btnWrap .btn {float: left; display: inline-block; color:#fff; font-size:20px; font-weight:500; cursor:pointer; padding: 20px 60px; margin: 0 3px;}
 .btnWrap .btn.btnY {background:#ff0000;}
 .btnWrap input.btn.btnY {height:60px; line-height:60px; font-size:20px; font-weight:600; padding: 0 60px;}
