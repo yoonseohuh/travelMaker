@@ -61,8 +61,8 @@
          <!-- //chatWrap end -->
 
          <ul class="gsMenu">
-            <li class="on">그룹홈</li>
-            <li>갤러리</li>
+            <li class="on"><a href="groupSpace.tm?gNo=${gNo}">그룹홈</a></li>
+            <li><a href="gallery.tm?gNo=${gNo}">갤러리</a></li>
          </ul>
 
          <div class="gsCont gsHome">
@@ -250,10 +250,10 @@
                                      <input type="hidden" name="gNo" value="${grpSpace.gNo}" />
                                      <input type="hidden" name="from" value="groupspace" />
                                      
-                                    <textarea cols="100" rows="10" name="genReview" placeholder="개설자 ${grpSpace.id}님의 여행총평을 남겨주세요!" ></textarea>
-                                    <input type="submit" value="작성" />
+                                    <textarea  style="margin:10px 0; display:block" cols="80" rows="5" name="genReview" placeholder="개설자 ${grpSpace.id}님의 여행총평을 남겨주세요!" ></textarea>
+                                      <button type="submit" class="mang">작성</button>
                                  </form>
-                                 <input type="button" value="취소" id="cancel" />
+                                 <input type="button"  class="mang"  value="취소" id="cancel" />
                               </c:if>
                               <c:if test="${!empty grpSpace.genReview}">
                                  개설자의 총평 : ${grpSpace.genReview}
@@ -314,48 +314,6 @@
 
          </div>
          <!-- //gsHome end -->
-
-         <div class="gsCont gsGal">
-            <div class="titWrap">
-               <p class="tit2" data-aos="fade-right" data-aos-duration="600">여행 후 남는 건 사진,</p>
-               <p class="tit2" data-aos="fade-right" data-aos-delay="400" data-aos-duration="600">소중한 추억을 간직해보세요!</p>
-            </div>
-            <form action="/travelMaker/travel/uploadPro.tm" method="post" enctype="multipart/form-data">
-               <input type="hidden" name="writer" value="${id}"/>
-               <input type="hidden" name="gNo" value="${gNo}"/>
-               <input type="file" name="img"/>
-               <input type="submit" value="업로드"/>
-            </form>
-            <ul class="list">
-               <c:forEach var="gList" items="${gList}">
-               <li>
-                  <img src="/travelMaker/save/${gList.pRoot}" width="200"/>
-               </li>
-               </c:forEach>
-               <li></li>
-               <li></li>
-               <li></li>
-               <li></li>
-               <li></li>
-               <li></li>
-            </ul>
-         </div>
-         <!-- //gsGal end -->
-
-         <script>
-            $('.gsMenu > li').eq(0).click(function(){
-               $(this).siblings().removeClass('on');
-               $(this).addClass('on');
-               $('.gsCont').hide();
-               $('.gsHome').fadeIn();
-            });
-            $('.gsMenu > li').eq(1).click(function(){
-               $(this).siblings().removeClass('on');
-               $(this).addClass('on');
-               $('.gsCont').hide();
-               $('.gsGal').fadeIn();
-            });
-         </script>
 
       </div>
       </c:if>
