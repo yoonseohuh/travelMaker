@@ -286,29 +286,30 @@
 				<!-- if: leader end -->
 				
 				<div>
-					<c:if test="${memId != grpSpace.id}">
-						<c:if test="${empty grpSpace.genReview}">
-							개설자의 총평이 아직 작성되지 않았습니다.
+					<div class="titWrap">
+						<p class="tit2" data-aos="fade-right" data-aos-duration="500">총평</p>
+					</div>
+					<c:if test="${empty grpSpace.genReview}">
+						개설자의 총평이 아직 작성되지 않았습니다.
+					</c:if>
+					<c:if test="${!empty grpSpace.genReview}">
+						 ${grpSpace.genReview} 
+						<c:forEach var="reviewList" items="${reviewList}">
+									<br/>└ ${reviewList.nickname}님 :  ${reviewList.genReply}
+						</c:forEach>
+						<c:if test="${result == 1 }">
+							<br/><button id="tab1">답글달기</button>
 						</c:if>
-						<c:if test="${!empty grpSpace.genReview}">
-							 ${grpSpace.genReview} 
-							<c:forEach var="reviewList" items="${reviewList}">
-										<br/>└ ${reviewList.nickname}님 :  ${reviewList.genReply}
-							</c:forEach>
-							<c:if test="${result == 1 }">
-								<br/><button id="tab1">답글달기</button>
-							</c:if>
-						</c:if>	
-						 	<form action="/travelMaker/travel/genReplyPro.tm" id="cont2" name="reply" method="get">
-						 		<input type="hidden" name="id" value="${memId}" />
-						 		<input type="hidden" name="gNo" value="${grpSpace.gNo}" />
-						 		<input type="hidden" name="from" value="groupspace" />
-						 		
-								<textarea cols="100" rows="10" name="genReply" onsubmit="return check()" placeholder="총평에 댓글로 소감을 남겨주세요!" ></textarea>
-								<input type="submit" value="답글작성" />
-							</form>
-							<input type="button" value="취소" id="cancel"/>
-					</c:if>					
+					</c:if>	
+					 	<form action="/travelMaker/travel/genReplyPro.tm" id="cont2" name="reply" method="get">
+					 		<input type="hidden" name="id" value="${memId}" />
+					 		<input type="hidden" name="gNo" value="${grpSpace.gNo}" />
+					 		<input type="hidden" name="from" value="groupspace" />
+					 		
+							<textarea cols="100" rows="10" name="genReply" onsubmit="return check()" placeholder="총평에 댓글로 소감을 남겨주세요!" ></textarea>
+							<input type="submit" value="답글작성" />
+						</form>
+						<input type="button" value="취소" id="cancel"/>
 				</div>
 				<!-- //총평 -->
 
