@@ -7,112 +7,124 @@
 	
 	<div class="wrapAll client">
 		
-		<c:if test="${sessionScope.memId==null}">
+		<div class="msWrap">
+		
+			<div class="titWrap">
+				<p class="tit2" data-aos="fade-right" data-aos-duration="500">간편하게 여행 정보를 공유할 수 있습니다.</p>
+				<p class="tit2" data-aos="fade-right" data-aos-delay="200" data-aos-duration="500">서로 쪽지를 주고 받아 보세요!</p>
+			</div>
+			
+			<c:if test="${sessionScope.memId==null}">
+				<script>
+					alert("로그인 후에 접근 가능합니다");
+					location.href='/travelMaker/mem/loginForm.tm';
+				</script>
+			</c:if>
+				
 			<script>
-				alert("로그인 후에 접근 가능합니다");
-				location.href='/travelMaker/mem/loginForm.tm';
-			</script>
-		</c:if>
-			
-		<script>
-		$(document).ready(function(){
-			
-			$("input:checkbox[name=msg]").on("click",function(){
+			$(document).ready(function(){
 				
-				var arr = new Array();
-				$("input:checkbox[name=msg]:checked").each(function(){
-					var checkVal = $(this).val();
-					arr.push(checkVal);
+				$("input:checkbox[name=msg]").on("click",function(){
+					
+					var arr = new Array();
+					$("input:checkbox[name=msg]:checked").each(function(){
+						var checkVal = $(this).val();
+						arr.push(checkVal);
+					});
+					$("#msgNo").val(arr);
+					console.log($('#msgNo').val());
+					
 				});
-				$("#msgNo").val(arr);
-				console.log($('#msgNo').val());
 				
-			});
+		        $(".menu > li > .sub").click(function(){ 
+		            $(this).parent('li').siblings().children('ul').hide();
+		            $(this).next('ul').fadeToggle(200);
+		        });
+		        
+		        $('#ms2').hide();
+		        $('#tab1').click(function(){
+		        	$(this).siblings().removeClass('on');
+		        	$(this).addClass('on');
+		    		$('#ms2').hide();
+		    		$('#ms1').fadeIn();
+		    	});
+		    	$('#tab2').click(function(){
+		    		$(this).siblings().removeClass('on');
+		        	$(this).addClass('on');
+		    		$('#ms1').hide();
+		    		$('#ms2').fadeIn();
+		    	});
+		    });	
+			</script>
 			
-	        $(".menu>a").click(function(){      //클래스가 menu의 아랫놈인 a를 클릭하면
-	            var submenu = $(this).next("ul");      //a 다음에있는 "ul을 submenu에 담고 
-	 
-	            if( submenu.is(":visible") ){     // ul display: none 아닐떄         -->display: none false 를 반환 한다.
-	                submenu.slideUp();			//ul이 슬라이드업
-	            }else{						// display: none이면 
-	                submenu.slideDown();	//ul부분 슬라이드다운
-	            }
-	        });
-	        $('#cont2').hide();
-	        $('#tab1').click(function(){
-	    		$('#cont2').hide();
-	    		$('#cont1').fadeIn();
-	    	});
-	    	$('#tab2').click(function(){
-	    		$('#cont1').hide();
-	    		$('#cont2').fadeIn();
-	    	});
-	    });	
-		</script>
-		
-		
-		
-		<br/><br/><br/><br/>
-		<h1>쪽지함</h1>
-		<a style="cursor:pointer" id="tab1">받은쪽지함</a> | <a style="cursor:pointer" id="tab2">보낸쪽지함</a>
-		
-		
-		
-		<div id="cont1">
-		<h2>받은쪽지함</h2>
-		<button onclick="window.location='messageWrite.tm'">쪽지쓰기</button>
-		<c:if test="${recMsgCnt == 0}">
-		저런 ! 받은 쪽지가 없네요^^ 
-		</c:if>
-		<c:if test="${recMsgCnt > 0}">
-		<form action="messageDel.tm" method="get">
-			<input type="submit" value="삭제" />
-			<input type="hidden" id="msgNo" name="msgNo">
-			<div>
-			<ul>
-			<c:forEach var="recMsgList" items="${recMsgList}"> 
-				<li class="menu">
-				<input type="checkbox" name="msg" value="${recMsgList.mNo}" /><a>${recMsgList.mNo} /받는사람: ${recMsgList.receiver}/ 보낸사람: ${recMsgList.sender}  / ${recMsgList.mStatus} / ${recMsgList.reg}  ▼ </a>
-					<ul style="display:none;">
-						<li><textarea rows="10" cols="50" readonly style="resize: none;">내용 : ${recMsgList.mCont}</textarea></li><br/>
-						<input type="button" name="dap" value="답장" onclick="window.location='messageWrite.tm?reply=${recMsgList.sender}'" />
-					</ul>
-				</li>
-			</c:forEach>
+			
+			<ul class="gsMenu">
+				<li id="tab1" class="on">받은쪽지함</li>
+				<li id="tab2">보낸쪽지함</li>				
 			</ul>
-			</div>
-		</form>
-		</c:if>
-		</div>
-		
-		
-		
-		<div id="cont2">
-		<h2>보낸쪽지함</h2>
-		<button onclick="window.location='messageWrite.tm'">쪽지쓰기</button>
-		<c:if test="${senMsgCnt == 0}">
-		보낸쪽지가 없습니다.
-		</c:if>
-		<c:if test="${senMsgCnt > 0}">
-		<form action="messageDel.tm" method="get">
-			<input type="submit" value="삭제" />
-			<div>
-			<ul>
-			<c:forEach var="senMsgList" items="${senMsgList}"> 
-				<li class="menu">
-				<input type="checkbox" name="msgNo" value="${senMsgList.mNo}" /><a>${senMsgList.mNo} /받는사람 : ${senMsgList.receiver}/ 보낸사람: ${senMsgList.sender}  / ${senMsgList.mStatus} / ${senMsgList.reg}  ▼ </a>
-					<ul style="display:none;">
-						<li><textarea rows="10" cols="50" readonly style="resize: none;">내용 : ${senMsgList.mCont}</textarea></li><br/>
+			
+			
+			
+			<div id="ms1" class="msCont">			
+				<c:if test="${recMsgCnt == 0}">
+				저런 ! 받은 쪽지가 없네요^^ 
+				</c:if>
+				<c:if test="${recMsgCnt > 0}">
+				<form action="messageDel.tm" method="get">
+					<input type="hidden" id="msgNo" name="msgNo">
+					<ul class="menu">
+						<c:forEach var="recMsgList" items="${recMsgList}"> 
+						<li>
+							<span class="check"><input type="checkbox" name="msg" value="${recMsgList.mNo}" /></span>
+							<p class="sub ${recMsgList.mStatus}"><span class="man">${recMsgList.sender}님으로부터</span><span class="ex">${recMsgList.mCont}</span><span class="date">${recMsgList.reg}</span></p>
+							<%-- <input type="checkbox" name="msg" value="${recMsgList.mNo}" /><a>${recMsgList.mNo} /받는사람: ${recMsgList.receiver}/ 보낸사람: ${recMsgList.sender}  / ${recMsgList.mStatus} / ${recMsgList.reg}  ▼ </a> --%>
+							<ul style="display:none;">
+								<li>
+									<textarea readonly style="resize: none;">${recMsgList.mCont}</textarea>
+									<input type="button" name="dap" value="답장" class="btn btnY" onclick="window.location='messageWrite.tm?reply=${recMsgList.sender}'" />
+								</li>								
+							</ul>
+						</li>
+						</c:forEach>
 					</ul>
-				</li>
-			</c:forEach>
-			</ul>
+					<div class="btnWrap">
+						<p onclick="window.location='messageWrite.tm'" class="btn btnY">쪽지쓰기</p>
+						<input type="submit" value="삭제" class="btn btnC"/>
+					</div>
+				</form>
+				</c:if>
 			</div>
-		</form>
-		</c:if>
+			
+			
+			
+			<div id="ms2" class="msCont">				
+				<c:if test="${senMsgCnt == 0}">
+				보낸쪽지가 없습니다.
+				</c:if>
+				<c:if test="${senMsgCnt > 0}">
+				<form action="messageDel.tm" method="get">					
+					<ul class="menu">
+						<c:forEach var="senMsgList" items="${senMsgList}"> 
+						<li>
+							<%-- <input type="checkbox" name="msgNo" value="${senMsgList.mNo}" /><a>${senMsgList.mNo} /받는사람 : ${senMsgList.receiver}/ 보낸사람: ${senMsgList.sender}  / ${senMsgList.mStatus} / ${senMsgList.reg}  ▼ </a> --%>
+							<span class="check"><input type="checkbox" name="msgNo" value="${senMsgList.mNo}" /></span>
+							<p class="sub ${senMsgList.mStatus}"><span class="man">${senMsgList.receiver}님에게</span><span class="ex">${senMsgList.mCont}</span><span class="date">${senMsgList.reg}</span></p>
+							<ul style="display:none;">
+								<li><textarea readonly style="resize: none;">${senMsgList.mCont}</textarea></li><br/>
+							</ul>
+						</li>
+						</c:forEach>
+					</ul>
+					<div class="btnWrap">
+						<p onclick="window.location='messageWrite.tm'" class="btn btnY">쪽지쓰기</p>
+						<input type="submit" value="삭제" class="btn btnC"/>
+					</div>
+				</form>
+				</c:if>
+			</div>
+		
 		</div>
-		
-		
+		<!-- //msWrap end -->
 		
 	</div>
 	<!-- //wrapAll end -->

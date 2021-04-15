@@ -267,21 +267,37 @@
 .gsHome .list li .inner .writeDown input.txt {width:100%; border: 0; line-height:1.6; font-size:17px; font-weight: 400;}
 .gsHome .list li .inner .writeDown .ent {width:100%; height:0;}
 
-
-
 .gsGal .list {overflow: hidden; margin: 50px 0 0;}
 .gsGal .list li {overflow: hidden; float: left; width: 24.25%; height: 200px; background: #000; margin: 0 1% 1% 0;}
 .gsGal .list li:nth-child(4n) {margin: 0 0 1% 0;}
 .gsGal .list li img {display: block; width: 100%;}
-
-
-
 
 /*gallery*/
 .gallery {overflow: hidden;}
 .gallery li {float: left; width:32.33%; min-height: 350px; background: #eee; margin: 0 1.5% 1.5% 0;}
 .gallery li:nth-child(3n) {float: left; width:32.34%; margin: 0 0 1.5% 0;}
 
+/*message*/
+.msWrap {width:1000px; padding: 80px 0; margin: 0 auto;}
+.msWrap .gsMenu {width:100%; margin: 40px 0;}
+.msWrap .gsMenu .btnY {margin: 5px 0 0;}
+
+.msCont {width:100%;}
+.msCont .btnWrap {margin: 50px 0 0;}
+.msCont .btnWrap .btnY {height:60px; line-height:60px; padding: 0 40px;}
+.msCont .btnWrap .btnC {height:60px; line-height:60px; padding: 0 40px;}
+
+.msCont .menu > li {background:#fff; color:#000; border-bottom: 1px solid #eee; cursor:pointer; transition:.3s; padding: 20px; position:relative;}
+.msCont .menu > li:hover {background:#eee;}
+.msCont .menu > li > .check {width:20px; position:absolute;left:20px; z-index:1;}
+.msCont .menu > li > .sub {font-size:20px; font-weight:500; padding: 0 0 0 200px; position:relative;}
+.msCont .menu > li > .sub .man {width:170px; position:absolute;left:50px;}
+.msCont .menu > li > .sub .ex {display:block; width:65%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.msCont .menu > li > .sub .date {position:absolute;right:0;top:0;}
+.msCont .menu > li > ul > li {background:#eee; padding: 40px; margin:30px 0 0;}
+.msCont .menu > li:hover > ul > li {background:#fff;}
+.msCont .menu > li > ul > li textarea {width:100%; height:75px; background:transparent; border:0; font-size:20px; font-weight:500; padding:0;}
+.msCont .menu > li > ul > li .btnY {float:none; margin: 30px 0 0; position:relative;left:50%;transform:translateX(-50%);}
 
 /*manual*/
 /*main*/
