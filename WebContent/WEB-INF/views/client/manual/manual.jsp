@@ -62,13 +62,13 @@
 					</div>
 				</div>
 				<div class="manualPic sec">
-					사진
+					
 				</div>
 			</div>
 			<!-- ManualMix  end -->
 			<div class="manualMix">
 				<div class="manualPic">
-					사진
+					
 				</div>
 				<div class="txtArea sec">
 					<div class="txtLoc">
