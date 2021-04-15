@@ -244,17 +244,24 @@
 .gsHome {display: block;}
 .gsHome .list {overflow: hidden; background: url(../images/gsBg.png)no-repeat center top; background-size: 1300px;}
 .gsHome .list li {float: left; width: 575px; height: 600px;}
-.gsHome .list li:nth-child(1) {overflow: auto; padding: 200px 40px 0 70px; margin: 0 50px 0 0;}
-.gsHome .list li:nth-child(2) {overflow: auto; width: 540px; padding: 200px 0 0 30px;}
-.gsHome .list li:nth-child(3) {overflow: auto; padding: 50px 40px 100px 70px; margin: 150px 0 0;}
+.gsHome .list li:nth-child(1) {padding: 200px 40px 0 70px; margin: 0 50px 0 0;}
+.gsHome .list li:nth-child(2) {width: 540px; padding: 200px 0 0 30px;}
+.gsHome .list li:nth-child(3) {padding: 50px 40px 100px 70px; margin: 150px 0 0;}
 .gsHome .list li:nth-child(4) {overflow: auto; padding: 50px 40px 100px 70px; margin: 150px 0 0;}
 .gsHome .list li .tit {color:#fff; font-size:55px; font-weight: 600; margin: 0 0 30px;}
 .gsHome .list li:nth-child(4) .tit {text-align:right; color:#000; font-size:55px; font-weight: 600; margin: 0 0 30px;}
-.gsHome .list li .maker {font-size:22px; font-weight: 600; margin: 0 0 20px;}
-.gsHome .list li .txt {line-height:1.6; font-size:20px; font-weight: 400;}
 .gsHome .list li:nth-child(4) .txt {text-align:right; line-height:1.6; font-size:20px; font-weight: 400;}
-#ingPlan {}
-#ingPlan textarea {width: 100%; height: 100%; border: 0;}
+.gsHome .list li .write {margin: 0 0 50px;}
+.gsHome .list li select {background:transparent; border:0; color:#fff; font-size:20px; font-weight:500;}
+.gsHome .list li input {background:transparent; border:0; border-bottom:2px solid #fff; color:#fff; font-size:20px; font-weight:500;}
+.gsHome .list li input.btn {background:#fff; border:0; line-height:27px; color:#000; font-size:14px; font-weight:600; cursor:pointer; padding: 0 15px;}
+.gsHome .list li textarea {width: 100%; height: 100%; border: 0;}
+.gsHome .list li .inner {overflow:auto; height:250px;}
+.gsHome .list li .inner .txt {line-height:1.6; font-size:20px; font-weight: 500;}
+.gsHome .list li .inner .writeDown {margin: 0 0 30px;}
+.gsHome .list li .inner .writeDown input.date {border: 0; line-height:1.6; font-size:17px; font-weight: 400;}
+.gsHome .list li .inner .writeDown input.txt {width:100%; border: 0; line-height:1.6; font-size:17px; font-weight: 400;}
+.gsHome .list li .inner .writeDown .ent {width:100%; height:0;}
 
 
 
@@ -317,9 +324,9 @@
 
 /*member*/
 /*loginForm*/
-.loginCover {width:700px; margin:0 auto; padding:200px 0; }
+.loginCover {width:700px; margin:0 auto; padding:100px 0; }
 .loginForm {height:600px; padding: 60px 70px; text-align:left;font-size: 16px; border: 1px solid #e5e5e5;}
-.loginForm h1 {text-align:left; margin: 0 0 30px 0; font-weight:500; font-size:50px;}
+.loginForm h1 {text-align:left; margin: 0 0 30px 0; font-weight:600; font-size:50px;}
 .input-area input {width:100%; left:0; font-size:17px; padding: 50px 2px 20px; border:none; border-bottom:1px solid #cccccc; outline:none;}
 input::placeholder {font-size:17px;}
 .set-login {margin:45px 0 10px; font-size:14px;} 
