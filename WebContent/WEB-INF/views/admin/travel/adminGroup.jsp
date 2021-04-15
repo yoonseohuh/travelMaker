@@ -47,7 +47,14 @@
 				<p>그룹번호 : ${groupAllList.gNo}</p>
 				<p>개설자ID : ${groupAllList.id}</p>
 				<p>그룹이름 : ${groupAllList.subject}</p>
-				<p>여행상태 : ${groupAllList.status}</p>
+				<p>
+					<c:if test="${groupAllList.status==0}">여행상태 : 모집중</c:if>
+					<c:if test="${groupAllList.status==1}">여행상태 : 모집완료</c:if>
+					<c:if test="${groupAllList.status==2}">여행상태 : 여행시작</c:if>
+					<c:if test="${groupAllList.status==3}">여행상태 : 여행종료</c:if>
+					<c:if test="${groupAllList.status==4}">여행상태 : 최종완료</c:if>
+					<c:if test="${groupAllList.status==5}">여행상태 : 모집취소</c:if>
+				</p>
 				</a>
 			</li>
 			</c:forEach>
