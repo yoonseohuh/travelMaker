@@ -52,7 +52,7 @@
 		<!-- myMenu end -->
 		<!-- 여행 리스트 -->
 		<div class="myPageWrap" id="transcroller-body">
-			<h2 class="pageTit">${id}님의 마이페이지 홈입니다.<br/>나의 여행관련 정보를 확인해보세요!</h2>
+			<h2 class="pageTit" data-aos="fade-right" data-aos-duration="600">${id}님의 마이페이지 홈입니다.<br/>나의 여행관련 정보를 확인해보세요!</h2>
 			<div class="travelList">
 				<c:if test="${!empty allList}">
 					<p class="HomeSubTit">참여중인 여행</p>

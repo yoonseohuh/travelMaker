@@ -18,7 +18,7 @@
 		</script>
 	</c:if>
 
-	<h2 class="pageTit" data-aos="fade-right" data-aos-delay="200" data-aos-duration="600">${id}님의 여행이력입니다 <br/> 다녀온 여행들을 확인해보세요 </h2>
+	<h2 class="pageTit" data-aos="fade-right" data-aos-duration="600">${id}님의 여행이력입니다 <br/> 다녀온 여행들을 확인해보세요 </h2>
 	<c:if test="${empty travelAll}">
 		<h2>
 			참여한 여행이 없습니다. <br />여행을 떠나보세요!

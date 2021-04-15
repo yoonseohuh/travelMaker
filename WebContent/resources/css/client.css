@@ -15,6 +15,7 @@
 .btnWrap {overflow: hidden; display: inline-block; position: relative;left: 50%; transform: translateX(-50%);}
 .btnWrap .btn {float: left; display: inline-block; color:#fff; font-size:20px; font-weight:500; cursor:pointer; padding: 20px 60px; margin: 0 3px;}
 .btnWrap .btn.btnY {background:#ff0000;}
+.btnWrap input.btn.btnY {height:60px; line-height:60px; font-size:20px; font-weight:600; padding: 0 60px;}
 .btnWrap .btn.btnC {background:#444;}
 .btnWrap .txt {text-align: center; font-size:17px; font-weight: 500; margin: 0 0 20px;}
 
@@ -213,19 +214,19 @@
 .makingContWrap .fl.mz {margin: 0;}
 .makingContWrap .txtWrap {margin: 0 0 30px;}
 .makingContWrap .txtWrap .sub {font-size:15px; font-weight: 600; margin: 0 0 7px;}
-.makingContWrap .txtWrap .txt {min-height: 56px; background: #fff; border-radius: 3px; line-height: 1.6; font-size:20px; font-weight: 400; padding: 12px 20px;}
+.makingContWrap .txtWrap .txt {min-height: 56px; background: #fff; border-radius: 3px; line-height: 1.6; font-size:20px; font-weight: 400; padding: 12px 20px; position:relative;}
+.makingContWrap .txtWrap .txt span {position:absolute;right:50px;}
 .makingContWrap .line {clear:both; width: 100%; height: 1px; background: #ddd; margin: 0 0 40px;}
 
 /*groupSpace*/
 .gsWrap {width: 1300px; padding:80px 0; margin: 0 auto;}
 
 .chatWrap {padding:20px 20px 0 0; position:fixed;top:17%;right:10%; z-index:5;}
-.chatWrap .btnChat {width:40px; height:40px; border-radius:100%; background:url(../images/close.png)no-repeat center,#555; background-size:18px; cursor:pointer; transition:.2s; position:absolute;top:0;right:0; z-index:2;}
-.chatWrap .btnChat:hover {background:url(../images/close.png)no-repeat center,#111; background-size:18px;}
-.chatWrap .btnChat.on {width:40px; height:40px; border-radius:100%; background:url(../images/chico.png)no-repeat center,#555; background-size:18px; transition:.2s; position:absolute;top:0;right:0;}
-.chatWrap .btnChat.on:hover {background:url(../images/chico.png)no-repeat center,#b6a4ff; background-size:18px;}
-.chatWrap .chat {overflow: hidden; width: 400px; height:300px; border-radius: 7px;}
-.chatWrap .chat.off {display:none;}
+.chatWrap .btnChat {width:40px; height:40px; border-radius:100%; background:url(../images/chico.png)no-repeat center,#555; background-size:18px; cursor:pointer; transition:.2s; position:absolute;top:0;right:0; z-index:2;}
+.chatWrap .btnChat:hover {background:url(../images/chico.png)no-repeat center,#b6a4ff; background-size:18px;}
+.chatWrap .btnChat.on {width:40px; height:40px; border-radius:100%; background:url(../images/close.png)no-repeat center,#555; background-size:18px; transition:.2s; position:absolute;top:0;right:0;}
+.chatWrap .btnChat.on:hover {background:url(../images/close.png)no-repeat center,#111; background-size:18px;}
+.chatWrap .chat {display:none; overflow: hidden; width: 400px; height:300px; border-radius: 7px;}
 .chatWrap .chat .viewChatWrap {overflow: auto; width: 100%; height:260px; background: #b6a4ff; padding: 35px;}
 .chatWrap .chat .viewChatWrap li {line-height:30px; height:30px; text-align: left; color: #fff;}
 .chatWrap .chat .viewChatWrap li.mine {text-align: right;}
@@ -401,7 +402,8 @@ textarea {resize:none; padding:20px;}
 .topCont {width:800px; color:#fff; margin:0 auto; position:relative; top:50%; transform:translateY(-50%);}
 .topCont .tit {font-family: 'Noto Serif TC', serif; font-size: 90px; line-height: 110px; text-align: center; font-weight: 500; margin-bottom: 10px;}
 .topCont .sub {margin: 50px 0 0; line-height: 48px; text-align: center; color: #fff; font-size: 25px; font-weight: 100;}
-.myPageWrap {padding-top:60px; width:1180px; margin:auto; box-sizing:border-box; position:relative;}
+.myPageWrap {padding:60px 0 120px; width:1180px; margin:auto; box-sizing:border-box; position:relative;}
+.myPageWrap2 {padding:150px 0; width:1180px; margin:auto; box-sizing:border-box; position:relative;}
 .myPageWrap .pageTit {font-size:56px; font-weight:bold; color:#000; line-height:1.5; letter-spacing:-1.5px;}
 .myPageWrap .pageSub {font-size:18px; line-height:1.89; letter-spacing:-0.7px; font-weight:normal; margin-top:30px;}
 .myPageWrap img {width:100%; margin-top: 60px;}
@@ -449,10 +451,10 @@ progress {-webkit-appearance: none; }
 .commentTab li::before {content: ''; display: block; width: 1px; height: 20px; background: #d4d4d4; position: absolute; left: 0; top: 50%; margin-top: -10px;}
 .commentTab ul::after {content: '';display: block; clear: both;}
 .com {margin-bottom: 50px; font-size:40px; font-weight:500;}
-.commentContent {width:75%; margin-bottom:100px;}
-.comBox {position: relative; box-sizing: border-box; padding: 30px 0; padding-left: 400px; border-bottom: 1px #ccc solid;}
-.comBox a {font-size:16px; padding-right: 12px;}
-.commentContent dl dt {position: absolute; width: 240px; padding-right: 60px; left: 0; top: 30px;}
+.commentContent {width:100%; margin-bottom:100px;}
+.comBox {position: relative; box-sizing: border-box; padding: 30px 0; padding-left: 500px; border-bottom: 1px #ccc solid;}
+.comBox a {font-size:16px; cursor:pointer; padding-right: 12px;}
+.commentContent dl dt {position: absolute; width: 440px; left: 0; top: 30px;}
 .commentContent dl dt strong {font-size:19px; font-weight: normal; line-height: 36px; letter-spacing: -0.5px; color: #000; display: block; margin-bottom: 20px;}
 .commentContent dl dd {position:relative;}
 .commentContent dl dd ul {margin-top:50px;}
@@ -470,6 +472,10 @@ progress {-webkit-appearance: none; }
 #map {margin-top:60px; width: 100%; height: 400px;}
 .myLandCont {width:100%; margin-top:50px;}
 .btnMyWrap {overflow:hidden; margin-top:30px;}
+.btnMyWrap .btnLike {position: absolute;left:0;}
+.btnMyWrap .btnLike img {width:10px; margin:0;}
+.btnMyWrap .btnLike .like p {width:200px; position:absolute;left:0;top:22px;}
+.btnMyWrap .btnLike .like .comBtn {position:absolute;left:200px;}
 .btnY {float:right;  background:#ff0000; color:#fff; font-size:15px; font-weight:500; cursor:pointer; padding: 10px 30px; margin: 0 3px;}
 .btnC {float:right;  background:#444; color:#fff; font-size:15px; font-weight:500; cursor:pointer; padding: 10px 30px; margin: 0 3px;}
 .Cont .HomeSubTit {margin-top:40px; border-bottom: 1px #ccc solid; display:block;}

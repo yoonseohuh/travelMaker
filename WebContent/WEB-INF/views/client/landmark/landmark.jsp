@@ -5,7 +5,7 @@
 <jsp:include page="/WEB-INF/views/include/top.jsp" />
 <!-- //top end -->
 
-<div class="wrapAll client">
+<div id="transcroller-body" class="myPageWrap myPageWrap2">
 	
 	<c:if test="${sessionScope.memId==null}">
 		<script>
@@ -13,9 +13,9 @@
 			location.href='/travelMaker/mem/loginForm.tm';
 		</script>
 	</c:if>
-	
+	<h2 class="pageTit" data-aos="fade-in" data-aos-duration="500">모두 함께 만들어가는 랜드마크,<br/>서로 정보를 공유해보세요!</h2>
 	<!-- 지도 -->
-	<div id="map" style="width: 1000px; height: 400px;"></div>
+	<div id="map" style="width: 1180px; height: 400px;"></div>
 
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dbb3c6ebdae00379cc812a1240d45848&libraries=services,clusterer,drawing"></script>
@@ -95,9 +95,9 @@
 								$('.content3').html("<h3>"+res.lType+"&nbsp;&nbsp;|&nbsp;&nbsp;"+res.addr+"</h3></br><h3>"+res.lCont+"</h3>");
 								
 								if(arr.includes(res.lNo+"")==true){	//arr 원소가 문자열로 들어있으므로 res.lNo도 문자형으로 형변환하여 비교
-									$('.like').html("좋아요 한 랜드마크입니다&nbsp;"
-											+"<img src=\"../resources/images/heart-colored.png\" width=\"14\"/>"
-											+"<br/><input type=\"button\" class=\"comBtn\" onclick=\"window.location='/travelMaker/my/myLand.tm'\" value=\"나의 랜드마크\"/>"
+									$('.like').html("<p>좋아요 한 랜드마크입니다</p>&nbsp;"
+											/* +"<img src=\"../resources/images/heart-colored.png\" width=\"14\"/>" */
+											+"<input type=\"button\" class=\"comBtn\" onclick=\"window.location='/travelMaker/my/myLand.tm'\" value=\"나의 랜드마크\"/>"
 									);
 									$('.likeBtn').hide();
 								}else{
@@ -126,9 +126,9 @@
 					contentType: "application/json",
 					data: JSON.stringify(data),
 					success: function(res){
-						$('.likeBtn').html("좋아요 한 랜드마크입니다&nbsp;"
+						$('.likeBtn').html("<p>좋아요 한 랜드마크입니다</p>&nbsp;"
 								+"<img src=\"../resources/images/heart-colored.png\" width=\"14\"/>"
-								+"<br/><input type=\"button\" class=\"comBtn\" onclick=\"window.location='/travelMaker/my/myLand.tm'\" value=\"나의 랜드마크\"/>"
+								+"<input type=\"button\" class=\"comBtn\" onclick=\"window.location='/travelMaker/my/myLand.tm'\" value=\"나의 랜드마크\"/>"
 						);
 					}
 				});
@@ -137,23 +137,36 @@
 		});//ready
 		
 	</script>
-		
-	<a href="/travelMaker/land/landWrite.tm"><button class="comBtn">랜드마크 작성</button></a>
-
-	<!-- 마커 클릭 시 상세 정보 보이는 부분 -->
-	<div class="content1"></div>	<!-- 장소명 -->
-	<div class="content2 clickMenu"></div>	<!-- 아이디 -->
-	<div class="content3"></div>	<!-- 카테고리, 주소, 설명 -->
 	
-	<!-- 좋아요 여부에 따라 보여줄 내용 달리 함 -->
-	<div class="like"></div>
+	<div class="btnMyWrap">
+		<!-- 좋아요 버튼 -->
+		<div class="btnLike">
+			<!-- 좋아요 여부에 따라 보여줄 내용 달리 함 -->
+			<div class="like"></div>
+			<form class="likeBtn">
+				<input type="hidden" id="lNo" name="lNo"/>
+				<input type="hidden" name="id" value="${sessionScope.memId}"/>
+				<input type="image" id="heartIcon" src="../resources/images/heart-empty.png" width="14" alt="좋아요"/>
+			</form>
+		</div>
+		<button onclick="window.location='/travelMaker/land/landWrite.tm'" class="btnY">랜드마크 생성</button>
+	</div>
+	<div class="myLandCont">
+		<!-- 지도 아래  -->
+		<!-- 마커 클릭 시 보일 정보 -->
+		<div class="Cont">
+			<div class="mapBox">
+				<p class="HomeSubTit">해당 랜드마크 정보</p>
+				<div class="content1"></div>
+				<div class="content2 clickMenu"></div>
+				<div class="content3"></div>
+			</div>
+		</div>
+	</div>
 	
-	<!-- 좋아요 버튼 -->
-		<form class="likeBtn">
-			<input type="hidden" id="lNo" name="lNo"/>
-			<input type="hidden" name="id" value="${sessionScope.memId}"/>
-			<input type="image" id="heartIcon" src="../resources/images/heart-empty.png" width="14" alt="좋아요"/>
-		</form>
+	
+	
+	
 </div>
 <!-- //wrapAll end -->
 

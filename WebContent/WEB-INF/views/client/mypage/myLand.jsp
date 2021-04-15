@@ -17,7 +17,7 @@
 		</script>
 	</c:if>
 	
-	<h2 class="pageTit">내가 작성한 랜드마크와 <br/>좋아요한 랜드마크를 확인해보세요.</h2>
+	<h2 class="pageTit" data-aos="fade-right" data-aos-duration="600">내가 작성한 랜드마크와 <br/>좋아요한 랜드마크를 확인해보세요.</h2>
 	<!-- 지도 -->
 	<div id="map"></div>
 
