@@ -278,6 +278,7 @@
 .gsGal .list li {overflow: hidden; float: left; width: 24.25%; height: 200px; background: #000; margin: 0 1% 1% 0;}
 .gsGal .list li:nth-child(4n) {margin: 0 0 1% 0;}
 .gsGal .list li img {display: block; width: 100%;}
+.mang {float:left; margin-right:5px;}
 
 /*gallery*/
 .gallery {overflow: hidden;}
