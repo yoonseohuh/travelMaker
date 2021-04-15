@@ -228,6 +228,14 @@
 				</div>
 				
 				<div class="txtWrap">
+					<p class="sub">모집 마감</p>
+					<p class="txt">
+						마감일
+						<input type="text" id="dueDate" name="closingDate" class="txt2"/>
+					</p>
+				</div>
+				
+				<div class="txtWrap">
 					<p class="sub">코스 설명</p>
 					<p class="txt txt3"><textarea name="courseExpl" rows="5" placeholder="코스 설명을 작성해주세요" style="resize:none;"></textarea></p>
 				</div>
