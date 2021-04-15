@@ -99,9 +99,9 @@ public class TravelController {
 	}
 	
 	//스케줄러: 총평 작성과 공개여부 설정을 모두 마친 그룹의 status를 4로 변경
-	@Scheduled(fixedDelay = 600000)
+	@Scheduled(fixedDelay = 30000)
 	public void travelEndCheck() throws Exception {
-		System.out.println("총평/공개여부 설정 시 그룹 status 변경 체크- 10분마다 호출["+new Date()+"]");
+		System.out.println("총평/공개여부 설정 시 그룹 status 변경 체크- 30초마다 호출["+new Date()+"]");
 		List<GroupSpaceDTO> list = travelService.getAllGroups();
 		for(int i=0; i<list.size(); i++) {
 			if((list.get(i).getShared()==1 || list.get(i).getShared()==2) && list.get(i).getGenReview()!=null) {
