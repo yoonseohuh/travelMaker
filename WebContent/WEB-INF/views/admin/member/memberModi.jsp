@@ -43,7 +43,7 @@
 	<div class="wrapAll admin">
 	    <form action="/travelMaker/admin/memberModiPro.tm" name="memberModi" onsubmit="return check()" method="post">
 	    	<input type="hidden" name="id" value="${mem.id }"/>
-			<table>
+			<table class="tm">
 				<tr>
 					<td>아이디</td>
 					<td>${mem.id}</td>

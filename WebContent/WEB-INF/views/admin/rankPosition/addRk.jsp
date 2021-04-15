@@ -26,7 +26,7 @@
 	<div class="wrapAll">
 		<form action="/travelMaker/admin/addRkPro.tm"  id="addPosForm" name="addPosForm" onsubmit="return check()" method="post">
 		<c:if test="${fn:length(rkList)!=0}">
-			<table>
+			<table class="tm" >
 				<tr>
 					<th>No.</th>
 					<th>등급이름</th>
@@ -37,7 +37,7 @@
 				</tr>
 			</table>
 		   		<c:forEach var="rk" items="${rkList}">
-			   		<table>
+			   		<table class="tm" >
 			    		<tr>
 			    			<td>
 			    				${number}
@@ -56,7 +56,7 @@
 		    	</c:forEach>
 		   </c:if>
 	    		<!-- 삽입 페이지 -->
-	    	<table>
+	    	<table class="tm" >
 	    		<tr>
 					<th>등급이름</th>
 					<th>요구횟수</th>

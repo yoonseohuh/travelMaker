@@ -16,7 +16,7 @@
 		<br/><br/>
 		<!-- 가입된 회원이 없을 때  -->
 		<c:if test="${count==0 || count==null}">
-			<table>
+			<table class="tm">
 				<tr>
 					<td><h3>가입된 회원이 없습니다.</h3></td>
 				</tr>
@@ -24,7 +24,7 @@
 		</c:if>
 		
 		<c:if test="${count>0}">
-			<table>
+			<table class="tm">
 				<tr>
 					<th>No.</th>
 					<th>아이디</th>
@@ -99,24 +99,21 @@
 		</div>
 		<br/><br/>
 		<!-- 검색  -->
-		<form action="/travelMaker/admin/member.tm">
-			<table>
-				<tr>
-					<td>아이디 검색</td>
-					<td><input type="text" name="search"/></td>
-					<td><input type="submit" value="검색"/></td>
-				</tr>
-			</table>
-		</form>
+		<div align="center">
+			<form action="/travelMaker/admin/member.tm" class="borInput">
+				아이디 검색
+				<input type="text" name="search"/>
+				<button type="submit">검색</button>
+			</form>
+		</div>
 		</c:if><!-- count>0 일 때  -->
 		
 		<!-- 전체 회원 보기  -->
-		<div align="center">
+		<span>
 			<button onclick="window.location='/travelMaker/admin/member.tm'">전체 회원 보기</button>
-		</div>
+		</span>
 		
 	</div>
 	<!-- //wrapAll end -->
 	
-	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
-	<!-- //footer end -->
+	

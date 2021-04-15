@@ -28,11 +28,11 @@
 		<input type="hidden" id="sDate" value="${content.startDate}"/>
 		<input type="hidden" id="eDate" value="${content.endDate}"/>
 		<input type="hidden" id="cDate" value="${content.closingDate}"/>
-		<c:if test="${sessionScope.memId eq 'admin'}">
-			<button onclick="window.location='/travelMaker/admin/adminGroupDel.tm?gNo=${content.gNo}'">그룹삭제</button>
-		</c:if>
 		
 		<div class="makingContWrap">
+		<c:if test="${sessionScope.memId eq 'admin'}">
+			<button onclick="window.location='/travelMaker/admin/adminGroupDel.tm?gNo=${content.gNo}'" style="color:red">그룹삭제</button>
+		</c:if>
 			<div class="titWrap">
 				<p class="tit2" data-aos="flip-down" data-aos-duration="600">"${content.subject}"</p>
 				<p class="txt" data-aos="flip-down" data-aos-duration="600">여행 사전계획을 자세히 살펴보고 참여신청 할 수 있습니다!</p>

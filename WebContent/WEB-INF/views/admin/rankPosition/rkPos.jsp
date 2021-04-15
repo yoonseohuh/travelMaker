@@ -44,7 +44,7 @@
 			<h3>랭크를 추가해주세요</h3>
 		</c:if>
 		<form action="/travelMaker/admin/addRkPro.tm" name="addRankForm" onsubmit="return check()" method="post">
-			<table>
+			<table class="tm">
 	    		<tr>
 					<th>등급이름</th>
 					<th>요구횟수</th>
@@ -63,7 +63,7 @@
 		</form>
 		<br/><br/>
 		<c:if test="${fn:length(rkList)!=0}">
-			<table>
+			<table class="tm">
 				<tr>
 					<th>No.</th>
 					<th>등급이름</th>
@@ -73,7 +73,7 @@
 					<th>버튼</th>
 				</tr>
    		<c:forEach var="rk" items="${rkList}">
-	    		<tr>
+	    		<tr class="tm">
 	    			<td>
 	    				${number}
 	    				<c:set var="number" value="${number+1}"/>
@@ -93,5 +93,3 @@
 	</div>
 	<!-- //wrapAll end -->
 	
-	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
-	<!-- //footer end -->

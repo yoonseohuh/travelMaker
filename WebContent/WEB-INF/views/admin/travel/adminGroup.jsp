@@ -19,7 +19,7 @@
 		<c:if test="${sel == null && search == null}">
 			${groupAllCnt}건
 		</c:if>
-		<div class="searchBar">
+		<%-- <div class="searchBar">
 			<form action="/travelMaker/admin/adminGroup.tm">
 				<select name="sel">
 					<option value="" selected disabled hidden>선택하세요</option>
@@ -33,7 +33,7 @@
 			<c:if test="${sel != null && search != null }">
 				<button onclick="window.location='/travelMaker/admin/adminGroup.tm'">전체목록</button>
 			</c:if>
-		</div>
+		</div> --%>
 		<!-- //searchBar end -->
 		
 		
