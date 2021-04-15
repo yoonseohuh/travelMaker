@@ -1,4 +1,4 @@
-`<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -9,9 +9,13 @@
 <!-- //top end -->
 
 <div class="wrapAll client">
-
-	<h1>sharedList</h1>
-
+	
+	<div class="sharedListWrap">
+		<div class="titWrap">
+			<p class="tit2" data-aos="fade-right" data-aos-duration="400">여행 공유하기!</p>
+			<p class="tit2" data-aos="fade-right" data-aos-delay="200" data-aos-duration="400">다른 그룹의 완료된 여행을 볼 수 있어요.</p>
+		</div>
+	
 	<c:if test="${count == 0}">
 		<table>
 			<tr>
@@ -19,23 +23,25 @@
 			</tr>
 		</table>
 	</c:if>
-	<c:if test="${count > 0 }">
+	<c:if test="${count > 0 }">	
 		<div id="sList">
 			<div id="articleTable">
 				<ul class="makingList">
 					<c:forEach var="article" items="${sharedList}" varStatus="status">
-						<li><a
-							href="completedCont.tm?gNo=${article.gNo}&pageNum=${pageNum}"></a>
-							<p class="title">${article.subject}</p>
-							<p class="maker">${article.id}</p>
+						<li>
+							<a href="completedCont.tm?gNo=${article.gNo}&pageNum=${pageNum}"></a>
+							<%-- <p class="no">${number}</p><c:set var="number" value="${number-1}"/> --%>
+							<p class="tit">${article.subject}<span></span></p>
 							<p class="date">${article.startDate}~${article.endDate}</p>
-							<p class="readCnt">조회수 : ${article.readCnt}</p>
-							<p class="likedCnt">좋아요 : ${article.likedCnt}</p></li>
+							<p class="txt">${article.courseExpl}</p>
+							<p class="maker">방장 : ${article.id}</p>
+							<p class="cost">예산 : ${article.cost}원</p>							
+							<p class="txt">조회수 : ${article.readCnt}</p>
+						</li>
 					</c:forEach>
 				</ul>
 			</div>
 		</div>
-		현재 페이지: ${pageNum}
 			<div class="pageNumbers">
 			<c:set var="pageBlock" value="5" />
 			<fmt:parseNumber var="res" value="${count/pageSize}"
@@ -70,7 +76,9 @@
 		</div>
 
 	</c:if>
-
+	</div>
+	<!-- //sharedListWrap end -->
+	
 </div>
 <!-- //wrapAll end -->
 
