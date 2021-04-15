@@ -54,11 +54,11 @@
 	</select>
 	
 	<select id="getSearchMembers" parameterType="string" resultType="TmUserDTO">
-		select * from tmUser where id=#{search}
+		select * from tmUser where id like '%'||#{search}||'%'
 	</select>
 	
 	<select id="getSearchMemberCount" parameterType="string" resultType="int">
-		select count(*) from tmUser where id=#{search}
+		select count(*) from tmUser where id like '%'||#{search}||'%'
 	</select>
 	
 	<select id="getMemberCount" resultType="int">
