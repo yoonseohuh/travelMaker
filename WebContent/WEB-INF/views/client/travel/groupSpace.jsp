@@ -67,9 +67,9 @@
 
 			<div class="gsCont gsHome">
 				<div class="titWrap">
-					<p class="tit2" data-aos="fade-right" data-aos-duration="600">환영합니다!</p>
-					<p class="tit2" data-aos="fade-right" data-aos-delay="400" data-aos-duration="600">${grpSpace.subject}의 그룹 방입니다.</p>
-					<p class="txt" data-aos="fade-right" data-aos-delay="700" data-aos-duration="600">
+					<p class="tit2" data-aos="fade-right" data-aos-duration="500">환영합니다!</p>
+					<p class="tit2" data-aos="fade-right" data-aos-delay="400" data-aos-duration="500">${grpSpace.subject}의 그룹 방입니다.</p>
+					<p class="txt" data-aos="fade-right" data-aos-delay="700" data-aos-duration="500">
 						[날짜 <strong>${grpSpace.startDate}-${grpSpace.endDate}</strong>]
 						&nbsp;[예상비용 <strong><fmt:formatNumber type="number" maxFractionDigits="3" value="${grpSpace.cost}"/></strong>원]
 						&nbsp;[개설자 ${leader}님]
@@ -93,35 +93,11 @@
 							</c:if>			
 							</c:forEach>
 							</c:if>
-							<p class="txt">pos1</p>
-							<p class="txt">pos2</p>
-							<p class="txt">pos3</p>
-							<p class="txt">pos4</p>
-							<p class="txt">pos1</p>
-							<p class="txt">pos2</p>
-							<p class="txt">pos3</p>
-							<p class="txt">pos4</p>
-							<p class="txt">pos1</p>
-							<p class="txt">pos2</p>
-							<p class="txt">pos3</p>
-							<p class="txt">pos4</p>
 						</div>
 					</li>
 					<li>
 						<p class="tit">Waiting</p>
 						<div class="inner">
-							<p class="txt">pos1</p>
-							<p class="txt">pos2</p>
-							<p class="txt">pos3</p>
-							<p class="txt">pos4</p>
-							<p class="txt">pos1</p>
-							<p class="txt">pos2</p>
-							<p class="txt">pos3</p>
-							<p class="txt">pos4</p>
-							<p class="txt">pos1</p>
-							<p class="txt">pos2</p>
-							<p class="txt">pos3</p>
-							<p class="txt">pos4</p>
 						</div>
 					</li>
 					<li>
@@ -176,7 +152,9 @@
 				
 				
 				<c:if test="${id==leader}">
-					<p class="tit2">새로 들어온 신청</p>
+					<div class="titWrap">
+						<p class="tit2" data-aos="fade-right" data-aos-duration="500">새로 들어온 신청</p>
+					</div>
 					<c:if test="${fn:length(awaiters)==0}">
 						신청자가 없습니다.
 					</c:if>
