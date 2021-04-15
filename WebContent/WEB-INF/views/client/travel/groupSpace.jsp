@@ -98,6 +98,16 @@
 					<li>
 						<p class="tit">Waiting</p>
 						<div class="inner">
+							<c:if test="${fn:length(awaiters)==0}">
+								승인 대기 중인 멤버가 없습니다. 
+							</c:if>
+							<c:if test="${fn:length(awaiters)>0}">
+								<c:forEach var="req" items="${awaiters}">
+									<p class="txt">${req.id}님</p>
+									<c:if test="${req.reqType==0}">일반</c:if>
+									<c:if test="${req.reqType==1}">가이드</c:if>
+								</c:forEach>
+							</c:if>
 						</div>
 					</li>
 					<li>
