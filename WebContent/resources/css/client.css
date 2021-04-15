@@ -282,7 +282,10 @@
 .gsGal .list li .tic1 {font-size:17x; font-weight: 500; margin: 0 0 10px; position:relative;}
 .gsGal .list li .tic1 span {font-size:20px; font-weight: 500; position:absolute;top:-5px;right:0;}
 .gsGal .list li img {display: block; width: 100%;}
+
 .gsGal .btnY {float:none;}
+.mang {float:left; margin-right:5px;}
+
 
 /*gallery*/
 .gallery {overflow: hidden;}
