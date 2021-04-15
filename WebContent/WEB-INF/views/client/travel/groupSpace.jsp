@@ -161,12 +161,12 @@
             
             
             
-            <c:if test="${id==leader && grpSpace.status<3}">
+            <c:if test="${id==leader}">
                <div class="titWrap">
                   <p class="tit2" data-aos="fade-right" data-aos-duration="500">새로 들어온 신청</p>
                </div>
                <c:if test="${fn:length(awaiters)==0}">
-                  신청자가 없습니다.
+                  <p>신청자가 없습니다.</p>
                </c:if>
                <c:if test="${fn:length(awaiters)>0}">
                   <table class="tm" id="applicants">
@@ -241,8 +241,7 @@
                      <!-- 총평 작성하고 여행 공개여부 다 처리하면 status==4로 바꾸기 -->
                      <div class="genSharedDiv">
                         <c:if test="${grpSpace.status==3}">
-                           <c:if test="${memId == grpSpace.id}">   <!-- 아이디바꿔놓음  -->
-                        
+                           <c:if test="${memId == grpSpace.id}">
                               <c:if test="${empty grpSpace.genReview}">
                                   ${grpSpace.id}님 ! 여행이 끝났습니다! 총평을 작성하고, 여행의 공개 여부를 지정해보세요.
                                   <button id="tab1">총평작성</button>
@@ -258,12 +257,10 @@
                               </c:if>
                               <c:if test="${!empty grpSpace.genReview}">
                                  개설자의 총평 : ${grpSpace.genReview}
-                                 <c:forEach var="reviewList" items="${reviewList}">
-                                    <br/>└ ${reviewList.nickname}님 :  ${reviewList.genReply}
-                                 </c:forEach>
                                  <c:if test="${grpSpace.shared == 0}">   <!-- 그룹스페이스 쉐어드가 0이면 공개여부 보여줌 -->
                                     <form action="/travelMaker/travel/groupSpace.tm" name="openOrbOpen" method="get">
                                        <input type="hidden" name="gNo" value="${grpSpace.gNo}" />
+                                       
                                        <br/> 공개여부 : 
                                        <input type="radio" name="shared" value="1" />공개
                                        <input type="radio" name="shared" value="2" />비공개
@@ -289,23 +286,17 @@
             <!-- if: leader end -->
             
             <div>
-
-                  <div class="titWrap">
-                          <p class="tit2" data-aos="fade-right" data-aos-duration="500">총평</p>
-                       </div>
-
+               <c:if test="${memId != grpSpace.id}">
                   <c:if test="${empty grpSpace.genReview}">
                      개설자의 총평이 아직 작성되지 않았습니다.
                   </c:if>
                   <c:if test="${!empty grpSpace.genReview}">
-                     개설자의 총평 : ${grpSpace.genReview} 
+                      ${grpSpace.genReview} 
                      <c:forEach var="reviewList" items="${reviewList}">
                               <br/>└ ${reviewList.nickname}님 :  ${reviewList.genReply}
                      </c:forEach>
-                     <c:if test="${memId != grpSpace.id}">
-                        <c:if test="${result == 1 }">
-                           <br/><button id="tab1">답글달기</button>
-                        </c:if>
+                     <c:if test="${result == 1 }">
+                        <br/><button id="tab1">답글달기</button>
                      </c:if>
                   </c:if>   
                       <form action="/travelMaker/travel/genReplyPro.tm" id="cont2" name="reply" method="get">
@@ -317,7 +308,7 @@
                         <input type="submit" value="답글작성" />
                      </form>
                      <input type="button" value="취소" id="cancel"/>
-                        
+               </c:if>               
             </div>
             <!-- //총평 -->
 
