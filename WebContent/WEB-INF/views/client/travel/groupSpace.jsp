@@ -250,10 +250,10 @@
                                      <input type="hidden" name="gNo" value="${grpSpace.gNo}" />
                                      <input type="hidden" name="from" value="groupspace" />
                                      
-                                    <textarea cols="100" rows="10" name="genReview" placeholder="개설자 ${grpSpace.id}님의 여행총평을 남겨주세요!" ></textarea>
-                                    <input type="submit" value="작성" />
+                                    <textarea  style="margin:10px 0; display:block" cols="80" rows="5" name="genReview" placeholder="개설자 ${grpSpace.id}님의 여행총평을 남겨주세요!" ></textarea>
+                                      <button type="submit" class="mang">작성</button>
                                  </form>
-                                 <input type="button" value="취소" id="cancel" />
+                                 <input type="button"  class="mang"  value="취소" id="cancel" />
                               </c:if>
                               <c:if test="${!empty grpSpace.genReview}">
                                  개설자의 총평 : ${grpSpace.genReview}
