@@ -10,7 +10,7 @@
 		<c:if test="${result == 1}">
 			<script>
 				alert("전송완료");
-				location.href = "messageWrite.tm";
+				location.href = "message.tm";
 			</script>
 			
 		</c:if>
