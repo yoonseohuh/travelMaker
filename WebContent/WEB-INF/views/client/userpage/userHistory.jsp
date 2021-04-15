@@ -9,42 +9,45 @@
 	<!-- //top end -->
 	
 	<div class="wrapAll client">
-		<c:import url="/WEB-INF/views/include/userMenu.jsp">
-			<c:param name="userId" value="${userId}"></c:param>
-		</c:import>
-		<h1>${userId}님의 여행이력</h1>
-		
-		<c:if test="${empty travelAll}">
-			<h2>
-				아직 참여한 여행이 없습니다.
-			</h2>
-		</c:if>
-		<c:if test="${!empty travelAll}">
-			<div class="infoList">
-				<c:forEach var="travelAll" items="${travelAll}" varStatus="status">
-		             <ul>
-		                 <li>
-		                     <div>
-		                         <h2>${travelAll.subject} <a href="/travelMaker/my/myHistoryCont.tm?gNo=${travelAll.gNo}&status=${travelAll.status}" class="posA">더 알아보기 ></a></h2>
-		                         <dl>
-		                             <dt>날짜</dt>
-		                             <dd>${travelAll.startDate} ~ ${travelAll.endDate}</dd>
-		                         </dl>
-		                         <dl>
-		                             <dt>컨셉</dt>
-		                             <dd class="cos">${travelAll.concept}</dd>
-		                         </dl>
-		                         <dl>
-		                             <dt>코스 설명</dt>
-		                             <dd class="cos">${travelAll.courseExpl}</dd>
-		                         </dl>
-		                     </div>
-		                 </li>
-		             </ul>
-				</c:forEach>
-	         </div>
-         <!--infoList end-->
-		</c:if>
+	
+		<div class="myPageWrap myPageWrap3">
+			<c:import url="/WEB-INF/views/include/userMenu.jsp">
+				<c:param name="userId" value="${userId}"></c:param>
+			</c:import>
+			<h2 class="pageTit">${userId}님의 여행이력</h2>
+			
+			<c:if test="${empty travelAll}">
+				<h2>
+					아직 참여한 여행이 없습니다.
+				</h2>
+			</c:if>
+			<c:if test="${!empty travelAll}">
+				<div class="infoList">
+					<c:forEach var="travelAll" items="${travelAll}" varStatus="status">
+			             <ul>
+			                 <li>
+			                     <div>
+			                         <h2>${travelAll.subject} <%-- <a href="/travelMaker/my/myHistoryCont.tm?gNo=${travelAll.gNo}&status=${travelAll.status}" class="posA">더 알아보기 ></a> --%></h2>
+			                         <dl>
+			                             <dt>날짜</dt>
+			                             <dd>${travelAll.startDate} ~ ${travelAll.endDate}</dd>
+			                         </dl>
+			                         <dl>
+			                             <dt>컨셉</dt>
+			                             <dd class="cos">${travelAll.concept}</dd>
+			                         </dl>
+			                         <dl>
+			                             <dt>코스 설명</dt>
+			                             <dd class="cos">${travelAll.courseExpl}</dd>
+			                         </dl>
+			                     </div>
+			                 </li>
+			             </ul>
+					</c:forEach>
+		         </div>
+	         <!--infoList end-->
+			</c:if>
+		</div>
 	</div>
 	<!-- //wrapAll end -->
 	

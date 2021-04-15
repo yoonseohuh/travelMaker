@@ -214,10 +214,17 @@
 .makingContWrap {overflow: hidden; width: 1200px; background: #eee; border-radius: 10px; margin: 120px auto 80px; padding: 80px;}
 .makingContWrap .titWrap {text-align: center; margin: 0 0 50px;}
 .makingContWrap .fl {float: left; width: 48%; margin: 0 4% 40px 0;}
+.makingContWrap .fl2 {float: left; width: 48%; margin: 0 4% 0 0;}
 .makingContWrap .fl.mz {margin: 0;}
 .makingContWrap .txtWrap {margin: 0 0 30px;}
 .makingContWrap .txtWrap .sub {font-size:15px; font-weight: 600; margin: 0 0 7px;}
 .makingContWrap .txtWrap .txt {min-height: 56px; background: #fff; border-radius: 3px; line-height: 1.6; font-size:20px; font-weight: 400; padding: 12px 20px; position:relative;}
+.makingContWrap .txtWrap .txt2 {padding:0;}
+.makingContWrap .txtWrap .txt3 {padding:30px;}
+.makingContWrap .txtWrap .txt > .txt {width:100%; line-height:56px; font-size:17px; border:0; padding: 0 15px;}
+.makingContWrap .txtWrap .txt > .txt2 {width:200px; height:52px; border-bottom: 2px solid #000; line-height:54px; font-size:17px; padding: 0 15px;}
+.makingContWrap .txtWrap .txt > .txt3 {width:500px;}
+.makingContWrap .txtWrap .txt3 textarea {width:100%; border:0; font-size:17px; font-weight: 400; padding: 0;}
 .makingContWrap .txtWrap .txt span {position:absolute;right:50px;}
 .makingContWrap .line {clear:both; width: 100%; height: 1px; background: #ddd; margin: 0 0 40px;}
 
@@ -429,6 +436,7 @@ textarea {resize:none; padding:20px;}
 .topCont .sub {margin: 50px 0 0; line-height: 48px; text-align: center; color: #fff; font-size: 25px; font-weight: 100;}
 .myPageWrap {padding:60px 0 120px; width:1180px; margin:auto; box-sizing:border-box; position:relative;}
 .myPageWrap2 {padding:150px 0; width:1180px; margin:auto; box-sizing:border-box; position:relative;}
+.myPageWrap3 {padding:0 0 150px;} 
 .myPageWrap .pageTit {font-size:56px; font-weight:bold; color:#000; line-height:1.5; letter-spacing:-1.5px;}
 .myPageWrap .pageSub {font-size:18px; line-height:1.89; letter-spacing:-0.7px; font-weight:normal; margin-top:30px;}
 .myPageWrap img {width:100%; margin-top: 60px;}
