@@ -289,6 +289,7 @@
 				<!-- if: leader end -->
 				
 				<div>
+
 						<div class="titWrap">
                  			<p class="tit2" data-aos="fade-right" data-aos-duration="500">총평</p>
               			</div>
@@ -316,7 +317,7 @@
 								<input type="submit" value="답글작성" />
 							</form>
 							<input type="button" value="취소" id="cancel"/>
-									
+								
 				</div>
 				<!-- //총평 -->
 
