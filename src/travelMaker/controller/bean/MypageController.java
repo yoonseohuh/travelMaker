@@ -120,7 +120,9 @@ public class MypageController {
 			List<GroupRequestDTO> list = travelService.getRequests(gNo);
 			for(int j=0;j<list.size();j++) {
 				if(id.equals(list.get(j).getId())) {
+					System.out.println("에러나여?");
 					int posNo = list.get(j).getPosNo();
+					System.out.println("에러납니다" + posNo);
 					if(posNo==-1) {
 						map.put("myPos", "일반");
 					}else {
