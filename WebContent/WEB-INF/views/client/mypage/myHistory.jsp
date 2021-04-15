@@ -23,7 +23,9 @@
 		<h2>
 			참여한 여행이 없습니다. <br />여행을 떠나보세요!
 		</h2>
-		<button onclick="window.location='/travelMaker/travel/makingList.tm'">여행떠나기</button>
+		<div class="btnWrap fl">
+			<p onclick="window.location='/travelMaker/travel/makingList.tm'" class="btn btnY">여행떠나기</p>
+		</div>
 	</c:if>
 	<c:if test="${!empty travelAll}">
 
