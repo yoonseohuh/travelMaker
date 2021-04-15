@@ -133,8 +133,10 @@
 .landM .cont .info .arrow a {float:right; color:#5066aa; font-size:12px;}
 
 
-/*making*/
+/*making + shared*/
 .makingListWrap {width: 100%; margin: 0 auto;}
+
+.sharedListWrap .titWrap {width: 1300px; padding: 80px 0 100px; margin: 0 auto;} 
 
 .makingListWrap .titWrap {width: 1300px; padding: 140px 0 130px 340px; margin: 0 auto; position: relative;}
 .makingListWrap .titWrap .myMakeBtn {display: inline-block; color:#444; font-size: 25px; font-weight: 600; cursor: pointer; margin: 50px 0 0;}
