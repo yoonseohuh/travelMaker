@@ -26,50 +26,36 @@
 		}
 	</script>
 	
-	<div class="wrapAll">
-	<br/><br/><br/><br/><br/><br/>
-		<a href="message.tm">받은쪽지함</a> | <a href="message.tm">보낸쪽지함</a>
-		<h1>쪽지쓰기</h1>
-		<form action="/travelMaker/msg/messageWritePro.tm" name="messageWrite" onsubmit="return check()" method="get">
+	<div class="wrapAll client">
+		
+		<div class="msWrap">
+		
+			<div class="titWrap">
+				<p class="tit2" data-aos="fade-right" data-aos-duration="500">쪽지쓰기</p>
+			</div>
 			
-			
-			<c:if test="${reply == null && receiver == null }"> 
-			받는이 <input type="text" name="receiver" /> <br/>
-			</c:if>
-			<c:if test="${reply != null }">
-			받는이 <input type="text" name="receiver"  value="${reply}" readonly/> <br/>
-			</c:if>
-			<c:if test="${receiver != null }">
-			받는이 <input type="text" name="receiver"  value="${receiver}" readonly/> <br/>
-			</c:if>
-			<textarea rows="10" cols="30" name="mCont"></textarea><br/>
-			<input type="submit" value="보내기" />
-		</form>
-		<button onclick="window.location='/travelMaker/msg/message.tm'" >취소</button> 
+			<form action="/travelMaker/msg/messageWritePro.tm" name="messageWrite" onsubmit="return check()" method="get">
+			<div class="msWrite"> 
+				<c:if test="${reply == null && receiver == null }">
+				<p><span>받는이</span><input type="text" name="receiver" /></p>
+				</c:if>
+				<c:if test="${reply != null }">
+				<p><span>받는이</span><input type="text" name="receiver"  value="${reply}" readonly/></p>
+				</c:if>
+				<c:if test="${receiver != null }">
+				<p><span>받는이</span><input type="text" name="receiver"  value="${receiver}" readonly/></p>
+				</c:if>
+				<textarea name="mCont"></textarea>
+			</div>
+		
+			<div class="btnWrap">
+				<input type="submit" value="보내기" class="btn btnY"/>
+				<p onclick="window.location='/travelMaker/msg/message.tm'" class="btn btnC">취소</p>
+			</div>
+			</form>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		</div>
+		<!-- //msWrap end -->
 		
 	</div>
 	<!-- //wrapAll end -->
