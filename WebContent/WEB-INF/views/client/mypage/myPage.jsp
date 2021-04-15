@@ -151,11 +151,11 @@
 				                        </li>
 				                    </ul>
 				        
-				                    <div id="cont2">
+				                    <div id="cont2" class="posSelList">
 									<c:forEach var="pos" items="${posList}">
 									<ul>
 										<li>
-											${pos.posName}:"${pos.posExpl}" <input type="button" value="선택" onclick="posDcsn(1,${pos.posNo})"/>
+											<input type="button" value="선택" onclick="posDcsn(1,${pos.posNo})"/> <span class="posName">${pos.posName}:</span> <span class="posExpl">"${pos.posExpl}"</span> 
 										</li>
 									</ul>
 									</c:forEach>
@@ -183,11 +183,11 @@
 				                            <a style="cursor:pointer" id="tab1">포지션 선택</a> <a style="cursor:pointer" id="cancel">접기</a>
 				                        </li>
 				                    </ul>
-				                    <div id="cont2">
+				                    <div id="cont2" class="posSelList">
 										<c:forEach var="pos" items="${posList}">
 										<ul>
 											<li>
-											${pos.posName}: "${pos.posExpl}" <input type="button" value="선택" onclick="posDcsn(2,${pos.posNo})"/>
+											<input type="button" value="선택" onclick="posDcsn(2,${pos.posNo})"/> <span class="posName">${pos.posName}:</span> <span class="posExpl">"${pos.posExpl}"</span> 
 											</li>
 										</ul>
 										</c:forEach>
