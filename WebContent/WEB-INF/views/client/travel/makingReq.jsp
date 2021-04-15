@@ -46,16 +46,22 @@
 			
 			<div class="txtWrap">
 				<p class="sub">참여유형</p>
+				
 				<c:if test="${pos1==0 && pos2==0}">
 				<p class="txt">${id}님은 일반으로만 지원 가능합니다.
 					<span>
 						<input type="radio" name="reqType" value="0" id="joinTypeN" onclick="posSlide(this.value)" checked/>일반
-						<c:if test="${pos1!=0 || pos2!=0}">
-						<input type="radio" name="reqType" value="1" id="joinTypeG" onclick="posSlide(this.value)"/>가이드
-						</c:if>
 					</span>
 				</p>								
-				</c:if>				
+				</c:if>
+				<c:if test="${pos1!=0 || pos2!=0}">
+				<p class="txt">${id}님은 일반 또는 가이드로 지원 가능합니다.
+					<span>
+						<input type="radio" name="reqType" value="0" id="joinTypeN" onclick="posSlide(this.value)" />일반
+						<input type="radio" name="reqType" value="1" id="joinTypeG" onclick="posSlide(this.value)" checked/>가이드
+					</span>
+				</p>
+				</c:if>			
 			</div>
 			
 			<div class="txtWrap pstn">
