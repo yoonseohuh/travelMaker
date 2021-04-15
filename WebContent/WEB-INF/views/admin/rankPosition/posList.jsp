@@ -85,7 +85,7 @@
 			</table>
 		</c:if>
 		<!-- 포지션 대분류 보여주기 -->
-		<table style="margin:50px 0;">
+		<table class="tm" style="margin:50px 0;">
 			<tr>
 				<td>포지션 대분류 번호</td>
 				<td>1</td>
@@ -108,7 +108,7 @@
 		<br/><br/>
 		<!-- 포지션 추가  -->
 		<form action="/travelMaker/admin/addSPosPro.tm" name="addPosForm" onsubmit="return check()" method="post" enctype="multipart/form-data">
-			<table>
+			<table class="tm">
 	    		<tr>
 					<th>포지션 대분류</th>
 					<th>이모티콘</th>
@@ -148,9 +148,9 @@
 		</form>
 		<br/><br/>
 		-->
-		
+		<br/><br/><br/>
 		<c:if test="${count>0}">
-			<table>
+			<table class="tm">
 				<tr>
 					<th>No.</th>
 					<th>포지션 대분류</th>

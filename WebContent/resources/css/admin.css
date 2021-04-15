@@ -8,3 +8,4 @@
 .adminGroup li:nth-child(4n) {margin: 0 0 1% 0;}
 
 /*member*/
+.admin input {border: 1px #000 solid;}

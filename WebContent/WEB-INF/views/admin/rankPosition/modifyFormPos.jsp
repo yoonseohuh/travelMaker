@@ -26,7 +26,7 @@
 	<div class="wrapAll admin">
 		<form action="/travelMaker/admin/modifyProPos.tm" name="modiPosForm" onsubmit="return check()" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="posNo" value="${spdto.posNo}" />
-			<table>
+			<table class="tm">
 				<tr>
 					<th>포지션 분류</th>
 					<th>이모티콘 업로드</th>

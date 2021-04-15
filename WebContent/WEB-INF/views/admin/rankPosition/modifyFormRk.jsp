@@ -33,7 +33,7 @@
 	<div class="wrapAll admin">
 		<form action="/travelMaker/admin/modifyProRk.tm" name="modiRk" onsubmit="return check()" method="post">
 			<input type="hidden" name="rkNo" value="${rdto.rkNo}" />
-			<table>
+			<table class="tm">
 				<tr>
 					<th>등급이름</th>
 					<th>요구횟수</th>
