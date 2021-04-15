@@ -166,7 +166,7 @@
 						<p class="tit2" data-aos="fade-right" data-aos-duration="500">새로 들어온 신청</p>
 					</div>
 					<c:if test="${fn:length(awaiters)==0}">
-						신청자가 없습니다.
+						<p>신청자가 없습니다.</p>
 					</c:if>
 					<c:if test="${fn:length(awaiters)>0}">
 						<table class="tm" id="applicants">
@@ -249,11 +249,10 @@
 										 		<input type="hidden" name="id" value="${grpSpace.id}" />
 										 		<input type="hidden" name="gNo" value="${grpSpace.gNo}" />
 										 		<input type="hidden" name="from" value="groupspace" />
-										 		
-												<textarea cols="100" rows="10" name="genReview" placeholder="개설자 ${grpSpace.id}님의 여행총평을 남겨주세요!" ></textarea>
-												<input type="submit" value="작성" />
+												<textarea style="margin:10px 0; display:block" cols="80" rows="5" name="genReview" placeholder="개설자 ${grpSpace.id}님의 여행총평을 남겨주세요!" ></textarea>
+												<button type="submit" class="mang">작성</button>
 											</form>
-											<input type="button" value="취소" id="cancel" />
+											<input type="button" value="취소" class="mang" id="cancel" />
 										</c:if>
 										<c:if test="${!empty grpSpace.genReview}">
 											개설자의 총평 : ${grpSpace.genReview}
