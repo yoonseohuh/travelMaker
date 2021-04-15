@@ -32,8 +32,8 @@
 	<div id="divView" style="position:absolute; display:none; background-color:#ffffff; border:solid 2px #d0d0d0; width:150px; height:50px; padding: 5px 15px 0;"></div>
 	<script>
 	$('.clickMenu').click(function(e) {
-		var divTop = e.clientY - 40; //상단 좌표 위치 안맞을시 e.pageY
-		var divLeft = e.clientX; //좌측 좌표 위치 안맞을시 e.pageX
+		var divTop = e.pageY - 40; //상단 좌표 위치 안맞을시 e.pageY
+		var divLeft = e.pageX; //좌측 좌표 위치 안맞을시 e.pageX
 		var serial = $(this).attr("serial");
 		var idx = $(this).attr("idx");
 		var userId = $('.clickId').val();
@@ -42,7 +42,8 @@
 		$('#divView').css({
 			"top": divTop,
 			"left": divLeft,
-			"position": "absolute"
+			"position": "absolute",
+			"z-index" : "996"
 		}).show();
 		$('#close').click(function(){document.getElementById('divView').style.display='none'});
 	});

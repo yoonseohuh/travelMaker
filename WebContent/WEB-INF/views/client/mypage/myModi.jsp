@@ -15,7 +15,7 @@
 
 	<div class="myPageWrap">
 		<div class="travelContent">
-		<h2 class="pageTit">나의 기본정보를 확인,수정 해보세요</h2>
+		<h2 class="pageTit" data-aos="fade-right" data-aos-duration="600">나의 기본정보를 확인,수정 해보세요</h2>
 			<div class="mArticle">
 				<h3 class="titModi">내정보 관리</h3>
 				<div class="wrapModi">

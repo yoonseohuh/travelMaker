@@ -101,7 +101,7 @@
       
 	</script>
       
-	<h2 class="pageTit">
+	<h2 class="pageTit" data-aos="fade-right" data-aos-duration="600">
                 나에게 넌.  너에게 난. <br/>
                 동행자들이 남긴 코멘트를 확인해보세요
      </h2>
