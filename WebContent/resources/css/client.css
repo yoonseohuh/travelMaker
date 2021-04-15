@@ -429,6 +429,7 @@ textarea {resize:none; padding:20px;}
 .topCont .sub {margin: 50px 0 0; line-height: 48px; text-align: center; color: #fff; font-size: 25px; font-weight: 100;}
 .myPageWrap {padding:60px 0 120px; width:1180px; margin:auto; box-sizing:border-box; position:relative;}
 .myPageWrap2 {padding:150px 0; width:1180px; margin:auto; box-sizing:border-box; position:relative;}
+.myPageWrap3 {padding:0 0 150px;} 
 .myPageWrap .pageTit {font-size:56px; font-weight:bold; color:#000; line-height:1.5; letter-spacing:-1.5px;}
 .myPageWrap .pageSub {font-size:18px; line-height:1.89; letter-spacing:-0.7px; font-weight:normal; margin-top:30px;}
 .myPageWrap img {width:100%; margin-top: 60px;}
