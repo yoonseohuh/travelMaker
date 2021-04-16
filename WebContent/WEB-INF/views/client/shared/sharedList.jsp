@@ -34,7 +34,7 @@
 							<p class="tit">${article.subject}<span></span></p>
 							<p class="date">${article.startDate}~${article.endDate}</p>
 							<p class="txt">${article.courseExpl}</p>
-							<p class="maker">방장 : ${article.id}</p>
+							<p class="maker">방장 : <input type="button" class="clickMenu clickId" idx="${article.id}" value="${article.id}"/></p>
 							<p class="cost">예산 : ${article.cost}원</p>							
 							<p class="txt">조회수 : ${article.readCnt}</p>
 						</li>

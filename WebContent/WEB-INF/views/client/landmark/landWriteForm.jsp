@@ -14,20 +14,24 @@
 			</script>
 		</c:if>
 		
-		<h1>landWriteForm</h1>
-		
-		<!-- 검색창 -->
-		<br />
-		<br /><br /><br /><br />
-		<div>
-			<input type="text" size="40" id="searchKeyword" placeholder="장소명을 검색해주세요"/>
-			<button id="searchBtn">검색</button>
-			<button id="deleteBtn">삭제</button>
-		</div>
-		<br />
-		<br />
+		<div class="makingContWrap">
+			<div class="titWrap">
+				<p class="tit2" data-aos="flip-down" data-aos-duration="600">랜드마크 생성</p>
+				<p class="txt" data-aos="flip-down" data-aos-duration="600">자신만의 노하우를 함께 나눠봐요!</p>
+			</div>
+			
+			<div class="txtWrap">
+				<p class="sub">상호명으로 검색</p>
+				<p class="txt txt2"><input type="text" size="40" class="txt txt3" id="searchKeyword" placeholder="장소명을 검색해주세요"/></p>
+			</div>
+			
+			<div class="btnWrap">
+				<button id="searchBtn" class="btn btnY">검색</button>
+				<button id="deleteBtn" class="btn btnC">삭제</button>
+			</div>
+			
 		<!-- 지도 -->
-		<div id="map" style="width: 1000px; height: 400px;"></div>
+		<div id="map" style="width: 1040px; height: 400px;"></div>
 
 		<script type="text/javascript"
 			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dbb3c6ebdae00379cc812a1240d45848&libraries=services,clusterer,drawing"></script>
@@ -137,13 +141,39 @@
 			});
 		</script>
 		<form action="/travelMaker/land/landWritePro.tm" name="inputForm" onsubmit="return validation()" method="post">
-			<input type="hidden" name="xLoc" id="xLoc"/>
-			<input type="hidden" name="yLoc" id="yLoc"/>
-			<input type="hidden" name="lOpen" value="0"/>
-			<table>
+		<input type="hidden" name="xLoc" id="xLoc"/>
+		<input type="hidden" name="yLoc" id="yLoc"/>
+		<input type="hidden" name="lOpen" value="0"/>
+		
+		<div class="txtWrap">
+			<p class="sub">랜드마크 장소명</p>
+			<p class="txt txt2"><input type="text" class="txt" name="lName" id="place_name" readonly></p>
+		</div>
+		
+		<div class="txtWrap">
+			<p class="sub">작성자</p>
+			<p class="txt txt2"><input type="text" class="txt" name="writer" value="${sessionScope.memId}" readonly></p>
+		</div>
+		
+		<div class="txtWrap">
+			<p class="sub">랜드마크 유형</p>
+			<p class="txt txt2"><input type="text" class="txt" name="lType" id="category_name" readonly></p>
+		</div>
+		
+		<div class="txtWrap">
+			<p class="sub">랜드마크 주소</p>
+			<p class="txt txt2"><input type="text" class="txt" name="addr" id="road_address_name" readonly></p>
+		</div>
+		
+		<div class="txtWrap">
+			<p class="sub">랜드마크 소개</p>
+			<p class="txt txt3"><textarea rows="3" name="lCont" placeholder="입력해주세요." style="resize:none;"></textarea></p>
+		</div>
+			
+			<%-- <table>
 				<tr>
 					<td>랜드마크 장소명</td>
-					<td><input type="text" name="lName" id="place_name" readonly></td>
+					<td><input type="text" class="txt" name="lName" id="place_name" readonly></td>
 				</tr>
 				<tr>
 					<td>작성자</td>
@@ -166,7 +196,13 @@
 						<input type="submit" value="등록"/> 
 						<input type="button" value="취소" onclick="window.location='/travelMaker/client/landmark/landmark.tm'"/>
 					</td>
-			</table>
+			</table> --%>
+		
+		</div>
+		<div class="btnWrap">
+			<input type="submit" value="등록" class="btn btnY"/> 
+			<p class="btn btnC" onclick="window.location='/travelMaker/client/landmark/landmark.tm'">취소</p>
+		</div>
 		</form>
 		
 	</div>
