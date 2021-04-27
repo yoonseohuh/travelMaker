@@ -58,9 +58,9 @@
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
           destroy-method="close"
           p:driverClassName="oracle.jdbc.driver.OracleDriver"
-          p:url="jdbc:oracle:thin:@nullmasternull.iptime.org:3000:ORCL"
-          p:username="team02"
-          p:password="team02" />
+          p:url="jdbc:oracle:thin:@123.108.162.94:1521:tmServer"
+          p:username="travelmanager"
+          p:password="1234" />
        
     <!-- 커넥션 풀 역할 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
