@@ -145,6 +145,7 @@
 			<button onclick="window.location='/travelMaker/shared/sharedList.tm'" class="comBtn btnRight">back</button>
 		</div>
 		</c:if>
+		
 		<!-- aContWrap end -->
 
 
