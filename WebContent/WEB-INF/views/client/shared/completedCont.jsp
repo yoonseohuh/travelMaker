@@ -96,7 +96,7 @@
 			<ul>
 				<li>
 					<c:if test="${empty gList}">
-							게시된 사진이 없습니다. </br></br></br>
+							게시된 사진이 없습니다. <br/><br/><br/>
 					</c:if>
 					<c:if test="${!empty gList}">
 						<c:forEach var="gList" items="${gList}">
