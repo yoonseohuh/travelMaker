@@ -11,7 +11,11 @@
 		<error-code>404</error-code>
 		<location>/mem/error404page.tm</location>
 	</error-page>
-		
+	
+	<!-- 클러스터링 
+	<distributable/>
+	-->
+	
 	<!-- 한글 인코딩 처리 -->
 	<filter>
 		<filter-name>characterEncodingFilter</filter-name>
