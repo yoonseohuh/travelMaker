@@ -1,124 +1,105 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
-	<jsp:include page="/WEB-INF/views/include/top.jsp" />
-	<!-- //top end -->
-	<script>
-		//ajax
-		$(document).ready(function(){
-			$(".change").change(function(event){
-				event.preventDefault();
-				var data = {};
-				$.each($('#signupForm').serializeArray(), function(index, i){
-					data[i.name] = i.value;
-				});
-				console.log(data);
-				$.ajax({
-					type:"post",
-					url: "/travelMaker/mem/ajaxIdCheck.tm",
-					dataType: "json",
-					contentType: "application/json",
-					data: JSON.stringify(data),
-					success : function(result){
-						var check = JSON.parse(result);
-						console.log(check.idResult);
-						console.log(check.nickResult);
-						console.log(check.emailResult);
-						$("#idChRes").val(check.idResult);
-						$("#nickChRes").val(check.nickResult);
-						$("#emailChRes").val(check.emailResult);
-					}
-				});
-			});			
-		});
-		
-		//유효성 검사 
-		function check(){
-			var inputs = document.signupForm;
-			if(!inputs.name.value){
-				alert("이름이 뭐에요");
-				return false;
-			}else if(!inputs.id.value){
-				alert("아이디를 입력하세요");
-				return false;
-			}else if(!inputs.pw.value){
-				alert("비밀번호를 입력하세요");
-				return false;
-			}else if(!inputs.pwch.value){
-				alert("비밀번호확인란을 입력하세요");
-				return false;
-			}else if(inputs.pw.value != inputs.pwch.value){
-				alert("비밀번호가 일치 하지 않습니다");
-				return false;
-			}else if(!inputs.nickname.value){
-				alert("닉네임을 입력하세요");
-				return false;
-			}else if(!inputs.birth.value){
-				alert("생년월일을 입력하세요");
-				return false;
-			}else if(!inputs.email.value){
-				alert("e메일을 입력하세요");
-				return false;
-			}else if(!inputs.gender.value){
-				alert("성별을 선택해주세요");
-				return false;
-			}else if(inputs.idChRes.value!="사용가능"){
-				alert("아이디가 중복됩니다");
-				return false;
-			}else if(inputs.nickChRes.value!="사용가능"){
-				alert("닉네임이 중복됩니다");
-				return false;
-			}else if(inputs.emailChRes.value!="사용가능"){
-				alert("email이 중복됩니다");
-				return false;
-			}
-		}
-		
-	</script>
 	
-		<c:if test="${sessionScope.memId != null}">
-			<script>
-				alert('로그아웃 후 이용해주십시오.')
-				history.go(-1)
-			</script>
-		</c:if>
-		
-		<div id="signupWrap">
-			<div id="signup-head">
-				<h1 id="signup-title">TravelMaker</h1>
-			</div>
-			<div id="signup-article"> 
-				<form action="/travelMaker/mem/signupPro.tm" id="signupForm" name="signupForm" onsubmit="return check()" method="post">
-					<strong class="tf_required">이름</strong>
-						<input type="text" name="name" />
-					<strong class="tf_required">아이디</strong>
-						<div><input type="text" class="change" name="id" id="id"  placeholder="아이디"/></div>
-						<div><input type="text"  id="idChRes" placeholder="아이디 사용 가능 여부" disabled/></div>
-					<strong class="tf_required">비밀번호</strong>
-						<input type="password" name="pw" placeholder="비밀번호" />
-						<input type="password" name="pwch" placeholder="비밀번호 확인"  />
-					<strong class="tf_required">닉네임</strong>
-						<input type="text" name="nickname" class="change" placeholder="닉네임"/>
-						<input type="text"id="nickChRes" placeholder="닉네임 사용 가능 여부" disabled/>
-					<strong class="tf_required">생년월일</strong>
-						<input type="text" name="birth" />
-					<strong class="tf_required">email</strong>
-						<input type="text" name="email" class="change" placeholder="email"/>
-						<input type="text"  id="emailChRes" placeholder="email 사용 가능 여부" disabled/>
-					<strong class="tf_required">성별</strong>
-						<div id="signup-radio">	
-							<div class="radioDetail">
-								<input type="radio"  name="gender" value=0 /><span class="gen">남</span>
-							</div>
-							<div class="radioDetail">
-								<input type="radio" name="gender" value=1 /><span class="gen">여</span>
-							</div>		
-						</div>
-					<button type="submit" id="sign-btn">회원가입</button>					
-				</form>
-			</div>
-		</div>
+	<!-- 로그인 확인 -->	
+	<c:if test="${sessionScope.memId != null}">
+		<script>
+			alert('로그아웃 후 이용해주십시오.')
+			history.go(-1)
+		</script>
+	</c:if>
+	
+	<div class="tableWrap">
+        <div class="signupWrap">
+            <div class="signHead">
+                <p>TRAVEL MAKER</p>
+            </div>
+            <div class="signArticle">
+                <h2>회원 정보를 입력해 주세요.</h2>
+                <form action="/travelMaker/mem/signupPro.tm" id="signupForm">
+                    <div class="formBox">
+                        <strong class="inputTit">아이디</strong>
+                        <div class="inputArea">
+                            <label for="idInput" class="inputPlace  screenIn">아이디(숫자*영어 조합 4~10자리)</label>
+                            <input type="text" id="idInput" class="signInput"/>
+                        </div>
+                        <p class="existError">이미 존재하는 아이디입니다.</p>
+                    </div>
+
+                    <div class="formBox">
+                        <strong class="inputTit">비밀번호</strong>
+                        <div class="inputArea">
+                            <label for="pwInput" class="inputPlace  screenIn">비밀번호(4~10자리)</label>
+                            <input type="text" id="pwInput" class="signInput"/>
+                        </div>
+                        <div class="inputArea">
+                            <label for="pwChInput" class="inputPlace  screenIn">비밀번호 재입력</label>
+                            <input type="text" id="pwChInput" class="signInput"/>
+                        </div>
+                        <p class="existError">입력한 비밀번호와 재입력한 비밀번호가 일치하지 않습니다. 다시 확인해 주세요.</p>
+                    </div>
+
+                    <div class="formBox">
+                        <strong class="inputTit">닉네임</strong>
+                        <div class="inputArea">
+                            <label for="nickInput" class="inputPlace  screenIn">닉네임이(숫자*영어 조합 4~10자리)</label>
+                            <input type="text" id="nickInput" class="signInput"/>
+                        </div>
+                        <p class="existError">이미 존재하는 닉네임입니다.</p>
+                    </div>
+
+                    <div class="formBox">
+                        <strong class="inputTit">Email</strong>
+                        <div class="inputArea">
+                            <label for="emailInput" class="inputPlace  screenIn">Email</label>
+                            <input type="text" id="emailInput" class="signInput"/>
+                        </div>
+                        <p class="existError">이미 가입된 email입니다.</p>
+                    </div>
+
+                    <div class="formBox">
+                        <strong class="inputTit">이름</strong>
+                        <div class="inputArea">
+                            <label for="nameInput" class="inputPlace  screenIn">나마에와</label>
+                            <input type="text" id="nameInput" class="signInput"/>
+                        </div>
+                        <p class="existError"></p>
+                    </div>
+
+                    <div class="formBox">
+                        <strong class="inputTit">생년월일</strong>
+                        <div class="inputArea">
+                            <label for="birthInput" class="inputPlace  screenIn">8자리 생년월일(ex.19920428)</label>
+                            <input type="text" id="birthInput" class="signInput"/>
+                        </div>
+                        <p class="existError"></p>
+                    </div>
+
+                    <div class="formBox">
+                        <strong class="inputTit">성별</strong>
+                        <div class="wrapRadio">
+                            <div class="radioItem">
+                                <input type="radio" id="genderInput1" name="gender" value=0>
+                                <label for="genderInput1">
+                                    <span class="txtRadio">남성</span>
+                                </label>
+                            </div>
+                            <div class="radioItem">
+                                <input type="radio" id="genderInput2" name="gender" value=1>
+                                <label for="genderInput2">
+                                    <span class="txtRadio">여성</span>
+                                </label>
+                            </div>
+                            <button type="submit" class="signBtn">회원가입</button>	
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- //signupWrap end -->	
+    </div>
+	<!-- //tableWrap end -->	
 	<!-- //signupWrap end -->	
 	
-	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
-	<!-- //footer end -->
+	

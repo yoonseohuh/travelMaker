@@ -42,7 +42,7 @@
 				</tr>
 				<tr>
 					<td><input type="text" name="rkName" value="${rdto.rkName}"/></td>
-					<td><input type="number" name="rkNeed" value="${rdto.rkNeed}" min="1" /></td>
+					<td><input type="number" name="rkNeed" value="${rdto.rkNeed}" min="0" /></td>
 					<td><input type="text" name="rkExpl" value="${rdto.rkExpl}"/></td>
 					<td><input type="text" name="rkAddExpl" value="${rdto.rkAddExpl}"/></td>
 				</tr>

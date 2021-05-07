@@ -54,7 +54,7 @@
 				</tr>
 				<tr>
 					<td><input type="text" name="rkName"/></td>
-					<td><input type="number"  min="1" name="rkNeed" placeholder="숫자를 입력하세요"/></td>
+					<td><input type="number"  min="0" name="rkNeed" placeholder="숫자를 입력하세요"/></td>
 					<td><input type="text" name="rkExpl"/></td>
 					<td><input type="text" name="rkAddExpl" placeholder="설명은 콤마(,)로 구분해주세요"/></td>
 					<td><input type="submit" value="추가"/></td>

@@ -46,6 +46,6 @@
 		<servlet-name>travelMaker</servlet-name>
 		<url-pattern>*.tm</url-pattern>
 	</servlet-mapping>
-
+	
 </web-app>
 

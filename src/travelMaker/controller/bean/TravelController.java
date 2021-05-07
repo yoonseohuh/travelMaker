@@ -49,6 +49,7 @@ public class TravelController {
 	@Autowired
 	private MemberService memberService = null;
 	
+	/*
 	//스케줄러: 날짜(마감일/시작일/종료일)에 따른 여행 상태 변경
 	@Scheduled(cron = "0 1 12 * * *")
 	public void groupStatusCheck() throws Exception {
@@ -109,7 +110,7 @@ public class TravelController {
 			}
 		}
 	}
-	
+	*/
 	@RequestMapping("makingWrite.tm")
 	public String makingWrite(String pageNum, Model model) {
 		List posList = memberService.getAllPos();
