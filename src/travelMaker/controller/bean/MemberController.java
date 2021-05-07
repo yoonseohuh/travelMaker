@@ -269,7 +269,6 @@ public class MemberController {
 	@RequestMapping("ajaxIdCheck.tm")
 	public String ajaxIdAvail(@RequestBody Map<Object,Object> map) throws Exception {
 		String id = (String)map.get("id"); 
-		//System.out.println("id :" +id);
 		String nickname = (String)map.get("nickname"); 
 		String email = (String)map.get("email"); 
 		String idResult = "";
@@ -398,33 +397,7 @@ public class MemberController {
 	      model.addAttribute("count", count);
 	      model.addAttribute("comRecUser", comRecUser);
 	      model.addAttribute("comSenUser", comSenUser);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		model.addAttribute("userId",userId);
 		return "client/userpage/userComment";
 	}
@@ -437,5 +410,7 @@ public class MemberController {
 		model.addAttribute("wLand",writtenLand);
 		return "client/userpage/userLand";
 	}
+	
+	
 	
 }
