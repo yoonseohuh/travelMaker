@@ -271,9 +271,9 @@ public class MemberController {
 		String id = (String)map.get("id"); 
 		String nickname = (String)map.get("nickname"); 
 		String email = (String)map.get("email"); 
-		String idResult = "";
-		String nickResult = "";
-		String emailResult = "";
+		Boolean idResult = true;
+		Boolean nickResult = true;
+		Boolean emailResult = true;
 		//매개변수로 전달 받은 id가 DB에 존재하는지 확인
 		int idCheck = memService.idCheck(id);	//1이면 이미 존재, 0이면 존재 X
 		System.out.println("idcheck: " + idCheck);
@@ -283,21 +283,21 @@ public class MemberController {
 		int emailCheck =memService.eCheck(email);
 		//id
 		if(idCheck == 1) {
-			idResult = "이미 사용중입니다";
+			idResult = false;
 		}else {
-			idResult = "사용가능";
+			idResult = true;
 		}
 		//nickname
 		if(nickCheck == 1) {
-			nickResult = "이미 사용중입니다";
+			nickResult = false;
 		}else {
-			nickResult = "사용가능";
+			nickResult = true;
 		}
 		//email
 		if(emailCheck == 1) {
-			emailResult = "이미 사용중입니다";
+			emailResult = false;
 		}else {
-			emailResult = "사용가능";
+			emailResult = true;
 		}
 		Map mmap = new HashMap();
 		mmap.put("idResult", idResult);
