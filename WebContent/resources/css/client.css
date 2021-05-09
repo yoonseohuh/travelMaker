@@ -391,7 +391,7 @@ input::placeholder {font-size:17px;}
 .signBtn:hover {background-color:#ff0000;}
 
 .errorBor {border-color:#e65f3e;}
-
+input:focus {outline:none;}
 
 /*findId*/
 .travelPWrap {display:table; width:100%; height:100%; min-width:320px;border-collapse: separate;}
