@@ -39,6 +39,7 @@
                             <input type="password" id="pwChInput" name="pwCh" class="signInput"/>
                         </div>
                         <p class="existError pwError"></p>
+                        <p class="existError pwError1"></p>
                     </div>
 
                     <div class="formBox">
@@ -48,6 +49,7 @@
                             <input type="text" id="nickInput" name="nickname" class="signInput"/>
                         </div>
                         <p class="existError nickError"></p>
+                        <p class="existError nickError1"></p>
                     </div>
 
                     <div class="formBox">
@@ -57,6 +59,7 @@
                             <input type="text" id="emailInput" name="email" class="signInput"/>
                         </div>
                         <p class="existError emailError"></p>
+                        <p class="existError emailError1"></p>
                     </div>
 
                     <div class="formBox">
@@ -65,7 +68,7 @@
                             <label for="nameInput" class="inputPlace  screenIn">나마에와</label>
                             <input type="text" id="nameInput" name="name" class="signInput"/>
                         </div>
-                        <p class="existError"></p>
+                        <p class="existError nameError"></p>
                     </div>
 
                     <div class="formBox">
@@ -74,7 +77,7 @@
                             <label for="birthInput" class="inputPlace  screenIn">8자리 생년월일(ex.19920428)</label>
                             <input type="text" id="birthInput" name="birth" class="signInput"/>
                         </div>
-                        <p class="existError"></p>
+                        <p class="existError birthError"></p>
                     </div>
 
                     <div class="formBox">
@@ -123,6 +126,10 @@
 						var check = JSON.parse(result);
 						var idResult = check.idResult;
 						console.log(idResult);
+						//idResult 가 true 일 때 !
+						//1.#idInput에 checkResult 라는 속성에 success 추가
+						//2.idError 부분 공백 처리 (오류 없으니까)
+						//3.errorBor(빨간색 줄) 클래스 제거 
 						if(idResult){
 							$('#idInput').attr('checkResult','success');
 							$(".idError").text('');
@@ -200,7 +207,7 @@
 				});
 			});			
 		});
-		
+		//아이디를 가져와서 변수 선언
 		let idInput = document.getElementById("idInput");
 		let pwInput = document.getElementById("pwInput");
 		let pwChInput = document.getElementById("pwChInput");
@@ -210,12 +217,17 @@
 		let birthInput = document.getElementById("birthInput");
 		let idPattern = /^[a-z0-9]{4,12}$/;	//아이디	a~z,0~9로 시작하는 4~12자리 아이디를 만들 수 있다.
 		let pwPattern = /^[a-z0-9]{4,12}$/;	//아이디	a~z,0~9로 시작하는 4~12자리 아이디를 만들 수 있다.
+		let nickPattern = /^[a-z0-9]{4,12}$/;	//아이디	a~z,0~9로 시작하는 4~12자리 아이디를 만들 수 있다.
+		let emailPattern = /^[a-z0-9]{4,12}$/;	//아이디	a~z,0~9로 시작하는 4~12자리 아이디를 만들 수 있다.
+		let namePattern = /^[가-힣]{2,4}$/;	//이름	한글만2~4자리 
+		let birthPattern = /^[1-2]{1}[0-9]{3}[0-1]{1}[0-9]{1}[0-3]{1}[0-9]{1}$/;	//생년월일	[1-2] 1~2까지 유효하다 {1}한 자리만 검사할꺼야
 		
 		//표현식 확인 하는 check 함수 , 패턴이랑 확인할 변수를 매개로! .test 사용하면 표현에 맞는지 나옴!
 		function regExCheck(pattern,param){
 			if(pattern.test(param.value)){
 				return true;
 			}else{
+				param.focus();
 				return false;
 			}
 		}
@@ -264,48 +276,124 @@
 				$('.pwError').text('두 비밀번호가 일치하지 않습니다.');
 				return false;
 			}
-			//닉네임 
-			if(!checkExist(nickInput,"닉네임을")){
-				return false;
-			}
-			//닉네임 중복 체크 
+			//닉네임 중복 체크
 			if($('#nickInput').attr('checkResult')=='fail'){
-				alert('닉네임 중복이야');
+				alert('닉네임 중복입니다.');
 				return false;
 			}
+			//닉네임  정규식
+			checkExist(nickInput,"닉네임을");
+			if(!regExCheck(nickPattern,nickInput)){
+				$('.nickError').text('숫자,영어를 조합하여 4~10자리 닉네임을 만들어주세요.');
+				return false;
+			}
+			
 			//email
 			checkExist(emailInput,"email을");
+			if(!regExCheck(emailPattern,emailInput)){
+				$('.emailError').text('숫자,영어를 조합하여 4~10자리 이메일을 만들어주세요.');
+				return false;
+			}
+			//이메일 중복 체크 
+			if($('#emailInput').attr('checkResult')=='fail'){
+				alert('Email 중복이야');
+				emailInput.focus();
+				return false;
+			}
 			//이름
 			checkExist(nameInput,"이름을");
+			if(!regExCheck(namePattern,nameInput)){
+				$('.nameError').text('한글 2~4');
+				return false;
+			}
 			//생년월일
 			checkExist(birthInput,"생일을");
+			if(!regExCheck(birthPattern,birthInput)){
+				$('.birthError').text('숫자8자리라구');
+				return false;
+			}
 			//성별
 			checkExist(genderInput,"성별을");
 		}
-		<%--
+		
+		//아이디 실시간 확인 
 		$('#idInput').change(function(){
-			if(!checkExist(idInput,"아이디를")){
-				console.log("탔어?");
-				return false;
-			}
 			if(regExCheck(idPattern,idInput)){
-				console.log('가능');
 				$('.idError1').text('');
-				$('#idInput').removeClass('errorBor');
+				$('#idInput').removeClass('errorBor1');
 			}else{
-				console.log('불가능');
 				$('.idError1').text('숫자,영어를 조합하여 4~10자리 아이디를 만들어주세요.');
-				$('#idInput').addClass('errorBor');
+				$('#idInput').addClass('errorBor1');
 			}
 		});
-		--%>
+		
+		//비밀번호 실시간 확인
+		$('#pwInput').change(function(){
+			if(regExCheck(pwPattern,pwInput)){
+				$('.pwError').text('');
+				$('#pwInput').removeClass('errorBor');
+			}else{
+				$('.pwError').text('숫자,영어를 조합하여 4~10자리 비밀번호를 만들어주세요.');
+				$('#pwInput').addClass('errorBor');
+			}
+		});
+		//비밀번호 일치 실시간 확인
+		$('#pwChInput').change(function(){
+			if(!checkPassword(pwInput,pwChInput)){
+				$('.pwError1').text('');
+				$('#pwInput').removeClass('errorBor');
+			}else{
+				$('.pwError1').text('비밀번호가 서로 일치 하지 않습니다.');
+				$('#pwInput').addClass('errorBor');
+			}
+		});
+		//닉네임 실시간 확인
+		$('#nickInput').change(function(){
+			console.log('닉변경');
+			if(regExCheck(nickPattern,nickInput)){
+				$('.nickError1').text('');
+				$('#nickInput').removeClass('errorBor1');
+			}else{
+				$('.nickError1').text('열받는 닉네임 사용 금지');
+				$('#nickInput').addClass('errorBor1');
+			}
+		});
+		// email 실시간 확인
+		$('#emailInput').change(function(){
+			if(regExCheck(emailPattern,emailInput)){
+				$('.emailError1').text('');
+				$('#emailInput').removeClass('errorBor1');
+			}else{
+				$('.emailError1').text('격식을 갖추세요');
+				$('#emailInput').addClass('errorBor1');
+			}
+		});
+		// 이름 실시간 확인
+		$('#nameInput').change(function(){
+			if(regExCheck(namePattern,nameInput)){
+				$('.nameError').text('');
+				$('#nameInput').removeClass('errorBor');
+			}else{
+				$('.nameError').text('이름');
+				$('#nameInput').addClass('errorBor');
+			}
+		});
+		// 생년월일 실시간 확인
+		$('#birthInput').change(function(){
+			if(regExCheck(birthPattern,birthInput)){
+				$('.birthError').text('');
+				$('#birthInput').removeClass('errorBor');
+			}else{
+				$('.birthError').text('8자리');
+				$('#birthInput').addClass('errorBor');
+			}
+		});
 		//input 입력 됐을 때 label 사라지게!
 		 $('input').keyup(function(){
 			 $(this).prev().hide();
 			 if($(this).val()==''){
 				 $(this).prev().show();
 			 }
-			 
 		 });
 		
 		

@@ -391,6 +391,7 @@ input::placeholder {font-size:17px;}
 .signBtn:hover {background-color:#ff0000;}
 
 .errorBor {border-color:#e65f3e;}
+.errorBor1 {border-color:#e65f3e;}
 input:focus {outline:none;}
 
 /*findId*/
