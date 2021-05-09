@@ -47,7 +47,7 @@
                             <label for="nickInput" class="inputPlace  screenIn">닉네임이(숫자*영어 조합 4~10자리)</label>
                             <input type="text" id="nickInput" name="nickname" class="signInput"/>
                         </div>
-                        <p class="existError"></p>
+                        <p class="existError nickError"></p>
                     </div>
 
                     <div class="formBox">
@@ -56,7 +56,7 @@
                             <label for="emailInput" class="inputPlace  screenIn">Email</label>
                             <input type="text" id="emailInput" name="email" class="signInput"/>
                         </div>
-                        <p class="existError"></p>
+                        <p class="existError emailError"></p>
                     </div>
 
                     <div class="formBox">
@@ -104,7 +104,7 @@
 	<!-- //signupWrap end -->	
 		<script>
 		//ajax 중복처리 , foucs 사라지게, 
-		//ajax
+		//ajax id중복
 		$(document).ready(function(){
 			$("#idInput").change(function(event){
 				event.preventDefault();
@@ -124,16 +124,83 @@
 						var idResult = check.idResult;
 						console.log(idResult);
 						if(idResult){
-							
+							$('#idInput').attr('checkResult','success');
+							$(".idError").text('');
+							$('#idInput').removeClass('errorBor');
 						}else{
 							$('#idInput').attr('checkResult','fail');
 							$(".idError").text('이미 사용중인 아이디입니다');
+							$('#idInput').addClass('errorBor');
 						}
 					}
 				});
 			});			
 		});
-		console.log(check);
+		//ajax 닉네임중복
+		$(document).ready(function(){
+			$("#nickInput").change(function(event){
+				event.preventDefault();
+				var data = {};
+				$.each($('#signupForm').serializeArray(), function(index, i){
+					data[i.name] = i.value;
+				});
+				console.log(data);
+				$.ajax({
+					type:"post",
+					url: "/travelMaker/mem/ajaxIdCheck.tm",
+					dataType: "json",
+					contentType: "application/json",
+					data: JSON.stringify(data),
+					success : function(result){
+						var check = JSON.parse(result);
+						var nickResult = check.nickResult;
+						console.log(nickResult);
+						if(nickResult){
+							$('#nickInput').attr('checkResult','success');
+							$(".nickError").text('');
+							$('#nickInput').removeClass('errorBor');
+						}else{
+							$('#nickInput').attr('checkResult','fail');
+							$(".nickError").text('이미 사용중인 닉네임입니다');
+							$('#nickInput').addClass('errorBor');
+						}
+					}
+				});
+			});			
+		});
+		//ajax email중복
+		$(document).ready(function(){
+			$("#emailInput").change(function(event){
+				event.preventDefault();
+				var data = {};
+				$.each($('#signupForm').serializeArray(), function(index, i){
+					data[i.name] = i.value;
+				});
+				console.log(data);
+				$.ajax({
+					type:"post",
+					url: "/travelMaker/mem/ajaxIdCheck.tm",
+					dataType: "json",
+					contentType: "application/json",
+					data: JSON.stringify(data),
+					success : function(result){
+						var check = JSON.parse(result);
+						var emailResult = check.emailResult;
+						console.log(emailResult);
+						if(emailResult){
+							$('#emailInput').attr('checkResult','success');
+							$(".emailError").text('');
+							$('#emailInput').removeClass('errorBor');
+						}else{
+							$('#emailInput').attr('checkResult','fail');
+							$(".emailError").text('이미 사용중인 email입니다');
+							$('#emailInput').addClass('errorBor');
+						}
+					}
+				});
+			});			
+		});
+		
 		let idInput = document.getElementById("idInput");
 		let pwInput = document.getElementById("pwInput");
 		let pwChInput = document.getElementById("pwChInput");
@@ -182,7 +249,7 @@
 			}
 			//아이디 중복 체크
 			if($('#idInput').attr('checkResult')=='fail'){
-				alert('아이디 중복이얌');
+				alert('아이디 중복입니다.');
 				return false;
 			}
 			//비밀번호 체크 
@@ -199,6 +266,11 @@
 			}
 			//닉네임 
 			if(!checkExist(nickInput,"닉네임을")){
+				return false;
+			}
+			//닉네임 중복 체크 
+			if($('#nickInput').attr('checkResult')=='fail'){
+				alert('닉네임 중복이야');
 				return false;
 			}
 			//email
@@ -229,9 +301,9 @@
 		--%>
 		//input 입력 됐을 때 label 사라지게!
 		 $('input').keyup(function(){
-			 $(this).prev().css('opacity','0');
+			 $(this).prev().hide();
 			 if($(this).val()==''){
-				 $(this).prev().css('opacity','1');
+				 $(this).prev().show();
 			 }
 			 
 		 });
